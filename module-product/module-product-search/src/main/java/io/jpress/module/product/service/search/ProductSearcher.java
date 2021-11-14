@@ -4,7 +4,7 @@ package io.jpress.module.product.service.search;
 import com.jfinal.plugin.activerecord.Page;
 import io.jpress.module.product.model.Product;
 
-public interface ProductSearcher {
+public interface ProductSearcher extends ProductSearcherExt {
 
     String HIGH_LIGHT_CLASS = "search-highlight";
 

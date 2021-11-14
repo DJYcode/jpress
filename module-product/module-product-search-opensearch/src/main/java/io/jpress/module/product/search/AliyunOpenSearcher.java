@@ -34,6 +34,7 @@ import io.jpress.module.product.service.search.ProductSearcher;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 帮助文档：https://help.aliyun.com/document_detail/52287.html
@@ -176,6 +177,11 @@ public class AliyunOpenSearcher implements ProductSearcher {
             e.printStackTrace();
         }
 
+        return null;
+    }
+
+    @Override
+    public Page<Product> search(Map<String, Object> searchMap, int pageNum, int pageSize) {
         return null;
     }
 }

@@ -509,10 +509,12 @@ public abstract class BaseProduct<M extends BaseProduct<M>> extends BaseOptionsM
 		return getStr("remarks");
 	}
 
+	@Override
 	public void setOptions(java.lang.String options) {
 		set("options", options);
 	}
 
+	@Override
 	public java.lang.String getOptions() {
 		return getStr("options");
 	}

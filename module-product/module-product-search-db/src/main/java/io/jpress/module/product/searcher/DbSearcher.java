@@ -21,6 +21,8 @@ import io.jpress.module.product.model.Product;
 import io.jpress.module.product.service.ProductService;
 import io.jpress.module.product.service.search.ProductSearcher;
 
+import java.util.Map;
+
 
 public class DbSearcher implements ProductSearcher {
 
@@ -46,5 +48,10 @@ public class DbSearcher implements ProductSearcher {
     @Override
     public Page<Product> search(String keyword, int pageNum, int pageSize) {
         return productService.searchIndb(keyword, pageNum, pageSize);
+    }
+
+    @Override
+    public Page<Product> search(Map<String,Object> searchMap, int pageNum, int pageSize) {
+        return productService.searchIndb(searchMap, pageNum, pageSize);
     }
 }

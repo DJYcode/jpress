@@ -91,7 +91,8 @@ public class SortKit {
     private static <M extends SortModel> void fillChild(M parent, List<M> models) {
         for (M model : models) {
             if (parent.getId() != null && parent.getId().equals(model.getParentId())) {
-                model.setParent(parent);
+                // 层次太深
+                //model.setParent(parent);
                 model.setLayerNumber(parent.getLayerNumber() + 1);
                 if (parent.getChilds() == null || !parent.getChilds().contains(model)) {
                     parent.addChild(model);

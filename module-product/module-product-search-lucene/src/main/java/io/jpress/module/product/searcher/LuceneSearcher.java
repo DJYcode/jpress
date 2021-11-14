@@ -39,6 +39,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class LuceneSearcher implements ProductSearcher {
 
@@ -239,4 +240,8 @@ public class LuceneSearcher implements ProductSearcher {
         return products;
     }
 
+    @Override
+    public Page<Product> search(Map<String, Object> searchMap, int pageNum, int pageSize) {
+        return null;
+    }
 }

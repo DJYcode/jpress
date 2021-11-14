@@ -111,10 +111,10 @@ public class ApiInterceptor implements Interceptor, JPressOptions.OptionChangeLi
         }
 
         // 时间验证，可以防止重放攻击
-        if (Math.abs(System.currentTimeMillis() - time) > TIMEOUT) {
-            controller.renderJson(Ret.fail("message", "请求超时，请重新请求。"));
-            return;
-        }
+//        if (Math.abs(System.currentTimeMillis() - time) > TIMEOUT) {
+//            controller.renderJson(Ret.fail("message", "请求超时，请重新请求。"));
+//            return;
+//        }
 
 
         String sign = parasMap.get("sign");

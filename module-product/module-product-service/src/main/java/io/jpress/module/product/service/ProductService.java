@@ -6,6 +6,7 @@ import io.jboot.service.JbootServiceJoiner;
 import io.jpress.module.product.model.Product;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProductService extends JbootServiceJoiner {
 
@@ -212,4 +213,8 @@ public interface ProductService extends JbootServiceJoiner {
     Page<Product> search(String queryString, int pageNum, int pageSize);
 
     Page<Product> searchIndb(String queryString, int pageNum, int pageSize);
+
+    Page<Product> searchIndb(Map<String,Object> searchMap, int pageNum, int pageSize);
+
+    Page<Product> search(Map<String,Object> searchMap, int pageNum, int pageSize);
 }

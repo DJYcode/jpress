@@ -28,6 +28,7 @@ import io.jpress.web.seoping.SeoManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Bean
@@ -355,5 +356,32 @@ public class ProductServiceProvider extends JbootServiceBase<Product> implements
         Columns columns = Columns.create("status", Product.STATUS_NORMAL)
                 .likeAppendPercent("title", queryString);
         return joinUserInfo(paginateByColumns(pageNum, pageSize, columns, "order_number desc,id desc"));
+    }
+
+    @Override
+    public Page<Product> searchIndb(Map<String, Object> searchMap,
+                                    int pageNum, int pageSize) {
+        // TODO 更多条件后续增加
+        Columns columns = Columns.create("product.status", Product.STATUS_NORMAL)
+                .likeAppendPercent("title", searchMap.get("title"))
+                .eq("m.category_id",searchMap.get("category_id"));
+        Page<Product> productPage = DAO.leftJoin("product_category_mapping").as("m")
+                .on("product.id = m.`product_id`")
+                .paginateByColumns(pageNum, pageSize, columns, "order_number desc,id desc");
+        return joinUserInfo(productPage);
+    }
+
+    @Override
+    public Page<Product> search(Map<String,Object> searchMap, int pageNum, int pageSize) {
+        try {
+            ProductSearcher searcher = ProductSearcherFactory.getSearcher();
+            Page<Product> page = searcher.search(searchMap, pageNum, pageSize);
+            if (page != null) {
+                return page;
+            }
+        } catch (Exception ex) {
+            LogKit.error(ex.toString(), ex);
+        }
+        return new Page<>(new ArrayList<>(), pageNum, pageSize, 0, 0);
     }
 }

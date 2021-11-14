@@ -242,4 +242,8 @@ public class ElasticSearcher implements ProductSearcher,JPressOptions.OptionChan
     }
 
 
+    @Override
+    public Page<Product> search(Map<String, Object> searchMap, int pageNum, int pageSize) {
+        return null;
+    }
 }
