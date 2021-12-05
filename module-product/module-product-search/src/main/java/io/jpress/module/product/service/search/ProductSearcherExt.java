@@ -2,6 +2,7 @@ package io.jpress.module.product.service.search;
 
 import com.jfinal.plugin.activerecord.Page;
 import io.jpress.module.product.model.Product;
+import io.jpress.module.product.service.query.SearchParam;
 
 import java.util.Map;
 
@@ -16,5 +17,5 @@ public interface ProductSearcherExt {
 
     String CATEGORY_ID = "category_id";
 
-    Page<Product> search(Map<String,Object> searchMap, int pageNum, int pageSize);
+    Page<Product> search(SearchParam searchParam, int pageNum, int pageSize);
 }

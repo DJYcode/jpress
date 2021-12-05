@@ -72,7 +72,7 @@ public class ProductCategoryApiController extends ApiControllerBase {
     public Ret page(@ApiPara("分页的页码") @DefaultValue("1") int pageNumber
             , @ApiPara("每页的数据数量") @DefaultValue("10") int pageSize) {
         Page<ProductCategory> page = productCategoryService.paginateByType(pageNumber, pageSize, ProductCategory.TYPE_CATEGORY);
-        return Ret.ok().set("page", page);
+        return Ret.ok().set("data", page);
     }
     @ApiPara("分类列表")
     public Ret list() {

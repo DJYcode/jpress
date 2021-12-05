@@ -18,10 +18,10 @@ package io.jpress.module.product.searcher;
 import com.jfinal.aop.Inject;
 import com.jfinal.plugin.activerecord.Page;
 import io.jpress.module.product.model.Product;
+import io.jpress.module.product.query.ProductQuery;
 import io.jpress.module.product.service.ProductService;
+import io.jpress.module.product.service.query.SearchParam;
 import io.jpress.module.product.service.search.ProductSearcher;
-
-import java.util.Map;
 
 
 public class DbSearcher implements ProductSearcher {
@@ -51,7 +51,11 @@ public class DbSearcher implements ProductSearcher {
     }
 
     @Override
-    public Page<Product> search(Map<String,Object> searchMap, int pageNum, int pageSize) {
-        return productService.searchIndb(searchMap, pageNum, pageSize);
+    public Page<Product> search(SearchParam searchParam, int pageNum, int pageSize) {
+        ProductQuery productQuery = new ProductQuery()
+                .setTitle(searchParam.getTitle())
+                .setCategoryId(searchParam.getCategoryId())
+                .setSortField(searchParam.getSortField());
+        return productService.searchIndb(productQuery, pageNum, pageSize);
     }
 }

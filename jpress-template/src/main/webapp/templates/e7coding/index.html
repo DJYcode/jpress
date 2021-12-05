@@ -1,0 +1,77 @@
+#include("./layout.html")
+#@layout()
+
+#define content()
+<div class="ui centered grid container stackable">
+
+    <div class="twelve wide column right-side stacked segments">
+        <!-- 首页分类 -->
+        <div class="ui segment pb-0 readmore  my-communities" data-height="55">
+            #categories(asTree=true)
+            #for(category :categories)
+            <a class="ui image light label mr-1 mb-3" href="#(category.slug)" style="padding-right: 2.2em!important;">
+                <img src="#(category.icon)">
+                #(category.title)
+            </a>
+            #end
+            #end
+        </div>
+
+        <div class="ui segment topic-index-list pt-1" style="padding: 8px 6px;">
+            <div class="content pl-3 pr-3" style="padding-top: 6px;">
+                <div class="ui divider mb-1 topic-index-divider"
+                     style="border-top: none;border-bottom: 1px solid rgb(219, 224, 226);margin-top: 6px;">
+                </div>
+                <!-- 文章列表 -->
+                #articlePage()
+                <div class="simple topic-list rm-link-color mt-0">
+
+                    #for(article : articlePage.list)
+                    <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                        <div class="image-44 user-avatar">
+                            <a href="#(article.url)" class="rm-tdu" target="">
+                                <img style="width:40px;height:40px;border-radius: inherit;border: none;"
+                                     class="image-border circle-image topic-list-author-avatar"
+                                     src="#(article.thumbnail ?? 'resource/images/default-img.png')"/>
+                            </a>
+                        </div>
+                        <div class="category-name hide-on-mobile ">
+                            <span class="hide-on-mobile ui label status small ">博客</span>
+                        </div>
+                        <a class="topic-title-wrap rm-tdu" href="#(article.url)" target="">
+                            <img class="ui community-image display-inline-block"
+                                 src="#(article.thumbnail ?? 'resource/images/default-img.png')">
+                            <span class="topic-title">
+                #(article.title)
+            </span>
+
+                            <span class=" hide-on-mobile simple-topic-meta">
+                 <span class="count_set" style="font-size:13px">
+                     <abbr title="浏览  #(article.view_count ?? 0)" class="timeago"> #(article.view_count ?? 0)</abbr>
+                     <span class="count_seperator">|</span>
+                     <abbr title="发布于 #date(article.created)" class="timeago">#date(article.created)</abbr>
+                </span>
+            </span>
+                        </a>
+                    </div>
+                    #end
+                </div>
+                #articlePaginate()
+                <!-- 分页 -->
+                <nav>
+                    <ul class="pagination">
+                        #for(page : pages)
+                        <li class="page-item #(page.style)">
+                            <a class="page-link" href="#(page.url ??)">#(page.text)</a>
+                        </li>
+                        #end
+                    </ul>
+                </nav>
+                #end
+                #end
+            </div>
+        </div>
+    </div>
+    #include("./_index_rightbar.html")
+</div>
+#end

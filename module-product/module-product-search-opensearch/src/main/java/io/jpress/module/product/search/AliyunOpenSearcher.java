@@ -30,6 +30,7 @@ import com.google.common.collect.Lists;
 import com.jfinal.plugin.activerecord.Page;
 import io.jpress.JPressOptions;
 import io.jpress.module.product.model.Product;
+import io.jpress.module.product.service.query.SearchParam;
 import io.jpress.module.product.service.search.ProductSearcher;
 
 import java.util.ArrayList;
@@ -181,7 +182,7 @@ public class AliyunOpenSearcher implements ProductSearcher {
     }
 
     @Override
-    public Page<Product> search(Map<String, Object> searchMap, int pageNum, int pageSize) {
+    public Page<Product> search(SearchParam searchParam, int pageNum, int pageSize) {
         return null;
     }
 }

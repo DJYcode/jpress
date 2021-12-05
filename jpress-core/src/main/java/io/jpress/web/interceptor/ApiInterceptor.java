@@ -116,7 +116,6 @@ public class ApiInterceptor implements Interceptor, JPressOptions.OptionChangeLi
 //            return;
 //        }
 
-
         String sign = parasMap.get("sign");
         if (StrUtil.isBlank(sign)) {
             controller.renderJson(Ret.fail("message", "签名数据不能为空，请提交 sign 数据。"));
@@ -153,7 +152,7 @@ public class ApiInterceptor implements Interceptor, JPressOptions.OptionChangeLi
             String value = queryParas.get(key);
             sb.append(key).append(value);
         }
-
+        ////a457e24f2285d01586ec87f4938a44b0
         return HashKit.md5(sb.append(apiSecret).toString());
     }
 

@@ -40,6 +40,10 @@ public class Article extends BaseArticle<Article> {
     public static final String STATUS_DRAFT = "draft";
     public static final String STATUS_TRASH = "trash";
 
+    private ArticleCategory articleCategory;
+
+    private List<ArticleCategory> tags;
+
 
     @JsonIgnore
     public boolean isNormal() {
@@ -232,5 +236,21 @@ public class Article extends BaseArticle<Article> {
         return PingData.create(getTitle(), getUrl());
     }
 
+    public ArticleCategory getArticleCategory() {
+        return articleCategory;
+    }
 
+    public Article setArticleCategory(ArticleCategory articleCategory) {
+        this.articleCategory = articleCategory;
+        return this;
+    }
+
+    public List<ArticleCategory> getTags() {
+        return tags;
+    }
+
+    public Article setTags(List<ArticleCategory> tags) {
+        this.tags = tags;
+        return this;
+    }
 }

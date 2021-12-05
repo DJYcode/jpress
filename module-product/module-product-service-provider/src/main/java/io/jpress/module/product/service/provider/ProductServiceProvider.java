@@ -16,9 +16,11 @@ import io.jboot.service.JbootServiceBase;
 import io.jboot.utils.StrUtil;
 import io.jpress.module.product.model.Product;
 import io.jpress.module.product.model.ProductCategory;
+import io.jpress.module.product.query.ProductQuery;
 import io.jpress.module.product.service.ProductCategoryService;
 import io.jpress.module.product.service.ProductCommentService;
 import io.jpress.module.product.service.ProductService;
+import io.jpress.module.product.service.query.SearchParam;
 import io.jpress.module.product.service.search.ProductSearcherFactory;
 import io.jpress.module.product.service.task.ProductCommentsCountUpdateTask;
 import io.jpress.module.product.service.task.ProductViewsCountUpdateTask;
@@ -359,12 +361,12 @@ public class ProductServiceProvider extends JbootServiceBase<Product> implements
     }
 
     @Override
-    public Page<Product> searchIndb(Map<String, Object> searchMap,
+    public Page<Product> searchIndb(ProductQuery productQuery,
                                     int pageNum, int pageSize) {
         // TODO 更多条件后续增加
         Columns columns = Columns.create("product.status", Product.STATUS_NORMAL)
-                .likeAppendPercent("title", searchMap.get("title"))
-                .eq("m.category_id",searchMap.get("category_id"));
+                .likeAppendPercent("title", productQuery.getTitle())
+                .eq("m.category_id",productQuery.getCategoryId());
         Page<Product> productPage = DAO.leftJoin("product_category_mapping").as("m")
                 .on("product.id = m.`product_id`")
                 .paginateByColumns(pageNum, pageSize, columns, "order_number desc,id desc");
@@ -372,10 +374,14 @@ public class ProductServiceProvider extends JbootServiceBase<Product> implements
     }
 
     @Override
-    public Page<Product> search(Map<String,Object> searchMap, int pageNum, int pageSize) {
+    public Page<Product> search(ProductQuery productQuery, int pageNum, int pageSize) {
         try {
             ProductSearcher searcher = ProductSearcherFactory.getSearcher();
-            Page<Product> page = searcher.search(searchMap, pageNum, pageSize);
+            SearchParam searchParam = new SearchParam()
+                    .setTitle(productQuery.getTitle())
+                    .setCategoryId(productQuery.getCategoryId())
+                    .setSortField(productQuery.getSortField());
+            Page<Product> page = searcher.search(searchParam, pageNum, pageSize);
             if (page != null) {
                 return page;
             }

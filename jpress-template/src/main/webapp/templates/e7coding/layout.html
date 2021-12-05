@@ -1,0 +1,464 @@
+#define layout()
+<!DOCTYPE html>
+<html lang="zh" class="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="baidu-site-verification" content="MfC8ppEukL"/>
+    <meta baidu-gxt-verify-token="">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="">
+
+    <title>#(SEO_TITLE ?? (WEB_TITLE + '-' + WEB_SUBTITLE))</title>
+    <meta name="description" content="#(SEO_DESCRIPTION)"/>
+    <meta name="keywords"
+          content="#(SEO_KEYWORDS)"/>
+
+    <meta name="author" content="Summer"/>
+
+    <link rel="shortcut icon" href=""/>
+
+    <!-- Styles -->
+    <link href="resource/css/vendors.css" rel="stylesheet">
+    <link href="resource/css/app.css" rel="stylesheet">
+
+</head>
+<body class=" home-page">
+
+<script>
+    window.Laravel = {"csrfToken": ""}
+    window.Config = {
+        'CSRF_TOKEN': '',
+        'token': '',
+        'environment': 'production',
+        'url': '',
+        'tags_url': '',
+        'scroll_to_top': true,
+        'community': {
+            'id': 0,
+            'name': '',
+            'favicon': ''
+        },
+        'routes': {
+            'upload_image': '',
+        },
+        'user_settings': {
+            'visit_topic_patches_page': false,
+            'annotation_disabled': 'yes',
+        },
+        'overlay': '',
+        'editor': {},
+        'destroyeditor_id': {},
+
+        'content': {
+            authorName:'dong'
+        }
+    };
+
+    var ShowCrxHint = 'no';
+
+    function onWXWebView() {
+        $('.wechat-login-link').attr("href", "")
+        $('.show-on-wechat-view').show();
+    }
+
+    if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+        onWXWebView();
+    } else {
+        if (document.addEventListener) {
+            document.addEventListener("WeixinJSBridgeReady", onWXWebView, false);
+        } else if (document.attachEvent) {
+            document.attachEvent("WeixinJSBridgeReady", onWXWebView);
+            document.attachEvent("onWeixinJSBridgeReady", onWXWebView);
+        }
+    }
+
+</script>
+
+<style type="text/css">
+    .ui.top.menu {
+        border-top: 4px solid #00b5ad;
+    }
+
+    .ui.fluid.search .results {
+        width: 550px;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .ui.top.menu > .ui.container {
+            height: 52px;
+            flex-direction: initial;
+        }
+    }
+
+
+    /* 顶部导航栏 */
+    .ui.top.menu {
+        border-top: 4px solid #00b5ad;
+    }
+
+    /* 右边导航栏顶部样式 */
+    .ui.top-color.segment:not(.inverted) {
+        border-top: 2px solid #00b5ad;
+    }
+
+    /* 右边导航栏顶部样式 */
+    .ui.top-color.card:not(.inverted) {
+        border-top: 2px solid #00b5ad;
+    }
+
+    a {
+        color: #1775cc;
+    }
+
+    a:hover, a:focus {
+        color: #0081f9;
+        transition: color .15s ease 0s;
+    }
+
+    /* 主要按钮 */
+
+    .ui.primary.buttons .button, .ui.primary.button {
+        background-color: #00b5ad;
+        border-color: #00b5ad;
+    }
+
+    /* 主要按钮选中状态 */
+    .ui.primary.buttons .button:hover, .ui.primary.button:hover, .ui.primary.button:focus, .ui.primary.buttons .button:focus {
+        background-color: #00b5ad;
+        border-color: #00b5ad;
+    }
+
+    /* 外框按钮 */
+    .ui.basic.primary.buttons .button, .ui.basic.primary.button {
+        color: #00b5ad !important;
+        box-shadow: 0px 0px 0px 1px #00b5ad inset !important;
+    }
+
+    /* 外框按钮选中状态 */
+    .ui.basic.primary.buttons .button:hover, .ui.basic.primary.button:hover {
+        color: #00b5ad !important;
+        box-shadow: 0px 0px 0px 1px #00b5ad inset !important;
+    }
+
+    .ui.basic.primary.buttons .button:active, .ui.basic.primary.button:active, .ui.basic.primary.buttons .active.button, .ui.basic.primary.active.button, .ui.basic.buttons .button:hover, .ui.basic.button:hover, .ui.basic.primary.buttons .button:focus, .ui.basic.primary.button:focus {
+        color: #00b5ad !important;
+        box-shadow: 0px 0px 0px 1px #00b5ad inset !important;
+    }
+
+
+    .footer {
+        max-height: max-content;
+    }
+
+</style>
+<style type="text/css">
+    .my-communities + .readmore-separator {
+        margin-top: -12px;
+        font-size: 12px;
+        padding-bottom: 0px;
+        margin-bottom: -8px;
+        padding-top: 0px !important;
+    }
+</style>
+
+
+<div class="ui top menu sidebar stackable">
+    <div class="item">
+        <img class="ui image" style="width:26px;height:26px;margin-top:-2px;"
+             src="https://cdn.learnku.com/uploads/images/201901/24/1/OyBnfB2vlk.png!/both/44x44">
+        <span class="site-name ml-2">#(WEB_NAME)</span>
+    </div>
+
+    <form class="ui fluid category  item secondary" action="/article/search" method="GET">
+        <div class="ui icon input">
+            <input class="prompt" name="keyword" type="text" placeholder="搜索" value="">
+            <i class="search icon"></i>
+        </div>
+    </form>
+
+
+    <a href="index.html" class="item secondary">
+        <i class="icon list"></i> 分类列表
+    </a>
+
+
+<!--    <div class="item">-->
+<!--        <a class="ui basic small button no-pjax" href=""><i class="icon user "></i> 登录 </a>-->
+<!--    </div>-->
+
+<!--    <div class="item">-->
+<!--        <a class="ui basic small button no-pjax" href=""><i class="icon signup "></i> 注册 </a>-->
+<!--    </div>-->
+</div>
+
+
+<div class="pusher">
+
+    <div class="main container">
+
+        <nav class="ui main borderless menu top stackable topnav" id="topnav">
+            <div class="ui container">
+
+                <div class="ui inline scrolling community-nav dropdown mr-2"
+                     style="padding-left: 22px;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;">
+                    <div class="text site-logo" style="color:#888888;display: flex;">
+
+                        <img class="ui image" style="width:26px;height:26px;margin-top:-2px;"
+                             src="">
+                        <span class="site-name">#(WEB_NAME)</span>
+                        <i class="dropdown icon ml-3"></i>
+                    </div>
+                    <div class="menu ml-4 communities" style="max-height: 520px;padding: 8px;">
+                        <div class="ui icon search input" style="width: 172px;float:left;">
+                            <i class="search icon"></i>
+                            <input type="text" placeholder="搜索分类">
+                        </div>
+
+                        <a class="item pr-3 mt-2" href="index.html">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;" src=""> 首页
+                        </a>
+                        <div class="divider clearfix"></div>
+                        #categories(asTree=true)
+                        #for(category :categories)
+                        <a class="item" href="#(category.slug)" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="#(category.icon)">
+                            #(category.title)
+                        </a>
+                        #end
+                        #end
+                    </div>
+                </div>
+
+                <a class="item header right menu " style="display:none">
+                    <i class="icon align justify"></i>
+                </a>
+
+                <!-- 主菜单 -->
+                #for(menu : MENUS)
+                #if(menu.hasChild())
+                <div class="ui simple item dropdown article stackable nav-user-item  secondary">#(menu.text ??)<i class="dropdown icon"></i>
+                    <div class="ui menu stackable">
+                        #for(childMenu : menu.getChilds())
+                        <a class="item" href="#(childMenu.url ??)"
+                           style="padding-right: 36px!important;">
+                            #(childMenu.text ??)
+                        </a>
+                        #end
+                    </div>
+                </div>
+                #else
+                <a href="#(menu.url ??)" class="item secondary">#(menu.text ??)</a>
+                #end
+                #end
+
+                <!-- 搜索框 -->
+                <form class="ui fluid category search item secondary hide-on-991" action="/article/search"
+                      method="GET">
+                    <div class="ui icon input">
+                        <input class="prompt" name="keyword" type="text" placeholder="搜索" value="">
+                        <i class="search icon"></i>
+                    </div>
+                    <div class="results"></div>
+                </form>
+
+                <!-- 登录注册 -->
+<!--                <div class=" right menu stackable secondary">-->
+<!--                    <div class="item rm-link-color">-->
+<!--                        <a class="mr-4 no-pjax login_required" href=""><i class="icon sign in "></i> 登录-->
+<!--                        </a>-->
+<!--                        <a class="no-pjax" href="" style="margin-left: 10px;"><i-->
+<!--                                class="icon user add "></i> 注册 </a>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+
+        </nav>
+
+        <!-- 微信登录 隐藏 -->
+<!--        <div class="mb-3 hide show-on-wechat-view">-->
+<!--            <div class="ui centered grid container message-container">-->
+<!--                <div class="sixteen wide column pt-0 pb-0">-->
+<!--                    <a class="ui button fluid green wechat-login-link"-->
+<!--                       href=""><i class="icon wechat "></i> 微信登录</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        #@content()
+
+    </div>
+    #include("./footer.html")
+
+</div>
+
+<!-- 登录弹窗 -->
+<div class="ui modal login small" style="width:400px;margin: 0em 0em 0em -200px;">
+    <i class="close icon"></i>
+    <div class="header">
+        <h4 class="modal-title ">
+            <img class="ui image display-inline-block mr-2" style="width:32px;height:32px;"
+                 src=""> <span
+                style="position: relative;top: 4px;">请登录</span>
+        </h4>
+    </div>
+    <div class="content">
+        <form class="ui form login" role="form" method="POST" action="" accept-charset="UTF-8">
+            <input type="hidden" name="_token" value="">
+            <input type="hidden" name="remember" value="yes">
+
+            <input type="hidden" name="return_back" value="no">
+
+            <div class="field">
+                <div class="ui left icon input">
+                    <i class="user icon"></i>
+                    <input type="text" name="username" placeholder="邮 箱 or 手 机 or 用户名" value="" required>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui left icon input">
+                    <i class="lock icon"></i>
+                    <input type="password" name="password" placeholder="密 码" value="" required>
+                </div>
+            </div>
+            <button class="ui primary right labeled icon button" type="submit">
+                <i class="right arrow icon"></i>
+                提交
+            </button>
+
+            <div class="pull-right mt-2 rm-link-color">
+                <a class="btn btn-link " href="" target="_blank">
+                    忘记密码?
+                </a>
+                <span class="text-mute">or</span>
+                <a class="btn btn-link " href="" target="_blank">
+                    注册
+                </a>
+            </div>
+
+            <div class="clearfix"></div>
+
+
+            <div class="ui horizontal divider fs-tiny text-mute">
+                第三方账号登录
+            </div>
+
+
+            <a class="ui button fluid mt-2 green wechat-login-link" href=""><i
+                    class="icon wechat "></i> 微信登录</a>
+
+            <a class="ui button fluid mt-2 basic" id="login-required-submit"
+               href=""><i class="icon github alternate"></i> GitHub 登录</a>
+
+        </form>
+    </div>
+</div>
+
+
+<div class="ui modal small report">
+    <div class="header modal-title">内容举报</div>
+    <form class="ui form error" method="POST" action="https://learnku.com/reports" accept-charset="UTF-8">
+        <input type="hidden" name="_token" value="B9Xi4ZxkZyBAOolyUmeMQehuu8PG3zD2Rk72Sb8G">
+        <input name="reportable_id" type="hidden" value="">
+        <input name="reportable_type" type="hidden" value="">
+        <div class="content" style="padding: 20px;">
+            <div class="ui message warning show">
+                <i class="icon info"></i> 匿名举报，为防止滥用，仅管理员可见举报者。
+            </div>
+            <p>我要举报该<span class='modal-typename'></span>，理由是：</p>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="spam" required>
+                    <label><strong>垃圾广告</strong>：恶意灌水、广告、推广等内容</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="meaningless" required>
+                    <label><strong>无意义内容</strong>：测试、灌水、文不对题、消极内容、文章品质太差等</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="violation" required>
+                    <label><strong>违规内容</strong>：色情、暴利、血腥、敏感信息等</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="unfriendly" required>
+                    <label><strong>不友善内容</strong>：人身攻击、挑衅辱骂、恶意行为</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="vpn" required>
+                    <label><strong>科学上网</strong>：翻墙、VPN、Shadowsocks，政策风险，会被关站！</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="qa" required>
+                    <label><strong>不懂提问</strong>：提问太随意，需要再做一遍《提问的智慧》测验</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="casually_ask" required>
+                    <label><strong>随意提问</strong>：提问没有发布在社区问答分类下</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="markdown" required>
+                    <label><strong>排版混乱</strong>：没有合理使用 Markdown 编写文章，未使用代码高亮</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="copywriting" required>
+                    <label><strong>内容结构混乱</strong>：逻辑不清晰，内容混乱，难以阅读</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="title" required>
+                    <label><strong>标题随意</strong>：标题党、标题不释义</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="category" required>
+                    <label><strong>尊重版权</strong>：分享付费课程、破解软件（付费），侵犯作者劳动成果</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="other" required>
+                    <label><strong>其他理由</strong>：请补充说明</label>
+                </div>
+            </div>
+            <div class="field">
+                <textarea placeholder="请提供详尽的说明" name="reason" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="actions field" style="padding: 1px 12px 25px;">
+            <button class="ui primary button" type="submit">举报</button>
+            <div class="ui cancel button">取消</div>
+        </div>
+    </form>
+</div>
+
+
+</body>
+
+
+<!-- Scripts -->
+<script src="resource/js/vendors.js"></script>
+<script src="resource/js/app.js"></script>
+
+</html>
+#end

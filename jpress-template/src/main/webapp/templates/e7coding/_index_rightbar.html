@@ -1,0 +1,55 @@
+<!-- 左侧栏 -->
+<div class="four wide column stackable ">
+    <div class="item header sidebar">
+        #articles(hasThumbnail=true,count=5)
+          #if(articles && articles.size() >0)
+            <div class="ui card tag-active-user-card popular-card responsive" style="font-size: 13px;">
+                <div class="content">
+                    <span>最新文章</span>
+                    <div class="ui middle aligned divided  list"
+                         style="padding: 0px 15px;margin-top: 0px;margin-bottom: 5px;">
+                        #for(article : articles)
+                        <a class="item" href="#(article.url)">
+                            #(article.title)
+                        </a>
+                        #end
+                    </div>
+                </div>
+            </div>
+          #end
+        #end
+
+        <div class="ui card text-center responsive">
+            <div class="content">
+                <div class="header">
+                    文章标签
+                </div>
+            </div>
+            <div class="content main">
+                #tags()
+                    #if(tags && tags.size() > 0)
+                        #for(tag : tags)
+                        <a class="ui label basic" href="#(tag.url)">
+                            #(tag.title)
+                            <div class="detail">#(tag.count)</div>
+                        </a>
+                        #end
+                    #else
+                    暂无
+                    #end
+                #end
+            </div>
+        </div>
+        <div class="ui card responsive">
+            <div class="content">
+                <div class="header text-center">
+                    友情链接
+                </div>
+            </div>
+
+            <div class="content text-center" style="padding-top:5px">
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -17,6 +17,7 @@ package io.jpress.module.product.service.search;
 
 import com.jfinal.plugin.activerecord.Page;
 import io.jpress.module.product.model.Product;
+import io.jpress.module.product.service.query.SearchParam;
 
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class NoneSearcher implements ProductSearcher {
     }
 
     @Override
-    public Page<Product> search(Map<String, Object> searchMap, int pageNum, int pageSize) {
+    public Page<Product> search(SearchParam searchParam, int pageNum, int pageSize) {
         return null;
     }
 }

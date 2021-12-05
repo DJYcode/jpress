@@ -22,6 +22,7 @@ import com.jfinal.plugin.activerecord.Page;
 import io.jboot.utils.StrUtil;
 import io.jpress.JPressOptions;
 import io.jpress.module.product.model.Product;
+import io.jpress.module.product.service.query.SearchParam;
 import io.jpress.module.product.service.search.ProductSearcher;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
@@ -243,7 +244,7 @@ public class ElasticSearcher implements ProductSearcher,JPressOptions.OptionChan
 
 
     @Override
-    public Page<Product> search(Map<String, Object> searchMap, int pageNum, int pageSize) {
+    public Page<Product> search(SearchParam searchParam, int pageNum, int pageSize) {
         return null;
     }
 }

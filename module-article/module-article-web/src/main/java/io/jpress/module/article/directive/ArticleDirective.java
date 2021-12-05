@@ -19,11 +19,18 @@ import com.jfinal.aop.Inject;
 import com.jfinal.template.Env;
 import com.jfinal.template.io.Writer;
 import com.jfinal.template.stat.Scope;
+import io.jboot.utils.CollectionUtil;
 import io.jboot.utils.StrUtil;
 import io.jboot.web.directive.annotation.JFinalDirective;
 import io.jboot.web.directive.base.JbootDirectiveBase;
 import io.jpress.module.article.model.Article;
+import io.jpress.module.article.model.ArticleCategory;
+import io.jpress.module.article.service.ArticleCategoryService;
 import io.jpress.module.article.service.ArticleService;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -35,6 +42,8 @@ public class ArticleDirective extends JbootDirectiveBase {
 
     @Inject
     private ArticleService service;
+    @Inject
+    private ArticleCategoryService categoryService;
 
     @Override
     public void onRender(Env env, Scope scope, Writer writer) {
@@ -43,6 +52,23 @@ public class ArticleDirective extends JbootDirectiveBase {
 
         if (article == null) {
             return;
+        }
+        List<ArticleCategory> articleCategories = categoryService.findListByArticleId(article.getId());
+        List<ArticleCategory> categorys = articleCategories.stream()
+                .filter(item -> ArticleCategory.TYPE_CATEGORY.equals(item.getType()))
+                .collect(Collectors.toList());
+        if (CollectionUtil.isEmpty(categorys)) {
+            article.setArticleCategory(new ArticleCategory());
+        } else {
+            article.setArticleCategory(categorys.get(0));
+        }
+        List<ArticleCategory> tags = articleCategories.stream()
+                .filter(item -> ArticleCategory.TYPE_TAG.equals(item.getType()))
+                .collect(Collectors.toList());
+        if (CollectionUtil.isEmpty(tags)) {
+            article.setTags(new ArrayList<>());
+        } else {
+            article.setTags(tags);
         }
 
         scope.setLocal("article", article);

@@ -24,20 +24,20 @@ import io.jboot.apidoc.annotation.Api;
 import io.jboot.apidoc.annotation.ApiOper;
 import io.jboot.apidoc.annotation.ApiPara;
 import io.jboot.db.model.Columns;
-import io.jboot.utils.ArrayUtil;
 import io.jboot.utils.StrUtil;
 import io.jboot.web.controller.annotation.RequestMapping;
 import io.jboot.web.json.JsonBody;
 import io.jpress.commons.Rets;
 import io.jpress.module.product.model.Product;
+import io.jpress.module.product.query.ProductQuery;
 import io.jpress.module.product.service.ProductService;
+import io.jpress.module.product.vo.SearchVO;
 import io.jpress.web.base.ApiControllerBase;
+import org.apache.commons.lang3.ObjectUtils;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author michael yang (fuhai999@gmail.com)
@@ -82,6 +82,13 @@ public class ProductApiController extends ApiControllerBase {
         List<Product> products = productService.findListByColumns(columns, orderBy, count);
         return Ret.ok().set("list", products);
     }
+    @ApiPara("获取产品列表")
+    public Ret list(@ApiPara("排序方式") String orderBy
+            , @ApiPara("分页的页码") @DefaultValue("1") int pageNumber
+            , @ApiPara("每页的数据数量") @DefaultValue("10") int pageSize) {
+        Page<Product> productPage = productService.paginateInNormal(pageNumber, pageSize, orderBy);
+        return Ret.ok().set("data", productPage);
+    }
 
 
     @ApiPara("查询某个产品的相关产品")
@@ -93,11 +100,18 @@ public class ProductApiController extends ApiControllerBase {
 
 
     @ApiPara("商品搜索")
-    public Ret search(@ApiPara("搜索关键字数据 map") @JsonBody Map<String, Object> searchMap
+    public Ret search(@ApiPara("搜索关键字数据 map") @JsonBody SearchVO searchParam
             , @ApiPara("分页页码") @DefaultValue("1") int pageNumber
             , @ApiPara("每页数量") @DefaultValue("10") int pageSize) {
-        Page<Product> dataPage = ArrayUtil.isNotEmpty(searchMap)
-                ? productService.search(searchMap,pageNumber, pageSize)
+        if (ObjectUtils.isEmpty(searchParam)) {
+            return null;
+        }
+        ProductQuery productQuery = new ProductQuery()
+                .setTitle(searchParam.getTitle())
+                .setCategoryId(searchParam.getCategoryId())
+                .setSortField(searchParam.getSortField());
+        Page<Product> dataPage = ObjectUtils.isNotEmpty(searchParam)
+                ? productService.search(productQuery,pageNumber, pageSize)
                 : null;
         return Ret.ok().set("page", dataPage);
     }
