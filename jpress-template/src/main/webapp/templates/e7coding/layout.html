@@ -168,7 +168,7 @@
 <div class="ui top menu sidebar stackable">
     <div class="item">
         <img class="ui image" style="width:26px;height:26px;margin-top:-2px;"
-             src="https://cdn.learnku.com/uploads/images/201901/24/1/OyBnfB2vlk.png!/both/44x44">
+             src="resource/img/admin.gif">
         <span class="site-name ml-2">#(WEB_NAME)</span>
     </div>
 
@@ -207,7 +207,7 @@
                     <div class="text site-logo" style="color:#888888;display: flex;">
 
                         <img class="ui image" style="width:26px;height:26px;margin-top:-2px;"
-                             src="">
+                             src="resource/img/admin.gif">
                         <span class="site-name">#(WEB_NAME)</span>
                         <i class="dropdown icon ml-3"></i>
                     </div>
@@ -218,7 +218,7 @@
                         </div>
 
                         <a class="item pr-3 mt-2" href="index.html">
-                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;" src=""> 首页
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;" src="resource/img/admin.gif"> 首页
                         </a>
                         <div class="divider clearfix"></div>
                         #categories(asTree=true)
@@ -355,101 +355,6 @@
 
         </form>
     </div>
-</div>
-
-
-<div class="ui modal small report">
-    <div class="header modal-title">内容举报</div>
-    <form class="ui form error" method="POST" action="https://learnku.com/reports" accept-charset="UTF-8">
-        <input type="hidden" name="_token" value="B9Xi4ZxkZyBAOolyUmeMQehuu8PG3zD2Rk72Sb8G">
-        <input name="reportable_id" type="hidden" value="">
-        <input name="reportable_type" type="hidden" value="">
-        <div class="content" style="padding: 20px;">
-            <div class="ui message warning show">
-                <i class="icon info"></i> 匿名举报，为防止滥用，仅管理员可见举报者。
-            </div>
-            <p>我要举报该<span class='modal-typename'></span>，理由是：</p>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="spam" required>
-                    <label><strong>垃圾广告</strong>：恶意灌水、广告、推广等内容</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="meaningless" required>
-                    <label><strong>无意义内容</strong>：测试、灌水、文不对题、消极内容、文章品质太差等</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="violation" required>
-                    <label><strong>违规内容</strong>：色情、暴利、血腥、敏感信息等</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="unfriendly" required>
-                    <label><strong>不友善内容</strong>：人身攻击、挑衅辱骂、恶意行为</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="vpn" required>
-                    <label><strong>科学上网</strong>：翻墙、VPN、Shadowsocks，政策风险，会被关站！</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="qa" required>
-                    <label><strong>不懂提问</strong>：提问太随意，需要再做一遍《提问的智慧》测验</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="casually_ask" required>
-                    <label><strong>随意提问</strong>：提问没有发布在社区问答分类下</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="markdown" required>
-                    <label><strong>排版混乱</strong>：没有合理使用 Markdown 编写文章，未使用代码高亮</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="copywriting" required>
-                    <label><strong>内容结构混乱</strong>：逻辑不清晰，内容混乱，难以阅读</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="title" required>
-                    <label><strong>标题随意</strong>：标题党、标题不释义</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="category" required>
-                    <label><strong>尊重版权</strong>：分享付费课程、破解软件（付费），侵犯作者劳动成果</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="other" required>
-                    <label><strong>其他理由</strong>：请补充说明</label>
-                </div>
-            </div>
-            <div class="field">
-                <textarea placeholder="请提供详尽的说明" name="reason" rows="3"></textarea>
-            </div>
-        </div>
-        <div class="actions field" style="padding: 1px 12px 25px;">
-            <button class="ui primary button" type="submit">举报</button>
-            <div class="ui cancel button">取消</div>
-        </div>
-    </form>
 </div>
 
 

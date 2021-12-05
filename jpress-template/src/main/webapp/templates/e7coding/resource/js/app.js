@@ -725,7 +725,6 @@ var moveEnd = function (t) {
             }, initEmojiPicker: function () {
                 0 !== t("[data-emojiable=true]").length && (window.emojiPicker = new EmojiPicker({
                     emojiable_selector: "[data-emojiable=true]",
-                    assetsPath: "https://cdn.learnku.com/assets/images",
                     popupButtonClasses: "icon smile",
                     wysiwyg: !1
                 }), window.emojiPicker.discover())

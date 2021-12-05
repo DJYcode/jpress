@@ -2005,27 +2005,6 @@
                     </button>
 
 
-                    <div class="ui card tag-active-user-card popular-card responsive">
-                        <div class="content">
-                            <span class="">文章归档</span>
-
-                            <a href="https://learnku.com/blog/qwwdezone" class="rm-link-color pull-right ui popover"
-                               style="font-size: 15px;margin-right: 8px;" data-content="所有文章">
-                                <i class="icon newspaper"></i>
-                            </a>
-                        </div>
-
-                        <div class="extra content ">
-                            <div class="ui list readmore" style="padding:8px">
-                                <a class="item" href="https://learnku.com/blog/qwwdezone/archive/2021-9"
-                                   style="line-height: 22px;">
-                                    <span class=" pull-right" style="color:inherit">1 篇</span>
-                                    2021 年 9 月
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="ui card tag-active-user-card popular-card responsive" style="font-size: 13px;">
                         <div class="ui secondary pointing menu"
                              style="margin-bottom: 5px;border-bottom: 2px solid rgba(34, 36, 38, 0.1);">
@@ -2036,12 +2015,16 @@
 
                             <div class="ui middle aligned divided  list"
                                  style="padding: 0px 15px;margin-top: 0px;margin-bottom: 5px;">
-                                #articles()
-                                    #for(article :articles)
-                                        <a class="item" href="#(article.url)">
-                                            #(article.title)
-                                        </a>
-                                    #end
+                                #relevantArticles(article)
+                                #if(relevantArticles && relevantArticles.size() >0)
+                                #for(article :relevantArticles)
+                                <a class="item" href="#(article.url)">
+                                    #(article.title)
+                                </a>
+                                #end
+                                #else
+                                暂无
+                                #end
                                 #end
                             </div>
                         </div>
@@ -2090,122 +2073,7 @@
 
     </div>
 
-    <div class="ui inverted vertical footer segment">
-        <div class="ui center aligned container">
-
-
-            <div class="ui stackable inverted divided grid">
-                <div class="four wide column">
-                    <h4 class="ui inverted header">
-                        <img src="https://cdn.learnku.com/uploads/images/201908/22/1/oVrAoOQ4Vc.png!/fw/40" alt=""
-                             style="width: 32px;border-radius: 6px;position: relative;top: -5px;">
-                        关于 LearnKu
-                    </h4>
-                    <div class="ui inverted  text-center">
-                        <div class="lh-3">LearnKu 是终身编程者的修道场</div>
-                        <div class="lh-3">摒弃世俗浮躁，追求技术精湛</div>
-                    </div>
-
-                    <div class="ui inverted  text-center mt-3 rm-link-color tdu">
-                        <i class="icon birthday"></i> <a href="28735.html">LearnKu 诞生的故事</a>
-                    </div>
-                </div>
-                <div class="four wide column">
-                    <h4 class="ui inverted header">资源推荐</h4>
-                    <div class="ui inverted link list">
-                        <li class="mb-1">
-                            <a class="item" href="../docs/guide.html">
-                                《社区使用指南》
-                            </a>
-                        </li>
-                        <li class="mb-1">
-                            <a class="item" href="../docs/writing-docs.html">
-                                《文档撰写指南》
-                            </a>
-                        </li>
-                        <li class="mb-1">
-                            <a class="item" href="../docs/guide/protocol/4992.html">
-                                《LearnKu 社区规范》
-                            </a>
-                        </li>
-                        <li class="mb-1">
-                            <a class="item" href="../docs/guide/smart-questions/2032.html">
-                                《提问的智慧》
-                            </a>
-                        </li>
-                    </div>
-                </div>
-                <div class="four wide column">
-                    <h4 class="ui inverted header">服务提供商</h4>
-                    <div class="ui inverted link list">
-                        <a href="https://passport.ucloud.cn/?invitation_code=rami45zj5kpm&amp;ytag=reZ5E7"
-                           rel="nofollow noopener noreferrer" class="item" target="_blank" style="line-height: 28px;">
-                            <img src="https://cdn.learnku.com/uploads/banners/bQawWl3vT5dc2lYx5JZ7.png!large"
-                                 title="本站服务器由 UCloud 赞助" class="ui popover"
-                                 style="height: 20px;margin-bottom: -4px;margin-right: 3px;display: inline-block;">
-                        </a>
-                        <a href="https://www.upyun.com/" rel="nofollow noopener noreferrer" class="item" target="_blank"
-                           style="line-height: 28px;">
-                            <img src="https://cdn.learnku.com/uploads/banners/XPtLlZmIN1cQbLuDFEON.png!large"
-                                 title="社区 CDN 赞助商" class="ui popover"
-                                 style="height: 20px;margin-bottom: -4px;margin-right: 3px;display: inline-block;">
-                        </a>
-                        <a href="http://www.sendcloud.net/" rel="nofollow noopener noreferrer" class="item"
-                           target="_blank" style="line-height: 28px;">
-                            <img src="https://cdn.learnku.com/uploads/banners/JpTCK6OKYBIrBIWdtob8.png!large"
-                                 title="订阅邮件赞助商：SendCloud" class="ui popover"
-                                 style="height: 20px;margin-bottom: -4px;margin-right: 3px;display: inline-block;">
-                        </a>
-                    </div>
-                </div>
-                <div class="four wide column">
-                    <h4 class="ui inverted header">其他信息</h4>
-                    <div class="ui inverted link list">
-
-                        <li>
-                            <a class="item" href="../contact%EF%B9%96code=outsource.html">
-                                <i class="icon thumbs up"></i> 软件外包
-                            </a>
-                        </li>
-                        <li>
-                            <a class="item" href="../docs/guide/administrator/4485.html">
-                                <i class="icon heartbeat"></i> 成为版主
-                            </a>
-                        </li>
-                        <li>
-                            <a class="item" href="../quizzes.html">
-                                <i class="icon wpforms"></i> 所有测验
-                            </a>
-                        </li>
-                        <li>
-                            <a class="item" href="../contact.html">
-                                <i class="icon wechat" aria-hidden="true"></i> 联系站长（反馈建议）
-                            </a>
-                        </li>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ui inverted section divider"></div>
-            <div style="color: rgb(137, 137, 140);font-size:0.9em;" class="rm-link-color">
-                <p>
-                    <a href="http://beian.miit.gov.cn/" target="_blank">粤ICP备18099781号-6</a>
-                    <span class="mx-2">|</span>
-                    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502004330"
-                       target="_blank"><img
-                            src="https://cdn.learnku.com/uploads/images/201908/21/1/L4ckM2CVb6.png!/fw/20" width="20"
-                            style="position: relative;top: 4px;"> 粤公网安备 44030502004330号</a>
-                    <span class="mx-2">|</span>
-                    <a href="../lk.html">违法和不良信息举报</a>
-                </p>
-                <p style=" margin-top:-8px;margin-bottom: -0px;" class="ui inverted signature">
-                    由 <a href="../contact.html" target="_blank" style="color: inherit;">Summer</a> 设计和编码 <span
-                        style="color: #e27575;font-size: 14px;">❤</span>
-                </p>
-            </div>
-        </div>
-    </div>
-
+    #include("./footer.html")
 
 </div>
 
@@ -2273,107 +2141,12 @@
 </div>
 
 
-<div class="ui modal small report">
-    <div class="header modal-title">内容举报</div>
-    <form class="ui form error" method="POST" action="https://learnku.com/reports" accept-charset="UTF-8">
-        <input type="hidden" name="_token" value="B9Xi4ZxkZyBAOolyUmeMQehuu8PG3zD2Rk72Sb8G">
-        <input name="reportable_id" type="hidden" value="">
-        <input name="reportable_type" type="hidden" value="">
-        <div class="content" style="padding: 20px;">
-            <div class="ui message warning show">
-                <i class="icon info"></i> 匿名举报，为防止滥用，仅管理员可见举报者。
-            </div>
-            <p>我要举报该<span class='modal-typename'></span>，理由是：</p>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="spam" required>
-                    <label><strong>垃圾广告</strong>：恶意灌水、广告、推广等内容</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="meaningless" required>
-                    <label><strong>无意义内容</strong>：测试、灌水、文不对题、消极内容、文章品质太差等</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="violation" required>
-                    <label><strong>违规内容</strong>：色情、暴利、血腥、敏感信息等</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="unfriendly" required>
-                    <label><strong>不友善内容</strong>：人身攻击、挑衅辱骂、恶意行为</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="vpn" required>
-                    <label><strong>科学上网</strong>：翻墙、VPN、Shadowsocks，政策风险，会被关站！</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="qa" required>
-                    <label><strong>不懂提问</strong>：提问太随意，需要再做一遍《提问的智慧》测验</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="casually_ask" required>
-                    <label><strong>随意提问</strong>：提问没有发布在社区问答分类下</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="markdown" required>
-                    <label><strong>排版混乱</strong>：没有合理使用 Markdown 编写文章，未使用代码高亮</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="copywriting" required>
-                    <label><strong>内容结构混乱</strong>：逻辑不清晰，内容混乱，难以阅读</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="title" required>
-                    <label><strong>标题随意</strong>：标题党、标题不释义</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="category" required>
-                    <label><strong>尊重版权</strong>：分享付费课程、破解软件（付费），侵犯作者劳动成果</label>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui radio checkbox">
-                    <input type="radio" name="report_type" value="other" required>
-                    <label><strong>其他理由</strong>：请补充说明</label>
-                </div>
-            </div>
-            <div class="field">
-                <textarea placeholder="请提供详尽的说明" name="reason" rows="3"></textarea>
-            </div>
-        </div>
-        <div class="actions field" style="padding: 1px 12px 25px;">
-            <button class="ui primary button" type="submit">举报</button>
-            <div class="ui cancel button">取消</div>
-        </div>
-    </form>
-</div>
-
-
 </body>
 
 
 <!-- Scripts -->
-<script src="https://cdn.learnku.com//build/js/eabf7db6c25d542f4f52-vendors.js"></script>
-<script src="https://cdn.learnku.com//build/js/43c9b62bbf61242c3543-app.js"></script>
+<script src="resource/js/vendors.js"></script>
+<script src="resource/js/app.js"></script>
 
 
 </html>
