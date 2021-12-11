@@ -1,0 +1,13 @@
+<div class="fixed-table-pagination">
+    <div class="pull-right pagination" style="float: right;margin-top: 10px;margin-bottom: 10px;">
+
+        <ul class="pagination">
+            #adminPaginate(previousText='<',nextText='>')
+            #for(page : pages)
+            <li class="page-item #(page.style)"><a class="page-link" href="#(page.url??)">#(page.text??)</a></li>
+            #end
+            #end
+        </ul>
+    </div>
+</div>
+

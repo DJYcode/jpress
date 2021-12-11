@@ -1,0 +1,48 @@
+#include("./_layout.html")
+#@uconsole_layout("加入会员")
+#define content()
+<table class="table mb-0">
+    <thead>
+    <tr>
+        <th scope="col">会员名称</th>
+        <th scope="col">简介</th>
+        <th scope="col">到期时间</th>
+    </tr>
+    </thead>
+    <tbody>
+    #for(mgroup : memberGroups)
+    <tr>
+        <td>
+            <strong>
+                <a href="#(CPATH)/ucenter/member/detail/#(mgroup.id)">#(mgroup.title ??)</a>
+            </strong>
+            <div class="jp-action-card">
+                <div class="jp-action-body">
+                    #if(mgroup.member ??)
+                    <a href="#(CPATH)/ucenter/member/join/#(mgroup.id)">续费</a>
+                    #else
+                    <a href="#(CPATH)/ucenter/member/join/#(mgroup.id)">加入会员</a>
+                    #end
+                    |
+                    <a href="#(CPATH)/ucenter/member/detail/#(mgroup.id)">查看福利</a>
+                </div>
+            </div>
+        </td>
+        <td>
+            #(mgroup.summary ??)
+        </td>
+        <td>
+            #if(mgroup.member.duetime ??)
+            #date(mgroup.member.duetime)
+            #else
+            尚未加入
+            #end
+        </td>
+    </tr>
+    #else
+    <tr class="nodata"><td colspan="999">暂无数据</td> </tr>
+    #end
+    </tbody>
+    </tbody>
+</table>
+#end

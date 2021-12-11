@@ -1,0 +1,170 @@
+#define uconsole_layout(title)
+<!DOCTYPE html>
+<!-- saved from url=(0110)test.html -->
+<html dir="ltr" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords"
+        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, monster admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, ">
+  <meta name="description"
+        content="Monster is powerful and clean admin dashboard template, inpired from Google&#39;s Material Design">
+  <meta name="robots" content="noindex,nofollow">
+  <title>#(WEB_NAME ??)-控制台</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="https://www.wrappixel.com/demos/admin-templates/monster-bootstrap-latest/monster/src/assets/images/favicon.png">
+  <!-- Custom CSS -->
+  <link href="#(CPATH)/static/front/css/style.min.css" rel="stylesheet">
+  <!-- This Page CSS -->
+  <link rel="stylesheet" type="text/css" href="#(CPATH)/static/front/css/prism.css">
+  <link rel="stylesheet" type="text/css" href="#(CPATH)/static/front/css/toastr.min.css">
+  <link rel="stylesheet" href="#(CPATH)/static/components/switchery/switchery.min.css">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <style type="text/css">.jqstooltip {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    visibility: hidden;
+    background: rgb(0, 0, 0) transparent;
+    background-color: rgba(0, 0, 0, 0.6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+    color: white;
+    font: 10px arial, san serif;
+    text-align: left;
+    white-space: nowrap;
+    padding: 5px;
+    border: 1px solid white;
+    box-sizing: content-box;
+    z-index: 10000;
+  }
+
+  .jqsfield {
+    color: white;
+    font: 10px arial, san serif;
+    text-align: left;
+  }</style>
+  <script>
+    var jpress = {
+      cpath: '#(CPATH)'
+    }
+  </script>
+  #@css?()
+</head>
+
+<body class="" style="">
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<div class="preloader" style="display: none;">
+  <svg class="tea lds-ripple" width="37" height="48" viewBox="0 0 37 48" fill="none"
+       xmlns="http://www.w3.org/2000/svg">
+    <path d="M27.0819 17H3.02508C1.91076 17 1.01376 17.9059 1.0485 19.0197C1.15761 22.5177 1.49703 29.7374 2.5 34C4.07125 40.6778 7.18553 44.8868 8.44856 46.3845C8.79051 46.79 9.29799 47 9.82843 47H20.0218C20.639 47 21.2193 46.7159 21.5659 46.2052C22.6765 44.5687 25.2312 40.4282 27.5 34C28.9757 29.8188 29.084 22.4043 29.0441 18.9156C29.0319 17.8436 28.1539 17 27.0819 17Z"
+          stroke="#009efb" stroke-width="2"></path>
+    <path d="M29 23.5C29 23.5 34.5 20.5 35.5 25.4999C36.0986 28.4926 34.2033 31.5383 32 32.8713C29.4555 34.4108 28 34 28 34"
+          stroke="#009efb" stroke-width="2"></path>
+    <path id="teabag" fill="#009efb" fill-rule="evenodd" clip-rule="evenodd"
+          d="M16 25V17H14V25H12C10.3431 25 9 26.3431 9 28V34C9 35.6569 10.3431 37 12 37H18C19.6569 37 21 35.6569 21 34V28C21 26.3431 19.6569 25 18 25H16ZM11 28C11 27.4477 11.4477 27 12 27H18C18.5523 27 19 27.4477 19 28V34C19 34.5523 18.5523 35 18 35H12C11.4477 35 11 34.5523 11 34V28Z"></path>
+    <path id="steamL" d="M17 1C17 1 17 4.5 14 6.5C11 8.5 11 12 11 12" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" stroke="#009efb"></path>
+    <path id="steamR" d="M21 6C21 6 21 8.22727 19 9.5C17 10.7727 17 13 17 13" stroke="#009efb" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"></path>
+  </svg>
+</div>
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin1" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+  <!-- ============================================================== -->
+  <!-- Topbar header - style you can find in pages.scss -->
+  <!-- ============================================================== -->
+  #include("_header.html",showToggle=true)
+  <!-- ============================================================== -->
+  <!-- End Topbar header -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Left Sidebar - style you can find in sidebar.scss  -->
+  <!-- ============================================================== -->
+  #include("_left_menu.html")
+  <!-- ============================================================== -->
+  <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Page wrapper  -->
+  <!-- ============================================================== -->
+  <div class="page-wrapper" style="display: block;">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+      <div class="row">
+        <div class="col-md-12 align-self-center">
+          <h3 class="page-title">#(title ??)</h3>
+        </div>
+      </div>
+    </div>
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+      <!-- -------------------------------------------------------------- -->
+      <!-- Start Page Content -->
+      <!-- -------------------------------------------------------------- -->
+      <div class="row">
+        <div class="col-12">
+          #@content()
+        </div> <!-- end col-->
+      </div> <!-- end col-->
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Container fluid  -->
+</div>
+
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="#(CPATH)/static/front/js/jquery.min.js"></script>
+<script src="#(CPATH)/static/components/jquery/jquery.form.min.js"></script>
+<script src="#(CPATH)/static/components/jquery-validation/jquery.validate.min.js"></script>
+<script src="#(CPATH)/static/components/jquery-validation/additional-methods.min.js"></script>
+<script src="#(CPATH)/static/components/jquery-validation/localization/messages_zh.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="#(CPATH)/static/front/js/bootstrap.bundle.min.js"></script>
+<!-- apps -->
+<script src="#(CPATH)/static/front/js/app.min.js"></script>
+<script src="#(CPATH)/static/front/js/app.init.js"></script>
+<script src="#(CPATH)/static/front/js/app-style-switcher.js"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script src="#(CPATH)/static/front/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="#(CPATH)/static/front/js/jquery.sparkline.min.js"></script>
+<!--Wave Effects -->
+<script src="#(CPATH)/static/front/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="#(CPATH)/static/front/js/sidebarmenu.js"></script>
+<!--Custom JavaScript -->
+<script src="#(CPATH)/static/front/js/feather.min.js"></script>
+<script src="#(CPATH)/static/front/js/custom.min.js"></script>
+<!-- This Page JS -->
+<script src="#(CPATH)/static/front/js/prism.js"></script>
+
+<script src="#(CPATH)/static/front/js/toastr.min.js"></script>
+<script src="#(CPATH)/static/components/switchery/switchery.min.js"></script>
+<script src="#(CPATH)/static/components/sweetalert2/sweetalert2.all.min.js"></script>
+
+<script src="#(CPATH)/static/front/js/uconsoleutils.js"></script>
+<script src="#(CPATH)/static/front/js/uconsole.js"></script>
+
+#@script?()
+<div id="toast-top-right" class="toast-container toastr toast-top-right"></div>
+</body>
+</html>
+#end

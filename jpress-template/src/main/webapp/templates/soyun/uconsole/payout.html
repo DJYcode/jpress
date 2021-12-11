@@ -1,0 +1,80 @@
+#include("./_layout.html")
+#@uconsole_layout("余额提现")
+
+#define content()
+<section class="content-header text-tap">
+    <a href="#(CPATH)/ucenter/finance/amount/payout">全部 (#(totalCount ?? 0))</a> |
+    <a href="?status=1">提现中 (#(payingCount ?? 0))</a> |
+    <a href="?status=9">已成功 (#(successCount ?? 0))</a> |
+    <a href="?status=2" style="color: #a00">已拒绝 (#(refuseCount ?? 0))</a>
+</section>
+<div class="card card-outline card-primary">
+    <div class="card-header with-border">
+
+        <div class="row admin-search-panel">
+            <div class="col-xs-12">
+                <a href="payoutsubmit" class="btn btn-info ">
+                    <i class="fas fa-plus"></i> 新建申请
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <th style="width: 150px">真实名字</th>
+                <th style="width: 100px">提现金额</th>
+                <th style="width: 80px">手续费</th>
+                <th>支付类型</th>
+                <th>支付账号</th>
+                <th style="width: 150px">状态</th>
+                <th style="width: 80px">操作</th>
+            </tr>
+
+            #for(item : page.list ??)
+            <tr>
+                <td>
+                    #(item.user_real_name)
+                </td>
+                <td>
+                    #number(item.amount,"0.00")
+                </td>
+                <td>
+                    #number(item.fee,"0.00")
+                </td>
+                <td>
+                    #(item.payTypeStr ??)
+                </td>
+                <td>
+                    #(item.pay_to ??)
+                </td>
+                <td>
+                    #(item.statusStr ??)
+                </td>
+                <td>
+                    <a href="#(CPATH)/ucenter/finance/amount/payoutdetail/#(item.id)">详情</a>
+                </td>
+            </tr>
+            #else
+            <tr class="nodata"><td colspan="999">暂无数据</td> </tr>
+            #end
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-sm-12">
+                #include("./_upaginate.html")
+            </div>
+        </div>
+    </div>
+    <!-- /.card-footer -->
+</div>
+#end

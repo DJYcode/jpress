@@ -1,0 +1,85 @@
+#define layout()
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>#(SEO_TITLE ?? (WEB_TITLE + '-' + WEB_SUBTITLE))</title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <meta name="keywords"
+        content="#(SEO_KEYWORDS ??)">
+  <meta name="description" content="#(SEO_DESCRIPTION ??)">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" href="favicon.ico" type="image/png">
+  <link rel="icon" href="favicon.svg" sizes="any" type="image/svg+xml">
+  <link rel="stylesheet" href="css/main.css">
+  #@css?()
+</head>
+<body>
+<header class="wrapper-header">
+  <section class="section-contain">
+    <a href="/" class="font-logo logo">#(WEB_NAME ??)</a>
+    <ul class="site-nav">
+      #for(menu : MENUS)
+        #if(menu.hasChild())
+        <li class="site-nav-item">
+          <div class="site-nav-group site-nav-dropdown">
+            <a href="javascript:;"><span class="subbtn">#(menu.text ??)</span></a>
+          </div>
+          <ul class="site-nav-dropdown-menue sub-nav">
+            <li class="site-nav-item site-nav-item-group">
+              <ul class="site-nav-item-group-list">
+                #for(childMenu : menu.getChilds())
+                <li class="site-nav-item sub-nav-links-item">
+                  <a href="#(childMenu.url ??)">#(childMenu.text ??)</a>
+                </li>
+                #end
+              </ul>
+            </li>
+          </ul>
+        </li>
+        #else
+        <li class="site-nav-item"><a href="#(menu.url ??)">#(menu.text ??)</a></li>
+        #end
+      #end
+      <li class="site-nav-item login-btn">
+        <div class="site-nav-group active">
+          #if(USER)
+          <a href="#(CPATH)/ucenter/info">我的控制台
+            <i class="uk-icon-angle-right"></i>
+          </a>
+          #else
+          <a href="#(CPATH)/user/login">登录控制台
+            <i class="uk-icon-angle-right"></i>
+          </a>
+          #end
+
+        </div>
+      </li>
+    </ul>
+    <section class="menu"><span class="crust-top"></span> <span class="crust-bottom"></span></section>
+  </section>
+</header>
+<div id="main" role="main" class="wrapper-container page-index">
+  <div class="content wrapper-container">
+    #@content()
+  </div>
+</div>
+#include("./footer.html")
+</body>
+<script src="#(CPATH)/static/front/js/vendor.js"></script>
+<script src="#(CPATH)/static/front/js/main.js"></script>
+<script src="#(CPATH)/static/components/jquery/jquery.min.js"></script>
+<script src="#(CPATH)/static/front/jpressfront.js"></script>
+<script src="#(CPATH)/static/components/clipboard/clipboard.min.js"></script>
+#@script?()
+<script>window.init("index")</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-42629236-1"></script>
+<script>function gtag() {
+  dataLayer.push(arguments)
+}
+
+window.dataLayer = window.dataLayer || [], gtag("js", new Date), gtag("config", "UA-42629236-1"), gtag("config", "AW-1030743864")</script>
+</html>
+#end

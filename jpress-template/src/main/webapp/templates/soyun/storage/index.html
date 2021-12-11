@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="dns-prefetch" href="https://d349cztnlupsuf.enginefront.net">
+    <title>替代传统数据库的高效云端存储 - LeanCloud</title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="keywords"
+          content="LeanCloud, cloud storage，FaaS, Function as a Service, Serverless, json document, key-value，cloud computing, scheme free, RESTful API, 云存储, 云端数据库, 数据存储, 文件存储, 云引擎，云函数，云端代码，无服务器应用后端, 移动后端, 小程序后端, 大数据分析, 多副本, 高可用">
+    <meta name="description" content="高效存取海量级 JSON 对象、二进制文件、地理位置等数据，内置的行级 ACL 权限控制，以及通用的用户及角色管理体系，帮助您快速实现安全而灵活的数据访问。">
+    <meta property="twitter:title" content="替代传统数据库的高效云端存储 - LeanCloud">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <link rel="icon" href="../favicon.ico" type="image/png">
+    <link rel="icon" href="../favicon.svg" sizes="any" type="image/svg+xml">
+    <link rel="canonical" href="https://leancloud.cn">
+    <link rel="manifest" href="../manifest.json">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="LeanCloud">
+    <meta property="og:url" content="https://leancloud.cn">
+    <meta property="og:description"
+          content="高效存取海量级 JSON 对象、二进制文件、地理位置等数据，内置的行级 ACL 权限控制，以及通用的用户及角色管理体系，帮助您快速实现安全而灵活的数据访问。">
+    <meta property="og:title" content="替代传统数据库的高效云端存储 - LeanCloud">
+    <meta property="og:image" content="https://leancloud.cn/logo.png">
+    <meta name="baidu-site-verification" content="sEgKd7fuLs">
+    <meta name="baidu-site-verification" content="oDahCCQqdn">
+    <link rel="stylesheet" href="../css/main.cbbf2041.css">
+    <link rel="alternate" type="application/rss+xml" title="LeanCloud - LeanCloud - 为开发加速" href="../feed.xml">
+</head>
+<body>
+<header class="wrapper-header">
+    <section class="section-contain"><a href="../index.html" class="font-logo logo">LeanCloud</a>
+        <ul class="site-nav">
+            <li class="site-nav-item current">
+                <div class="site-nav-group site-nav-dropdown"><a href="javascript:;"><span class="subbtn">产品</span></a>
+                </div>
+                <ul class="site-nav-dropdown-menue sub-nav">
+                    <li class="site-nav-item site-nav-item-group">
+                        <div class="site-nav-item-group-title">基础服务</div>
+                        <ul class="site-nav-item-group-list">
+                            <li class="site-nav-item sub-nav-links-item current"><a href="index.html">数据存储</a></li>
+                            <li class="site-nav-item sub-nav-links-item"><a href="../engine/index.html">云引擎 + 数据库</a>
+                            </li>
+                            <li class="site-nav-item sub-nav-links-item"><a href="../rtm/index.html">即时通讯</a></li>
+                            <li class="site-nav-item sub-nav-links-item"><a href="../notification/index.html">消息推送</a>
+                            </li>
+                            <li class="site-nav-item sub-nav-links-item"><a href="../sms/index.html">短信</a></li>
+                        </ul>
+                    </li>
+                    <li class="site-nav-item site-nav-item-group">
+                        <div class="site-nav-item-group-title">行业解决方案</div>
+                        <ul class="site-nav-item-group-list">
+                            <li class="site-nav-item sub-nav-links-item"><a href="../play/index.html">游戏解决方案</a></li>
+                            <li class="site-nav-item sub-nav-links-item"><a href="../miniprogram/index.html">微信小程序</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="site-nav-item"><a href="../pricing/index.html">价格</a></li>
+            <li class="site-nav-item"><a href="../customers/index.html">用户</a></li>
+            <li class="site-nav-item"><a href="https://leancloud.cn/docs/">文档</a></li>
+            <li class="site-nav-item"><a href="../tutorials/index.html">学习</a></li>
+            <li class="site-nav-item"><a href="../帮助/index.html">帮助</a></li>
+            <li class="site-nav-item"><a href="https://leancloud.app">国际版 (Intl)</a></li>
+            <li class="site-nav-item login-btn">
+                <div class="site-nav-group active"><a href="https://console.leancloud.cn">控制台 <i
+                        class="uk-icon-angle-right"></i></a></div>
+            </li>
+        </ul>
+        <section class="menu"><span class="crust-top"></span> <span class="crust-bottom"></span></section>
+    </section>
+</header>
+<div id="main" role="main" class="wrapper-container page-storage">
+    <section class="section">
+        <section class="section-contain column first-section"><h2 class="title">替代传统数据库的高效云端存储</h2>
+            <p>LeanCloud 能够高效存取海量级 JSON 对象、二进制文件、地理位置等数据。其内置的行级 ACL 权限控制，以及通用的用户及角色管理体系，可以帮助您快速实现安全而灵活的数据访问。</p>
+            <p>无服务器架构，让您快人一步。</p></section>
+    </section>
+    <section id="features" class="features-section">
+        <section class="section section-background small-scene">
+            <section class="section-contain text-img-section rightimg">
+                <section class="text"><h3 class="title">面向对象的海量数据库</h3>
+                    <p>从社交娱乐、生活服务、智能硬件，到游戏动漫、电商社区，LeanCloud 存储服务都可以满足各种行业的核心业务需求。</p></section>
+                <figure class="imgcontainer"><img src="../assets/imgs/storage/db.292d8778.png" alt=""></figure>
+            </section>
+        </section>
+        <section class="section">
+            <section class="section-contain column table-section"><h3 class="title">实用功能</h3>
+                <div class="table-item">
+                    <section class="content"><i class="icon big json"></i><h4 class="title">结构化数据存储</h4>
+                        <p class="small text-muted">存储任意类型的 JSON 对象，支持对象之间的关联映射，同时提供完整的增删改查操作接口。</p></section>
+                    <section class="content"><i class="icon big file"></i><h4 class="title">文件存储</h4>
+                        <p class="small text-muted">存储图片，文档，音视频等二进制文件，自动提供弹性空间和多副本的冗余备份策略，默认支持多个 CDN 加速节点。</p></section>
+                    <section class="content"><i class="icon big acl"></i><h4 class="title">ACL 权限控制</h4>
+                        <p class="small text-muted">支持在整表、单行、单列三个维度上，进行读写分离的权限控制。严密的 ACL 机制，确保数据安全。</p></section>
+                    <section class="content"><i class="icon big identity"></i><h4 class="title">内建账户系统</h4>
+                        <p class="small text-muted">支持用户通过邮件或手机进行注册和登录，并提供密码重置等实用功能。</p></section>
+                    <section class="content"><i class="icon big sync"></i><h4 class="title">多端实时同步</h4>
+                        <p class="small text-muted">数据可在云端与多个客户端之间实时同步，支持跨设备进行实时互动协作。</p></section>
+                    <section class="content"><i class="icon big data"></i><h4 class="title">大数据分析处理</h4>
+                        <p class="small text-muted">提供通用的 SQL 查询接口，可实时并行处理数据，专为数据挖掘、OLAP 以及商业智能而建。</p></section>
+                </div>
+            </section>
+        </section>
+        <section class="section-group"><h3 class="title group-title">优势和特色</h3>
+            <section class="section">
+                <section class="section-contain text-img-section leftimg">
+                    <figure class="imgcontainer"><img src="../assets/imgs/storage/feature1.bb876180.svg" alt="">
+                    </figure>
+                    <section class="text"><h3 class="title"></h3>
+                        <p>多副本分布保存，提供 99.999% 的数据可靠性和超高并发访问能力。</p>
+                        <p>完善的备份机制确保数据万无一失。</p></section>
+                </section>
+            </section>
+            <section class="section">
+                <section class="section-contain text-img-section rightimg">
+                    <section class="text"><h3 class="title"></h3>
+                        <p>扩展功能组件，支持朋友圈、动态消息等常见社区功能，让业务开发更简单便捷。</p></section>
+                    <figure class="imgcontainer"><img src="../assets/imgs/storage/feature2.548ec354.svg" alt="">
+                    </figure>
+                </section>
+            </section>
+            <section class="section">
+                <section class="section-contain text-img-section leftimg">
+                    <figure class="imgcontainer"><img src="../assets/imgs/storage/feature3.fcc3ae47.svg" alt="">
+                    </figure>
+                    <section class="text"><h3 class="title"></h3>
+                        <p>每天支撑超过 10 亿次请求，峰值压力堪比电商秒杀。自动应对流量高峰，服务稳定可靠。</p></section>
+                </section>
+            </section>
+        </section>
+    </section>
+    <section class="section section-background" id="example">
+        <section class="section-contain column example-section"><h3 class="title margin-bottom-sm">典型用户</h3>
+            <div class="swiper-container" id="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><p class="content">『LeanCloud
+                        作为一个后端服务化的云平台使用起来相当便捷，同时服务稳定速度快，技术支持反应迅速，对开发者来说既节约了开发成本且降低了技术门槛，特别适合像我们这样的独立开发者。』</p>
+                        <p class="h4 user">鲍嵬伟 / 椰岛游戏创始人</p></div>
+                    <div class="swiper-slide"><p class="content">『好的架构应该像乐高积木一样，将优秀健壮的模块组合起来，搭建出成功的项目。LeanCloud
+                        在我看来就是这样一个完美的积木，成功支撑了我们「天天打波利」游戏中百万日活用户的聊天和消息系统。』</p>
+                        <p class="h4 user">沈晟 / CTO</p></div>
+                    <div class="swiper-slide"><p class="content">『新东方多纳项目成立之初，依靠 LeanCloud
+                        强大成熟的一站式后端服务，快速上线了「多纳学英语」：比别人快一步，就会比别人多一些机会。到现在使用 LeanCloud 3 年多，沟通顺畅，问题处理及时快速，值得信赖。』</p>
+                        <p class="h4 user">李文峰 / 技术经理</p></div>
+                </div>
+                <div class="example-pagination"><span class="pagination-bg juezhanmiaoxing" data-index="1"></span> <span
+                        class="pagination-bg xd" data-index="2"></span> <span class="pagination-bg xindongfang"
+                                                                              data-index="3"></span></div>
+            </div>
+        </section>
+    </section>
+    <section class="section" id="pricing">
+        <section class="section-contain column pricing-section"><h2 class="title">价格方案</h2>
+            <div class="content"><h4 class="title">结构化数据存储</h4>
+                <table class="table-view">
+                    <thead>
+                    <tr>
+                        <th><p class="title"></p></th>
+                        <th><p class="title">开发版</p></th>
+                        <th><p class="title">商用版</p>
+                            <p class="description text-muted">按使用量计费</p></th>
+                        <th><p class="title">企业版</p>
+                            <p class="description text-muted">固定价格，需商务洽谈</p></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><p class="title">API 请求</p></td>
+                        <td><p class="small">3 万次 / 天</p></td>
+                        <td><p class="small">1.0 元 / 万次</p></td>
+                        <td><p class="small">商务洽谈</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="title">并发线程</p></td>
+                        <td><p class="small">3 个</p></td>
+                        <td><p class="small">最大 200 个</p></td>
+                        <td><p class="small">商务洽谈</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="title">自动备份</p></td>
+                        <td><p class="small">不支持</p></td>
+                        <td><p class="small">支持</p></td>
+                        <td><p class="small">支持</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="title">大数据分析</p></td>
+                        <td><p class="small">不支持</p></td>
+                        <td><p class="small">支持</p></td>
+                        <td><p class="small">支持</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="title">全文搜索</p></td>
+                        <td><p class="small">1 万次搜索查询请求 / 天</p></td>
+                        <td><p class="small">2.5 元 / 万次请求<br>索引空间 0.8 元 / GB / 天</p></td>
+                        <td><p class="small">商务洽谈</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="title">LiveQuery</p></td>
+                        <td><p class="small">最大订阅数 100 次 / 天<br>最大下发消息 5000 条 / 天</p></td>
+                        <td><p class="small">每千次订阅 4.0 元 / 天<br>每万条消息 2.0 元 / 天</p></td>
+                        <td><p class="small">商务洽谈</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="title">数据存储空间</p></td>
+                        <td><p class="small">免费 1 GB</p>
+                            <p class="description text-muted">超出部分 0.10 元 / GB / 天</p></td>
+                        <td><p class="small">0.10 元 / GB / 天</p></td>
+                        <td><p class="small">商务洽谈</p></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td></td>
+                        <td><a class="button button-primary" href="https://console.leancloud.cn/register"
+                               uk-tooltip="title:  ; pos: top-left" target="_blank">立即注册</a></td>
+                        <td><a class="button button-primary" href="https://console.leancloud.cn"
+                               uk-tooltip="title:  ; pos: top-left" target="_blank">开始使用</a></td>
+                        <td><a class="button button-primary" href="tel:+8617321279433"
+                               uk-tooltip="title: 合作电话：+86 173-2127-9433 ; pos: top-left" target="_blank">联系我们</a></td>
+                    </tr>
+                    </tfoot>
+                </table>
+                <section class="list-view">
+                    <div class="list-container">
+                        <div class="list-header"><h5 class="title">开发版</h5>
+                            <p class="description text-muted"></p></div>
+                        <ul class="list-content">
+                            <li class="title">API 请求</li>
+                            <li class="small">3 万次 / 天</li>
+                            <li class="title">并发线程</li>
+                            <li class="small">3 个</li>
+                            <li class="title">自动备份</li>
+                            <li class="small">不支持</li>
+                            <li class="title">大数据分析</li>
+                            <li class="small">不支持</li>
+                            <li class="title">全文搜索</li>
+                            <li class="small">1 万次搜索查询请求 / 天</li>
+                            <li class="title">LiveQuery</li>
+                            <li class="small">最大订阅数 100 次 / 天<br>最大下发消息 5000 条 / 天</li>
+                            <li class="title">数据存储空间</li>
+                            <li class="small">免费 1 GB</li>
+                            <li class="small">超出部分 0.10 元 / GB / 天</li>
+                            <li><a class="button button-small button-primary"
+                                   href="https://console.leancloud.cn/register" target="_blank">立即注册</a></li>
+                        </ul>
+                    </div>
+                    <div class="list-container">
+                        <div class="list-header"><h5 class="title">商用版</h5>
+                            <p class="description text-muted">按使用量计费</p></div>
+                        <ul class="list-content">
+                            <li class="title">API 请求</li>
+                            <li class="small">1.0 元 / 万次</li>
+                            <li class="title">并发线程</li>
+                            <li class="small">最大 200 个</li>
+                            <li class="title">自动备份</li>
+                            <li class="small">支持</li>
+                            <li class="title">大数据分析</li>
+                            <li class="small">支持</li>
+                            <li class="title">全文搜索</li>
+                            <li class="small">2.5 元 / 万次请求<br>索引空间 0.8 元 / GB / 天</li>
+                            <li class="title">LiveQuery</li>
+                            <li class="small">每千次订阅 4.0 元 / 天<br>每万条消息 2.0 元 / 天</li>
+                            <li class="title">数据存储空间</li>
+                            <li class="small">0.10 元 / GB / 天</li>
+                            <li><a class="button button-small button-primary" href="https://console.leancloud.cn"
+                                   target="_blank">开始使用</a></li>
+                        </ul>
+                    </div>
+                    <div class="list-container">
+                        <div class="list-header"><h5 class="title">企业版</h5>
+                            <p class="description text-muted">固定价格，需商务洽谈</p></div>
+                        <ul class="list-content">
+                            <li class="title">API 请求</li>
+                            <li class="small">商务洽谈</li>
+                            <li class="title">并发线程</li>
+                            <li class="small">商务洽谈</li>
+                            <li class="title">自动备份</li>
+                            <li class="small">支持</li>
+                            <li class="title">大数据分析</li>
+                            <li class="small">支持</li>
+                            <li class="title">全文搜索</li>
+                            <li class="small">商务洽谈</li>
+                            <li class="title">LiveQuery</li>
+                            <li class="small">商务洽谈</li>
+                            <li class="title">数据存储空间</li>
+                            <li class="small">商务洽谈</li>
+                            <li><a class="button button-small button-primary" href="tel:+8617321279433" target="_blank">联系我们</a>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+            <div class="content"><h4 class="title">文件存储（空间）</h4>
+                <p>免费赠送 10 GB 存储空间，超出部分每月 0.16 元 / GB （文件存储空间和流量均不计入商用版最低消费）</p></div>
+            <div class="content"><h4 class="title">文件存储（流量）</h4>
+                <p>上传流量不计费</p>
+                <table class="table-view">
+                    <thead>
+                    <tr>
+                        <th><p class="title"></p></th>
+                        <th><p class="title">国内访问</p></th>
+                        <th><p class="title">海外访问</p></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><p class="title">HTTP 流量</p></td>
+                        <td><p class="small">免费 500 MB / 天</p>
+                            <p class="description text-muted">超出部分 0.30 元 / GB</p></td>
+                        <td><p class="small">无免费流量</p>
+                            <p class="description text-muted">0.40 元 / GB</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="title">HTTPS 流量</p></td>
+                        <td><p class="small">无免费流量</p>
+                            <p class="description text-muted">0.36 元 / GB</p></td>
+                        <td><p class="small">无免费流量</p>
+                            <p class="description text-muted">0.60 元 / GB</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <section class="list-view">
+                    <div class="list-container">
+                        <div class="list-header"><h5 class="title">国内访问</h5>
+                            <p class="description text-muted"></p></div>
+                        <ul class="list-content">
+                            <li class="title">HTTP 流量</li>
+                            <li class="small">免费 500 MB / 天</li>
+                            <li class="small">超出部分 0.30 元 / GB</li>
+                            <li class="title">HTTPS 流量</li>
+                            <li class="small">无免费流量</li>
+                            <li class="small">0.36 元 / GB</li>
+                        </ul>
+                    </div>
+                    <div class="list-container">
+                        <div class="list-header"><h5 class="title">海外访问</h5>
+                            <p class="description text-muted"></p></div>
+                        <ul class="list-content">
+                            <li class="title">HTTP 流量</li>
+                            <li class="small">无免费流量</li>
+                            <li class="small">0.40 元 / GB</li>
+                            <li class="title">HTTPS 流量</li>
+                            <li class="small">无免费流量</li>
+                            <li class="small">0.60 元 / GB</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </section>
+    <nav class="fixed-nav-section" id="fixed-nav-section">
+        <section class="section-contain"><span class="module">数据存储</span>
+            <ul class="fixed-nav"><a href="#features">功能特色</a> <a href="#example">典型用户</a> <a href="#pricing">价格方案</a>
+                <a href="https://leancloud.cn/docs/storage_overview.html" target="_blank">开发指南 <i
+                        class="uk-icon-external-link"></i></a></ul>
+        </section>
+    </nav>
+</div>
+<footer class="wrapper-footer">
+    <section class="connect">
+        <section class="section-contain">
+            <section class="apply"><h2 class="font-logo logo">LeanCloud</h2><a class="button button-primary"
+                                                                               href="https://console.leancloud.cn/register">立即申请试用</a>
+                <form class="submail"
+                      action="https://leancloud.us12.list-manage.com/subscribe/post?u=ab0f847461dceee3d41553154&amp;id=bb488780ff"
+                      method="post"><label for="blog-subscription-email"><p class="email-label small">邮件订阅 <a
+                        href="https://leancloudblog.com">LeanCloud Blog </a>的最新资讯</p></label> <input type="email"
+                                                                                                     name="EMAIL"
+                                                                                                     class="emaiinput small"
+                                                                                                     name=""
+                                                                                                     placeholder="请输入邮箱"
+                                                                                                     id="blog-subscription-email"
+                                                                                                     required></form>
+            </section>
+            <nav class="links">
+                <section><p class="title">产品</p>
+                    <ul class="small">
+                        <li><a href="index.html">数据存储</a></li>
+                        <li><a href="../engine/index.html">云引擎 + 数据库</a></li>
+                        <li><a href="../rtm/index.html">即时通讯</a></li>
+                        <li><a href="../notification/index.html">消息推送</a></li>
+                        <li><a href="../sms/index.html">短信</a></li>
+                        <li><a href="../play/index.html">游戏解决方案</a></li>
+                        <li><a href="../miniprogram/index.html">微信小程序</a></li>
+                        <li><a href="https://leancloudstatus.com/">服务健康状态</a></li>
+                    </ul>
+                </section>
+                <section><p class="title">资源</p>
+                    <ul class="small">
+                        <li><a href="https://leancloud.cn/docs/">文档</a></li>
+                        <li><a href="../tutorials/index.html">讲座视频</a></li>
+                        <li><a href="https://forum.leancloud.cn/">论坛</a></li>
+                        <li><a href="https://leanticket.cn/">工单</a></li>
+                    </ul>
+                </section>
+                <section><p class="title">公司</p>
+                    <ul class="small">
+                        <li><a href="../about/index.html">关于我们</a></li>
+                        <li><a href="https://open.leancloud.cn/">开放资源</a></li>
+                        <li><a href="../jobs/index.html">工作机会</a></li>
+                        <li><a href="../news/index.html">媒体报道</a></li>
+                        <li><a href="../协议/index.html">使用协议</a></li>
+                        <li><a href="https://leancloudblog.com/">博客</a></li>
+                        <li><a href="../logo/index.html">Logo</a></li>
+                    </ul>
+                </section>
+                <section><p class="title">社交网络</p>
+                    <ul class="small">
+                        <li><a class="tooltip">微信 <span class="tooltiptext"><img
+                                src="../assets/imgs/qr-wechat-borderless.11ef7253.png" alt=""></span></a></li>
+                        <li><a href="https://weibo.com/avoscloud">微博</a></li>
+                        <li><a href="https://zhuanlan.zhihu.com/leancloud-eng">知乎专栏</a></li>
+                        <li><a href="https://github.com/leancloud">GitHub</a></li>
+                        <li><a href="https://twitter.com/leancloudrocks">Twitter</a></li>
+                        <li><a href="https://www.facebook.com/leancloudus">Facebook</a></li>
+                    </ul>
+                </section>
+            </nav>
+        </section>
+    </section>
+    <section class="address">
+        <section class="section-contain"><p><a
+                href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502036747" target="_blank"
+                rel="nofollow">京公网安备 11010502036747 号</a> · <a href="http://beian.miit.gov.cn/" target="_blank"
+                                                               rel="nofollow">京 ICP 备 12025059-8</a> · <a
+                href="https://www.leancloud.cn/assets/ICP.182c7324.jpg" target="_blank" rel="nofollow">京 ICP 证 130300
+            号</a></p>
+            <p>版权所有 © 2021 美味书签（北京）信息技术有限公司</p></section>
+    </section>
+</footer>
+</body>
+<script src="../vendor.22064f24.js"></script>
+<script src="../main.aab48a90.js"></script>
+<script>window.init("storage")</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-42629236-1"></script>
+<script>function gtag() {
+    dataLayer.push(arguments)
+}
+
+window.dataLayer = window.dataLayer || [], gtag("js", new Date), gtag("config", "UA-42629236-1"), gtag("config", "AW-1030743864")</script>
+</html>

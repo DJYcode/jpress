@@ -1,0 +1,59 @@
+#include("./_layout.html")
+#@uconsole_layout("基本信息")
+#define content()
+<div class="card card-outline card-primary">
+
+  <!-- form start -->
+  <form class="autoAjaxSubmit" data-ok-message="数据保存成功" autocomplete="off" action="/ucenter/doSaveUser" novalidate="novalidate">
+    <div class="card-body">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">登录账号</label>
+
+        <div class="col-sm-7">
+          <input type="input" class="form-control" value="#(user.username ??)" readonly>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">昵称</label>
+
+        <div class="col-sm-7">
+          <input type="input" class="form-control" placeholder="取个好听的昵称..."
+                 value="#(user.nickname ??)" name="user.nickname">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">邮箱</label>
+
+        <div class="col-sm-7">
+          <input type="input" class="form-control" placeholder="填写邮箱账号"
+                 name="user.email" value="#(user.email ??)">
+          #if(user.email && !user.isEmailStatusOk())
+          <small id="name" class="form-text text-muted">
+            你的邮件尚未激活，点击<a href="javascript:doActivateEmail('#(user.id)')">这里</a>进行激活。
+          </small>
+          #end
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">手机号</label>
+
+        <div class="col-sm-7">
+          <input type="input" class="form-control" placeholder="及手机号"
+                 name="user.mobile" value="#(user.mobile ??)">
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <div class="offset-sm-2 col-sm-10 submit-block">
+        <div class="card-submit">
+          <button type="submit" class="btn btn-info">提交</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+#end

@@ -1,0 +1,89 @@
+<aside class="left-sidebar" data-sidebarbg="skin6">
+  <!-- Sidebar scroll-->
+  <div class="scroll-sidebar ps-container ps-theme-default ps-active-y"
+       data-ps-id="85f76269-dd02-3fb3-22fa-4cb10e583413">
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav">
+      <ul id="sidebarnav" class="in">
+        <!-- User Profile-->
+        <li>
+          <!-- User profile -->
+          <div class="user-profile text-center position-relative pt-4 mt-1">
+            <!-- User profile image -->
+            <div class="profile-img m-auto"><img src="#(USER.avatar ??)" alt="user"
+                                                 class="w-100 rounded-circle"></div>
+            <!-- User profile text-->
+            <div class="profile-text py-1">
+              <a href="#" class="dropdown-toggle link u-dropdown" data-bs-toggle="dropdown"
+                 role="button" aria-haspopup="true" aria-expanded="true">#(user.nickname ??)<span
+                      class="caret"></span>
+              </a>
+              <div class="dropdown-menu animated flipInY">
+                <a class="dropdown-item" href="#(CPATH)/ucenter/index">
+                  <i class="fas fa-home text-info"></i>
+                  我的首页
+                </a>
+                <a class="dropdown-item" href="#(CPATH)/ucenter/info">
+                  <i class="fas fa-address-card text-info"></i>
+                  基本信息
+                </a>
+                <a class="dropdown-item" href="#(CPATH)/ucenter/address">
+                  <i class="fas fa-map text-info"></i>
+                  我的地址
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#(CPATH)/ucenter/pwd">
+                  <i class="fas fa-key text-info"></i>
+                  修改密码
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item"
+                   href="#(CPATH)/ucenter/logout">
+                  <i class="fas fa-sign-out-alt text-danger"></i>
+                  退出登录
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- End User profile text-->
+        </li>
+        <!-- User Profile-->
+        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="#(CPATH)/ucenter/index"
+                                    aria-expanded="false">
+          <i class="fas fa-home text-info"></i>
+          <span class="hide-menu">我的首页</span></a></li>
+        <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span
+                class="hide-menu">财务信息</span></li>
+        #for(item : ucenterFinanceMenus)
+        <li class="sidebar-item">
+          <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="#(item.url ??)"
+                                    aria-expanded="false">
+            #(item.icon ?? '<i class="fas fa-smile"></i>')
+          <span class="hide-menu">#(item.text ??)</span></a>
+        </li>
+        #end
+
+        <li class="nav-devider"></li>
+        <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span
+                class="hide-menu">个人信息</span></li>
+        #for(item : ucenterPersonalMenus)
+        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="#(item.url ??)"
+                                    aria-expanded="false">
+          #(item.icon ?? '<i class="fas fa-smile"></i>')
+          <span class="hide-menu">#(item.text ??)</span></a>
+        </li>
+        #end
+      </ul>
+    </nav>
+    <!-- End Sidebar navigation -->
+    <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: -798px;">
+      <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+    </div>
+  </div>
+  <!-- End Sidebar scroll-->
+
+  <!-- End Bottom points-->
+</aside>

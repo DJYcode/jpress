@@ -1,0 +1,160 @@
+<header class="topbar" data-navbarbg="skin1">
+  <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+    <div class="navbar-header" data-logobg="skin6">
+      <!-- This is for the sidebar toggle which is visible on mobile only -->
+      <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
+              class="fas fa-bars"></i></a>
+      <!-- ============================================================== -->
+      <!-- Logo -->
+      <!-- ============================================================== -->
+      <a class="navbar-brand"
+         href="/">
+        <!-- Logo icon -->
+        <b class="logo-icon">
+          <!-- Dark Logo icon -->
+          <img src="#option('cloud_logo','')" alt="homepage" class="dark-logo" width="30px">
+          <!-- Light Logo icon -->
+          <img src="./img/logo-light-icon.png" alt="homepage" class="light-logo">
+        </b>
+        <!--End Logo icon -->
+        <!-- Logo text -->
+        <span class="logo-text">
+                <span style="color: black">#(WEB_NAME ??)</span>
+          <!-- Light Logo text -->
+                             <img src="./img/logo-light-text.png" class="light-logo" alt="homepage">
+        </span>
+      </a>
+      <!-- ============================================================== -->
+      <!-- End Logo -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Toggle which is visible on mobile only -->
+      <!-- ============================================================== -->
+      <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
+         data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-ellipsis-h"></i></a>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Logo -->
+    <!-- ============================================================== -->
+    <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin1">
+      <!-- ============================================================== -->
+      <!-- toggle and nav items -->
+      <!-- ============================================================== -->
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light"
+                                                  href="javascript:void(0)" data-sidebartype="mini-sidebar">
+          <i class="fas fa-bars"></i>
+        </a></li>
+
+      </ul>
+      <!-- ============================================================== -->
+      <!-- Right side toggle and nav items -->
+      <!-- ============================================================== -->
+      <ul class="navbar-nav">
+        <!-- 购物车商品 -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" id="3"
+             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-cart-plus"></i>
+            #if(USER_CARTS_COUNT && USER_CARTS_COUNT > 0)
+            <div class="notify"><span class="heartbit"></span> <span class="point"></span></div>
+            #end
+          </a>
+          <div class="dropdown-menu mailbox dropdown-menu-end dropdown-menu-animate-up"
+               aria-labelledby="2">
+            <ul class="list-style-none">
+              <li>
+                <div class="border-bottom rounded-top py-3 px-4">
+                  #if(USER_CARTS_COUNT && USER_CARTS_COUNT > 0)
+                  <div class="mb-0 font-weight-medium fs-4">共 #(USER_CARTS_COUNT) 件商品</div>
+                  #else
+                  <div class="mb-0 font-weight-medium fs-4">共 0 件商品</div>
+                  #end
+                </div>
+              </li>
+              <li>
+                <div class="message-center message-body position-relative ps-container ps-theme-default"
+                     style="height:230px;" data-ps-id="6143bfb8-cb70-a823-6f2b-ff8b77bec8a6">
+                  #for(userCart : USER_CARTS)
+                    <a href="#(userCart.product_link ?? 'javascript:;')" target="_blank"
+                       class="message-item d-flex align-items-center border-bottom px-3 py-2">
+                       <span class="user-img position-relative d-inline-block">
+                         #if(userCart.product_thumbnail)
+                         <img src="#(userCart.product_thumbnail)" alt="user" class="rounded-circle w-100">
+                         #end
+                       </span>
+                      <div class="w-75 d-inline-block v-middle ps-3">
+                        <h5 class="message-title mb-0 mt-1 fs-3 fw-bold">
+                          #maxLength(userCart.product_title ??,16,'...')
+                        </h5>
+                        <span class="fs-2 text-nowrap d-block time text-truncate fw-normal mt-1">
+                        #maxLength(userCart.product_summary ??,14,'...')
+                        </span>
+                      </div>
+                    </a>
+                  <div class="dropdown-divider"></div>
+                  #else
+                  <div class="jpress-empty-cart">
+                    空空如也...
+                  </div>
+                  #end
+
+                  <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
+                    <div class="ps-scrollbar-x" tabindex="0"
+                         style="left: 0px; width: 0px;"></div>
+                  </div>
+                  <div class="ps-scrollbar-y-rail" style="top: 0px; right: 3px;">
+                    <div class="ps-scrollbar-y" tabindex="0"
+                         style="top: 0px; height: 0px;"></div>
+                  </div>
+                </div>
+              </li>
+              #if(USER_CARTS_COUNT && USER_CARTS_COUNT > 0)
+              <li>
+                <a class="nav-link border-top text-center text-dark pt-3"
+                   href="#(CPATH)/ucenter/cart"> <b>查看全部</b> <i
+                        class="fa fa-angle-right"></i> </a>
+              </li>
+              #end
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" data-bs-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            <img src="#(USER.avatar ??)" alt="user" width="30" class="profile-pic rounded-circle">
+          </a>
+          <div class="dropdown-menu dropdown-menu-end user-dd animated flipInY">
+            <div class="d-flex no-block align-items-center p-3 bg-info text-white mb-2">
+              <div class=""><img src="#(USER.avatar ??)" alt="user" class="rounded-circle" width="60"></div>
+              <div class="ms-2">
+                <h4 class="mb-0 text-white">#(user.nickname ??)</h4>
+                <p class=" mb-0">#(user.email ??)</p>
+              </div>
+            </div>
+            <a class="dropdown-item" href="#(CPATH)/ucenter/index">
+              <i class="fas fa-home text-info"></i>
+              我的首页
+            </a>
+            <a class="dropdown-item" href="#(CPATH)/ucenter/info">
+              <i class="fas fa-address-card text-info"></i>
+              基本信息</a>
+            <a class="dropdown-item" href="#(CPATH)/ucenter/address">
+              <i class="fas fa-map text-info"></i>
+              我的地址</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#(CPATH)/ucenter/pwd">
+              <i class="fas fa-key text-info"></i>
+              修改密码</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#(CPATH)/ucenter/logout">
+              <i class="fas fa-sign-out-alt text-danger"></i>
+              退出登录</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

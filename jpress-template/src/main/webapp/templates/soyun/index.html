@@ -1,0 +1,87 @@
+#include("./layout.html")
+#@layout()
+#define content()
+<!-- banner -->
+<section class="banner">
+    <div class="swiper-container" id="banner-swiper">
+        <div class="swiper-wrapper">
+            #bannerInfos()
+            #for(bannerInfo : bannerInfos)
+            <div class="swiper-slide"
+                 style="background:url('#(bannerInfo.bannerImg)') bottom/1600px no-repeat">
+                <div class="banner-content">
+                    <h1><span class="font-logo">#(bannerInfo.bannerTitle)</span></h1>
+                    <p class="h3">#(bannerInfo.bannerContent)</p>
+                    <a href="#(bannerInfo.bannerBtnUrl)" class="button button-primary button-more h4">
+                        #(bannerInfo.bannerBtnTitle)<i class="uk-icon-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+            #end
+            #end
+        </div>
+        <div class="banner-pagination"></div>
+    </div>
+</section>
+<!-- 产品 -->
+<section class="section product-section">
+    <section class="section-contain column table-section">
+        <h3 class="title">产品</h3>
+        <div class="table-item">
+            #productPage()
+            #for(product : productPage.list)
+            <section>
+                <h4 class="title">
+                    #(product.title ??)
+                </h4>
+                #for(spec : splitValue(product.specs,','))
+                <p class="small">#(spec)</p>
+                #end
+                <p style="margin-bottom: 10px">
+                    <a class="button button-primary" href="javascript:void(0);;" onclick="buyProduct('#(product.id ??)')"
+                       title="" aria-expanded="false">
+                        立即购买
+                    </a>
+                </p>
+            </section>
+            #end
+            #end
+
+        </div>
+    </section>
+</section>
+<!-- 产品end -->
+
+#contents()
+#for(content : contents ??)
+ #(content.templateContent)
+#end
+#end
+<section class="section section-background" id="example">
+    <section class="section-contain column example-section"><h3 class="title margin-bottom-sm">我们已服务超过 24 万开发团队</h3>
+        <div class="swiper-container" id="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="avatars"><img src="assets/imgs/examples/xd_avatars.8ba7dda4.jpg" alt=""> <span
+                            class="h4">沈晟 / CTO</span></div>
+                    <p class="content">『好的架构应该像乐高积木一样，将优秀健壮的模块组合起来，搭建出成功的项目。LeanCloud
+                        在我看来就是这样一个完美的积木，成功支撑了我们「天天打波利」游戏中百万日活用户的聊天和消息系统。』</p></div>
+                <div class="swiper-slide">
+                    <div class="avatars"><img src="assets/imgs/examples/zhihu_avatars.0b7873ef.jpg" alt=""> <span
+                            class="h4">李申申 / CTO</span></div>
+                    <p class="content">『LeanCloud 接口使用非常方便，推送速度也很快，在国内算是很棒的推送服务提供方。除此之外，每次跟 LeanCloud
+                        反馈问题，沟通都很高效、畅通。』</p></div>
+                <div class="swiper-slide">
+                    <div class="avatars"><img src="assets/imgs/examples/dongqiu_avatars.bba4cae4.jpg" alt=""> <span
+                            class="h4">欧创坚 / 技术合伙人</span></div>
+                    <p class="content">『LeanCloud 是一家有 Geek
+                        精神的公司，他们提供的即时通讯服务高效稳定，懂球帝从创业初期至今一直在使用。他们提供的服务加速了我们开发的效率，使我们能专注于产品和业务。』</p></div>
+            </div>
+            <div class="example-pagination"><span class="pagination-bg xd" data-index="1"></span> <span
+                    class="pagination-bg zhihu" data-index="2"></span> <span class="pagination-bg dongqiu"
+                                                                             data-index="3"></span></div>
+        </div>
+        <a class="button button-default button-more" href="customers/index.html">查看更多<i
+                class="uk-icon-angle-right"></i></a></section>
+</section>
+#end

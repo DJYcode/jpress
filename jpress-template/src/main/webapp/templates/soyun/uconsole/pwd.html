@@ -1,0 +1,44 @@
+#include("./_layout.html")
+#@uconsole_layout("修改密码")
+#define content()
+<div class="card card-outline card-primary">
+
+
+  <form class="autoAjaxSubmit" data-ok-message="密码修改成功" autocomplete="off" action="/ucenter/doUpdatePwd" novalidate="novalidate">
+    <div class="card-body">
+      <div class="form-group row">
+        <label class="col-sm-1 col-form-label"><span class="text-danger mr-2">*</span>旧密码</label>
+        <div class="col-sm-8">
+          <input type="password" class="form-control" required="" placeholder="请输入之前的密码" name="oldPwd">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-1 col-form-label"><span class="text-danger mr-2">*</span>新密码</label>
+        <div class="col-sm-8">
+          <input type="password" class="form-control" required="" minlength="6" placeholder="新的密码" name="newPwd" id="newPwd">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-1 col-form-label"><span class="text-danger mr-2">*</span>确认密码</label>
+        <div class="col-sm-8">
+          <input type="password" class="form-control" required="" minlength="6" equalto="#newPwd" placeholder="及确认密码" name="confirmPwd">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card-footer">
+      <div class="offset-sm-2 col-sm-10 submit-block">
+        <div class="card-submit">
+          <button type="submit" class="btn btn-info">提交</button>
+        </div>
+      </div>
+    </div>
+
+    <input type="hidden" name="csrf_token" value="5ed5740122b7ee5b26979c77eb1383e4"></form>
+
+
+</div>
+#end

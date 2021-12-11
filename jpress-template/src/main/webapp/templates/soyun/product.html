@@ -1,0 +1,90 @@
+#include("./layout.html")
+#@layout()
+#define content()
+<section id="features" class="features-section">
+  <section class="section-group">
+    <section class="section">
+      <section class="section-contain text-img-section leftimg">
+        <figure class="imgcontainer">
+          <img src="#(product.thumbnail)" alt="">
+        </figure>
+        <section class="text">
+          <h3 class="title">#(product.title)</h3>
+          <div>
+            <span style="font-weight: 400;font-size:15px">交易量：#(product.sales_count ?? 0)</span>
+            <span style="font-weight: 400;font-size:15px">库存：#(product.stock ?? 0)</span>
+          </div>
+          <div>
+            <span style="font-weight: 500;font-size:30px">¥ #number(product.price ?? 0 , '0.00')</span>
+            <span style="font-weight: 400;font-size:15px;padding-left: 10px">原价：</span>
+            <span style="font-weight: 400;font-size:15px">¥ #number(product.price ?? 0 , '0.00')</span>
+          </div>
+          <div>
+            <span style="font-weight: 500;">摘要：</span>
+            <span style="font-weight: 400;font-size:15px">#(product.summary ??)</span>
+          </div>
+          <div>
+            <span style="font-weight: 500;">卖点：</span>
+            <span style="font-weight: 400;font-size:15px">#(product.usp ??)</span>
+          </div>
+          <div>
+            <span style="font-size: 14px">
+              <a href="javascript:;" onclick="addProductToFavorite('#(product.id ??)')">添加收藏</a>
+              <a href="javascript:;" class="copy"
+                 data-clipboard-action="copy"
+                 data-clipboard-text="我觉得这个产品不错，分享给你...   #(productShareUrl ??)">
+                分享产品链接</a>
+            </span>
+          </div>
+          <div style="padding-top:50px">
+            <a class="button button-primary"
+               href="javascript:;" onclick="addProductToCart('#(product.id ??)')" title="" aria-expanded="false">
+              加入购物车
+            </a>
+            <a class="button button-primary" href="javascript:;" onclick="buyProduct('#(product.id ??)')"
+               title="" aria-expanded="false">立即购买</a>
+          </div>
+        </section>
+      </section>
+    </section>
+  </section>
+</section>
+<section class="section" id="specs">
+  <section class="section-contain column pricing-section"><h2 class="title">商品规格</h2>
+    <div class="content">
+      <table class="table-view">
+        <tbody>
+        #if(product.specs)
+          #stringSplit(product.specs)
+          #for(str : strings)
+          <tr>
+            <td colspan="4">
+              <p class="title">#(str)</p>
+            </td>
+          </tr>
+          #end
+          #end
+        #end
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+<section class="section" id="detail">
+  <section class="section-contain column pricing-section"><h2 class="title">商品介绍</h2>
+    <div class="content">
+      #(product.content)
+    </div>
+  </section>
+</section>
+<nav class="fixed-nav-section" id="fixed-nav-section">
+  <section class="section-contain">
+    <span class="module">商品详情</span>
+    <ul class="fixed-nav">
+      <a href="#features" class="active">基本信息</a>
+      <a href="#specs" class="">商品规格</a>
+      <a href="#detail" class="">商品介绍</a>
+    </ul>
+  </section>
+</nav>
+#end

@@ -16,7 +16,7 @@
     <meta name="keywords"
           content="#(SEO_KEYWORDS)"/>
 
-    <meta name="author" content="Summer"/>
+    <meta name="author" content="dong"/>
 
     <link rel="shortcut icon" href=""/>
 
@@ -185,13 +185,9 @@
     </a>
 
 
-<!--    <div class="item">-->
-<!--        <a class="ui basic small button no-pjax" href=""><i class="icon user "></i> 登录 </a>-->
-<!--    </div>-->
-
-<!--    <div class="item">-->
-<!--        <a class="ui basic small button no-pjax" href=""><i class="icon signup "></i> 注册 </a>-->
-<!--    </div>-->
+    <div class="item">
+        <a class="ui basic small button no-pjax" href=""><i class="icon user "></i> 登录 </a>
+    </div>
 </div>
 
 
@@ -266,27 +262,25 @@
                 </form>
 
                 <!-- 登录注册 -->
-<!--                <div class=" right menu stackable secondary">-->
-<!--                    <div class="item rm-link-color">-->
-<!--                        <a class="mr-4 no-pjax login_required" href=""><i class="icon sign in "></i> 登录-->
-<!--                        </a>-->
-<!--                        <a class="no-pjax" href="" style="margin-left: 10px;"><i-->
-<!--                                class="icon user add "></i> 注册 </a>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <div class=" right menu stackable secondary">
+                    <div class="item rm-link-color">
+                        <a class="mr-4 no-pjax login_required" href=""><i class="icon sign in "></i> 登录
+                        </a>
+                    </div>
+                </div>
             </div>
 
         </nav>
 
         <!-- 微信登录 隐藏 -->
-<!--        <div class="mb-3 hide show-on-wechat-view">-->
-<!--            <div class="ui centered grid container message-container">-->
-<!--                <div class="sixteen wide column pt-0 pb-0">-->
-<!--                    <a class="ui button fluid green wechat-login-link"-->
-<!--                       href=""><i class="icon wechat "></i> 微信登录</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <div class="mb-3 hide show-on-wechat-view">
+            <div class="ui centered grid container message-container">
+                <div class="sixteen wide column pt-0 pb-0">
+                    <a class="ui button fluid green wechat-login-link"
+                       href="#(CPATH)/oauth/wechat"><i class="icon wechat "></i> 微信登录</a>
+                </div>
+            </div>
+        </div>
 
         #@content()
 
@@ -306,54 +300,18 @@
         </h4>
     </div>
     <div class="content">
-        <form class="ui form login" role="form" method="POST" action="" accept-charset="UTF-8">
-            <input type="hidden" name="_token" value="">
-            <input type="hidden" name="remember" value="yes">
-
-            <input type="hidden" name="return_back" value="no">
-
-            <div class="field">
-                <div class="ui left icon input">
-                    <i class="user icon"></i>
-                    <input type="text" name="username" placeholder="邮 箱 or 手 机 or 用户名" value="" required>
-                </div>
-            </div>
-            <div class="field">
-                <div class="ui left icon input">
-                    <i class="lock icon"></i>
-                    <input type="password" name="password" placeholder="密 码" value="" required>
-                </div>
-            </div>
-            <button class="ui primary right labeled icon button" type="submit">
-                <i class="right arrow icon"></i>
-                提交
-            </button>
-
-            <div class="pull-right mt-2 rm-link-color">
-                <a class="btn btn-link " href="" target="_blank">
-                    忘记密码?
-                </a>
-                <span class="text-mute">or</span>
-                <a class="btn btn-link " href="" target="_blank">
-                    注册
-                </a>
-            </div>
-
-            <div class="clearfix"></div>
-
-
-            <div class="ui horizontal divider fs-tiny text-mute">
-                第三方账号登录
-            </div>
-
-
-            <a class="ui button fluid mt-2 green wechat-login-link" href=""><i
+        #if(option('login_qq_enable') || option('login_wechat_enable'))
+        <div class="form-group row">
+            #if(option('login_wechat_enable'))
+            <a class="ui button fluid mt-2 green wechat-login-link" href="#(CPATH)/oauth/wechat"><i
                     class="icon wechat "></i> 微信登录</a>
-
+            #end
+            #if(option('login_qq_enable'))
             <a class="ui button fluid mt-2 basic" id="login-required-submit"
-               href=""><i class="icon github alternate"></i> GitHub 登录</a>
-
-        </form>
+               href="#(CPATH)/oauth/qq"><i class="icon github alternate"></i> QQ 登录</a>
+            #end
+        </div>
+        #end
     </div>
 </div>
 

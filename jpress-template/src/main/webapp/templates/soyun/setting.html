@@ -1,0 +1,939 @@
+
+#@layout()
+
+#define css()
+<link rel="stylesheet" href="#(CPATH)/static/components/jquery-file-upload/css/jquery.fileupload.css">
+<style>
+    #uploader {
+        height: 230px;
+    }
+</style>
+#end
+
+#define script()
+<script src="#(CPATH)/static/components/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="#(CPATH)/static/components/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="#(CPATH)/static/components/jquery-file-upload/js/jquery.fileupload.js"></script>
+#end
+#define content()
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <h1>
+                            模板设置
+                            <small data-toggle="tooltip" title="" data-placement="right" data-trigger="hover" data-original-title=""><i class="nav-icon far fa-question-circle"></i></small>
+                            <small> 首页 / 模板 / 设置</small>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+
+    <div class="container-fluid">
+        <div class="card card-primary card-outline card-outline-tabs">
+            <div class="card-header p-0 border-bottom-0">
+                <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill"
+                           href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
+                           aria-selected="true">基本设置</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-four-profile-tab"
+                           data-toggle="pill" href="#custom-tabs-four-profile" role="tab"
+                           aria-controls="custom-tabs-four-profile" aria-selected="false">内容设置</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill"
+                           href="#custom-tabs-four-messages" role="tab" aria-controls="custom-tabs-four-messages"
+                           aria-selected="false">底部设置</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-four-settings-tab" data-toggle="pill" href="#custom-tabs-four-settings" role="tab" aria-controls="custom-tabs-four-settings" aria-selected="false">Settings</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+
+                <div class="tab-content" id="custom-tabs-four-tabContent">
+                    <!-- 基本设置 -->
+                    <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
+                         aria-labelledby="custom-tabs-four-home-tab">
+                        <form class=" form-setting" autocomplete="off"
+                              id="customForm">
+                            <div class="card-body">
+                                <h4 class="page-header">LOGO设置</h4>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <button type="button"
+                                                for-src="cloud_logo"
+                                                for-input="cloud_logo_input"
+                                                class="btn-image-browser btn btn-flat btn-default btn-xs">
+                                            <i class="fa fa-fw fa-image"></i> 选择图片
+                                        </button>
+                                        <br/>
+                                        <img src="#(CPATH)#option('cloud_logo','/resource/images/logo.png')"
+                                             id="cloud_logo" cc>
+                                        <input type="hidden" id="cloud_logo_input" class="cloud_logo_input" name="cloud_logo"
+                                               value="#option('cloud_logo')">
+                                    </div>
+                                </div>
+                                <h4 class="page-header">幻灯片设置</h4>
+                                <div id="education_fields" class="row">
+                                    #bannerInfos()
+                                    #for(bannerInfo : bannerInfos)
+                                    <div class="col-4 form-group removeclass#(for.index)">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <button for-src="banner_img#(for.index)" for-input="banner_input#(for.index)" type="button" onclick="choiceImg(this)"
+                                                        class="btn-image-browser btn btn-flat btn-default btn-xs">
+                                                    <i class="fa fa-fw fa-image"></i>选择图片
+                                                </button><br>
+                                                <img src="#(bannerInfo.bannerImg)" class="banner_img" id="banner_img#(for.index)" alt="">
+                                                <input type="hidden" id="banner_input#(for.index)" class="bannerImg" name="bannerImg" value="#(bannerInfo.bannerImg)">
+                                                <input class="form-control bannerTitle" value="#(bannerInfo.bannerTitle)" name="bannerTitle" type="text">
+                                                <textarea class="form-control bannerContent"  name="bannerContent" rows="3">#(bannerInfo.bannerContent)</textarea>
+                                                <input class="form-control bannerBtnTitle" value="#(bannerInfo.bannerBtnTitle)" type="text" name="bannerBtnTitle">
+                                                <input class="form-control bannerBtnUrl" value="#(bannerInfo.bannerBtnUrl)" type="text" name="bannerBtnUrl"></div>
+                                            <div class="col-4">
+                                                <button type="button" class="btn btn-primary " onclick="remove_education_fields(#(for.index));">
+                                                <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    #end
+                                    #end
+                                </div>
+                                <button type="button" class="btn btn-primary" onclick="education_fields();" style="width: 100px">
+                                    <i class="fas fa-plus"></i>增加设置
+                                </button>
+                            </div>
+                            <div class="card-footer">
+                                <div class="offset-sm-2 col-sm-10 submit-block">
+                                    <div class="card-submit">
+                                        <button type="button" onclick="submitBasicInfo()" class="btn btn-primary">保存设置</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- 基本设置结束 -->
+
+                    <!-- 内容设置 -->
+                    <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+                        <section class="content">
+
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="card card-outline card-primary">
+
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <form class=" form-setting autoAjaxSubmit" autocomplete="off" method="post" novalidate="novalidate">
+                                            <input type="hidden" name="category.id" value="">
+                                            <input type="hidden" name="category.type" value="category">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label"><span class="text-danger mr-2"></span> 选择内容模板</label>
+
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control" id="templateSelect" name="template.pid" onchange="choiceTemplate(this)" aria-invalid="false">
+                                                            <option value="-1">-请选择模板-</option>
+                                                            <option value="0">左右两格，左内容，右图片</option>
+                                                            <option value="1">左右两格，左图片，右内容</option>
+                                                            <option value="2">宽四宫格</option>
+                                                            <option value="3">扁平二宫格</option>
+                                                            <option value="4">三宫格</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row " >
+                                                    <label class="col-sm-2 col-form-label">排序</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="input" class="form-control" id="sort" placeholder="越小的数字越靠前" value="" name="sort">
+                                                    </div>
+                                                </div>
+                                                <div class="templateShow">
+
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">模板内容</label>
+                                                    <div class="col-sm-9">
+                                                        <textarea id="templateContent" rows="8" class="form-control" placeholder="..."  readonly>
+
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-body -->
+                                            <div class="card-footer">
+                                                <div class="offset-sm-2 col-sm-10 submit-block">
+                                                    <div class="card-submit">
+                                                        <button type="button" class="btn btn-primary" onclick="saveTemplateList($('#templateSelect').val())">保存到列表</button>
+                                                        <button type="button" class="btn btn-primary" onclick="submitContent()">提交</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-footer -->
+                                            <input type="hidden" name="csrf_token" value="fc74e138ebffa3eb27f3429207ccb9ef"></form>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="card card-outline card-primary">
+
+                                        <div class="card-body p-0  ">
+
+                                            <table class="table table-striped">
+                                                <tbody id="templateTableTbody">
+                                                <tr>
+                                                    <th style="width: 40%">模板</th>
+                                                    <th>排序</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <!-- 内容设置结束 -->
+
+                    <!-- 底部设置 -->
+                    <div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel" aria-labelledby="custom-tabs-four-messages-tab">
+                        <div id="footer_contents" class="row">
+                            #footers()
+                            #for(footer : footers)
+                            <div class="col-4 form-group removeclass#(for.index)">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <input value="#(footer.groupTitle)" class="form-control groupTitle" placeholder="Group标题" name="groupTitle" type="text">
+                                        <div class="group#(for.index)">
+                                            #for(subTitle : footer.subTitles)
+                                            <div class="subTitle">
+                                                <input value="#(subTitle.titleName)" class="form-control titleName" placeholder="小标题名称" type="text" name="titleName">
+                                                <input value="#(subTitle.titleUrl)" class="form-control titleUrl" placeholder="小标题URL" type="text" name="titleUrl">
+                                            </div>
+                                            #end
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-primary " onclick="remove_footer(#(for.index));">
+                                            <i class="fas fa-minus"></i>
+                                        </button><button type="button" class="btn btn-primary " onclick="add_subtitle(#(for.index));">增加小标题</button>
+                                    </div>
+                                </div>
+                            </div>
+                            #end
+                            #end
+
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="footer_contents();" style="width: 100px">
+                            <i class="fas fa-plus"></i>增加设置
+                        </button>
+                        <div class="card-footer">
+                            <div class="offset-sm-2 col-sm-10 submit-block">
+                                <div class="card-submit">
+                                    <button type="button" onclick="submitFooterInfo()" class="btn btn-primary">保存设置</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 底部设置结束 -->
+
+                    <div class="tab-pane fade" id="custom-tabs-four-settings" role="tabpanel" aria-labelledby="custom-tabs-four-settings-tab">
+                        Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                    </div>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+
+</section>
+#end
+<script>
+    // https://www.leancloud.cn/assets/imgs/index/server.b2fa22d1.svg
+    /**
+     * 左右两格，左内容，右图片
+     * @type {string}
+     */
+    let template0 = '<section class="section section-background">' +
+        '    <section class="section-contain text-img-section rightimg">' +
+        '        <section class="text">' +
+        '            <h3 class="title">${title}</h3>' +
+        '            <p>${content}</p>' +
+        '        </section>' +
+        '        <figure class="imgcontainer">' +
+        '            <img src="${image}" alt="">' +
+        '        </figure>' +
+        '    </section>' +
+        '</section>'
+    /**
+     * 左右两格，左图片，右内容
+     * @type {string}
+     */
+    let template1 = '<section class="section section-background">' +
+        '    <section class="section-contain text-img-section rightimg">' +
+        '        <figure class="imgcontainer">' +
+        '            <img src="${image}" alt="">' +
+        '        </figure>' +
+        '        <section class="text">' +
+        '            <h3 class="title">${title}</h3>' +
+        '            <p>${content}</p>' +
+        '        </section>' +
+        '    </section>' +
+        '</section>'
+    /**
+     * 宽四宫格
+     * @type {string}
+     */
+    let template2 = '<section class="section product-section">' +
+        '    <section class="section-contain column table-section">' +
+        '        <h3 class="title mainTitle">${mainTitle}</h3>' +
+        '        <div class="table-item">' +
+        '            <section><a class="content" href="${url1}"><i class="icon big storage"></i>' +
+        '                <h4 class="title">${title1}</h4>' +
+        '                <p class="small">${content1}</p></a>' +
+        '            </section>' +
+        '            <section><a class="content" href="${url2}"><i class="icon big engine"></i>' +
+        '                <h4 class="title">${title2}</h4>' +
+        '                <p class="small">${content2}</p></a>' +
+        '            </section>' +
+        '            <section><a class="content" href="${url3}"><i class="icon big chat"></i>' +
+        '                <h4 class="title">${title3}</h4>' +
+        '                <p class="small">${content3}</p></a></section>' +
+        '            <section><a class="content" href="${url4}"><i class="icon big game"></i>' +
+        '                <h4 class="title">${title4}</h4>' +
+        '                <p class="small">${content4}</p>' +
+        '            </a></section>' +
+        '        </div>' +
+        '    </section>' +
+        '</section>';
+    /**
+     * 扁平二宫格
+     * @type {string}
+     */
+    let template3 = '<section class="section global-section section-background">' +
+        '    <section class="section-contain">' +
+        '        <section class="global-section-contain">' +
+        '            <div><i class="icon map"></i>' +
+        '                <p class="small">${content1}</p></div>' +
+        '            <div><i class="icon shield"></i>' +
+        '                <p class="small">${content2}</p></div>' +
+        '        </section>' +
+        '    </section>' +
+        '</section>';
+    /**
+     * 三宫格
+     * @type {string}
+     */
+    let template4 = '<section class="section price-section">' +
+        '    <section class="section-contain">' +
+        '        <section class="versions">' +
+        '            <section><h3 class="title"><i class="icon dev"></i> <span>${title1}</span></h3>' +
+        '                <p>${content1}</p></section>' +
+        '            <section><h3 class="title"><i class="icon pro"></i> <span>${title2}</span></h3>' +
+        '                <p>${content2}</p></section>' +
+        '            <section><h3 class="title"><i class="icon ent"></i> <span>${title3}</span></h3>' +
+        '                <p>${content3}</p></section>' +
+        '        </section>' +
+        '        <div>' +
+        '</div>' +
+        '    </section>' +
+        '</section>';
+
+    function choiceTemplate(event) {
+        let i = $(event).val();
+        switch (i) {
+            case "0":
+                $("#templateContent").val(template0);
+                $(".templateShow").empty();
+                let html0 = ' <button type="button"' +
+                    ' onclick="choiceImg(this)"' +
+                    '     for-src="template_image0"' +
+                    '     for-input="template_image0_input"' +
+                    '     class="btn-image-browser btn btn-flat btn-default btn-xs">' +
+                    '     <i class="fa fa-fw fa-image"></i> 选择图片' +
+                    '  </button>' +
+                    '  <br/>' +
+                    '  <img src="/resource/images/logo.png" id="template_image0" alt=""/>' +
+                    '  <input type="hidden" id="template_image0_input" class="template_image0_input" ' +
+                    'name="template_image0" value="">' +
+                    '<div class="form-group row " id="titleRow">' +
+                    '    <label class="col-sm-2 col-form-label">标题</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control title" placeholder="输入标题" name="title">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<div class="form-group row " id="contentRow">' +
+                    '    <label class="col-sm-2 col-form-label">内容</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control content" placeholder="输入内容" name="title">' +
+                    '   </div>' +
+                    ' </div>'
+                $(".templateShow").append(html0);
+                break;
+            case "1":
+                $("#templateContent").val(template1);
+                $(".templateShow").empty();
+                let html1 = ' <button type="button"' +
+                    ' onclick="choiceImg(this)"' +
+                    '     for-src="template_image0"' +
+                    '     for-input="template_image0_input"' +
+                    '     class="btn-image-browser btn btn-flat btn-default btn-xs">' +
+                    '     <i class="fa fa-fw fa-image"></i> 选择图片' +
+                    '  </button>' +
+                    '  <br/>' +
+                    '  <img src="/resource/images/logo.png" id="template_image0" alt=""/>' +
+                    '  <input type="hidden" id="template_image0_input" class="template_image0_input" ' +
+                    'name="template_image0" value="">' +
+                    '<div class="form-group row " id="titleRow">' +
+                    '    <label class="col-sm-2 col-form-label">标题</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control title" placeholder="输入标题" name="title">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<div class="form-group row " id="contentRow">' +
+                    '    <label class="col-sm-2 col-form-label">内容</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control content" placeholder="输入内容" name="title">' +
+                    '   </div>' +
+                    ' </div>'
+                $(".templateShow").append(html1);
+                break;
+            case "2":
+                $("#templateContent").val(template2);
+                $(".templateShow").empty();
+                let html2 = '<div class="form-group row " id="mainTitleRow">' +
+                    '    <label class="col-sm-2 col-form-label">主标题</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control mainTitle" placeholder="输入主标题" name="mainTitle">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<h4 class="form-header">第一块内容</h4>' +
+                    '<div class="form-group row " id="title1Row">' +
+                    '    <label class="col-sm-2 col-form-label">标题</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control title1" placeholder="输入标题" name="title1">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<div class="form-group row " id="content1Row">' +
+                    '    <label class="col-sm-2 col-form-label">内容</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control content1" placeholder="输入内容" name="content1">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<div class="form-group row " id="url1Row">' +
+                    '    <label class="col-sm-2 col-form-label">URL链接</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control url1" placeholder="输入URL链接" name="url1">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<h4 class="form-header">第二块内容</h4>' +
+                    '<div class="form-group row " id="title2Row">' +
+                    '    <label class="col-sm-2 col-form-label">标题</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control title2" placeholder="输入标题" name="title2">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<div class="form-group row " id="content2Row">' +
+                    '    <label class="col-sm-2 col-form-label">内容</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control content2" placeholder="输入内容" name="content2">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<div class="form-group row " id="url2Row">' +
+                    '    <label class="col-sm-2 col-form-label">URL链接</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control url2" placeholder="输入URL链接" name="url2">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<h4 class="form-header">第三块内容</h4>' +
+                    '<div class="form-group row " id="title3Row">' +
+                    '    <label class="col-sm-2 col-form-label">标题</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control title3" placeholder="输入标题" name="title3">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<div class="form-group row " id="content3Row">' +
+                    '    <label class="col-sm-2 col-form-label">内容</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control content3" placeholder="输入内容" name="content3">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<div class="form-group row " id="url3Row">' +
+                    '    <label class="col-sm-2 col-form-label">URL链接</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control url3" placeholder="输入URL链接" name="url3">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<h4 class="form-header">第四块内容</h4>' +
+                    '<div class="form-group row " id="title4Row">' +
+                    '    <label class="col-sm-2 col-form-label">标题</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control title4" placeholder="输入标题" name="title4">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<div class="form-group row " id="content4Row">' +
+                    '    <label class="col-sm-2 col-form-label">内容</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control content4" placeholder="输入内容" name="content4">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<div class="form-group row " id="url4Row">' +
+                    '    <label class="col-sm-2 col-form-label">URL链接</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control url4" placeholder="输入URL链接" name="url5">' +
+                    '   </div>' +
+                    ' </div>'
+                $(".templateShow").append(html2);
+                break;
+            case "3":
+                $("#templateContent").val(template3);
+                $(".templateShow").empty();
+                let html3= '<div class="form-group row " id="content1Row">' +
+                    '    <label class="col-sm-2 col-form-label">内容1</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control content1" placeholder="输入内容1" name="content1">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<div class="form-group row " id="content2Row">' +
+                    '    <label class="col-sm-2 col-form-label">内容2</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control content2" placeholder="输入内容2" name="content2">' +
+                    '   </div>' +
+                    ' </div>';
+                $(".templateShow").append(html3);
+                break;
+            case "4":
+                $("#templateContent").val(template4);
+                $(".templateShow").empty();
+                let html4 = '<h4 class="form-header">第一块内容</h4>' +
+                    '<div class="form-group row " id="title1Row">' +
+                    '    <label class="col-sm-2 col-form-label">标题</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control title1" placeholder="输入标题" name="title1">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<div class="form-group row " id="content1Row">' +
+                    '    <label class="col-sm-2 col-form-label">内容</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control content1" placeholder="输入内容1" name="content1">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<h4 class="form-header">第二块内容</h4>' +
+                    '<div class="form-group row " id="title2Row">' +
+                    '    <label class="col-sm-2 col-form-label">标题</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control title2" placeholder="输入标题" name="title2">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<div class="form-group row " id="content2Row">' +
+                    '    <label class="col-sm-2 col-form-label">内容</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control content2" placeholder="输入内容" name="content2">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<h4 class="form-header">第三块内容</h4>' +
+                    '<div class="form-group row " id="title3Row">' +
+                    '    <label class="col-sm-2 col-form-label">标题</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control title3" placeholder="输入标题" name="title3">' +
+                    '   </div>' +
+                    ' </div>' +
+                    '<div class="form-group row " id="content3Row">' +
+                    '    <label class="col-sm-2 col-form-label">内容</label>' +
+                    '   <div class="col-sm-9">' +
+                    '      <input type="input" class="form-control content3" placeholder="输入内容" name="content3">' +
+                    '   </div>' +
+                    ' </div>';
+                $(".templateShow").append(html4);
+                break;
+            default:
+                $("#templateContent").val("");
+        }
+
+    }
+
+    /**
+     * 渲染到模板内容
+     */
+    function renderTemplate(flag) {
+       let templateContent = $("#templateContent").val();
+        switch (flag) {
+            case "0":
+                templateContent = templateContent.replace("${title}",$("#titleRow").find('.title').val())
+                templateContent = templateContent.replace("${content}",$("#contentRow").find('.content').val())
+                templateContent = templateContent.replace("${image}",$("#template_image0_input").val())
+                $("#templateContent").val(templateContent);
+                break;
+            case "1":
+                templateContent = templateContent.replace("${title}",$("#titleRow").find('.title').val())
+                templateContent = templateContent.replace("${content}",$("#contentRow").find('.content').val())
+                templateContent = templateContent.replace("${image}",$("#template_image0_input").val())
+                $("#templateContent").val(templateContent);
+                break;
+            case "2":
+                templateContent = templateContent.replace("${mainTitle}",$("#mainTitleRow").find('.mainTitle').val())
+
+                templateContent = templateContent.replace("${title1}",$("#title1Row").find('.title1').val())
+                templateContent = templateContent.replace("${content1}",$("#content1Row").find('.content1').val())
+                templateContent = templateContent.replace("${url1}",$("#url1Row").find('.url1').val())
+
+                templateContent = templateContent.replace("${title2}",$("#title2Row").find('.title2').val())
+                templateContent = templateContent.replace("${content2}",$("#content2Row").find('.content2').val())
+                templateContent = templateContent.replace("${url2}",$("#url2Row").find('.url2').val())
+
+                templateContent = templateContent.replace("${title3}",$("#title3Row").find('.title3').val())
+                templateContent = templateContent.replace("${content3}",$("#content3Row").find('.content3').val())
+                templateContent = templateContent.replace("${url3}",$("#url3Row").find('.url3').val())
+
+                templateContent = templateContent.replace("${title4}",$("#title4Row").find('.title4').val())
+                templateContent = templateContent.replace("${content4}",$("#content4Row").find('.content4').val())
+                templateContent = templateContent.replace("${url4}",$("#url4Row").find('.url4').val())
+
+                $("#templateContent").val(templateContent);
+                break;
+            case "3":
+                templateContent = templateContent.replace("${content1}",$("#content1Row").find('.content1').val())
+                templateContent = templateContent.replace("${content2}",$("#content2Row").find('.content2').val())
+                $("#templateContent").val(templateContent);
+                break;
+            case "4":
+                templateContent = templateContent.replace("${title1}",$("#title1Row").find('.title1').val())
+                templateContent = templateContent.replace("${content1}",$("#content1Row").find('.content1').val())
+
+                templateContent = templateContent.replace("${title2}",$("#title2Row").find('.title2').val())
+                templateContent = templateContent.replace("${content2}",$("#content2Row").find('.content2').val())
+
+                templateContent = templateContent.replace("${title3}",$("#title3Row").find('.title3').val())
+                templateContent = templateContent.replace("${content3}",$("#content3Row").find('.content3').val())
+
+                $("#templateContent").val(templateContent);
+                break;
+            default:
+                console.log("执行了默认...")
+        }
+    }
+
+    let templates = [];
+    let count = 0;
+    function saveTemplateList(flag) {
+        ++count
+        switch (flag) {
+            case "0":
+                renderTemplate(flag) // 先渲染模板
+                let tr0 = '<tr data-index="'+count+'">' +
+                    '<td class="templateName" data-id="0">左右两格，左内容，右图片</td> ' +
+                    '<td>'+$("#sort").val()+'</td> ' +
+                    '<td><a href="javascript:void(0);;" onclick="delTr(this)">删除</a> </td> ' +
+                    '</tr>';
+                $("#templateTableTbody").append(tr0);
+                let templateContent0 = $("#templateContent").val();
+                let sort0 = $("#sort").val();
+                let templateName0 = "左右两格，左内容，右图片";
+                let template0 = {}
+                template0.index = count;
+                template0.templateName = templateName0;
+                template0.sort = sort0;
+                templateContent0 = templateContent0.replaceAll("\"","&#34;");
+                template0.templateContent = templateContent0;
+                templates.push(template0)
+                break;
+            case "1":
+                renderTemplate(flag) // 先渲染模板
+                let tr1 = '<tr data-index="'+count+'">' +
+                    '<td class="templateName" data-id="1">左右两格，左图片，右内容</td> ' +
+                    '<td>'+$("#sort").val()+'</td> ' +
+                    '<td><a href="javascript:void(0);;" onclick="delTr(this)">删除</a> </td> ' +
+                    '</tr>';
+                $("#templateTableTbody").append(tr1);
+                let templateContent1 = $("#templateContent").val();
+                let sort1 = $("#sort").val();
+                let templateName1 = "左右两格，左图片，右内容";
+                let template1 = {}
+                template1.index = count;
+                template1.templateName = templateName1;
+                template1.sort = sort1;
+                templateContent1 = templateContent1.replaceAll("\"","&#34;");
+                template1.templateContent = templateContent1;
+                templates.push(template1)
+                break;
+            case "2":
+                renderTemplate(flag) // 先渲染模板
+                let tr2 = '<tr data-index="'+count+'">' +
+                    '<td class="templateName" data-id="2">宽四宫格</td> ' +
+                    '<td>'+$("#sort").val()+'</td> ' +
+                    '<td><a href="javascript:void(0);;" onclick="delTr(this)">删除</a> </td> ' +
+                    '</tr>';
+                $("#templateTableTbody").append(tr2);
+                let templateContent2 = $("#templateContent").val();
+                let sort2 = $("#sort").val();
+                let templateName2 = "宽四宫格";
+                let template2 = {}
+                template2.index = count;
+                template2.templateName = templateName2;
+                template2.sort = sort2;
+                templateContent2 = templateContent2.replaceAll("\"","&#34;");
+                template2.templateContent = templateContent2;
+                templates.push(template2)
+                break;
+            case "3":
+                renderTemplate(flag) // 先渲染模板
+                let tr3 = '<tr data-index="'+count+'">' +
+                    '<td class="templateName" data-id="3">扁平二宫格</td> ' +
+                    '<td>'+$("#sort").val()+'</td> ' +
+                    '<td><a href="javascript:void(0);;" onclick="delTr(this)">删除</a> </td> ' +
+                    '</tr>';
+                $("#templateTableTbody").append(tr3);
+                let templateContent3 = $("#templateContent").val();
+                let sort3 = $("#sort").val();
+                let templateName3 = "扁平二宫格";
+                let template3 = {}
+                template3.index = count;
+                template3.templateName = templateName3;
+                template3.sort = sort3;
+                templateContent3 = templateContent3.replaceAll("\"","&#34;");
+                template3.templateContent = templateContent3;
+                templates.push(template3)
+                break;
+            case "4":
+                renderTemplate(flag) // 先渲染模板
+                let tr4 = '<tr data-index="'+count+'">' +
+                    '<td class="templateName" data-id="4">三宫格</td> ' +
+                    '<td>'+$("#sort").val()+'</td> ' +
+                    '<td><a href="javascript:void(0);;" onclick="delTr(this)">删除</a> </td> ' +
+                    '</tr>';
+                $("#templateTableTbody").append(tr4);
+                let templateContent4 = $("#templateContent").val();
+                let sort4 = $("#sort").val();
+                let templateName4 = "三宫格";
+                let template4 = {}
+                template4.index = count;
+                template4.templateName = templateName4;
+                template4.sort = sort4;
+                templateContent4 = templateContent4.replaceAll("\"","&#34;");
+                template4.templateContent = templateContent4;
+                templates.push(template4)
+                break;
+            default:
+                break;
+        }
+    }
+    // 暂时不重置
+    function resetInput() {
+
+    }
+    function delTr(event) {
+        $(event).parent().parent().remove();
+        let index = $(event).parent().parent().attr('data-index');
+        console.log("=====index:" + index)
+        for (let i = 0; i < templates.length; i++) {
+            if (templates[i].index+"" === index) {
+                templates.splice(i,1);
+                break;
+            }
+        }
+    }
+
+</script>
+<script type="application/javascript">
+    let room = 1;
+    function education_fields() {
+
+        room++;
+        let objTo = document.getElementById('education_fields')
+        let divtest = document.createElement("div");
+        divtest.setAttribute("class", "col-4 form-group removeclass" + room);
+        let rdiv = 'removeclass' + room;
+        divtest.innerHTML = '<div class="row"><div class="col-8">' +
+            '<button for-src="banner_img'+room+'" for-input="banner_input'+room+'" type="button" ' +
+            'onclick="choiceImg(this)" class="btn-image-browser btn btn-flat btn-default btn-xs">' +
+            '<i class="fa fa-fw fa-image"></i>选择图片</button><br/>' +
+            '<img src="/resource/images/logo.png" class="banner_img" id="banner_img'+room+'" alt=""/>' +
+            '<input type="hidden" id="banner_input'+room+'" class="bannerImg" name="bannerImg" value="">' +
+            '<input class="form-control bannerTitle" placeholder="Banner标题" name="bannerTitle" type="text">' +
+            '<textarea class="form-control bannerContent" placeholder="内容描述" name="bannerContent" rows="3"></textarea>' +
+            '<input class="form-control bannerBtnTitle" placeholder="Banner按钮标题" type="text" name="bannerBtnTitle"/>' +
+            '<input class="form-control bannerBtnUrl" placeholder="Banner按钮URL" type="text" name="bannerBtnUrl" /></div>' +
+            '<div class="col-4">' +
+            '<button type="button" class="btn btn-primary " onclick="remove_education_fields(' + room + ');"><i class="fas fa-minus"></i></button></div>'
+
+        objTo.appendChild(divtest)
+    }
+    let footer = 1;
+    function footer_contents() {
+        footer++;
+        let objTo = document.getElementById('footer_contents')
+        let divtest = document.createElement("div");
+        divtest.setAttribute("class", "col-4 form-group removeclass" + footer);
+        let rdiv = 'removeclass' + footer;
+        divtest.innerHTML = '<div class="row"><div class="col-8">' +
+            '<input class="form-control groupTitle" placeholder="Group标题" name="groupTitle" type="text">' +
+            '<div class="group'+footer+'">' +
+            '<div class="subTitle">' +
+            '<input class="form-control titleName" placeholder="小标题名称" type="text" name="titleName"/>' +
+            '<input class="form-control titleUrl" placeholder="小标题URL" type="text" name="titleUrl" /></div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-4">' +
+            '<button type="button" class="btn btn-primary " onclick="remove_footer(' + footer + ');"><i class="fas fa-minus"></i></button>' +
+            '<button type="button" class="btn btn-primary " onclick="add_subtitle(' + footer + ');">增加小标题</button>' +
+            '</div>'
+
+        objTo.appendChild(divtest)
+    }
+    function add_subtitle(fid) {
+        $(".group"+fid).append('<div class="subTitle">' +
+            '<input class="form-control titleName" placeholder="小标题名称" type="text" name="titleName"/>' +
+            '<input class="form-control titleUrl" placeholder="小标题URL" type="text" name="titleUrl" />' +
+            '</div>');
+    }
+    function remove_footer(rid) {
+        $('.removeclass' + rid).remove();
+    }
+    function remove_education_fields(rid) {
+        $('.removeclass' + rid).remove();
+    }
+    function choiceImg(event) {
+        var $this = $(event);
+        layer.open({
+            type: 2,
+            title: '选择图片',
+            anim: 2,
+            shadeClose: true,
+            shade: 0.3,
+            area: ['90%', '90%'],
+            content: jpress.cpath + '/admin/attachment/browse',
+            end: function () {
+                if (layer.data.src != null) {
+                    var img = $this.attr("for-src");
+                    var input = $this.attr("for-input");
+
+                    if (img) {
+                        $("#" + img).attr("src", getContextPath() + layer.data.src).trigger("srcChanged", getContextPath() + layer.data.src);
+                        ;
+                    } else {
+                        $this.siblings('img').attr('src', getContextPath() + layer.data.src).trigger("srcChanged", getContextPath() + layer.data.src);
+                    }
+                    if (input) {
+                        $("#" + input).val(layer.data.src).trigger("valChanged", layer.data.src);
+                    } else {
+                        $this.siblings('input[type="hidden"]').val(layer.data.src).trigger("valChanged", layer.data.src);
+                        ;
+                    }
+                }
+            }
+        });
+    }
+
+</script>
+<script type="application/javascript">
+    function submitBasicInfo() {
+        let bannerGroups = $("#education_fields").find(".form-group");
+        let bannersInfos=[]
+        if (bannerGroups) {
+            for (let i = 0; i < bannerGroups.length; i++) {
+                let bannerInfo={}
+                let bannerImg = $(bannerGroups[i]).find(".bannerImg").val();
+                let bannerTitle = $(bannerGroups[i]).find(".bannerTitle").val();
+                let bannerContent = $(bannerGroups[i]).find(".bannerContent").val();
+                let bannerBtnTitle = $(bannerGroups[i]).find(".bannerBtnTitle").val();
+                let bannerBtnUrl = $(bannerGroups[i]).find(".bannerBtnUrl").val();
+                if (bannerImg === ""
+                    || bannerTitle === ""
+                    || bannerContent === ""
+                    || bannerBtnTitle === ""
+                    || bannerBtnUrl === "") {
+                    toastr.error('请填写全部信息');
+                    return;
+                }
+                bannerInfo.bannerImg = bannerImg;
+                bannerInfo.bannerTitle = bannerTitle;
+                bannerInfo.bannerContent = bannerContent;
+                bannerInfo.bannerBtnTitle = bannerBtnTitle;
+                bannerInfo.bannerBtnUrl = bannerBtnUrl;
+                bannersInfos.push(bannerInfo);
+            }
+        }
+        let cloudLogo = $(".cloud_logo_input").val();
+        let basicInfo = {}
+        basicInfo.cloudLogo = cloudLogo;
+        basicInfo.bannersInfos = bannersInfos;
+        let data = JSON.stringify(basicInfo);
+        ajaxPost(jpress.cpath + "/admin/option/doJsonSave", {params: JSON.stringify(data)}, function (res) {
+            if (res.state === "ok") {
+                toastr.success('保存成功。');
+            } else {
+                toastr.error(data.message, '操作失败');
+            }
+        });
+    }
+    function submitFooterInfo() {
+        let footerGroupRows = $("#footer_contents").find(".form-group");
+        let footerGroups = [];
+        if (footerGroupRows) {
+            for (let i = 0; i < footerGroupRows.length; i++) {
+                let footerGroup = {}
+                footerGroup.groupTitle = $(footerGroupRows[i]).find(".groupTitle").val();
+                let subTitlesDivs = $(footerGroupRows[i]).find(".subTitle");
+                let subTitles = []
+                for (let j = 0; j < subTitlesDivs.length; j++) {
+                    let subTitle = {}
+                    subTitle.titleName = $(subTitlesDivs[j]).find(".titleName").val();
+                    subTitle.titleUrl = $(subTitlesDivs[j]).find(".titleUrl").val();
+                    subTitles.push(subTitle);
+                }
+                footerGroup.subTitles = subTitles
+                footerGroups.push(footerGroup)
+            }
+        }
+        let footerInfo = {}
+        footerInfo.footers = footerGroups
+        let data = JSON.stringify(footerInfo);
+        ajaxPost(jpress.cpath + "/admin/option/doJsonSave", {params: JSON.stringify(data)}, function (res) {
+            if (res.state === "ok") {
+                toastr.success('保存成功。');
+            } else {
+                toastr.error(data.message, '操作失败');
+            }
+        });
+    }
+    function submitContent() {
+        if (templates.length === 0) {
+            toastr.success('请先保存模板。');
+            return;
+        }
+        let content = {}
+        content.templates = templates;
+        let saveData = JSON.stringify(content);
+        ajaxPost(jpress.cpath + "/admin/option/doJsonSave", {params: JSON.stringify(saveData)}, function (res) {
+            if (res.state === "ok") {
+                toastr.success('保存成功。');
+            } else {
+                toastr.error(data.message, '操作失败');
+            }
+        });
+    }
+</script>

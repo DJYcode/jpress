@@ -1,0 +1,55 @@
+#include("./layout.html")
+#@layout()
+#define content()
+<!-- banner -->
+<section class="banner">
+    <div class="swiper-container" id="banner-swiper">
+        <div class="swiper-wrapper">
+            #bannerInfos()
+            #for(bannerInfo : bannerInfos)
+            <div class="swiper-slide"
+                 style="background:url('#(bannerInfo.bannerImg)') bottom/1600px no-repeat">
+                <div class="banner-content">
+                    <h1><span class="font-logo">#(bannerInfo.bannerTitle)</span></h1>
+                    <p class="h3">#(bannerInfo.bannerContent)</p>
+                    <a href="#(bannerInfo.bannerBtnUrl)" class="button button-primary button-more h4">
+                        #(bannerInfo.bannerBtnTitle)<i class="uk-icon-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+            #end
+            #end
+        </div>
+        <div class="banner-pagination"></div>
+    </div>
+</section>
+<section class="section">
+    <section class="section-contain table-section">
+        <div class="table-item">
+            #productPage()
+            #for(product : productPage.list)
+            <section class="tutorial-item">
+                <a href="#(product.url)" target="_blank"
+                   class="tutorial-image"
+                   style="background-image:url(#(product.thumbnail))"></a>
+                <div class="tutorial-meta"><a href="#(product.url)" target="_blank"><p
+                        class="tutorial-meta-title">#(product.title ??)</p></a>
+                    <div class="tutorial-meta-date small"></div>
+                    <div class="tutorial-meta-extra small">
+                        <span style="margin: 20px 0;font-size: 20px;color: #333;font-weight: 600;">
+                            ¥ #number(product.price)
+                        </span>
+                        <span class="right tutorial-download">购买人数：#(product.sales_count ?? 0)</span></div>
+                    <p class="tutorial-meta-desc">
+                        #(product.summary ??)
+                    </p>
+                </div>
+            </section>
+            #end
+            <section class="tutorial-item"></section>
+            <section class="tutorial-item"></section>
+            #end
+        </div>
+    </section>
+</section>
+#end

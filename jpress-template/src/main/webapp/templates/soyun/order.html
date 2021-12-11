@@ -1,0 +1,374 @@
+#include("./layout.html")
+#@layout()
+#define script()
+<script src="#(CPATH)/static/components/distpicker/distpicker.min.js"></script>
+<script src="#(CPATH)/static/components/layer/layer.js"></script>
+<script src="#(CPATH)/static/components/jquery/jquery.form.min.js"></script>
+<script src="#(CPATH)/static/components/jquery-validation/jquery.validate.min.js"></script>
+<script src="#(CPATH)/static/components/jquery-validation/additional-methods.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $("[name='paytype']:first").attr("checked", "checked");
+    });
+
+    function seleteAddress() {
+        layer.data = {}
+        layer.open({
+            type: 2,
+            title: "选择地址",
+            anim: 2,
+            shadeClose: true,
+            shade: 0.3,
+            area: ['60%', '60%'],
+            content: '#(CPATH)/ucenter/address/layer',
+            end: function () {
+                if (layer.data.addrUsername) {
+                    $('#addr_username').val(layer.data.addrUsername);
+                    $('#addr_mobile').val(layer.data.addrMobile);
+                    $('#addr_detail').val(layer.data.addrDetail);
+                    $('#addr_zipcode').val(layer.data.addrZipcode);
+
+                    $("#distpicker").distpicker('destroy');
+                    $("#distpicker").distpicker({
+                        province: layer.data.addrProvince,
+                        city: layer.data.addrCity,
+                        district: layer.data.addrDistrict
+                    });
+                }
+            }
+        });
+    }
+
+</script>
+#end
+
+#define css()
+<link rel="stylesheet" href="#(CPATH)/static/adminlte/css/adminlte.min.css">
+<style>
+    .form-header {
+        margin: 4px 0;
+        border:none;
+        padding:0 0 4px 0;
+        font-size:16px;
+    }
+
+    .input-number {
+        width: 120px;
+    }
+
+    .input-group-addon {
+        cursor: pointer;
+    }
+
+    .add, .subtract {
+
+    }
+
+    .bottom-bar {
+        left: 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+        background-color: #fff;
+        border-top: solid 1px #ccc;
+        card-shadow: -15px 10px 10px 10px #ccc;;
+    }
+
+    .bottom-content {
+        background-color: #ccc;
+        width: 100%;
+        height: 60px;
+        padding: 0 230px 0 230px;
+    }
+
+    .bottom-content div {
+        height: 60px;
+    }
+
+    .table > tbody > tr > td {
+        vertical-align: middle;
+    }
+    .invoice{
+        margin-bottom:20px;
+    }
+
+    table,table th,table td{
+        font-size: 14px;
+    }
+    .input-group{
+        align-items: center;
+    }
+    .input-group  .form-control{
+        margin:0 10px;
+        font-size: 14px;
+    }
+    .page-footer{
+        font-size: 14px;
+        text-align: right;
+        padding:10px 0;
+    }
+
+</style>
+#end
+
+#define content()
+<form action="#(CPATH)/ucenter/checkout/payorder/#(order.id)" method="post" target="_blank" id="checkout">
+    <section class="section">
+        <section class="section-contain column pricing-section">
+            <div class="content" id="productInfo">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6">
+                            <h3 class="form-header" style="color:#666;">
+                                <i class="fa fa-bars" aria-hidden="true"></i> 产品信息
+                            </h3>
+                        </div>
+                        <div class="col-6" style="text-align: right;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 table-responsive">
+                    <table class="table table-striped" id="tab">
+                        <colgroup>
+                            <col width="400">
+                            <col width="250">
+                            <col width="250">
+                            <col width="250">
+                        </colgroup>
+                        <thead>
+                        <tr style="text-align: center">
+                            <th>商品</th>
+                            <th>单价</th>
+                            <th>数量</th>
+                            <th>总价</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            #for(item : orderItems)
+                            <tr>
+                                <td>
+                                    #(item.product_title ??)
+                                    <div style="color: #9c9c9c">
+                                        #for(option : item.optionsMap)
+                                        #(option.key ??) : #(option.value ??) #if(!(for.last))<br />#end
+                                        #end
+                                    </div>
+
+                                </td>
+                                <td>#(item.product_price ??)</td>
+                                <td>
+                                    <div class="input-group input-number">
+                                        <input type="hidden" name="cid" value="#(item.id ??)">
+                                        #(item.product_count ??)
+                                    </div>
+                                </td>
+                                <td>#(item.product_count * item.product_price ??)</td>
+                            </tr>
+                            #end
+                        </tbody>
+                    </table>
+                </div>
+                <div class="container-fluid">
+                    <h2 class="page-footer">
+                        <small class="float-right">应支付: <span
+                                id="totalPrice">#number(order.orderRealAmount,'0.00')</span>￥</small>
+                    </h2>
+                </div>
+            </div>
+            <div class="content" id="receiveInfo">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6">
+                            <h3 class="form-header" style="color:#666;">
+                                <i class="fa fa-bars" aria-hidden="true"></i> 收件人信息
+                            </h3>
+                        </div>
+                        <div class="col-6" style="text-align: right;">
+                            <button type="button" style="border:none;background: transparent; font-size: 14px;color:#666;font-weight: 400;" onclick="seleteAddress()">
+                                <i class="fa fa-map-marker-alt"></i>
+                                选择收货地址
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-outline card-dashboard">
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <!-- text input -->
+                        <div class="form-group row">
+                            <label>联系人</label>
+                            <input type="text" class="form-control" name="order.delivery_addr_username"
+                                   id="addr_username"
+                                   placeholder="收件人的姓名..." value="#(defaultAddress.username ??)">
+                        </div>
+
+                        <div class="form-group row">
+                            <label>联系电话</label>
+                            <input type="text" class="form-control" name="order.delivery_addr_mobile"
+                                   id="addr_mobile"
+                                   placeholder="收件人的电话..." value="#(defaultAddress.mobile ??)">
+                        </div>
+
+                        <div class="form-group row">
+                            <label>地址</label>
+                            <div data-toggle="distpicker" class="form-inline" data-autoselect="3" id="distpicker">
+                                <select class="form-control" name="order.delivery_addr_province" id="addr_province"
+                                        data-province="#(defaultAddress.province ?? '---- 选择省 ----')"></select>
+                                <select class="form-control" name="order.delivery_addr_city" id="addr_city"
+                                        data-city="#(defaultAddress.city ?? '---- 选择市 ----')"></select>
+                                <select class="form-control" name="order.delivery_addr_district" id="addr_district"
+                                        data-district="#(defaultAddress.district ?? '---- 选择区 ----')"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label>详细地址</label>
+                            <textarea class="form-control" name="order.delivery_addr_detail" id="addr_detail"
+                                      placeholder="请输入详细地址信息，如道路、门牌号、小区、楼栋号、单元等信息"
+                                      rows="2">#(defaultAddress.detail ??)</textarea>
+                        </div>
+
+                        <div class="form-group row">
+                            <label>邮政编码</label>
+                            <input type="text" class="form-control" name="order.delivery_addr_zipcode"
+                                   id="addr_zipcode"
+                                   placeholder="邮政编码..." value="#(defaultAddress.zipcode ??)">
+                        </div>
+
+
+                        <div class="col-xs-12">
+                            <button type="button" class="btn btn-primary float-right" onclick="seleteAddress()">
+                                <i class="fa fa-fw fa-street-view"></i>
+                                选择其他地址
+                            </button>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="content" id="payInfo">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6">
+                            <h3 class="form-header" style="color:#666;">
+                                <i class="fa fa-bars" aria-hidden="true"></i> 支付信息
+                            </h3>
+                        </div>
+                        <div class="col-6" style="text-align: right;">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-outline card-dashboard" style="box-shadow: none;border:1px solid #e4e6e6;">
+
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="address-lable">支付方式</label>
+
+                            #if(wechatxConfig.isEnable())
+                            <div class="form-group">
+                                <div class="radio custom-control">
+                                    <label class="ng-binding">
+                                        <input type="radio" name="paytype" value="wechatx">
+                                        <span class="control-indicator"></span>
+                                        微信转账支付
+                                    </label>
+                                </div>
+                            </div>
+                            #end
+
+                            #if(alipayxConfig.isEnable())
+                            <div class="form-group">
+                                <div class="radio custom-control">
+                                    <label class="ng-binding">
+                                        <input type="radio" name="paytype" value="alipayx">
+                                        <span class="control-indicator"></span>
+                                        支付宝转账支付
+                                    </label>
+                                </div>
+                            </div>
+                            #end
+
+                            #if(wechatConfig.isEnable())
+                            <div class="form-group">
+                                <div class="radio custom-control">
+                                    <label class="ng-binding">
+                                        <input type="radio" name="paytype" value="wechat">
+                                        <span class="control-indicator"></span>
+                                        微信支付
+                                    </label>
+                                </div>
+                            </div>
+                            #end
+
+                            #if(alipayConfig.isEnable())
+                            <div class="form-group">
+                                <div class="radio custom-control">
+                                    <label class="ng-binding">
+                                        <input type="radio" name="paytype" value="alipay">
+                                        <span class="control-indicator"></span>
+                                        支付宝支付
+                                    </label>
+                                </div>
+                            </div>
+                            #end
+
+                            #if(paypalConfig.isEnable())
+                            <div class="form-group">
+                                <div class="radio custom-control">
+                                    <label class="ng-binding">
+                                        <input type="radio" name="paytype" value="paypal">
+                                        <span class="control-indicator"></span>
+                                        Paypal支付
+                                    </label>
+                                </div>
+                            </div>
+                            #end
+
+                            <div class="form-group">
+                                <div class="radio custom-control">
+                                    <label class="ng-binding">
+                                        <input type="radio" name="paytype" value="amount">
+                                        <span class="control-indicator"></span>
+                                        使用账户余额支付
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="address-lable">备注</label>
+                            <textarea class="form-control group-line" rows="3" name="payer_msg"
+                                      placeholder="备注信息"></textarea>
+                        </div>
+                        <div class="row no-print" style="margin:0 10px 40px 0;justify-content:flex-end;">
+                            <div class="col-xs-12" style="">
+                                <button type="submit" id="submit" class="btn btn-primary">
+                                    提交订单
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <nav class="fixed-nav-section" id="fixed-nav-section">
+        <section class="section-contain"><span class="module">订单信息</span>
+            <ul class="fixed-nav">
+                <a href="#productInfo">商品信息</a>
+                <a href="#receiveInfo">收件人信息</a>
+                <a href="#payInfo">支付信息</a>
+            </ul>
+        </section>
+    </nav>
+</form>
+#end

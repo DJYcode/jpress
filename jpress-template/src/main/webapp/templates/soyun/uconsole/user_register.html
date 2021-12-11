@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="utf-8">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, monster admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, ">
+  <meta name="description" content="Monster is powerful and clean admin dashboard template, inpired from Google&#39;s Material Design">
+  <meta name="robots" content="noindex,nofollow">
+  <title>#(WEB_NAME ??)-注册</title>
+  <link rel="canonical" href="https://www.wrappixel.com/templates/monsteradmin/">
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="https://www.wrappixel.com/demos/admin-templates/monster-bootstrap-latest/monster/src/assets/images/favicon.png">
+  <!-- Custom CSS -->
+  <link href="#(CPATH)/static/front/css/style.min.css" rel="stylesheet">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <style>
+    .login-page {
+      background-image: url("#(CDN)#(CPATH)/static/commons/img/bg.png");
+      background-size: cover;
+    }
+
+    .login-box {
+      margin-top: 100px;
+    }
+
+    .form-group {
+      text-align: left;
+    }
+
+  </style>
+
+  <script>
+
+    function doGetSmsCode() {
+      var phone = $('#phone').val();
+      var captcha = $('#captcha').val();
+
+      if (phone == '') {
+        alert('手机号不能为空....');
+        return;
+      }
+      if (captcha == '') {
+        alert('验证码不能为空....');
+        return;
+      }
+
+
+      $.get("#(CPATH)/commons/getsmscode?phone=" + phone + "&captcha=" + captcha, function (result) {
+        $('#captcha').val('');
+        $('#captchaimg').attr("src", '#(CPATH)/commons/captcha?d=' + Math.random())
+        alert(result.message);
+      });
+    }
+
+  </script>
+</head>
+
+<body>
+<div class="main-wrapper">
+  <!-- ============================================================== -->
+  <!-- Preloader - style you can find in spinners.css -->
+  <!-- ============================================================== -->
+  <div class="preloader" style="display: none;">
+    <svg class="tea lds-ripple" width="37" height="48" viewBox="0 0 37 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M27.0819 17H3.02508C1.91076 17 1.01376 17.9059 1.0485 19.0197C1.15761 22.5177 1.49703 29.7374 2.5 34C4.07125 40.6778 7.18553 44.8868 8.44856 46.3845C8.79051 46.79 9.29799 47 9.82843 47H20.0218C20.639 47 21.2193 46.7159 21.5659 46.2052C22.6765 44.5687 25.2312 40.4282 27.5 34C28.9757 29.8188 29.084 22.4043 29.0441 18.9156C29.0319 17.8436 28.1539 17 27.0819 17Z" stroke="#009efb" stroke-width="2"></path>
+      <path d="M29 23.5C29 23.5 34.5 20.5 35.5 25.4999C36.0986 28.4926 34.2033 31.5383 32 32.8713C29.4555 34.4108 28 34 28 34" stroke="#009efb" stroke-width="2"></path>
+      <path id="teabag" fill="#009efb" fill-rule="evenodd" clip-rule="evenodd" d="M16 25V17H14V25H12C10.3431 25 9 26.3431 9 28V34C9 35.6569 10.3431 37 12 37H18C19.6569 37 21 35.6569 21 34V28C21 26.3431 19.6569 25 18 25H16ZM11 28C11 27.4477 11.4477 27 12 27H18C18.5523 27 19 27.4477 19 28V34C19 34.5523 18.5523 35 18 35H12C11.4477 35 11 34.5523 11 34V28Z"></path>
+      <path id="steamL" d="M17 1C17 1 17 4.5 14 6.5C11 8.5 11 12 11 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#009efb"></path>
+      <path id="steamR" d="M21 6C21 6 21 8.22727 19 9.5C17 10.7727 17 13 17 13" stroke="#009efb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </div>
+  <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(../assets/images/big/auth-bg.jpg) no-repeat center center;">
+    <div class="auth-box p-4 bg-white rounded">
+      <div>
+        <div class="logo text-center">
+          <span class="db"><img src="#option('cloud_logo','')" alt="logo" width="40px"></span>
+          <h5 class="font-weight-medium mb-3 mt-1">注册</h5>
+        </div>
+        <!-- Form -->
+        <div class="row mt-4">
+          <div class="col-12">
+            <form class="form-horizontal autoAjaxSubmit" action="#(CPATH)/user/doRegister" method="post" data-ok-function="ok">
+              <div class="form-floating mb-3">
+                <input type="text" name="username" class="form-control form-input-bg" id="tb-rfname" placeholder="请输入账号" required>
+                <label for="tb-rfname">账号</label>
+                <div class="invalid-feedback">
+                  账号必须填写
+                </div>
+              </div>
+              #if(option('reg_sms_validate_enable'))
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control"  placeholder="请输入手机号" name="phone" id="tb-phone" required>
+                <label for="tb-phone">手机号</label>
+                <div class="invalid-feedback">
+                  手机号必须填写
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" autocomplete="off" class="form-control" style="width: 120px;float: left;margin-right: 10px"
+                       placeholder="请输入手机验证码" name="sms_code" id="sms-code" required>
+                <label for="sms-code">手机验证码</label>
+                <div class="invalid-feedback">
+                  手机验证码必须填写
+                </div>
+                <button type="button" class="btn btn-info btn-block btn-flat" style="width: 100px;"
+                        onclick="doGetSmsCode()">
+                  获取验证码
+                </button>
+              </div>
+              #end
+              <div class="form-floating mb-3">
+                <input type="email" name="email" class="form-control form-input-bg" id="tb-remail" placeholder="请输入邮箱" required>
+                <label for="tb-remail">邮箱</label>
+                <div class="invalid-feedback">
+                  邮箱必须填写
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" name="pwd" class="form-control form-input-bg" id="text-rpassword" placeholder="*****" required>
+                <label for="text-rpassword">密码</label>
+                <div class="invalid-feedback">
+                  密码必须填写
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" name="confirmPwd" class="form-control form-input-bg" id="text-rcpassword" placeholder="*****" required>
+                <label for="text-rcpassword">确认密码</label>
+                <div class="invalid-feedback">
+                  确认密码必须填写
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control form-input-bg" id="text-code" placeholder="请输入验证码" name="captcha" required>
+                <label for="text-code">验证码</label>
+                <div class="invalid-feedback">
+                  验证码必须填写
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <img src="#(CPATH)/commons/captcha" id="captcha-img"
+                     style="float: right;height: 34px;margin-top: 2px;"
+                     onclick="this.src='#(CPATH)/commons/captcha?d='+Math.random();" cdn-exclude/>
+              </div>
+              <div class="d-flex align-items-stretch">
+                <button type="submit" class="btn btn-info d-block w-100">注 册</button>
+              </div>
+              <div class="d-flex align-items-stretch">
+                <p class="text-muted" style="float: left;">
+                  已有账号？点击 <a href="#(CPATH)/user/login">这里</a> 登录。
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="#(CPATH)/static/components/jquery/jquery.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="#(CPATH)/static/front/js/bootstrap.bundle.min.js"></script>
+
+<script src="#(CPATH)/static/components/jquery/jquery.form.min.js"></script>
+<script src="#(CPATH)/static/components/jquery-validation/jquery.validate.min.js"></script>
+<script src="#(CPATH)/static/components/jquery-validation/additional-methods.min.js"></script>
+<script src="#(CPATH)/static/components/jquery-validation/localization/messages_zh.min.js"></script>
+
+<script src="#(CPATH)/static/admin/js/jpressutils.js"></script>
+<script src="#(CPATH)/static/admin/js/jpressadmin.js"></script>
+<script>
+  $(".preloader ").fadeOut();
+</script>
+<script>
+  function ok() {
+    alert("注册成功，点击确定进行登录。")
+    location.href = "#(CPATH)/user/login";
+  }
+</script>
+
+
+</body></html>
