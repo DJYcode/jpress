@@ -1,31 +1,32 @@
-#define layout()
+#define ucenter_layout(title)
 <!DOCTYPE html>
 <html lang="zh" class="">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    <meta name="baidu-site-verification" content="MfC8ppEukL"/>
-    <meta baidu-gxt-verify-token="">
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="">
-
-    <title>#(SEO_TITLE ?? (WEB_TITLE + '-' + WEB_SUBTITLE))</title>
-    <meta name="description" content="#(SEO_DESCRIPTION)"/>
+    <meta name="baidu-site-verification" content=""/>
+    #if(USER)
+    <title>#(USER.nickname ??) - #(title??) | #(SEO_TITLE ?? (WEB_TITLE + '-' + WEB_SUBTITLE))</title>
+    #else
+    <title>- #(title??) | #(SEO_TITLE ?? (WEB_TITLE + '-' + WEB_SUBTITLE))</title>
+    #end
+    <meta name="description"
+          content="#(SEO_DESCRIPTION  ??)"/>
     <meta name="keywords"
-          content="#(SEO_KEYWORDS)"/>
+          content="#(SEO_KEYWORDS ??)"/>
 
     <meta name="author" content="dong"/>
 
     <link rel="shortcut icon" href=""/>
 
     <!-- Styles -->
-    <link href="resource/css/vendors.css" rel="stylesheet">
-    <link href="resource/css/app.css" rel="stylesheet">
+    <link href="../resource/css/vendors.css" rel="stylesheet">
+    <link href="../resource/css/app.css" rel="stylesheet">
 
 </head>
-<body class=" home-page">
+
+<body class=" users-show-page">
 
 <script>
     window.Laravel = {"csrfToken": ""}
@@ -76,8 +77,7 @@
     }
 
 </script>
-
-<style type="text/css">
+<style>
     .ui.top.menu {
         border-top: 4px solid #00b5ad;
     }
@@ -96,56 +96,60 @@
 
     /* 顶部导航栏 */
     .ui.top.menu {
-        border-top: 4px solid #00b5ad;
+        border-top: 4px solid #368cda;
     }
 
     /* 右边导航栏顶部样式 */
     .ui.top-color.segment:not(.inverted) {
-        border-top: 2px solid #00b5ad;
+        border-top: 2px solid #368cda;
     }
 
     /* 右边导航栏顶部样式 */
     .ui.top-color.card:not(.inverted) {
-        border-top: 2px solid #00b5ad;
-    }
-
-    a {
-        color: #1775cc;
-    }
-
-    a:hover, a:focus {
-        color: #0081f9;
-        transition: color .15s ease 0s;
+        border-top: 2px solid #368cda;
     }
 
     /* 主要按钮 */
 
     .ui.primary.buttons .button, .ui.primary.button {
-        background-color: #00b5ad;
-        border-color: #00b5ad;
+        background-color: #368cda;
+        border-color: #368cda;
     }
 
     /* 主要按钮选中状态 */
-    .ui.primary.buttons .button:hover, .ui.primary.button:hover, .ui.primary.button:focus, .ui.primary.buttons .button:focus {
-        background-color: #00b5ad;
-        border-color: #00b5ad;
+    .ui.primary.buttons .button:hover, .ui.primary.button:hover, .ui.primary.button:active, .ui.primary.buttons .button:active, .ui.primary.button:focus, .ui.primary.buttons .button:focus, .ui.primary.active.button, .ui.primary.button .active.button:active, .ui.primary.buttons .active.button, .ui.primary.buttons .active.button:active {
+        background-color: #368cda;
+        border-color: #368cda;
     }
 
     /* 外框按钮 */
     .ui.basic.primary.buttons .button, .ui.basic.primary.button {
-        color: #00b5ad !important;
-        box-shadow: 0px 0px 0px 1px #00b5ad inset !important;
+        color: #368cda !important;
+        box-shadow: 0px 0px 0px 1px #368cda inset !important;
     }
 
     /* 外框按钮选中状态 */
     .ui.basic.primary.buttons .button:hover, .ui.basic.primary.button:hover {
-        color: #00b5ad !important;
-        box-shadow: 0px 0px 0px 1px #00b5ad inset !important;
+        color: #368cda !important;
+        box-shadow: 0px 0px 0px 1px #368cda inset !important;
+    }
+
+    .ui.basic.primary.buttons .active.button, .ui.basic.primary.active.button {
+        color: #368cda !important;
+        box-shadow: 0px 0px 0px 1px #368cda inset !important;
     }
 
     .ui.basic.primary.buttons .button:active, .ui.basic.primary.button:active, .ui.basic.primary.buttons .active.button, .ui.basic.primary.active.button, .ui.basic.buttons .button:hover, .ui.basic.button:hover, .ui.basic.primary.buttons .button:focus, .ui.basic.primary.button:focus {
-        color: #00b5ad !important;
-        box-shadow: 0px 0px 0px 1px #00b5ad inset !important;
+        box-shadow: 0px 0px 0px 1px #368cda inset !important;
+    }
+
+    .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+        background-color: #368cda;
+        border-color: #368cda;
+    }
+
+    .pagination > li > a, .pagination > li > span {
+        color: #368cda;
     }
 
 
@@ -154,16 +158,6 @@
     }
 
 </style>
-<style type="text/css">
-    .my-communities + .readmore-separator {
-        margin-top: -12px;
-        font-size: 12px;
-        padding-bottom: 0px;
-        margin-bottom: -8px;
-        padding-top: 0px !important;
-    }
-</style>
-
 
 <div class="ui top menu sidebar stackable">
     <div class="item">
@@ -275,7 +269,6 @@
 
         </nav>
 
-        <!-- 微信登录 隐藏 -->
         <div class="mb-3 hide show-on-wechat-view">
             <div class="ui centered grid container message-container">
                 <div class="sixteen wide column pt-0 pb-0">
@@ -285,10 +278,15 @@
             </div>
         </div>
 
-        #@content()
+
+        <div class="ui centered grid container stackable">
+            #include("./left.html")
+            #@content()
+        </div>
 
     </div>
-    #include("./footer.html")
+
+    #include("../footer.html")
 
 </div>
 
@@ -319,12 +317,13 @@
 </div>
 
 
+
 </body>
 
-
 <!-- Scripts -->
-<script src="resource/js/vendors.js"></script>
-<script src="resource/js/app.js"></script>
+<script src="https://cdn.learnku.com//build/js/eabf7db6c25d542f4f52-vendors.js"></script>
+<script src="https://cdn.learnku.com//build/js/f039dca4c166b50553f8-app.js"></script>
+
 
 </html>
 #end

@@ -157,40 +157,32 @@
 
 
 <div class="ui top menu sidebar stackable">
-
-    <a href="../php.html" class="item secondary">
-        <i class="icon list"></i> 话题列表
-    </a>
-
-    <a href="../php/wikis.html" class="item secondary">
-        <i class="icon wikipedia"></i> 社区 Wiki
-    </a>
-
-    <a href="../php/c/translations.html" class="item">
-        <i class="icon translate"></i> 优质外文
-    </a>
-
-    <a href="../php/c/jobs.html" class="item">
-        <i class="icon suitcase"></i> 招聘求职
-    </a>
-
-    <a href="../php/courses.html" class="item">
-        <i class="icon book"></i> PHP 实战教程
-    </a>
-
-    <a href="../php/docs.html" class="item">
-        <i class="icon text file outline"></i> 社区文档
-    </a>
-
     <div class="item">
-        <a class="ui basic small button no-pjax" href="../auth/login.html"><i class="icon user "></i> 登录 </a>
+        <img class="ui image" style="width:26px;height:26px;margin-top:-2px;"
+             src="resource/img/admin.gif">
+        <span class="site-name ml-2">#(WEB_NAME)</span>
     </div>
 
+    <form class="ui fluid category  item secondary" action="/article/search" method="GET">
+        <div class="ui icon input">
+            <input class="prompt" name="keyword" type="text" placeholder="搜索" value="">
+            <i class="search icon"></i>
+        </div>
+    </form>
+
+    #categories(asTree=true)
+    #for(category :categories)
+    <a href="#(category.slug)" class="item secondary">
+        <i class="icon list"></i> #(category.title)
+    </a>
+    #end
+    #end
+
+
     <div class="item">
-        <a class="ui basic small button no-pjax" href="../auth/register.html"><i class="icon signup "></i> 注册 </a>
+        <a class="ui basic small button no-pjax" href=""><i class="icon user "></i> 登录 </a>
     </div>
 </div>
-
 
 <div class="pusher">
 
