@@ -1,0 +1,69 @@
+#include("./u_layout.html")
+#@ucenter_layout("用户首页")
+#define content()
+<div class="twelve wide column">
+  <div class="ui segment">
+    <h1>
+      <i class="credit card outline icon"></i> 我的余额
+    </h1>
+    <div class="ui divider"></div>
+    <div class="ui two column stackable grid">
+      <div class="column">
+        <div class="ui segment">
+          <div class="ui statistic">
+            <div class="value">
+              2,204
+            </div>
+            <div class="label">可用余额 </div>
+          </div>
+          <div>
+            <button class="ui primary basic button">
+              充值
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui segment">
+          <p class="lead">本月统计</p>
+          <div class="ui small horizontal statistic">
+            <div class="value">
+              2,204
+            </div>
+            <div class="label">支出 </div>
+          </div>
+          <div class="ui small horizontal statistic">
+            <div class="value">
+              2,204
+            </div>
+            <div class="label">提现 </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h1>
+      <i class="credit card outline icon"></i> 账户流水
+    </h1>
+    <table class="ui blue table">
+      <thead>
+      <tr>
+        <th>支出</th>
+        <th>项目</th>
+        <th>相关</th>
+        <th>金额</th>
+        <th>时间</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>回复至</td>
+        <td>200</td>
+        <td>0g</td>
+        <td>删除</td>
+        <td>删除</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+#end
