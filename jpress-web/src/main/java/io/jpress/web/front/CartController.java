@@ -40,8 +40,10 @@ import java.util.Set;
  * @version V1.0
  * @Package io.jpress.web
  */
-@RequestMapping(value = "/ucenter/cart", viewPath = "/WEB-INF/views/ucenter")
+@RequestMapping(value = "/ucenter/cart")
 public class CartController extends UcenterControllerBase {
+
+    private static final String DEFAULT_CART_LIST_TEMPLATE = "/WEB-INF/views/ucenter/cart.html";
 
     @Inject
     private UserService userService;
@@ -82,7 +84,7 @@ public class CartController extends UcenterControllerBase {
         }
 
 
-        render("cart.html");
+        render("ucenter/cart.html",DEFAULT_CART_LIST_TEMPLATE);
     }
 
 

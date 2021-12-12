@@ -16,8 +16,12 @@ import java.util.List;
  * @author haicuan139 (haicuan139@163.com)
  * @Date: 2019/12/24
  */
-@RequestMapping(value = "/ucenter/coupon", viewPath = "/WEB-INF/views/ucenter/coupon")
+@RequestMapping(value = "/ucenter/coupon")
 public class CouponController extends UcenterControllerBase {
+
+    private static final String DEFAULT_COUPON_LIST_TEMPLATE = "/WEB-INF/views/ucenter/coupon/coupon_code_list.html";
+    private static final String DEFAULT_COUPON_LAYER_TEMPLATE = "/WEB-INF/views/ucenter/coupon/coupon_code_layer.html";
+
 
     @Inject
     private CouponService couponService;
@@ -28,11 +32,12 @@ public class CouponController extends UcenterControllerBase {
     /**
      * 用户优惠券列表
      */
-    @UCenterMenu(text = "优惠券", groupId = JPressConsts.UCENTER_MENU_FINANCE_INFO, icon = "<i class=\"fas fa-closed-captioning\"></i>",order = 40)
+    @UCenterMenu(text = "优惠券", groupId = JPressConsts.UCENTER_MENU_FINANCE_INFO,
+            icon = "<i class=\"fas fa-credit-card text-info\"></i>",order = 40)
     public void index() {
         List<CouponCode> renderList = couponCodeService.findAvailableByUserId(getLoginedUser().getId());
         setAttr("couponCodeList", renderList);
-        render("coupon_code_list.html");
+        render("ucenter/coupon_list.html",DEFAULT_COUPON_LIST_TEMPLATE);
     }
 
 
@@ -43,7 +48,7 @@ public class CouponController extends UcenterControllerBase {
         String price = getPara("price");
         List<CouponCode> couponCodes = couponCodeService.findAvailableByUserId(getLoginedUser().getId(), new BigDecimal(price));
         setAttr("couponCodeList", couponCodes);
-        render("coupon_code_layer.html");
+        render(DEFAULT_COUPON_LAYER_TEMPLATE);
     }
 
 

@@ -18,8 +18,12 @@ import java.util.Date;
 import java.util.List;
 
 
-@RequestMapping(value = "/ucenter/order", viewPath = "/WEB-INF/views/ucenter/order")
+@RequestMapping(value = "/ucenter/order")
 public class OrderController extends UcenterControllerBase {
+
+    private static final String DEFAULT_ORDER_LIST_INDEX_TEMPLATE = "/WEB-INF/views/ucenter/order/order_list.html";
+    private static final String DEFAULT_ORDER_DETAIL_INDEX_TEMPLATE = "/WEB-INF/views/ucenter/order/order_detail.html";
+
 
     @Inject
     private UserOrderService orderService;
@@ -42,11 +46,12 @@ public class OrderController extends UcenterControllerBase {
     /**
      * 用户订单列表
      */
-    @UCenterMenu(text = "我的订单", groupId = JPressConsts.UCENTER_MENU_FINANCE_INFO, icon = "<i class=\"fas fa-cart-arrow-down\"></i>",order = 20)
+    @UCenterMenu(text = "我的订单", groupId = JPressConsts.UCENTER_MENU_FINANCE_INFO,
+            icon = "<i class=\"fas fa-shopping-cart text-info\"></i>",order = 20)
     public void index() {
         Page<UserOrder> userOrderPage = orderService.paginateByUserId(getPagePara(), 10, getLoginedUser().getId(), getPara("title"), getPara("ns"));
         setAttr("userOrderPage", userOrderPage);
-        render("order_list.html");
+        render("ucenter/order_list.html",DEFAULT_ORDER_LIST_INDEX_TEMPLATE);
     }
 
 
@@ -90,7 +95,7 @@ public class OrderController extends UcenterControllerBase {
 
         setAttr("order", order);
 
-        render("order_detail.html");
+        render("ucenter/order_detail.html",DEFAULT_ORDER_DETAIL_INDEX_TEMPLATE);
     }
 
     public void comment() {

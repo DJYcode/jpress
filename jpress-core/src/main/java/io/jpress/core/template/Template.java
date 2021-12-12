@@ -83,6 +83,14 @@ public class Template {
         if (files != null && files.length > 0) {
             this.htmls.addAll(Arrays.asList(files));
         }
+        String[] ucenterFiles = new File(path.getPath() + "/ucenter")
+                .list((dir, name) -> name.endsWith(".html"));
+        if (ucenterFiles != null && ucenterFiles.length > 0) {
+            for (int i = 0; i < ucenterFiles.length; i++) {
+                ucenterFiles[i] = "ucenter/" + ucenterFiles[i];
+            }
+            this.htmls.addAll(Arrays.asList(ucenterFiles));
+        }
 
         String flagStrings = prop.get("flags");
         if (StrUtil.isNotBlank(flagStrings)) {

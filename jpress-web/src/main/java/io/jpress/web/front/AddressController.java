@@ -15,8 +15,12 @@ import io.jpress.web.base.UcenterControllerBase;
 import java.util.Set;
 
 
-@RequestMapping(value = "/ucenter/address", viewPath = "/WEB-INF/views/ucenter/address")
+@RequestMapping(value = "/ucenter/address")
 public class AddressController extends UcenterControllerBase {
+    private static final String DEFAULT_ADDRESS_LIST_TEMPLATE = "/WEB-INF/views/ucenter/address/address_list.html";
+    private static final String DEFAULT_ADDRESS_EDIT_TEMPLATE = "/WEB-INF/views/ucenter/address/address_edit.html";
+    private static final String DEFAULT_ADDRESS_LAYER_TEMPLATE = "/WEB-INF/views/ucenter/address/address_layer.html";
+
 
     @Inject
     private UserAddressService userAddressService;
@@ -24,11 +28,12 @@ public class AddressController extends UcenterControllerBase {
     /**
      * 用户地址列表
      */
-    @UCenterMenu(text = "我的地址", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fas fa-map-marked\"></i>",order = 20)
+    @UCenterMenu(text = "我的地址", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO,
+            icon = "<i class=\"fas fa-map text-info\"></i>",order = 20)
     public void index() {
         Page<UserAddress> page = userAddressService.paginate(getPagePara(), 10, getLoginedUser().getId());
         setAttr("page", page);
-        render("address_list.html");
+        render("ucenter/address_list.html",DEFAULT_ADDRESS_LIST_TEMPLATE);
     }
 
     /**
@@ -41,7 +46,7 @@ public class AddressController extends UcenterControllerBase {
             render404If(notLoginedUserModel(data));
             setAttr("address", data);
         }
-        render("address_edit.html");
+        render("ucenter/address_edit.html",DEFAULT_ADDRESS_EDIT_TEMPLATE);
     }
 
     /**
@@ -50,7 +55,7 @@ public class AddressController extends UcenterControllerBase {
     public void layer() {
         Page<UserAddress> page = userAddressService.paginate(getPagePara(), 10, getLoginedUser().getId());
         setAttr("page", page);
-        render("address_layer.html");
+        render(DEFAULT_ADDRESS_LAYER_TEMPLATE);
     }
 
 

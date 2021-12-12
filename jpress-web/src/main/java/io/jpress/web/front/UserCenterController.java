@@ -46,8 +46,14 @@ import java.util.Map;
  * @version V1.0
  * @Package io.jpress.web
  */
-@RequestMapping(value = "/ucenter", viewPath = "/WEB-INF/views/ucenter/")
+@RequestMapping(value = "/ucenter")
 public class UserCenterController extends UcenterControllerBase {
+    private static final String DEFAULT_USER_CENTER_INDEX_TEMPLATE = "/WEB-INF/views/ucenter/index.html";
+    private static final String DEFAULT_USER_CENTER_INFO_TEMPLATE = "/WEB-INF/views/ucenter/info.html";
+    private static final String DEFAULT_USER_CENTER_SIGNATURE_TEMPLATE = "/WEB-INF/views/ucenter/signature.html";
+    private static final String DEFAULT_USER_CENTER_AVATAR_TEMPLATE = "/WEB-INF/views/ucenter/avatar.html";
+    private static final String DEFAULT_USER_CENTER_PWD_TEMPLATE = "/WEB-INF/views/ucenter/pwd.html";
+    private static final String DEFAULT_USER_CENTER_BIND_TEMPLATE = "/WEB-INF/views/ucenter/bind.html";
 
     @Inject
     private UserService userService;
@@ -74,13 +80,14 @@ public class UserCenterController extends UcenterControllerBase {
      * 用户中心首页
      */
     public void index() {
-        render("index.html");
+        render("ucenter/index.html", DEFAULT_USER_CENTER_INDEX_TEMPLATE);
     }
 
 
-    @UCenterMenu(text = "基本信息", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fas fa-user\"></i>",order = 10)
+    @UCenterMenu(text = "基本信息", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO,
+            icon = "<i class=\"fas fa-address-card text-info \"></i>",order = 10)
     public void info() {
-        render("info.html");
+        render("ucenter/info.html", DEFAULT_USER_CENTER_INFO_TEMPLATE);
     }
 
     public void doSaveUser() {
@@ -90,7 +97,7 @@ public class UserCenterController extends UcenterControllerBase {
 
         //若用户更新邮件，那么重置邮件状态为：未激活
         if (user.getEmail() != null
-                && user.getEmail().equals(getLoginedUser().getEmail()) == false) {
+                && !user.getEmail().equals(getLoginedUser().getEmail())) {
             user.setEmailStatus(null);
         }
 
@@ -104,32 +111,35 @@ public class UserCenterController extends UcenterControllerBase {
      */
     @UCenterMenu(text = "个人签名", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fas fa-bars\"></i>",order = 30)
     public void signature() {
-        render("signature.html");
+        render("ucenter/signature.html",DEFAULT_USER_CENTER_SIGNATURE_TEMPLATE);
     }
 
 
     /**
      * 头像设置
      */
-    @UCenterMenu(text = "头像设置", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fab fa-black-tie\"></i>",order = 40)
+    @UCenterMenu(text = "头像设置", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO,
+            icon = "<i class=\"fas fa-image text-info\"></i>",order = 40)
     public void avatar() {
-        render("avatar.html");
+        render("ucenter/avatar.html",DEFAULT_USER_CENTER_AVATAR_TEMPLATE);
     }
 
 
     /**
      * 账号密码
      */
-    @UCenterMenu(text = "修改密码", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fas fa-key\"></i>",order = 50)
+    @UCenterMenu(text = "修改密码", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO,
+            icon = "<i class=\"fas fa-key text-info\"></i>",order = 50)
     public void pwd() {
-        render("pwd.html");
+        render("ucenter/pwd.html",DEFAULT_USER_CENTER_PWD_TEMPLATE);
     }
 
 
     /**
      * 账号绑定
      */
-    @UCenterMenu(text = "账号绑定", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO, icon = "<i class=\"fas fa-random\"></i>",order = 60)
+    @UCenterMenu(text = "账号绑定", groupId = JPressConsts.UCENTER_MENU_PERSONAL_INFO,
+            icon = "<i class=\"fas fa-random text-info\"></i>",order = 60)
     public void bind() {
         UserOpenidService openidService = Aop.get(UserOpenidService.class);
         List<UserOpenid> list = openidService.findListByUserId(getLoginedUser().getId());
@@ -138,7 +148,7 @@ public class UserCenterController extends UcenterControllerBase {
             list.forEach(userOpenid -> map.put(userOpenid.getType(), userOpenid));
         }
         setAttr("userOpenidMap", map);
-        render("bind.html");
+        render("ucenter/bind.html",DEFAULT_USER_CENTER_BIND_TEMPLATE);
     }
 
     /**
@@ -164,7 +174,7 @@ public class UserCenterController extends UcenterControllerBase {
     })
     public void doUpdatePwd(String oldPwd, String newPwd, String confirmPwd) {
 
-        if (newPwd.equals(confirmPwd) == false) {
+        if (!newPwd.equals(confirmPwd)) {
             renderJson(Ret.fail().set("message", "两次输入密码不一致"));
             return;
         }

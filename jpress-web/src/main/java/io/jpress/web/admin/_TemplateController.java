@@ -143,11 +143,12 @@ public class _TemplateController extends AdminControllerBase {
                 .substring(0, templateZipFile.getAbsolutePath().length() - 4);
 
         if (new File(templatePath).exists()) {
-            renderJson(Ret.fail()
-                    .set("success", false)
-                    .set("message", "该模板可能已经存在，无法进行安装。"));
-            deleteFileQuietly(ufile.getFile());
-            return;
+//            renderJson(Ret.fail()
+//                    .set("success", false)
+//                    .set("message", "该模板可能已经存在，无法进行安装。"));
+//            deleteFileQuietly(ufile.getFile());
+//            return;
+            deleteFileQuietly(new File(templatePath));
         }
 
 

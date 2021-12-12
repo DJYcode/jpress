@@ -187,10 +187,17 @@
     #end
     #end
 
-
+    #if(USER)
+    <a href="/ucenter/index" class="item">
+        <img class="ui avatar image" src="#(USER.avatar ??)"> &nbsp;
+        #(USER.nickname ??)
+    </a>
+    #else
     <div class="item">
         <a class="ui basic small button no-pjax" href=""><i class="icon user "></i> 登录 </a>
     </div>
+    #end
+
 </div>
 
 
@@ -265,12 +272,54 @@
                 </form>
 
                 <!-- 登录注册 -->
+                #if(USER)
                 <div class=" right menu stackable secondary">
-                    <div class="item rm-link-color">
-                        <a class="mr-4 no-pjax login_required" href=""><i class="icon sign in "></i> 登录
-                        </a>
+                    <div class="ui simple item dropdown article stackable nav-user-item">
+                        <img class="ui avatar image" src="#(USER.avatar ??)"/> &nbsp;
+                        #(USER.nickname ??)
+                        <i class="dropdown icon"></i>
+
+                        <div class="ui menu stackable">
+                            <a href="#(CPATH)/ucenter/index" class="item">
+                                <i class="icon newspaper"></i> 主页
+                            </a>
+                            <a href="#(CPATH)/ucenter/info" class="item">
+                                <i class="icon newspaper"></i> 基本信息
+                            </a>
+                            <a href="#(CPATH)/ucenter/order/index" class="item">
+                                <i class="icon heart"></i> 我的订单
+                            </a>
+                            <a href="#(CPATH)/ucenter/article/write" class="item">
+                                <i class="icon user"></i>
+                                投稿
+                            </a>
+
+                            <a href="#(CPATH)/ucenter/product/favorite" class="item">
+                                <i class="icon payment"></i>
+                                产品收藏
+                            </a>
+
+                            <a class="item no-pjax" href="javascript:void(0)" data-url="#(CPATH)/user/logout"
+                               data-method="POST" data-prompt="您确定要退出登录吗？" title="退出登录" style="cursor: pointer;">
+                                <i class="icon sign out"></i>
+                                退出
+                                <form action="#(CPATH)/user/logout" method="POST" style="display:none">
+                                    <input type="hidden" name="_method" value="POST">
+                                    <input type="hidden" name="_token" value="">
+                                </form>
+                            </a>
+                        </div>
                     </div>
                 </div>
+                #else
+                    <div class=" right menu stackable secondary">
+                        <div class="item rm-link-color">
+                            <a class="mr-4 no-pjax login_required" href=""><i class="icon sign in "></i> 登录
+                            </a>
+                        </div>
+                    </div>
+
+                #end
             </div>
 
         </nav>

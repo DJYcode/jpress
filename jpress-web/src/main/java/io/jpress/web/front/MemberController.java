@@ -43,8 +43,12 @@ import java.util.List;
  * @version V1.0
  * @Package io.jpress.web
  */
-@RequestMapping(value = "/ucenter/member", viewPath = "/WEB-INF/views/ucenter")
+@RequestMapping(value = "/ucenter/member")
 public class MemberController extends UcenterControllerBase {
+
+    private static final String DEFAULT_MEMBER_LIST_TEMPLATE = "/WEB-INF/views/ucenter/member/member_list.html";
+    private static final String DEFAULT_MEMBER_DETAIL_TEMPLATE = "/WEB-INF/views/ucenter/member/member_detail.html";
+    private static final String DEFAULT_MEMBER_JOIN_TEMPLATE = "/WEB-INF/views/ucenter/member/member_join.html";
 
     @Inject
     private UserService userService;
@@ -59,7 +63,8 @@ public class MemberController extends UcenterControllerBase {
     /**
      * 加入会员
      */
-    @UCenterMenu(text = "加入会员", groupId = JPressConsts.UCENTER_MENU_FINANCE_INFO, icon = "<i class=\"fas fa-smile\"></i>",order = 10)
+    @UCenterMenu(text = "加入会员", groupId = JPressConsts.UCENTER_MENU_FINANCE_INFO,
+            icon = "<i class=\"fas fa-gem text-info\"></i>",order = 10)
     public void index() {
         List<MemberGroup> memberGroups = memberGroupService.findUcenterList();
         List<Member> userMembers = memberService.findListByUserId(getLoginedUser().getId());
@@ -74,20 +79,20 @@ public class MemberController extends UcenterControllerBase {
 
 
         setAttr("memberGroups", memberGroups);
-        render("member/member_list.html");
+        render("ucenter/member_list.html",DEFAULT_MEMBER_LIST_TEMPLATE);
     }
 
     public void detail() {
         MemberGroup memberGroup = memberGroupService.findById(getPara());
         setAttr("memberGroup", memberGroup);
-        render("member/member_detail.html");
+        render("ucenter/member_detail.html",DEFAULT_MEMBER_DETAIL_TEMPLATE);
     }
 
     public void join() {
         MemberGroup memberGroup = memberGroupService.findById(getPara());
         PayConfigUtil.setConfigAttrs(this);
         setAttr("memberGroup", memberGroup);
-        render("member/member_join.html");
+        render("ucenter/member_join.html",DEFAULT_MEMBER_JOIN_TEMPLATE);
     }
 
     @EmptyValidate({

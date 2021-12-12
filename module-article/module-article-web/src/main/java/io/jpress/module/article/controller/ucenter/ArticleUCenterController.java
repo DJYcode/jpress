@@ -49,8 +49,13 @@ import java.util.Set;
  * @author Michael Yang 杨福海 （fuhai999@gmail.com）
  * @version V1.0
  */
-@RequestMapping(value = "/ucenter/article", viewPath = "/WEB-INF/views/ucenter/")
+@RequestMapping(value = "/ucenter/article")
 public class ArticleUCenterController extends UcenterControllerBase {
+
+    private static final String DEFAULT_ARTICLE_LIST_VIEW = "/WEB-INF/views/ucenter/article/article_list.html";
+    private static final String DEFAULT_ARTICLE_FAVORITE_VIEW = "/WEB-INF/views/ucenter/article/article_favorite.html";
+    private static final String DEFAULT_ARTICLE_WRITE_VIEW = "/WEB-INF/views/ucenter/article/article_write.html";
+    private static final String DEFAULT_COMMENT_LIST_VIEW = "/WEB-INF/views/ucenter/article/comment_list.html";
 
     @Inject
     private ArticleService articleService;
@@ -71,7 +76,7 @@ public class ArticleUCenterController extends UcenterControllerBase {
         Page<Article> page = articleService._paginateByUserId(getPagePara(), 10, loginedUser.getId());
         setAttr("page", page);
 
-        render("article/article_list.html");
+        render("ucenter/article_list.html",DEFAULT_ARTICLE_LIST_VIEW);
     }
 
     public void doDel() {
@@ -141,7 +146,7 @@ public class ArticleUCenterController extends UcenterControllerBase {
         Long[] categoryIds = categoryService.findCategoryIdsByArticleId(articleId);
         flagCheck(categories, categoryIds);
 
-        render("article/article_write.html");
+        render("ucenter/article_write.html",DEFAULT_ARTICLE_WRITE_VIEW);
     }
 
     private void flagCheck(List<ArticleCategory> categories, Long... checkIds) {
@@ -255,7 +260,7 @@ public class ArticleUCenterController extends UcenterControllerBase {
     public void comment() {
         Page<ArticleComment> page = commentService._paginateByUserId(getPagePara(), 10, getLoginedUser().getId());
         setAttr("page", page);
-        render("article/comment_list.html");
+        render("ucenter/comment_list.html",DEFAULT_COMMENT_LIST_VIEW);
     }
 
 
@@ -263,7 +268,7 @@ public class ArticleUCenterController extends UcenterControllerBase {
     public void favorite() {
         Page<UserFavorite> page = favoriteService.paginateByUserIdAndType(getPagePara(), 10, getLoginedUser().getId(), "article");
         setAttr("page", page);
-        render("article/article_favorite.html");
+        render("ucenter/article_favorite.html",DEFAULT_ARTICLE_FAVORITE_VIEW);
     }
 
 

@@ -25,9 +25,13 @@ import io.jpress.web.base.UcenterControllerBase;
 import java.math.BigDecimal;
 
 
-@RequestMapping(value = "/ucenter/finance/amount", viewPath = "/WEB-INF/views/ucenter/finance")
+@RequestMapping(value = "/ucenter/finance/amount")
 public class FinanceController extends UcenterControllerBase {
 
+    private static final String DEFAULT_FINANCE_AMOUNT_TEMPLATE = "/WEB-INF/views/ucenter/finance/amount.html";
+    private static final String DEFAULT_FINANCE_PAYOUT_TEMPLATE = "/WEB-INF/views/ucenter/finance/payout.html";
+    private static final String DEFAULT_FINANCE_RECHARGE_TEMPLATE = "/WEB-INF/views/ucenter/finance/recharge.html";
+    private static final String DEFAULT_FINANCE_PAYOUT_SUBMIT_TEMPLATE = "/WEB-INF/views/ucenter/finance/payoutsubmit.html";
 
     @Inject
     private UserService userService;
@@ -42,7 +46,8 @@ public class FinanceController extends UcenterControllerBase {
     /**
      * 用户余额信息
      */
-    @UCenterMenu(text = "我的余额", groupId = JPressConsts.UCENTER_MENU_FINANCE_INFO, icon = "<i class=\"fab fa-gg-circle\"></i>", order = 30)
+    @UCenterMenu(text = "我的余额", groupId = JPressConsts.UCENTER_MENU_FINANCE_INFO,
+            icon = "<i class=\" fas fa-yen-sign text-info \"></i>",order = 30)
     public void index() {
         BigDecimal incomeAmount = amountStatementService.queryIncomeAmount(getLoginedUser().getId());
         BigDecimal payAmount = amountStatementService.queryPayAmount(getLoginedUser().getId());
@@ -54,7 +59,7 @@ public class FinanceController extends UcenterControllerBase {
 
         setAttr("userAmount", userService.queryUserAmount(getLoginedUser().getId()));
         setAttr("userAmountStatements", amountStatementService.findListByUserId(getLoginedUser().getId(), 10));
-        render("amount.html");
+        render("ucenter/amount.html",DEFAULT_FINANCE_AMOUNT_TEMPLATE);
     }
 
     public void payout() {
@@ -71,13 +76,13 @@ public class FinanceController extends UcenterControllerBase {
         setAttr("refuseCount", refuseCount);
         setAttr("successCount", successCount);
 
-        render("payout.html");
+        render("ucenter/payout.html",DEFAULT_FINANCE_PAYOUT_TEMPLATE);
     }
 
 
     public void payoutsubmit() {
         setAttr("userAmount", userService.queryUserAmount(getLoginedUser().getId()));
-        render("payoutsubmit.html");
+        render("ucenter/payoutsubmit.html",DEFAULT_FINANCE_PAYOUT_SUBMIT_TEMPLATE);
     }
 
     public void payoutdetail() {
@@ -88,7 +93,7 @@ public class FinanceController extends UcenterControllerBase {
         setAttr("payout", payout);
         setAttr("userAmount", userService.queryUserAmount(getLoginedUser().getId()));
 
-        render("payoutdetail.html");
+        render("ucenter/payoutdetail.html");
     }
 
 
@@ -146,7 +151,7 @@ public class FinanceController extends UcenterControllerBase {
      */
     public void recharge() {
         PayConfigUtil.setConfigAttrs(this);
-        render("recharge.html");
+        render("ucenter/recharge.html",DEFAULT_FINANCE_RECHARGE_TEMPLATE);
     }
 
     /**

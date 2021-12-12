@@ -15,6 +15,7 @@
  */
 package io.jpress.web.admin;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Sets;
 import com.jfinal.aop.Inject;
 import com.jfinal.kit.Ret;
@@ -24,6 +25,7 @@ import io.jpress.JPressConsts;
 import io.jpress.JPressOptions;
 import io.jpress.service.OptionService;
 import io.jpress.web.base.AdminControllerBase;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -76,7 +78,26 @@ public class _OptionController extends AdminControllerBase {
 
         renderOkJson();
     }
-
+    public void doJsonSave() {
+        String params = getPara("params");
+        params = params.replaceAll("\\\\", "");
+        params = params.substring(1, params.length() - 1);
+        JSONObject paramsObj = JSONObject.parseObject(params);
+        HashMap<String, String> datasMap = new HashMap<String, String>();
+        for (Map.Entry<String, Object> entry : paramsObj.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue().toString();
+            if (StringUtils.isNoneBlank(value)) {
+                datasMap.put(key, value);
+            }
+        }
+        for (Map.Entry<String, String> entry : datasMap.entrySet()) {
+            String key = entry.getKey().trim();
+            service.saveOrUpdate(key, entry.getValue());
+            JPressOptions.set(key, entry.getValue());
+        }
+        renderOkJson();
+    }
     /**
      * 通过key值删除数据
      *

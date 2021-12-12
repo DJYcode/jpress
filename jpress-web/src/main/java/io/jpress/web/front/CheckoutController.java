@@ -38,9 +38,10 @@ import java.util.StringJoiner;
  * @version V1.0
  * @Package io.jpress.web
  */
-@RequestMapping(value = "/ucenter/checkout", viewPath = "/WEB-INF/views/ucenter/checkout")
+@RequestMapping(value = "/ucenter/checkout")
 public class CheckoutController extends UcenterControllerBase {
-
+    private static final String DEFAULT_CHECKOUT_TEMPLATE = "/WEB-INF/views/ucenter/checkout/checkout.html";
+    private static final String DEFAULT_ORDER_TEMPLATE = "/WEB-INF/views/ucenter/checkout/order.html";
     @Inject
     private UserService userService;
 
@@ -108,7 +109,7 @@ public class CheckoutController extends UcenterControllerBase {
         setAttr("userCarts", userCarts);
         setAttr("defaultAddress", addressService.findDefaultAddress(getLoginedUser().getId()));
 
-        render("checkout.html");
+        render("checkout.html",DEFAULT_CHECKOUT_TEMPLATE);
     }
 
 
@@ -133,7 +134,7 @@ public class CheckoutController extends UcenterControllerBase {
         setAttr("order", order);
         setAttr("orderItems", orderItems);
         setAttr("defaultAddress", addressService.findDefaultAddress(getLoginedUser().getId()));
-        render("order.html");
+        render("order.html",DEFAULT_ORDER_TEMPLATE);
     }
 
 

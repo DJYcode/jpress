@@ -61,7 +61,7 @@ public class UserController extends TemplateControllerBase {
     public void index() {
 
         //不支持渲染用户详情
-        if (hasTemplate("user_detail.html") == false) {
+        if (!hasTemplate("user_detail.html")) {
             renderError(404);
             return;
         }
@@ -86,7 +86,7 @@ public class UserController extends TemplateControllerBase {
      * 用户登录页面
      */
     public void login() {
-        render("user_login.html", default_user_login_template);
+        render("ucenter/user_login.html", default_user_login_template);
     }
 
     @Clear
@@ -136,7 +136,7 @@ public class UserController extends TemplateControllerBase {
      * 用户注册页面
      */
     public void register() {
-        render("user_register.html", default_user_register_template);
+        render("ucenter/user_register.html", default_user_register_template);
     }
 
 
@@ -189,7 +189,7 @@ public class UserController extends TemplateControllerBase {
         if (authCode == null) {
             setAttr("code", 1);
             setAttr("message", "链接已经失效，您可以尝试在用户中心再次发送激活邮件");
-            render("user_emailactivate.html", default_user_register_emailactivate);
+            render("user_email_activate.html", default_user_register_emailactivate);
             return;
         }
 
@@ -197,7 +197,7 @@ public class UserController extends TemplateControllerBase {
         if (user == null) {
             setAttr("code", 2);
             setAttr("message", "用户不存在或已经被删除");
-            render("user_emailactivate.html", default_user_register_emailactivate);
+            render("user_email_activate.html", default_user_register_emailactivate);
             return;
         }
 
@@ -206,7 +206,7 @@ public class UserController extends TemplateControllerBase {
 
         setAttr("code", 0);
         setAttr("user", user);
-        render("user_emailactivate.html", default_user_register_emailactivate);
+        render("user_email_activate.html", default_user_register_emailactivate);
     }
 
 
@@ -322,7 +322,7 @@ public class UserController extends TemplateControllerBase {
             EmailSender.sendForUserActivate(user);
         }
 
-        renderJson(user != null ? OK : FAIL);
+        renderJson(OK);
     }
 
 
