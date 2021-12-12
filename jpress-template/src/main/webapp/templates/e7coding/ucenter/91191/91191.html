@@ -23,6 +23,13 @@
     <!-- Styles -->
     <link href="https://cdn.learnku.com//build/css/df80a43d32032bc8fda1-vendors.css" rel="stylesheet">
     <link href="https://cdn.learnku.com//build/css/4e2dea8d16267ffc4673-app.css" rel="stylesheet">
+    <link href="temp.css" rel="stylesheet">
+
+    <script src="jquery.min.js"></script>
+    <script src="jquery.jcrop.min.js"></script>
+    <script src="jquery.ui.widget.js"></script>
+    <script src="jquery.iframe-transport.js"></script>
+    <script src="jquery.fileupload.js"></script>
 
 </head>
 
@@ -532,62 +539,192 @@
 
 
         <div class="ui centered grid container stackable">
-            <div class=" column">
+
+            <div class="four wide column ">
+                <div class="ui fluid vertical pointing right menu" style="border: 1px solid #d3e0e9;">
+                    <a href="index.html" class="item lh-2 active"
+                       style="color: #636b6f;padding: .92857143em .824285714em .92857143em .4em;">
+                        <i class="icon pr-1 nofloat user"></i> 首页
+                    </a>
+                </div>
+                <div class="ui fluid vertical pointing right menu" style="border: 1px solid #d3e0e9;">
+
+                    <div class="header my-2 py-1">
+                        <h2 class="fs-normal pl-3 text-mute">我的文章</h2>
+                    </div>
+
+
+                    <a href="https://learnku.com/users/91191/following" class="item lh-2 "
+                       style="color: #636b6f;padding: .92857143em .824285714em .92857143em .4em;">
+                        <i class="icon pr-1 nofloat eye"></i> 文章列表
+                        <span class="ui left  label">0</span>
+                    </a>
+
+                    <a href="https://learnku.com/users/91191/followers" class="item lh-2 "
+                       style="color: #636b6f;padding: .92857143em .824285714em .92857143em .4em;">
+                        <i class="icon pr-1 nofloat smile"></i> 投稿
+                        <span class="ui left  label">0</span>
+                    </a>
+                </div>
+                <div class="ui fluid vertical pointing right menu" style="border: 1px solid #d3e0e9;">
+                    <div class="header my-2 py-1">
+                        <h2 class="fs-normal pl-3 text-mute">我的评论</h2>
+                    </div>
+                    <a href="https://learnku.com/users/91191/following" class="item lh-2 "
+                       style="color: #636b6f;padding: .92857143em .824285714em .92857143em .4em;">
+                        <i class="icon pr-1 nofloat eye"></i> 文章评论
+                        <span class="ui left  label">0</span>
+                    </a>
+
+                    <a href="https://learnku.com/users/91191/followers" class="item lh-2 "
+                       style="color: #636b6f;padding: .92857143em .824285714em .92857143em .4em;">
+                        <i class="icon pr-1 nofloat smile"></i> 产品评论
+                        <span class="ui left  label">0</span>
+                    </a>
+                </div>
+                <div class="ui fluid vertical pointing right menu" style="border: 1px solid #d3e0e9;">
+                    <div class="header my-2 py-1">
+                        <h2 class="fs-normal pl-3 text-mute">我的收藏</h2>
+                    </div>
+                    <a href="https://learnku.com/users/91191/following" class="item lh-2 "
+                       style="color: #636b6f;padding: .92857143em .824285714em .92857143em .4em;">
+                        <i class="icon pr-1 nofloat eye"></i> 文章收藏
+                        <span class="ui left  label">0</span>
+                    </a>
+
+                    <a href="https://learnku.com/users/91191/followers" class="item lh-2 "
+                       style="color: #636b6f;padding: .92857143em .824285714em .92857143em .4em;">
+                        <i class="icon pr-1 nofloat smile"></i> 产品收藏
+                        <span class="ui left  label">0</span>
+                    </a>
+                </div>
+
+                <div class="ui fluid vertical pointing right menu" style="border: 1px solid #d3e0e9;">
+                    <div class="header my-2 py-1">
+                        <h2 class="fs-normal pl-3 text-mute">财务信息</h2>
+                    </div>
+                    <a href="https://learnku.com/users/91191/following" class="item lh-2 "
+                       style="color: #636b6f;padding: .92857143em .824285714em .92857143em .4em;">
+                        <i class="icon pr-1 nofloat eye"></i> 加入会员
+                    </a>
+                    <a href="https://learnku.com/users/91191/followers" class="item lh-2 "
+                       style="color: #636b6f;padding: .92857143em .824285714em .92857143em .4em;">
+                        <i class="icon pr-1 nofloat smile"></i> 我的订单
+                    </a>
+                    <a href="https://learnku.com/users/91191/followers" class="item lh-2 "
+                       style="color: #636b6f;padding: .92857143em .824285714em .92857143em .4em;">
+                        <i class="icon pr-1 nofloat smile"></i> 我的余额
+                    </a>
+                    <a href="https://learnku.com/users/91191/followers" class="item lh-2 "
+                       style="color: #636b6f;padding: .92857143em .824285714em .92857143em .4em;">
+                        <i class="icon pr-1 nofloat smile"></i> 优惠券
+                    </a>
+                </div>
+                <div class="ui fluid vertical pointing right menu" style="border: 1px solid #d3e0e9;">
+                    <div class="header my-2 py-1">
+                        <h2 class="fs-normal pl-3 text-mute">个人信息</h2>
+                    </div>
+                    <a href="https://learnku.com/users/91191/following" class="item lh-2 "
+                       style="color: #636b6f;padding: .92857143em .824285714em .92857143em .4em;">
+                        <i class="icon pr-1 nofloat eye"></i> 基本信息
+                    </a>
+                    <a href="https://learnku.com/users/91191/followers" class="item lh-2 "
+                       style="color: #636b6f;padding: .92857143em .824285714em .92857143em .4em;">
+                        <i class="icon pr-1 nofloat smile"></i> 头像设置
+                    </a>
+                    <a href="https://learnku.com/users/91191/followers" class="item lh-2 "
+                       style="color: #636b6f;padding: .92857143em .824285714em .92857143em .4em;">
+                        <i class="icon pr-1 nofloat smile"></i> 修改密码
+                    </a>
+                    <a href="index.html" class="item lh-2 "
+                       style="color: #636b6f;padding: .92857143em .824285714em .92857143em .4em;">
+                        <i class="icon pr-1 nofloat user"></i> 账号绑定
+                    </a>
+                </div>
+            </div>
+
+            <div class="twelve wide column">
+                <script>
+
+                    var jcrop_api;
+                    $('#cfile').fileupload({
+                        dropZone: $('#uploader'),
+                        url: '#(CPATH)/commons/attachment/upload',
+                        sequentialUploads: true,
+                        done: function (e, data) {
+                            if (data.result.state == "ok") {
+                                if (jcrop_api) {
+                                    jcrop_api.destroy()
+                                }
+                                var src = data.result.src;
+                                $("#path").val(src);
+                                $("#avatarimg").attr("src", "#(CPATH)" + src);
+                                $('#avatarimg').Jcrop({
+                                    setSelect: [30, 30, 250, 250],
+                                    minSize: [50, 50],
+                                    aspectRatio: 1,
+                                    onSelect: updateSelect,
+                                    onChange: updateSelect
+                                }, function () {
+                                    jcrop_api = this;
+                                });
+                            }
+                        }
+                    });
+
+                    function updateSelect(c) {
+                        $('#x').val(c.x);
+                        $('#y').val(c.y);
+                        $('#w').val(c.w);
+                        $('#h').val(c.h);
+                    }
+
+                    function submitSuccess() {
+                        toastr.options.onHidden = function () {
+                            location.reload();
+                        }
+                        toastr.success('头像修改成功，2s后自动刷新...');
+                    }
+
+                </script>
                 <div class="ui segment">
-
-                    <div class="twelve wide column">
-                        <div class="ui segment">
-                            <h1>
-                                <i class="icon image" aria-hidden="true"></i> 修改头像
-                            </h1>
-                            <div class="ui stacked segment">
-                                <div class="content px-3 py-3">
-
-                                    <div class="ui message warning my-3">
-                                        <b><i class="icon info"></i> 请注意：</b>
-                                        <p>上传闪烁、奇异、违法、色情头像，情节严重者将会被封号处理。</p>
-                                    </div>
-
-
-                                    <form class="ui form" method="POST" action="https://learnku.com/users/91191/update_avatar"
-                                          enctype="multipart/form-data" accept-charset="UTF-8">
-                                        <input name="_method" type="hidden" value="PATCH">
-                                        <input type="hidden" name="_token" value="KbRAGMop6xekVJ25F7Yq4yagr1d13tW2PM4b7Vmu">
-
-                                        <div id="image-preview-div">
-                                            <img id="preview-img" class="avatar-preview-img image-border "
-                                                 src="./LearnKu 终身编程者的知识社区_files/380x380" width="320">
-                                        </div>
-
-                                        <div class="mb-3 mt-3">
-                                            <label for="exampleInputFile">请选择图片：</label>
-                                        </div>
-
-
-                                        <div class="filed">
-                                            <input type="file" name="avatar" id="file" required="">
-                                        </div>
-
-                                        <div class="filed mt-3">
-                                            <button class="ui button primary" id="upload-button" type="submit">上传头像</button>
-                                        </div>
-
-
-                                        <div class="ui message warning" id="loading" style="display: none;" role="alert">
-                                            图片上传中...
-                                            <div class="progress">
-                                                <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                                     aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="message"></div>
-                                    </form>
-
+                    <h1>
+                        <i class="icon image" aria-hidden="true"></i> 修改头像
+                    </h1>
+                    <form class=" autoAjaxSubmit" autocomplete="off" action="#(CPATH)/ucenter/doSaveAvatar"
+                          method="post"
+                          data-ok-function="submitSuccess"
+                    >
+                        <input type="hidden" name="path" id="path">
+                        <input type="hidden" name="x" id="x">
+                        <input type="hidden" name="y" id="y">
+                        <input type="hidden" name="w" id="w">
+                        <input type="hidden" name="h" id="h">
+                        <input type="hidden" name="uid" value="#(user.id)">
+                        <div class="card-body">
+                            <div id="uploader">
+                                <span class="btn btn-block btn-primary fileinput-button" style="width: 160px">
+                                    <i class="fas fa-plus"></i>
+                                    <span>选择图片...</span>
+                                    <input id="cfile" type="file" name="files[]" multiple>
+                                </span>
+                            </div>
+                            <div class="text-center" style="margin-bottom: 20px">
+                                <div style="margin: 10px 0">
+                                    <img src="avatar.png" style="max-width: 100%;height: 100%"
+                                         id="avatarimg">
                                 </div>
                             </div>
                         </div>
-                    </div>
+
+                        <div class="card-footer">
+                            <div class="col-sm-10 submit-block">
+                                <div class="card-submit">
+                                    <button type="submit" class="btn btn-primary"> 保存选择区域</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

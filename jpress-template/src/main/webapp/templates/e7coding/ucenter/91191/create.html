@@ -8,9 +8,9 @@
     <meta name="baidu-site-verification" content="MfC8ppEukL"/>
     <meta baidu-gxt-verify-token="fa750b19bb54c9ad03503638f41923db">
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="42Ns3Ryf1LHMKjKWHk70b6TMu7S9uZzyBNWtL3QK">
+    <meta name="csrf-token" content="fgdCjTKG6KhxQYU9yItAsicoGkPoObJLhDuXVYUw">
 
-    <title>dongjy 个人信息 | Go 技术论坛 </title>
+    <title>新建文章 | Go 技术论坛 </title>
     <meta name="description"
           content="我们致力于为 Golang / Go 语言开发者提供一个分享创造、结识伙伴、协同互助的中文论坛，由 Golang  / Go 语言爱好者维护的高品质 Golang  / Go 语言中国知识社区。"/>
     <meta name="keywords"
@@ -21,26 +21,28 @@
     <link rel="shortcut icon" href="https://cdn.learnku.com//uploads/communities/sNljssWWQoW6J88O9G37.png!/both/44x44"/>
 
     <!-- Styles -->
-    <link href="https://cdn.learnku.com//build/css/df80a43d32032bc8fda1-vendors.css" rel="stylesheet">
-    <link href="https://cdn.learnku.com//build/css/4e2dea8d16267ffc4673-app.css" rel="stylesheet">
+    <link href="../../resource/css/vendors.css" rel="stylesheet">
+    <link href="../../resource/css/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/editor/css/editormd.css">
+
 
 </head>
 
-<body class=" users-show-page">
+<body class=" articles-create-page">
 
 <!-- 为 Pjax 和模板加载优化，只能放这里 -->
 <script>
-    window.Laravel = {"csrfToken": "42Ns3Ryf1LHMKjKWHk70b6TMu7S9uZzyBNWtL3QK"}
+    window.Laravel = {"csrfToken": "fgdCjTKG6KhxQYU9yItAsicoGkPoObJLhDuXVYUw"}
     window.Config = {
         'GA_Tracking_ID': 'UA-133323996-1',
-        'user_id': 0,
+        'user_id': 91191,
         'is_student': '',
         'search_user_id': 0,
         'cdn_domain': 'cdn.learnku.com',
         'domain': 'learnku.com',
         'request_interval': 600000, // 消息通知检测周期
         'notification_count': 0,
-        'token': '42Ns3Ryf1LHMKjKWHk70b6TMu7S9uZzyBNWtL3QK',
+        'token': 'fgdCjTKG6KhxQYU9yItAsicoGkPoObJLhDuXVYUw',
         'environment': 'production',
         'url': 'https://learnku.com',
         'tags_url': '',
@@ -102,84 +104,85 @@
 </script>
 
 <style>
+
     .ui.top.menu {
-    border-top: 4px solid #00b5ad;
-}
-
-.ui.fluid.search .results {
-    width: 550px;
-}
-
-@media only screen and (max-width: 767px) {
-    .ui.top.menu > .ui.container {
-        height: 52px;
-        flex-direction: initial;
+        border-top: 4px solid #00b5ad;
     }
-}
+
+    .ui.fluid.search .results {
+        width: 550px;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .ui.top.menu > .ui.container {
+            height: 52px;
+            flex-direction: initial;
+        }
+    }
 
 
-/* 顶部导航栏 */
-.ui.top.menu {
-    border-top: 4px solid #368cda;
-}
+    /* 顶部导航栏 */
+    .ui.top.menu {
+        border-top: 4px solid #368cda;
+    }
 
-/* 右边导航栏顶部样式 */
-.ui.top-color.segment:not(.inverted) {
-    border-top: 2px solid #368cda;
-}
+    /* 右边导航栏顶部样式 */
+    .ui.top-color.segment:not(.inverted) {
+        border-top: 2px solid #368cda;
+    }
 
-/* 右边导航栏顶部样式 */
-.ui.top-color.card:not(.inverted) {
-    border-top: 2px solid #368cda;
-}
+    /* 右边导航栏顶部样式 */
+    .ui.top-color.card:not(.inverted) {
+        border-top: 2px solid #368cda;
+    }
 
-/* 主要按钮 */
+    /* 主要按钮 */
 
-.ui.primary.buttons .button, .ui.primary.button {
-    background-color: #368cda;
-    border-color: #368cda;
-}
+    .ui.primary.buttons .button, .ui.primary.button {
+        background-color: #368cda;
+        border-color: #368cda;
+    }
 
-/* 主要按钮选中状态 */
-.ui.primary.buttons .button:hover, .ui.primary.button:hover, .ui.primary.button:active, .ui.primary.buttons .button:active, .ui.primary.button:focus, .ui.primary.buttons .button:focus, .ui.primary.active.button, .ui.primary.button .active.button:active, .ui.primary.buttons .active.button, .ui.primary.buttons .active.button:active {
-    background-color: #368cda;
-    border-color: #368cda;
-}
+    /* 主要按钮选中状态 */
+    .ui.primary.buttons .button:hover, .ui.primary.button:hover, .ui.primary.button:active, .ui.primary.buttons .button:active, .ui.primary.button:focus, .ui.primary.buttons .button:focus, .ui.primary.active.button, .ui.primary.button .active.button:active, .ui.primary.buttons .active.button, .ui.primary.buttons .active.button:active {
+        background-color: #368cda;
+        border-color: #368cda;
+    }
 
-/* 外框按钮 */
-.ui.basic.primary.buttons .button, .ui.basic.primary.button {
-    color: #368cda !important;
-    box-shadow: 0px 0px 0px 1px #368cda inset !important;
-}
+    /* 外框按钮 */
+    .ui.basic.primary.buttons .button, .ui.basic.primary.button {
+        color: #368cda !important;
+        box-shadow: 0px 0px 0px 1px #368cda inset !important;
+    }
 
-/* 外框按钮选中状态 */
-.ui.basic.primary.buttons .button:hover, .ui.basic.primary.button:hover {
-    color: #368cda !important;
-    box-shadow: 0px 0px 0px 1px #368cda inset !important;
-}
+    /* 外框按钮选中状态 */
+    .ui.basic.primary.buttons .button:hover, .ui.basic.primary.button:hover {
+        color: #368cda !important;
+        box-shadow: 0px 0px 0px 1px #368cda inset !important;
+    }
 
-.ui.basic.primary.buttons .active.button, .ui.basic.primary.active.button {
-    color: #368cda !important;
-    box-shadow: 0px 0px 0px 1px #368cda inset !important;
-}
+    .ui.basic.primary.buttons .active.button, .ui.basic.primary.active.button {
+        color: #368cda !important;
+        box-shadow: 0px 0px 0px 1px #368cda inset !important;
+    }
 
-.ui.basic.primary.buttons .button:active, .ui.basic.primary.button:active, .ui.basic.primary.buttons .active.button, .ui.basic.primary.active.button, .ui.basic.buttons .button:hover, .ui.basic.button:hover, .ui.basic.primary.buttons .button:focus, .ui.basic.primary.button:focus {
-    box-shadow: 0px 0px 0px 1px #368cda inset !important;
-}
+    .ui.basic.primary.buttons .button:active, .ui.basic.primary.button:active, .ui.basic.primary.buttons .active.button, .ui.basic.primary.active.button, .ui.basic.buttons .button:hover, .ui.basic.button:hover, .ui.basic.primary.buttons .button:focus, .ui.basic.primary.button:focus {
+        box-shadow: 0px 0px 0px 1px #368cda inset !important;
+    }
 
-.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
-    background-color: #368cda;
-    border-color: #368cda;
-}
+    .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+        background-color: #368cda;
+        border-color: #368cda;
+    }
 
-.pagination > li > a, .pagination > li > span {
-    color: #368cda;
-}
+    .pagination > li > a, .pagination > li > span {
+        color: #368cda;
+    }
 
 
-.footer {
-    max-height: max-content;
-}
+    .footer {
+        max-height: max-content;
+    }
 
 </style>
 
@@ -224,22 +227,26 @@
         <i class="icon text file outline"></i> 社区文档
     </a>
 
-    <div class="item">
-        <a class="ui basic small button no-pjax" href="https://learnku.com/auth/login"><i class="icon user "></i> 登录
-        </a>
-    </div>
 
-    <div class="item">
-        <a class="ui basic small button no-pjax" href="https://learnku.com/auth/register"><i class="icon signup "></i>
-            注册 </a>
-    </div>
+    <a class="item" href="https://learnku.com/notifications/unread" title="消息通知">
+        <i class="icon alarm outline"></i>
+        未读消息数
+
+        <div class="ui basic  left pointing label">
+            0
+        </div>
+    </a>
+
+    <a href="https://learnku.com/users/91191" class="item">
+        <img class="ui avatar image" src="https://cdn.learnku.com/uploads/avatars/91191_1638561708.jpeg!/both/100x100">
+        &nbsp;
+        dongjy
+    </a>
 </div>
 
 
-<div class="pusher">
-
+<div class="pusher in-editor-view">
     <div class="main container">
-
         <nav class="ui main borderless menu top stackable topnav" id="topnav">
             <div class="ui container">
 
@@ -508,92 +515,359 @@
                 </form>
 
                 <div class=" right menu stackable secondary">
-                    <div class="item rm-link-color">
-                        <a class="mr-4 no-pjax login_required" href="https://learnku.com/auth/login"><i
-                                class="icon sign in "></i> 登录 </a>
-                        <a class="no-pjax" href="https://learnku.com/auth/register" style="margin-left: 10px;"><i
-                                class="icon user add "></i> 注册 </a>
+                    <div class="ui simple item dropdown article stackable nav-user-item  secondary">
+                        <i class="icon paint brush"></i> <i class="dropdown icon"></i>
+
+                        <div class="ui menu stackable">
+                            <a href="https://learnku.com/articles/create" class="item no-pjax">
+                                <i class="icon paint brush"></i> 新建博文
+                            </a>
+
+
+                            <a href="https://learnku.com/go/topics/create" class="item no-pjax">
+                                <i class="icon comment"></i> 发起讨论
+                            </a>
+
+                            <a href="https://learnku.com/go/topics/questions/create" class="item no-pjax">
+                                <i class="icon help circle"></i> 提个问题
+                            </a>
+
+                            <a href="https://learnku.com/go/topics/create?category_id=1" class="item no-pjax">
+                                <i class="icon suitcase"></i> 招聘求职
+                            </a>
+
+                            <a href="https://learnku.com/go/topics/create?category_id=20" class="item no-pjax">
+                                <i class="icon code"></i> 代码速记
+                            </a>
+
+
+                        </div>
+                    </div>
+
+                    <a class="item no-pjax" href="https://learnku.com/notifications/unread" title="消息通知">
+            <span class="ui basic circular label notification" id="notification-count">
+                0
+            </span>
+                    </a>
+
+
+                    <div class="ui simple item dropdown article stackable nav-user-item">
+                        <img class="ui avatar image"
+                             src="https://cdn.learnku.com/uploads/avatars/91191_1638561708.jpeg!/both/100x100"> &nbsp;
+
+                        dongjy <i class="dropdown icon"></i>
+
+                        <div class="ui menu stackable">
+
+                            <a href="https://learnku.com/users/91191/reputation_logs" class="item">
+                                <i class="icon trophy"></i> 0
+                                声望
+                            </a>
+
+                            <a href="https://learnku.com/blog/dongjy" class="item">
+                                <i class="icon newspaper"></i> 我的博客
+                            </a>
+
+                            <a href="https://learnku.com/users/91191/collections" class="item">
+                                <i class="icon heart"></i> 我的收藏
+                            </a>
+
+
+                            <a href="https://learnku.com/users/91191" class="item">
+                                <i class="icon user"></i>
+                                个人中心
+                            </a>
+
+                            <a href="https://learnku.com/courses/my/coupons" class="item">
+                                <i class="icon payment"></i>
+                                卡券中心
+                            </a>
+
+
+                            <a href="https://learnku.com/users/settings/edit" class="item">
+                                <i class="icon settings"></i>
+                                编辑资料
+                            </a>
+
+                            <a class="item no-pjax" href="javascript:void(0)" data-url="https://learnku.com/logout"
+                               data-method="POST" data-prompt="您确定要退出登录吗？" title="退出登录">
+                                <i class="icon sign out"></i>
+                                退出
+                            </a>
+
+                        </div>
                     </div>
                 </div>
 
             </div>
 
+            <a class="ui button basic simple  shadow-none  tiny hide-on-mobile icon popover night-mode" title="切换视图模式"
+               href="javascript:void(0);" data-url="https://learnku.com/users/settings/night_mode" data-method="post"
+               style="cursor: pointer;padding-top: 13px;"><i class="icon moon mt-2 fs-large"></i></a>
         </nav>
-
-
-        <div class="mb-3 hide show-on-wechat-view">
-            <div class="ui centered grid container message-container">
-                <div class="sixteen wide column pt-0 pb-0">
-                    <a class="ui button fluid green wechat-login-link"
-                       href="https://learnku.com/auth/oauth?driver=wechat"><i class="icon wechat "></i> 微信登录</a>
-                </div>
-            </div>
-        </div>
 
 
         <div class="ui centered grid container stackable">
             <div class=" column">
                 <div class="ui segment">
 
-                    <div class="twelve wide column">
-                        <div class="ui segment">
-                            <h1>
-                                <i class="icon image" aria-hidden="true"></i> 修改头像
-                            </h1>
-                            <div class="ui stacked segment">
-                                <div class="content px-3 py-3">
+                    <div class="ui right rail rm-link-color lh-3 ml-1 mt-3 pl-4">
+                        <p>
+                            <b>技巧:</b>
+                        </p>
+                        <p>
+                            <a class="" href="https://learnku.com/docs/writing-docs/editor-guide/3958" target="_blank">
+                                MD 语法
+                            </a>
+                        </p>
+                        <p>
+                            <a class="" href="https://learnku.com/docs/writing-docs/typesetting-specification/1775"
+                               target="_blank">
+                                排版规范
+                            </a>
+                        </p>
+                        <p>
+                            <a class=""
+                               href="https://learnku.com/docs/guide/how-do-i-insert-pictures-in-articles-or-comments/4472"
+                               target="_blank">
+                                上传图片
+                            </a>
+                        </p>
+                        <p>
+                            <a class=""
+                               href="https://learnku.com/docs/guide/how-to-remove-the-shadow-of-the-picture/4474"
+                               target="_blank">
+                                图片阴影
+                            </a>
+                        </p>
+                        <p>
+                            <a class="" href="https://learnku.com/docs/guide/how-to-set-the-image-size/4475"
+                               target="_blank">
+                                图片大小
+                            </a>
+                        </p>
+                        <p>
+                            <a class="" href="https://learnku.com/docs/writing-docs/clean-screenshots/1778"
+                               target="_blank">
+                                干净的截图
+                            </a>
+                        </p>
+                        <p>
+                            <a class=""
+                               href="https://learnku.com/docs/writing-docs/paraphrase-the-screen-when-it-is-screenshot/1776"
+                               target="_blank">
+                                截屏要释义
+                            </a>
+                        </p>
 
-                                    <div class="ui message warning my-3">
-                                        <b><i class="icon info"></i> 请注意：</b>
-                                        <p>上传闪烁、奇异、违法、色情头像，情节严重者将会被封号处理。</p>
-                                    </div>
+                        <p>
+                            <a class="" href="https://learnku.com/docs/guide/blog-added-series-articles-function/7096"
+                               target="_blank">
+                                系列文章
+                            </a>
+                        </p>
+                    </div>
+                    <a class="ui right corner label compose-help" href="javascript:;">
+                        <i class="info icon"></i>
+                    </a>
+
+                    <div class="content extra-padding">
+
+                        <div class="ui header text-center text gery" style="margin:10px 0 40px">
+                            <i class="icon paint brush"></i> 新建博文
+                        </div>
 
 
-                                    <form class="ui form" method="POST" action="https://learnku.com/users/91191/update_avatar"
-                                          enctype="multipart/form-data" accept-charset="UTF-8">
-                                        <input name="_method" type="hidden" value="PATCH">
-                                        <input type="hidden" name="_token" value="KbRAGMop6xekVJ25F7Yq4yagr1d13tW2PM4b7Vmu">
+                        <form method="POST" action="https://learnku.com/articles" accept-charset="UTF-8"
+                              id="article-create-form" class="ui form">
 
-                                        <div id="image-preview-div">
-                                            <img id="preview-img" class="avatar-preview-img image-border "
-                                                 src="./LearnKu 终身编程者的知识社区_files/380x380" width="320">
-                                        </div>
+                            <input type="hidden" name="_token" value="fgdCjTKG6KhxQYU9yItAsicoGkPoObJLhDuXVYUw">
 
-                                        <div class="mb-3 mt-3">
-                                            <label for="exampleInputFile">请选择图片：</label>
-                                        </div>
+                            <input name="editor_unique_id" type="hidden" value="">
+                            <input name="category_id" type="hidden" value="8">
+                            <input name="body_html" type="hidden" value="">
 
-
-                                        <div class="filed">
-                                            <input type="file" name="avatar" id="file" required="">
-                                        </div>
-
-                                        <div class="filed mt-3">
-                                            <button class="ui button primary" id="upload-button" type="submit">上传头像</button>
-                                        </div>
-
-
-                                        <div class="ui message warning" id="loading" style="display: none;" role="alert">
-                                            图片上传中...
-                                            <div class="progress">
-                                                <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                                     aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                                </div>
+                            <div class="fields">
+                                <div class=" three wide field ">
+                                    <div class="ui fluid search selection dropdown community-selection">
+                                        <input type="hidden" name="community_id" value="6" required>
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">社区</div>
+                                        <div class="menu communities">
+                                            <div class="item" data-value="0">
+                                                社区
+                                            </div>
+                                            <div class="item" data-value="1">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com//uploads/communities/WtC3cPLHzMbKRSZnagU9.png">
+                                                Laravel
+                                            </div>
+                                            <div class="item" data-value="6">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com//uploads/communities/sNljssWWQoW6J88O9G37.png">
+                                                Go
+                                            </div>
+                                            <div class="item" data-value="8">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com//uploads/communities/Y7fElYYwCFjTTXCdwPNW.png">
+                                                PHP
+                                            </div>
+                                            <div class="item" data-value="5">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com//uploads/communities/hIZjRRdF8oVYZy69XJnT.png">
+                                                Vue.js
+                                            </div>
+                                            <div class="item" data-value="2">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com//uploads/communities/mTBLIP7o0gVGn3ZCphpN.png">
+                                                Python
+                                            </div>
+                                            <div class="item" data-value="34">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com/uploads/images/201908/18/1/yAH1hJ3pZF.png">
+                                                MySQL
+                                            </div>
+                                            <div class="item" data-value="19">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com//uploads/communities/h3Xef7s3mLKYmqwBRIiA.png">
+                                                Java
+                                            </div>
+                                            <div class="item" data-value="9">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com//uploads/communities/Qj48vezkYfZM1ZM5Y75X.png">
+                                                Rust
+                                            </div>
+                                            <div class="item" data-value="37">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com/uploads/images/201908/10/25425/QdtUV2rox6.png">
+                                                Elasticsearch
+                                            </div>
+                                            <div class="item" data-value="31">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com//uploads/communities/b1qLi8CKYnkipeMwdvPU.png">
+                                                LK
+                                            </div>
+                                            <div class="item" data-value="13">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com//uploads/communities/DGHjM6p2qdamHmFJZt9g.jpg">
+                                                F2E 前端
+                                            </div>
+                                            <div class="item" data-value="42">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com//uploads/communities/pwwWCCpPeKm8z3HEubmo.png">
+                                                Server
+                                            </div>
+                                            <div class="item" data-value="49">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com//uploads/communities/ceowUfx7bxLyyng5ykyu.png">
+                                                Database
+                                            </div>
+                                            <div class="item" data-value="50">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com//uploads/communities/0QFgKXFJBOmsQNf47XOY.png">
+                                                DevTools
+                                            </div>
+                                            <div class="item" data-value="52">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com//uploads/communities/BTBwRdYCj8UFXIjMqEbG.jpg">
+                                                Computer Science
+                                            </div>
+                                            <div class="item" data-value="55">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com//uploads/communities/6vqw97jFnblvXh3F1o0F.png">
+                                                程序员
+                                            </div>
+                                            <div class="item" data-value="54">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="https://cdn.learnku.com//uploads/communities/tSK8naqmi1fiQTJcoa2o.png">
+                                                手机开发
                                             </div>
                                         </div>
-                                        <div id="message"></div>
-                                    </form>
+                                    </div>
+                                </div>
+
+                                <div class="thirteen wide field">
+                                    <input class="form-control" type="text" name="title" id="title-field" value=""
+                                           placeholder="标题" required/>
+                                </div>
+                            </div>
+
+
+                            <div class="field editor">
+                                <div id="editormd">
+                                    <textarea rows="15" id="body-field" name="body" placeholder="请使用 Markdown 编写"
+                                              required></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="ui styled fluid accordion">
+                                <div class="title">
+                                    <i class="dropdown icon"></i>
+                                    高级设置
+                                </div>
+                                <div class="content">
+
+                                    <div class="field">
+                                        <label>选择标签（Tab 键可创建新标签）</label>
+                                        <div class="ui search multiple selection tags dropdown ">
+                                            <input type="hidden" name="tags_string" value="">
+                                            <i class="dropdown icon"></i>
+                                            <input type="text" class="search">
+                                            <div class="default text">请选择标签（选填）</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field">
+                                        <label>系列文章（<a
+                                                href="https://learnku.com/docs/guide/blog-added-series-articles-function/7096"
+                                                target="_blank">详见此链接</a>） <i class="info icon ui popover"
+                                                                              title="我们使用文章 ID 为作为系列文章的标识符，同一文章系列请选择同一篇文章"></i></label>
+                                        <div class="ui search selection articles dropdown">
+                                            <input type="hidden" name="series_id" value="">
+                                            <i class="dropdown icon"></i>
+                                            <input type="text" class="search">
+                                            <div class="default text">请选择文章</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field ">
+                                        <label>编号（系列文章选中时才有效，选填）<i class="info icon ui popover"
+                                                                   title="使用此选项来控制系列里的文章排序"></i></label>
+                                        <input type="text" name="position" id="position-field" value=""
+                                               placeholder="使用此选项来控制系列里的文章排序" maxlength="4"/>
+                                    </div>
 
                                 </div>
                             </div>
-                        </div>
+
+                            <div contenteditable="true" id="pastebin"></div>
+
+                            <div class="ui message">
+                                <button type="submit" class="ui button primary publish-btn loading-on-clicked" id="">
+                                    <i class="icon send"></i>
+                                    发布文章
+                                </button>
+
+
+                                &nbsp;&nbsp;or&nbsp;&nbsp;
+                                <button class="ui button" type="submit" name="subject" value="draft">
+                                    <i class="icon save"></i> 保存草稿
+                                </button>
+
+                                <a class="pull-right" href="https://learnku.com/docs/writing-docs/editor-guide/3958"
+                                   target="_blank"
+                                   style="color: #777;font-size: .9em;text-decoration: underline;margin-top: 8px;">
+                                    <i class="icon wpforms"></i> 编辑器使用指南
+                                </a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
-
     <div class="ui inverted vertical footer segment">
         <div class="ui center aligned container">
 
@@ -709,8 +983,6 @@
             </div>
         </div>
     </div>
-
-
 </div>
 
 <div class="ui modal login small" style="width:400px;margin: 0em 0em 0em -200px;">
@@ -727,7 +999,7 @@
 
         <form class="ui form login" role="form" method="POST" action="https://learnku.com/auth/login"
               accept-charset="UTF-8">
-            <input type="hidden" name="_token" value="42Ns3Ryf1LHMKjKWHk70b6TMu7S9uZzyBNWtL3QK">
+            <input type="hidden" name="_token" value="fgdCjTKG6KhxQYU9yItAsicoGkPoObJLhDuXVYUw">
             <input type="hidden" name="remember" value="yes">
 
             <input type="hidden" name="return_back" value="no">
@@ -781,7 +1053,7 @@
 <div class="ui modal small report">
     <div class="header modal-title">内容举报</div>
     <form class="ui form error" method="POST" action="https://learnku.com/reports" accept-charset="UTF-8">
-        <input type="hidden" name="_token" value="42Ns3Ryf1LHMKjKWHk70b6TMu7S9uZzyBNWtL3QK">
+        <input type="hidden" name="_token" value="fgdCjTKG6KhxQYU9yItAsicoGkPoObJLhDuXVYUw">
         <input name="reportable_id" type="hidden" value="">
         <input name="reportable_type" type="hidden" value="">
         <div class="content" style="padding: 20px;">
@@ -875,14 +1147,73 @@
 
 </body>
 
-<script>
-    Config.routes.api_search = 'https://learnku.com/articles/api_search';
-    Config.search_user_id = 91191;
-</script>
+
 
 <!-- Scripts -->
-<script src="https://cdn.learnku.com//build/js/eabf7db6c25d542f4f52-vendors.js"></script>
-<script src="https://cdn.learnku.com//build/js/f039dca4c166b50553f8-app.js"></script>
+<script src="../../resource/js/vendors.js"></script>
+<script src="../../resource/js/app.js"></script>
+
+<script type="text/javascript">
+    // 本地保存内容唯一值
+    Config.editor.unique_id = "articles-create_article_content_";
+    Config.tags_url = 'https://learnku.com/articles/tags/search?q={query}';
+</script>
+
+
+<script src="build/js/editor.vendors.js"></script>
+
+<script src="build/js/editor.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.tags.ui.dropdown')
+            .dropdown({
+                allowAdditions: true,
+                apiSettings: {
+                    url: Config.tags_url,
+                    data: {
+                        '_token': Config.token
+                    },
+                }
+            });
+
+    });
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#publish-hint').click(function (event) {
+            event.preventDefault();
+            swal({
+                title: "",
+                text: "确定要将发布草稿？",
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonText: "取消",
+                confirmButtonText: "发布"
+            }).then(function () {
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', "subject")
+                    .attr('value', "publish")
+                    .appendTo('#article-edit-form');
+                $("#article-edit-form").submit();
+            }).catch(swal.noop);
+        });
+
+        $('.articles.ui.dropdown.search.selection')
+            .dropdown({
+                allowAdditions: false,
+                saveRemoteData: false,
+                apiSettings: {
+                    url: 'https://learnku.com/my/articles/search?q={query}',
+                    data: {
+                        '_token': Config.token
+                    },
+                    cache: false,
+                }
+            });
+    });
+</script>
 
 
 </html>

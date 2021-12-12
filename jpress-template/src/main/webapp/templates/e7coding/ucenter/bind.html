@@ -1,0 +1,119 @@
+#include("./u_layout.html")
+#@ucenter_layout("基本信息")
+#define content()
+<div class="twelve wide column">
+  <div class="ui segment">
+    <h1>
+      <i class="icon lock" aria-hidden="true"></i> 账号绑定
+    </h1>
+    <div class="ui stacked segment">
+      <div class="content px-3 py-3">
+        <form class="ui form" method="POST" action="https://learnku.com/users/91191/update_email_notify"
+              accept-charset="UTF-8">
+          <div class="field mt-4">
+
+            <div class="col-sm-9">
+
+              <table class="ui celled table">
+                <thead>
+                <tr>
+                  <th>第三方平台名称</th>
+                  <th>状态</th>
+                  <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><i class="icon wechat green"></i> 微信</td>
+                  <td>
+                    <i class="icon checkmark green"></i> 已绑定
+                  </td>
+                  <td>
+                    <a class="item rm-link-color" href="javascript:;"
+                       data-url="https://learnku.com/users/unbind_social_login/wechat"
+                       data-method="POST" data-prompt="解除绑定后无法使用微信直接登录本站，请确定？"
+                       style="cursor: pointer;"><i class="icon remove red"></i> 解除绑定
+                      <form action="https://learnku.com/users/unbind_social_login/wechat"
+                            method="POST" style="display:none">
+                        <input type="hidden" name="_method" value="POST">
+                        <input type="hidden" name="_token"
+                               value="fgdCjTKG6KhxQYU9yItAsicoGkPoObJLhDuXVYUw">
+                      </form>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="icon github alternate"></i> GitHub</td>
+                  <td>
+                    未绑定
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://learnku.com/auth/oauth?driver=github"
+                       class="tdu">
+                      前往绑定
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="icon weibo alternate"></i> 微博</td>
+                  <td>
+                    未绑定
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://learnku.com/auth/oauth?driver=github"
+                       class="tdu">
+                      前往绑定
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="icon qq alternate"></i> QQ</td>
+                  <td>
+                    未绑定
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://learnku.com/auth/oauth?driver=github"
+                       class="tdu">
+                      前往绑定
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="icon telegram plane blue"></i> 钉钉</td>
+                  <td>
+                    未绑定
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://learnku.com/auth/oauth?driver=github"
+                       class="tdu">
+                      前往绑定
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="icon codiepie alternate"></i> 开源中国</td>
+                  <td>
+                    未绑定
+                  </td>
+                  <td>
+                    <a target="_blank" href="https://learnku.com/auth/oauth?driver=github"
+                       class="tdu">
+                      前往绑定
+                    </a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+          <br>
+
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+#end

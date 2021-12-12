@@ -1,4 +1,3 @@
-#define ucenter_layout(title)
 <!DOCTYPE html>
 <html lang="zh" class="">
 <head>
@@ -20,12 +19,13 @@
 
     <link rel="shortcut icon" href=""/>
 
-    <!-- Styles -->
     <link href="../resource/css/vendors.css" rel="stylesheet">
     <link href="../resource/css/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="../resource/assets/editor/css/editormd.css">
+    <link rel="stylesheet" href="../resource/assets/editor/lib/codemirror/codemirror.min.css">
 </head>
 
-<body class=" users-show-page">
+<body class=" articles-create-page">
 
 <script>
     window.Config = {
@@ -33,6 +33,7 @@
         'token': '',
         'environment': 'production',
         'url': '',
+        'cdn_domain':'',
         'tags_url': '',
         'scroll_to_top': true,
         'community': {
@@ -75,7 +76,9 @@
     }
 
 </script>
+
 <style>
+
     .ui.top.menu {
         border-top: 4px solid #00b5ad;
     }
@@ -157,6 +160,7 @@
 
 </style>
 
+
 <div class="ui top menu sidebar stackable">
     <div class="item">
         <img class="ui image" style="width:26px;height:26px;margin-top:-2px;"
@@ -186,8 +190,7 @@
 </div>
 
 
-<div class="pusher">
-
+<div class="pusher in-editor-view">
     <div class="main container">
 
         <nav class="ui main borderless menu top stackable topnav" id="topnav">
@@ -266,7 +269,6 @@
             </div>
 
         </nav>
-
         <div class="mb-3 hide show-on-wechat-view">
             <div class="ui centered grid container message-container">
                 <div class="sixteen wide column pt-0 pb-0">
@@ -278,14 +280,146 @@
 
 
         <div class="ui centered grid container stackable">
-            #include("./left.html")
-            #@content()
+            <div class=" column">
+                <div class="ui segment">
+
+
+                    <a class="ui right corner label compose-help" href="javascript:;">
+                        <i class="info icon"></i>
+                    </a>
+
+                    <div class="content extra-padding">
+
+                        <div class="ui header text-center text gery" style="margin:10px 0 40px">
+                            <i class="icon paint brush"></i> 投稿
+                        </div>
+
+
+                        <form method="POST" action="" accept-charset="UTF-8"
+                              id="article-create-form" class="ui form">
+
+                            <input name="editor_unique_id" type="hidden" value="">
+                            <input name="category_id" type="hidden" value="8">
+                            <input name="body_html" type="hidden" value="">
+
+                            <div class="fields">
+                                <div class=" three wide field ">
+                                    <div class="ui fluid search selection dropdown community-selection">
+                                        <input type="hidden" name="community_id" value="0" required="">
+                                        <i class="dropdown icon"></i>
+                                        <input class="search" autocomplete="off" tabindex="0">
+                                        <div class="text"></div>
+                                        <div class="menu communities transition hidden" tabindex="-1">
+                                            <div class="item" data-value="0">
+                                                选择分类
+                                            </div>
+                                            <div class="item" data-value="1">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="">
+                                                Laravel
+                                            </div>
+                                            <div class="item" data-value="6">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="">
+                                                Go
+                                            </div>
+                                            <div class="item" data-value="8">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="">
+                                                PHP
+                                            </div>
+                                            <div class="item" data-value="5">
+                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                                     src="">
+                                                Vue.js
+                                            </div>
+                                        </div>
+                                        <div class="results"></div>
+                                    </div>
+                                </div>
+                                <div class="thirteen wide field">
+                                    <input class="form-control" type="text" name="title" id="title-field" value=""
+                                           placeholder="请输入文章标题" required/>
+                                </div>
+                            </div>
+                            <div class="inline fields">
+                                <div class="five wide disabled field">
+                                    <input type="text" value="网址：http://www.e7coding.com/article/" readonly disabled>
+                                </div>
+                                <div class="two wide field">
+                                    <input type="text" placeholder="页面标识">
+                                </div>
+                                <div class="two wide disabled field">
+                                    <input type="text" value=".html" readonly disabled>
+                                </div>
+                            </div>
+
+
+                            <div class="field editor">
+                                <div id="editormd">
+                                    <textarea rows="15" id="body-field" name="body" placeholder="请使用 Markdown 编写"
+                                              required></textarea>
+                                </div>
+                            </div>
+                            <div class="ui ">
+                                <div class="card-header with-border ">
+                                    <h3 class="card-title">缩略图</h3>
+                                </div>
+                                <div class="card-body p-0">
+                                    <img src="#(CPATH)#(article.thumbnail ??'/static/commons/img/nothumbnail.jpg')"
+                                         style="width: 100%;"
+                                         id="thumbnail">
+                                    <input type="hidden" value="#(article.thumbnail ??)"
+                                           name="article.thumbnail"
+                                           id="articleThumbnail">
+                                </div>
+                                <div class="card-footer">
+                                        <span class="btn  btn-default btn-sm fileinput-button">
+                                            <span>选择图片</span>
+                                            <input id="cfile" type="file" name="files[]" multiple>
+                                        </span>
+                                    <a href="javascript:;" style="padding-left: 15px" id="removeThumbnail">移除</a>
+                                </div>
+                            </div>
+                            <div class="ui styled fluid accordion">
+                                <div class="title">
+                                    <i class="dropdown icon"></i>
+                                    属性设置
+                                </div>
+                                <div class="content">
+                                    <div class="field">
+                                        <label>SEO关键字</label>
+                                        <textarea rows="3"></textarea>
+                                    </div>
+                                    <div class="field">
+                                        <label>SEO描述</label>
+                                        <textarea rows="4"></textarea>
+                                    </div>
+
+                                    <div class="field">
+                                        <label>输入标签（多个标签请用 “回车键” 或英文逗号（,）隔开）</label>
+                                        <input type="text" name="position"  value=""
+                                               placeholder="多个标签请用 “回车键” 或英文逗号（,）隔开" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div contenteditable="true" id="pastebin"></div>
+
+                            <div class="ui message">
+                                <button type="submit" class="ui button primary publish-btn loading-on-clicked" id="">
+                                    <i class="icon send"></i>
+                                    保存并投稿
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
-
     #include("../footer.html")
-
 </div>
 
 <!-- 登录弹窗 -->
@@ -313,15 +447,73 @@
         #end
     </div>
 </div>
-
-
-
 </body>
+
+
 
 <!-- Scripts -->
 <script src="../resource/js/vendors.js"></script>
 <script src="../resource/js/app.js"></script>
 
+<script type="text/javascript">
+    // 本地保存内容唯一值
+    Config.editor.unique_id = "articles-create_article_content_";
+</script>
+<script src="../resource/assets/editor/lib/codemirror/codemirror.min.js"></script>
+<script src="../resource/assets/editor/js/editor.vendors.js"></script>
+
+<script src="../resource/assets/editor/js/editor.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.tags.ui.dropdown')
+            .dropdown({
+                allowAdditions: true,
+                apiSettings: {
+                    url: Config.tags_url,
+                    data: {
+                        '_token': Config.token
+                    },
+                }
+            });
+
+    });
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#publish-hint').click(function (event) {
+            event.preventDefault();
+            swal({
+                title: "",
+                text: "确定要将发布草稿？",
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonText: "取消",
+                confirmButtonText: "发布"
+            }).then(function () {
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', "subject")
+                    .attr('value', "publish")
+                    .appendTo('#article-edit-form');
+                $("#article-edit-form").submit();
+            }).catch(swal.noop);
+        });
+
+        $('.articles.ui.dropdown.search.selection')
+            .dropdown({
+                allowAdditions: false,
+                saveRemoteData: false,
+                apiSettings: {
+                    url: 'https://learnku.com/my/articles/search?q={query}',
+                    data: {
+                        '_token': Config.token
+                    },
+                    cache: false,
+                }
+            });
+    });
+</script>
+
 
 </html>
-#end

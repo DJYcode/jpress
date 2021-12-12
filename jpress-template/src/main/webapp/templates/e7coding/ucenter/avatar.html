@@ -1,0 +1,57 @@
+#include("./u_layout.html")
+#@ucenter_layout("修改头像")
+#define content()
+<div class="twelve wide column">
+    <div class="ui segment">
+        <h1>
+            <i class="icon image" aria-hidden="true"></i> 修改头像
+        </h1>
+        <div class="ui stacked segment">
+            <div class="content px-3 py-3">
+
+                <div class="ui message warning my-3">
+                    <b><i class="icon info"></i> 请注意：</b>
+                    <p>上传闪烁、奇异、违法、色情头像，情节严重者将会被封号处理。</p>
+                </div>
+
+
+                <form class="ui form" method="POST" action="https://learnku.com/users/91191/update_avatar"
+                      enctype="multipart/form-data" accept-charset="UTF-8">
+                    <input name="_method" type="hidden" value="PATCH">
+                    <input type="hidden" name="_token" value="KbRAGMop6xekVJ25F7Yq4yagr1d13tW2PM4b7Vmu">
+
+                    <div id="image-preview-div">
+                        <img id="preview-img" class="avatar-preview-img image-border "
+                             src="" width="320">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="exampleInputFile">请选择图片：</label>
+                    </div>
+
+
+                    <div class="filed">
+                        <input type="file" name="avatar" id="file" required="">
+                    </div>
+
+                    <div class="filed mt-3">
+                        <button class="ui button primary" id="upload-button" type="submit">上传头像</button>
+                    </div>
+
+
+                    <div class="ui message warning" id="loading" style="display: none;" role="alert">
+                        图片上传中...
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                 aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="message"></div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+#end

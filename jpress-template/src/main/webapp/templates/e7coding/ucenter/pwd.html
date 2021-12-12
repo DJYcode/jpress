@@ -1,0 +1,55 @@
+#include("./u_layout.html")
+#@ucenter_layout("我的订单")
+#define content()
+<div class="twelve wide column">
+    <div class="ui segment">
+        <h1>
+            <i class="icon lock" aria-hidden="true"></i> 修改密码
+        </h1>
+        <div class="ui stacked segment">
+            <div class="content px-3 py-3">
+                <form class="ui form" method="POST" action="https://learnku.com/users/91191/update_password"
+                      accept-charset="UTF-8">
+                    <input name="_method" type="hidden" value="PATCH">
+                    <input type="hidden" name="_token" value="fgdCjTKG6KhxQYU9yItAsicoGkPoObJLhDuXVYUw">
+
+                    <div class="two fields">
+                        <div class="ten wide field ">
+                            <label>旧密码：</label>
+                            <input type="password" class="form-control" required="" placeholder="请输入之前的密码" name="oldPwd">
+                        </div>
+                    </div>
+
+                    <div class="two fields">
+                        <div class="ten wide field ">
+                            <label>新密码：</label>
+                            <input type="password" class="form-control" required="" minlength="6" placeholder="新的密码" name="newPwd" id="newPwd">
+                        </div>
+                        <div class="six wide field pt-3 mt-4">
+
+                        </div>
+                    </div>
+
+                    <div class="two fields">
+                        <div class="ten wide field ">
+                            <label>确认密码：</label>
+                            <input type="password" class="form-control" required="" minlength="6" equalto="#newPwd" placeholder="及确认密码" name="confirmPwd">
+                        </div>
+                        <div class="six wide field pt-3 mt-4">
+
+                        </div>
+                    </div>
+
+                    <div class="field mt-4">
+                        <div class="col-sm-offset-2 col-sm-6">
+                            <input class="ui button primary" id="user-edit-submit" type="submit" value="提交修改">
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+#end
