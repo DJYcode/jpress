@@ -8,11 +8,17 @@
         </h1>
         <div class="ui segment">
             <h2>#(memberGroup.title ??)</h2>
+            <div class="ui divider"></div>
             #(memberGroup.content ??)
         </div>
-        <a href="#(CPATH)/ucenter/member/join/#(memberGroup.id)" class="btn btn-primary">
-            加入会员
-        </a>
+        <div class="ui basic buttons">
+            <div class="ui button">
+                <a href="#(CPATH)/ucenter/member/join/#(memberGroup.id)" class="btn btn-primary">
+                    加入会员
+                </a>
+            </div>
+        </div>
+
     </div>
 </div>
 #end

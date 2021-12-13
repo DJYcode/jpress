@@ -17,10 +17,16 @@
             <div class="label">可用余额 </div>
           </div>
           <div>
-            #if(option('payout_enable'))
-            <a href="#(CPATH)/ucenter/finance/amount/payout">提现</a>
-            #end
-            <a href="#(CPATH)/ucenter/finance/amount/recharge">充值</a>
+            <div class="ui basic buttons">
+              #if(option('payout_enable'))
+              <div class="ui button">
+                <a href="#(CPATH)/ucenter/finance/amount/payout">提现</a>
+              </div>
+              #end
+              <div class="ui button">
+                <a href="#(CPATH)/ucenter/finance/amount/recharge">充值</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

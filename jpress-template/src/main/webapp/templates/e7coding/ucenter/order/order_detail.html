@@ -1,7 +1,7 @@
 #include("../u_layout.html")
 #@ucenter_layout("订单信息")
 #define script()
-<script src="#(CPATH)/static/front/js/jquery.min.js"></script>
+
 <script src="#(CPATH)/static/components/jquery/jquery.form.min.js"></script>
 <script>
     function addMessage() {
@@ -234,6 +234,7 @@
             <form class="ui form" autocomplete="off" id="submitMsgForm"
                   action="#(CPATH)/ucenter/order/doAddMessage"
                   method="POST"
+                  data-ok-function="parent.layer.closeAll()"
             >
                 <input type="hidden" name="orderId" value="#(order.id ??)">
                 <div class="field">

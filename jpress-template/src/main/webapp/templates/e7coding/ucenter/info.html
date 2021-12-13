@@ -1,12 +1,15 @@
 #include("./u_layout.html")
 #@ucenter_layout("基本信息")
+#define script()
+<script src="#(CPATH)/static/components/jquery/jquery.form.min.js"></script>
+#end
 #define content()
 <div class="twelve wide column">
   <div class="ui segment">
     <h1>
       <i class="info circle icon"></i> 基本信息
     </h1>
-    <form class="ui form" action="#(CPATH)/ucenter/doSaveUser">
+    <form class="ui form autoAjaxSubmit" action="#(CPATH)/ucenter/doSaveUser" data-ok-message="数据保存成功" autocomplete="off">
       <div class="field">
         <div class="ui labeled input">
           <div class="ui label">

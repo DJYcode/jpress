@@ -1,12 +1,18 @@
 #include("../u_layout.html")
 #@ucenter_layout("提现申请")
+#define script()
+<script src="#(CPATH)/static/components/jquery/jquery.form.min.js"></script>
+<script src="#(CPATH)/static/components/jquery-validation/jquery.validate.min.js"></script>
+#end
 #define content()
 <div class="twelve wide column">
     <div class="ui segment">
         <h1>
-            <i class="info circle icon"></i> 基本信息
+            <i class="info circle icon"></i> 提现申请
         </h1>
-        <form class="ui form" action="#(CPATH)/ucenter/finance/amount/doPayoutSubmit">
+        <form class="ui form autoAjaxSubmit" autocomplete="off"
+              data-ok-href="#(CPATH)/ucenter/finance/amount/payout"
+              action="#(CPATH)/ucenter/finance/amount/doPayoutSubmit">
             <div class="field">
                 <div class="ui labeled input">
                     <div class="ui label">
@@ -47,22 +53,18 @@
                     <div class="ui label">
                         提现到
                     </div>
-                    <div class="ui selection dropdown">
-                        <input type="hidden" name="payType">
-                        <i class="dropdown icon"></i>
-                        <div class="default text">提现到</div>
-                        <div class="menu">
-                            <div class="item" data-value="alipay">支付宝账号</div>
-                            <div class="item" data-value="wechat">微信账号</div>
-                            <div class="item" data-value="boc">中国银行</div>
-                            <div class="item" data-value="abc">农业银行</div>
-                            <div class="item" data-value="icbc">工商银行</div>
-                            <div class="item" data-value="ccb">建设银行</div>
-                            <div class="item" data-value="bankcomm">交通银行</div>
-                            <div class="item" data-value="cmb">招商银行</div>
-                            <div class="item" data-value="otherbank">其他银行</div>
-                        </div>
-                    </div>
+                    <select class="ui dropdown">
+                        <option value="">提现到</option>
+                        <option value="alipay">支付宝账号</option>
+                        <option value="wechat">微信账号</option>
+                        <option value="boc">中国银行</option>
+                        <option value="abc">农业银行</option>
+                        <option value="icbc">工商银行</option>
+                        <option value="ccb">建设银行</option>
+                        <option value="bankcomm">交通银行</option>
+                        <option value="cmb">招商银行</option>
+                        <option value="otherbank">其他银行</option>
+                    </select>
                 </div>
             </div>
             <div class="field">
