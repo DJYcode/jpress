@@ -1,0 +1,49 @@
+#include("../u_layout.html")
+#@ucenter_layout("文章收藏")
+#define script()
+<script>
+    function doDelFavorite(id) {
+        if (confirm("确定要删除该内容吗？")) {
+            ajaxGet("#(CPATH)/ucenter/product/doDelFavorite?id=" + id)
+        }
+    }
+</script>
+#end
+#define content()
+<div class="twelve wide column">
+    <div class="ui segment">
+        <h1>
+            <i class="icon heart outline" aria-hidden="true"></i> 文章收藏
+        </h1>
+        <div class="content extra-padding rm-link-color">
+            <div class="article-content">
+                <div class="extra-padding" style="padding-bottom:4px">
+                    <div class="ui feed blog-article-list rm-link-color">
+                        #for(favorite : page.list ??)
+                        <div class="event">
+                            <div class="content">
+                                <div class="summary">
+                                    <a href="#(CPATH)#(favorite.link ??)" target="_blank" class="title">#(favorite.title ??)</a>
+                                </div>
+
+                                <div class="meta" style="line-height: 34px;">
+                                    <div class="date" style="font-size: 13px;margin: 7px 0em 0em;margin-left:0px">
+                                        <a href="#(CPATH)#(favorite.link ??)" target="_blank">查看</a>
+                                        <span class="divider">|</span>
+                                        <a href="javascript:void(0);" onclick="doDelFavorite('#(favorite.id??)')" class="red-action">删除</a>
+                                        <span class="divider">|</span>
+                                        <a class="" data-tooltip="#date(favorite.created)"><span title="#date(favorite.created)">#date(favorite.created)</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        #else
+                        <div class="empty-block">暂无数据~~</div>
+                        #end
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#end

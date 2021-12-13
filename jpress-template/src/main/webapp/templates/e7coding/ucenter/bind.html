@@ -23,85 +23,126 @@
                 </tr>
                 </thead>
                 <tbody>
+                #if(option("login_wechat_enable"))
                 <tr>
                   <td><i class="icon wechat green"></i> 微信</td>
                   <td>
+                    #if(userOpenidMap.get('wechat') != null)
                     <i class="icon checkmark green"></i> 已绑定
-                  </td>
-                  <td>
-                    <a class="item rm-link-color" href="javascript:;"
-                       data-url="https://learnku.com/users/unbind_social_login/wechat"
-                       data-method="POST" data-prompt="解除绑定后无法使用微信直接登录本站，请确定？"
-                       style="cursor: pointer;"><i class="icon remove red"></i> 解除绑定
-                      <form action="https://learnku.com/users/unbind_social_login/wechat"
-                            method="POST" style="display:none">
-                        <input type="hidden" name="_method" value="POST">
-                        <input type="hidden" name="_token"
-                               value="fgdCjTKG6KhxQYU9yItAsicoGkPoObJLhDuXVYUw">
-                      </form>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td><i class="icon github alternate"></i> GitHub</td>
-                  <td>
+                    #else
                     未绑定
+                    #end
                   </td>
                   <td>
-                    <a target="_blank" href="https://learnku.com/auth/oauth?driver=github"
-                       class="tdu">
-                      前往绑定
-                    </a>
+                    #if(userOpenidMap.get('wechat') != null)
+                    您已经绑定了账号微信账号：#(userOpenidMap.get('wechat').nickname ??)
+                    ，点击<a href="#(CPATH)/ucenter/unbind?type=wechat"> 这里 </a>取消绑定。
+                    #else
+                    您当前没有绑定微信账号，点击 <a href="#(CPATH)/oauth/wechat" target="_blank">这里</a> 进行绑定。
+                    #end
                   </td>
                 </tr>
+                #end
+                #if(option("login_github_enable"))
+                  <tr>
+                    <td><i class="icon github alternate"></i> GitHub</td>
+                    <td>
+                      #if(userOpenidMap.get('github') != null)
+                      <i class="icon checkmark green"></i> 已绑定
+                      #else
+                      未绑定
+                      #end
+                    </td>
+                    <td>
+                      #if(userOpenidMap.get('github') != null)
+                      您已经绑定了账号Github账号：#(userOpenidMap.get('github').nickname ??)
+                      ，点击<a href="#(CPATH)/ucenter/unbind?type=github"> 这里 </a>取消绑定。
+                      #else
+                      您当前没有绑定Github账号，点击 <a href="#(CPATH)/oauth/github" target="_blank">这里</a> 进行绑定。
+                      #end
+                    </td>
+                  </tr>
+                #end
+                #if(option("login_weibo_enable"))
                 <tr>
                   <td><i class="icon weibo alternate"></i> 微博</td>
                   <td>
+                    #if(userOpenidMap.get('weibo') != null)
+                    <i class="icon checkmark green"></i> 已绑定
+                    #else
                     未绑定
+                    #end
                   </td>
                   <td>
-                    <a target="_blank" href="https://learnku.com/auth/oauth?driver=github"
-                       class="tdu">
-                      前往绑定
-                    </a>
+                    #if(userOpenidMap.get('weibo') != null)
+                    您已经绑定了账号微博账号：#(userOpenidMap.get('weibo').nickname ??)
+                    ，点击<a href="#(CPATH)/ucenter/unbind?type=weibo"> 这里 </a>取消绑定。
+                    #else
+                    您当前没有绑定微博账号，点击 <a href="#(CPATH)/oauth/weibo" target="_blank">这里</a> 进行绑定。
+                    #end
                   </td>
                 </tr>
+                #end
+                #if(option("login_qq_enable"))
                 <tr>
                   <td><i class="icon qq alternate"></i> QQ</td>
                   <td>
+                    #if(userOpenidMap.get('qq') != null)
+                    <i class="icon checkmark green"></i> 已绑定
+                    #else
                     未绑定
+                    #end
                   </td>
                   <td>
-                    <a target="_blank" href="https://learnku.com/auth/oauth?driver=github"
-                       class="tdu">
-                      前往绑定
-                    </a>
+                    #if(userOpenidMap.get('qq') != null)
+                    您已经绑定了账号QQ账号：#(userOpenidMap.get('qq').nickname ??)
+                    ，点击<a href="#(CPATH)/ucenter/unbind?type=qq"> 这里 </a>取消绑定。
+                    #else
+                    您当前没有绑定QQ账号，点击 <a href="#(CPATH)/oauth/qq" target="_blank">这里</a> 进行绑定。
+                    #end
                   </td>
                 </tr>
+                #end
+                #if(option("login_dingding_enable"))
                 <tr>
                   <td><i class="icon telegram plane blue"></i> 钉钉</td>
                   <td>
+                    #if(userOpenidMap.get('dingding') != null)
+                    <i class="icon checkmark green"></i> 已绑定
+                    #else
                     未绑定
+                    #end
                   </td>
                   <td>
-                    <a target="_blank" href="https://learnku.com/auth/oauth?driver=github"
-                       class="tdu">
-                      前往绑定
-                    </a>
+                    #if(userOpenidMap.get('dingding') != null)
+                    您已经绑定了账号钉钉账号：#(userOpenidMap.get('dingding').nickname ??)
+                    ，点击<a href="#(CPATH)/ucenter/unbind?type=dingding"> 这里 </a>取消绑定。
+                    #else
+                    您当前没有绑定钉钉账号，点击 <a href="#(CPATH)/oauth/dingding" target="_blank">这里</a> 进行绑定。
+                    #end
                   </td>
                 </tr>
+                #end
+                #if(option("login_gitee_enable"))
                 <tr>
                   <td><i class="icon codiepie alternate"></i> 开源中国</td>
                   <td>
+                    #if(userOpenidMap.get('oschina') != null)
+                    <i class="icon checkmark green"></i> 已绑定
+                    #else
                     未绑定
+                    #end
                   </td>
                   <td>
-                    <a target="_blank" href="https://learnku.com/auth/oauth?driver=github"
-                       class="tdu">
-                      前往绑定
-                    </a>
+                    #if(userOpenidMap.get('oschina') != null)
+                    您已经绑定了账号开源中国账号：#(userOpenidMap.get('oschina').nickname ??)
+                    ，点击<a href="#(CPATH)/ucenter/unbind?type=oschina"> 这里 </a>取消绑定。
+                    #else
+                    您当前没有绑定开源中国账号，点击 <a href="#(CPATH)/oauth/oschina" target="_blank">这里</a> 进行绑定。
+                    #end
                   </td>
                 </tr>
+                #end
                 </tbody>
               </table>
 

@@ -1,0 +1,92 @@
+#include("../u_layout.html")
+#@ucenter_layout("提现申请")
+#define content()
+<div class="twelve wide column">
+    <div class="ui segment">
+        <h1>
+            <i class="credit card outline icon"></i> 提现申请
+        </h1>
+        <form class="ui form" autocomplete="off">
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        当前状态
+                    </div>
+                    #(payout.statusStr ??)
+                </div>
+            </div>
+            #if(payout.isRefuse())
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        拒绝原因
+                    </div>
+                    #(payout.feedback ??)
+                </div>
+            </div>
+            #end
+            #if(payout.isSuccess())
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        凭证
+                    </div>
+                    <img src="#(payout.pay_success_proof)" style="max-width: 100%">
+                </div>
+            </div>
+            #end
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        提现金额
+                    </div>
+                    <input type="text"  value="#number(payout.amount,'0.00')" readonly>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        身份证号码
+                    </div>
+                    <input type="text"  value="#(payout.user_idcard ??)" readonly>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        身份证姓名
+                    </div>
+                    <input type="text"  value="#(payout.user_real_name ??)" readonly>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        身份证姓名
+                    </div>
+                    <input type="text"  value="#(payout.payTypeStr ??)" readonly>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        收款账号
+                    </div>
+                    <input type="text"  value="#(payout.pay_to ??)" readonly>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        备注
+                    </div>
+                <textarea rows="3" class="form-control" readonly>#(payout.remarks ??)</textarea>
+                </div>
+            </div>
+
+            <button type="button" onclick="history.back()" class="btn btn-primary">返回</button>
+        </form>
+</div>
+</div>
+
+#end

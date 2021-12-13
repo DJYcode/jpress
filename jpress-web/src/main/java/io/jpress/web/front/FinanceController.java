@@ -59,7 +59,7 @@ public class FinanceController extends UcenterControllerBase {
 
         setAttr("userAmount", userService.queryUserAmount(getLoginedUser().getId()));
         setAttr("userAmountStatements", amountStatementService.findListByUserId(getLoginedUser().getId(), 10));
-        render("ucenter/amount.html",DEFAULT_FINANCE_AMOUNT_TEMPLATE);
+        render("ucenter/finance/amount.html",DEFAULT_FINANCE_AMOUNT_TEMPLATE);
     }
 
     public void payout() {
@@ -76,13 +76,13 @@ public class FinanceController extends UcenterControllerBase {
         setAttr("refuseCount", refuseCount);
         setAttr("successCount", successCount);
 
-        render("ucenter/payout.html",DEFAULT_FINANCE_PAYOUT_TEMPLATE);
+        render("ucenter/finance/payout.html",DEFAULT_FINANCE_PAYOUT_TEMPLATE);
     }
 
 
     public void payoutsubmit() {
         setAttr("userAmount", userService.queryUserAmount(getLoginedUser().getId()));
-        render("ucenter/payoutsubmit.html",DEFAULT_FINANCE_PAYOUT_SUBMIT_TEMPLATE);
+        render("ucenter/finance/payoutsubmit.html",DEFAULT_FINANCE_PAYOUT_SUBMIT_TEMPLATE);
     }
 
     public void payoutdetail() {
@@ -93,7 +93,7 @@ public class FinanceController extends UcenterControllerBase {
         setAttr("payout", payout);
         setAttr("userAmount", userService.queryUserAmount(getLoginedUser().getId()));
 
-        render("ucenter/payoutdetail.html");
+        render("ucenter/finance/payoutdetail.html");
     }
 
 
@@ -151,7 +151,7 @@ public class FinanceController extends UcenterControllerBase {
      */
     public void recharge() {
         PayConfigUtil.setConfigAttrs(this);
-        render("ucenter/recharge.html",DEFAULT_FINANCE_RECHARGE_TEMPLATE);
+        render("ucenter/finance/recharge.html",DEFAULT_FINANCE_RECHARGE_TEMPLATE);
     }
 
     /**

@@ -537,53 +537,45 @@
 
                     <div class="twelve wide column">
                         <div class="ui segment">
-                            <h1>
-                                <i class="icon image" aria-hidden="true"></i> 修改头像
-                            </h1>
-                            <div class="ui stacked segment">
-                                <div class="content px-3 py-3">
-
-                                    <div class="ui message warning my-3">
-                                        <b><i class="icon info"></i> 请注意：</b>
-                                        <p>上传闪烁、奇异、违法、色情头像，情节严重者将会被封号处理。</p>
+                            <div class="ui cards">
+                                <div class="card">
+                                    <div class="content">
+                                        <img class="right floated mini ui image" src="/images/avatar/large/elliot.jpg">
+                                        <div class="header">Elliot Fu </div>
+                                        <div class="meta">Veronika 的好友 </div>
+                                        <div class="description">
+                                            Elliot requested permission to view your contact details
+                                        </div>
                                     </div>
-
-
-                                    <form class="ui form" method="POST" action="https://learnku.com/users/91191/update_avatar"
-                                          enctype="multipart/form-data" accept-charset="UTF-8">
-                                        <input name="_method" type="hidden" value="PATCH">
-                                        <input type="hidden" name="_token" value="KbRAGMop6xekVJ25F7Yq4yagr1d13tW2PM4b7Vmu">
-
-                                        <div id="image-preview-div">
-                                            <img id="preview-img" class="avatar-preview-img image-border "
-                                                 src="./LearnKu 终身编程者的知识社区_files/380x380" width="320">
+                                    <div class="extra content">
+                                        <div class="ui two buttons">
+                                            <div class="ui basic green button">Approve</div>
+                                            <div class="ui basic red button">Decline</div>
                                         </div>
-
-                                        <div class="mb-3 mt-3">
-                                            <label for="exampleInputFile">请选择图片：</label>
+                                    </div>
+                                </div>
+                                <div class=" card">
+                                    <div class="content">
+                                        <div class="header">
+                                            <a class="ui green ribbon label">尚未生效</a>
+                                            Jenny Hess
                                         </div>
-
-
-                                        <div class="filed">
-                                            <input type="file" name="avatar" id="file" required="">
+                                        <div class="description">
+                                            <strong>拥有权限</strong>
+                                            <ul class="ui list">
+                                                <li>增加权限</li>
+                                                <li>邀请好友</li>
+                                                <li>利益</li>
+                                                <li>Warranty</li>
+                                            </ul>
                                         </div>
-
-                                        <div class="filed mt-3">
-                                            <button class="ui button primary" id="upload-button" type="submit">上传头像</button>
+                                    </div>
+                                    <div class="extra content">
+                                        <div class="ui two buttons">
+                                            <div class="ui basic blue button"><a href="http://google.com">查看福利</a></div>
+                                            <div class="ui basic blue button"><a href="#">加入会员</a></div>
                                         </div>
-
-
-                                        <div class="ui message warning" id="loading" style="display: none;" role="alert">
-                                            图片上传中...
-                                            <div class="progress">
-                                                <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                                     aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="message"></div>
-                                    </form>
-
+                                    </div>
                                 </div>
                             </div>
                         </div>

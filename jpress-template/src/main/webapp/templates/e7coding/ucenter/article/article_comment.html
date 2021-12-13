@@ -1,0 +1,53 @@
+#include("../u_layout.html")
+#@ucenter_layout("文章评论")
+#define script()
+<script>
+    function doDelComment(id) {
+        if (confirm("确定要删除这条评论吗？删除后不可恢复")) {
+            ajaxGet("#(CPATH)/ucenter/article/doCommentDel?id=" + id)
+        }
+    }
+
+</script>
+#end
+#define content()
+<div class="twelve wide column">
+    <div class="ui segment">
+        <h1>
+            <i class="icon comment outline" aria-hidden="true"></i> 文章评论
+        </h1>
+    <table class="ui blue table">
+        <thead>
+        <tr>
+            <th>内容</th>
+            <th>回复至</th>
+            <th style="width: 50px"></th>
+            <th>发布时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        #for(comment : page.list ??)
+        <tr>
+            <td> #(comment.content ??)
+                <strong>
+                    #if(comment.isUnaudited()) <span style="color:#007bff;">(待审核) </span>#end
+                </strong></td>
+            <td>
+                <a href="#(comment.article.url ??)" target="_blank">
+                    #(comment.article.title ??)
+                </a>
+            </td>
+            <td>#(comment.comment_count ??)</td>
+            <td>#date(comment.created)</td>
+            <td><a style="color:#007bff;" href="javascript:;" onclick="doDelComment('#(comment.id)')">删除</a></td>
+        </tr>
+        #else
+        <tr class="nodata"><td colspan="999">暂无数据</td> </tr>
+        #end
+
+        </tbody>
+    </table>
+    </div>
+</div>
+#end

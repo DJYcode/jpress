@@ -51,7 +51,7 @@ public class OrderController extends UcenterControllerBase {
     public void index() {
         Page<UserOrder> userOrderPage = orderService.paginateByUserId(getPagePara(), 10, getLoginedUser().getId(), getPara("title"), getPara("ns"));
         setAttr("userOrderPage", userOrderPage);
-        render("ucenter/order_list.html",DEFAULT_ORDER_LIST_INDEX_TEMPLATE);
+        render("ucenter/order/order_list.html",DEFAULT_ORDER_LIST_INDEX_TEMPLATE);
     }
 
 
@@ -95,7 +95,7 @@ public class OrderController extends UcenterControllerBase {
 
         setAttr("order", order);
 
-        render("ucenter/order_detail.html",DEFAULT_ORDER_DETAIL_INDEX_TEMPLATE);
+        render("ucenter/order/order_detail.html",DEFAULT_ORDER_DETAIL_INDEX_TEMPLATE);
     }
 
     public void comment() {

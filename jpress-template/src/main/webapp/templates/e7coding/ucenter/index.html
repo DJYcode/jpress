@@ -7,24 +7,44 @@
             <div class="ui divided items">
                 <div class="item">
                     <div class="middle aligned content">
-                        绑定邮箱: djycode@126.com
+                        绑定邮箱:
+                        #if(user.email )
+                        #(user.email )
+                        #else
+                        您还未绑定邮箱，点击<a href="#(CPATH)/ucenter/info"> 这里 </a> 进行绑定。
+                        #end
                     </div>
                 </div>
                 <div class="item">
 
                     <div class="middle aligned content">
-                        绑定手机: 您还未绑定手机，点击 这里 进行绑定。
+                        绑定手机:
+                        #if(user.mobile )
+                        #(user.mobile)
+                        #else
+                        您还未绑定手机，点击<a href="#(CPATH)/ucenter/info"> 这里 </a> 进行绑定。
+                        #end
                     </div>
                 </div>
                 <div class="item">
 
                     <div class="middle aligned content">
-                        当前身份: 程序猿一枚
+                        当前身份:
+                        #if(user.identity )
+                        #(user.identity )
+                        #else
+                        您还未设置个人身份，点击<a href="#(CPATH)/ucenter/info"> 这里 </a> 进行设置。
+                        #end
                     </div>
                 </div>
                 <div class="item">
                     <div class="middle aligned content">
-                        我的签名: 您未设置签名，点击 这里 写点心情吧...
+                        我的签名:
+                        #if(user.signature )
+                        #(user.signature )
+                        #else
+                        您未设置签名，点击<a href="#(CPATH)/ucenter/info"> 这里 </a> 写点心情吧...
+                        #end
                     </div>
                 </div>
             </div>

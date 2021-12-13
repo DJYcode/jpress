@@ -1,5 +1,62 @@
 #include("./u_layout.html")
 #@ucenter_layout("修改头像")
+#define script()
+<script src="#(CPATH)/static/components/jcrop/js/jquery.jcrop.min.js"></script>
+<script src="#(CPATH)/static/components/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="#(CPATH)/static/components/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="#(CPATH)/static/components/jquery-file-upload/js/jquery.fileupload.js"></script>
+<script>
+
+    var jcrop_api;
+    $('#cfile').fileupload({
+        dropZone: $('#uploader'),
+        url: '#(CPATH)/commons/attachment/upload',
+        sequentialUploads: true,
+        done: function (e, data) {
+            if (data.result.state == "ok") {
+                if (jcrop_api) {
+                    jcrop_api.destroy()
+                }
+                var src = data.result.src;
+                $("#path").val(src);
+                $("#avatarimg").attr("src", "#(CPATH)" + src);
+                $('#avatarimg').Jcrop({
+                    setSelect: [30, 30, 250, 250],
+                    minSize: [50, 50],
+                    aspectRatio: 1,
+                    onSelect: updateSelect,
+                    onChange: updateSelect
+                }, function () {
+                    jcrop_api = this;
+                });
+            }
+        }
+    });
+
+    function updateSelect(c) {
+        $('#x').val(c.x);
+        $('#y').val(c.y);
+        $('#w').val(c.w);
+        $('#h').val(c.h);
+    }
+
+    function submitSuccess() {
+        toastr.options.onHidden = function () {
+            location.reload();
+        }
+        toastr.success('头像修改成功，2s后自动刷新...');
+    }
+
+</script>
+#end
+#define css()
+<link rel="stylesheet" href="#(CPATH)/static/components/jcrop/css/jquery.jcrop.min.css" rel="stylesheet">
+<link rel="stylesheet" href="#(CPATH)/static/components/jquery-file-upload/css/jquery.fileupload.css">
+
+<style>
+
+</style>
+#end
 #define content()
 <div class="twelve wide column">
     <div class="ui segment">
@@ -15,14 +72,14 @@
                 </div>
 
 
-                <form class="ui form" method="POST" action="https://learnku.com/users/91191/update_avatar"
+                <form class="ui form" method="POST" action="#(CPATH)/ucenter/doSaveAvatar"
                       enctype="multipart/form-data" accept-charset="UTF-8">
                     <input name="_method" type="hidden" value="PATCH">
                     <input type="hidden" name="_token" value="KbRAGMop6xekVJ25F7Yq4yagr1d13tW2PM4b7Vmu">
 
                     <div id="image-preview-div">
                         <img id="preview-img" class="avatar-preview-img image-border "
-                             src="" width="320">
+                             src="#(CPATH)/static/commons/img/avatar.png" width="320" >
                     </div>
 
                     <div class="mb-3 mt-3">

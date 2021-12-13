@@ -37,7 +37,7 @@ public class CouponController extends UcenterControllerBase {
     public void index() {
         List<CouponCode> renderList = couponCodeService.findAvailableByUserId(getLoginedUser().getId());
         setAttr("couponCodeList", renderList);
-        render("ucenter/coupon_list.html",DEFAULT_COUPON_LIST_TEMPLATE);
+        render("ucenter/coupon/coupon_list.html",DEFAULT_COUPON_LIST_TEMPLATE);
     }
 
 

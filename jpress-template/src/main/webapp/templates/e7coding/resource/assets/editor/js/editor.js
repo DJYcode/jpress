@@ -1410,7 +1410,7 @@ function merge_options(e, t) {
                 styleActiveLine: !1,
                 toolbarIcons: ["h2", "h3", "quote", "|", "list-ul", "list-ol", "|", "link", "image", "code-block", "table", "emoji", "|", "watch", "fullscreen", "help"],
                 lineNumbers: !1,
-                path: "",
+                path: "resource/assets/editor/lib",
                 imageUpload: !0,
                 imageUploadURL: Config.routes.upload_image,
                 emoji: !0,

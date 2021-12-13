@@ -1,0 +1,18 @@
+#include("../u_layout.html")
+#@ucenter_layout("我的会员")
+#define content()
+<div class="twelve wide column">
+    <div class="ui segment">
+        <h1>
+            <i class="icon lightbulb outline" aria-hidden="true"></i> 会员详情
+        </h1>
+        <div class="ui segment">
+            <h2>#(memberGroup.title ??)</h2>
+            #(memberGroup.content ??)
+        </div>
+        <a href="#(CPATH)/ucenter/member/join/#(memberGroup.id)" class="btn btn-primary">
+            加入会员
+        </a>
+    </div>
+</div>
+#end

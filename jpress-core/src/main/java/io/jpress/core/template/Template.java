@@ -17,6 +17,7 @@ package io.jpress.core.template;
 
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.Prop;
+import io.jboot.utils.CollectionUtil;
 import io.jboot.utils.FileUtil;
 import io.jboot.utils.StrUtil;
 import org.apache.commons.io.FileUtils;
@@ -41,6 +42,8 @@ public class Template {
 
     private Set<String> htmls = new HashSet<>();
     private List<String> flags = new ArrayList<>();
+
+    private static final String UCENTER_DIR_NAME = "ucenter";
 
     public Template() {
 
@@ -83,14 +86,32 @@ public class Template {
         if (files != null && files.length > 0) {
             this.htmls.addAll(Arrays.asList(files));
         }
-        String[] ucenterFiles = new File(path.getPath() + "/ucenter")
-                .list((dir, name) -> name.endsWith(".html"));
-        if (ucenterFiles != null && ucenterFiles.length > 0) {
-            for (int i = 0; i < ucenterFiles.length; i++) {
-                ucenterFiles[i] = "ucenter/" + ucenterFiles[i];
+        String basicPath = path.getPath() + "/" + UCENTER_DIR_NAME;
+        File ucenter = new File(basicPath);
+        File[] listFiles = ucenter.listFiles();
+        if (listFiles != null && listFiles.length > 0) {
+            for (File file : listFiles) {
+                if (file.isDirectory()) {
+                    String[] htmlFiles = new File(basicPath + "/"+file.getName())
+                            .list((dir, name) -> name.endsWith(".html"));
+                    if (htmlFiles != null && htmlFiles.length >0) {
+                        for (String htmlFile : htmlFiles) {
+                            this.htmls.add(UCENTER_DIR_NAME + "/"+ file.getName() + "/" +  htmlFile);
+                        }
+                    }
+                } else if (file.getName().endsWith(".html")){
+                    this.htmls.add(UCENTER_DIR_NAME + "/"+ file.getName());
+                }
             }
-            this.htmls.addAll(Arrays.asList(ucenterFiles));
         }
+//        String[] ucenterFiles = new File(path.getPath() + "/ucenter")
+//                .list((dir, name) -> name.endsWith(".html"));
+//        if (ucenterFiles != null && ucenterFiles.length > 0) {
+//            for (int i = 0; i < ucenterFiles.length; i++) {
+//                ucenterFiles[i] = "ucenter/" + ucenterFiles[i];
+//            }
+//            this.htmls.addAll(Arrays.asList(ucenterFiles));
+//        }
 
         String flagStrings = prop.get("flags");
         if (StrUtil.isNotBlank(flagStrings)) {

@@ -1,0 +1,261 @@
+#include("../u_layout.html")
+#@ucenter_layout("订单信息")
+#define script()
+<script src="#(CPATH)/static/front/js/jquery.min.js"></script>
+<script src="#(CPATH)/static/components/jquery/jquery.form.min.js"></script>
+<script>
+    function addMessage() {
+        $('.ui.submitMsg.modal')
+            .modal({
+                closable  : false,
+                onDeny    : function(){
+                    return true;
+                },
+                onApprove : function() {
+                    $("#submitMsgForm").ajaxSubmit({
+                        type: "post",
+                        success: function (data) {
+                            location.reload();
+                        },
+                        error: function () {
+                            alert("系统错误，请联系管理员。");
+                        }
+                    });
+                }
+            })
+            .modal('show')
+        ;
+    }
+
+    function doFlagDelivery() {
+        if (confirm("确定已经收到货物？")) {
+            ajaxGet("#(CPATH)/ucenter/order/doFlagDelivery/#(order.id)", function () {
+                location.reload()
+            })
+        }
+    }
+
+    function applyForInvoice() {
+        openlayer("申请发票", "#(CPATH)/ucenter/order/applyForInvoice/#(order.id)");
+    }
+
+</script>
+#end
+#define content()
+<div class="twelve wide column">
+    <div class="ui segment">
+        <h1>
+            <i class="icon clipboard outline" aria-hidden="true"></i> 订单信息
+        </h1>
+        <div class="ui segments">
+            <div class="ui left aligned segment">
+                订单号：#(order.ns ??)
+            </div>
+            #if(order.buyer_msg)
+                <div class="ui segment">
+                    <p> 用户留言:#(order.buyer_msg)</p>
+                </div>
+            #end
+        </div>
+        <h4 class="ui horizontal divider header">
+            <i class="bar chart icon"></i>
+            基本信息
+        </h4>
+        <table class="ui definition table">
+            <tbody>
+            <tr>
+                <td class="two wide column">价格</td>
+                <td>#number(order.orderRealAmount ,'0.00') 元</td>
+            </tr>
+            <tr>
+                <td>订单用户</td>
+                <td>#(orderUser.nickname ??)</td>
+            </tr>
+            <tr>
+                <td>支付状态</td>
+                <td>#(order.payStatusStr ??)</td>
+            </tr>
+            <tr>
+                <td>物流状态</td>
+                <td>#(order.deliveryStatusStr ??)</td>
+            </tr>
+            <tr>
+                <td>发票状态</td>
+                <td>#(order.invoiceStatusStr ??)</td>
+            </tr>
+            </tbody>
+        </table>
+        <h4 class="ui horizontal divider header">
+            <i class="bar chart icon"></i>
+            收件信息
+        </h4>
+        <table class="ui definition table">
+            <tbody>
+            <tr>
+                <td class="two wide column">收件人</td>
+                <td>#(order.delivery_addr_username ??)</td>
+            </tr>
+            <tr>
+                <td>电话</td>
+                <td>#(order.delivery_addr_mobile ??)</td>
+            </tr>
+            <tr>
+                <td>编码</td>
+                <td>#(order.delivery_addr_zipcode ??)</td>
+            </tr>
+            <tr>
+                <td>地址</td>
+                <td>#(order.delivery_addr_province ??) #(order.delivery_addr_city ??) #(order.delivery_addr_district
+                    ??)<br>
+                    #(order.delivery_addr_detail ??)
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <h4 class="ui horizontal divider header">
+            <i class="bar chart icon"></i>
+            发票信息
+        </h4>
+        <table class="ui definition table">
+            <tbody>
+            <tr>
+                <td class="two wide column">类型</td>
+                <td>#(invoice.type ??)</td>
+            </tr>
+            <tr>
+                <td>抬头</td>
+                <td>#(invoice.title ??)</td>
+            </tr>
+            <tr>
+                <td>内容</td>
+                <td>#(invoice.content ??)</td>
+            </tr>
+            <tr>
+                <td>纳税人识别号</td>
+                <td>#(invoice.identity ??)</td>
+            </tr>
+            </tbody>
+        </table>
+        <h4 class="ui horizontal divider header">
+            <i class="bar chart icon"></i>
+            商品信息
+        </h4>
+        <table class="ui blue table">
+            <thead>
+            <tr>
+                <th style="text-align: center">商品</th>
+                <th style="text-align: center">数量</th>
+                <th style="text-align: center">单价</th>
+                <th style="text-align: center">总价</th>
+                <th style="text-align: center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            #for(item : orderItems)
+            <tr>
+                <td style="width: 20%;text-align: center">
+                    #(item.product_title ??)
+                    <div style="color: #9c9c9c">
+                        #for(option : item.optionsMap)
+                        #(option.key ??) : #(option.value ??) #if(!(for.last))<br/>#end
+                        #end
+                    </div>
+                </td>
+                <td style="width: 20%;text-align: center">
+                    #(item.product_count ??)
+                </td>
+                <td style="width: 20%;text-align: center">
+                    #(item.product_price ??)
+                </td>
+                <td style="width: 20%;text-align: center">
+                    #(item.product_price * item.product_count ??)
+                </td>
+                <td style="width: 20%;text-align: center">
+                    #if(item.comment_path ??)
+                    <a href="#(CPATH)/ucenter/order/comment/#(item.id)" target="_blank">评价</a>
+                    #end
+
+                    #if(item.canView())
+                    <a href="#(CPATH)#(item.view_path ??)itemId=#(item.id)" target="_blank">
+                        #(item.view_text ??)
+                    </a>
+                    #end
+
+                    #if(!item.comment_path && !item.canview)
+                    - -
+                    #end
+                </td>
+            </tr>
+            #end
+            </tbody>
+        </table>
+        <div class="ui horizontal segments">
+            <div class="ui right aligned segment">
+                <div class="ui basic buttons">
+                    #if(order.isUnpay() && !order.isClosed())
+                        <div class="ui button">
+                            <a href="#(CPATH)/ucenter/checkout/order/#(order.id)" class="btn btn-success" target="_blank">
+                            <i class="fa fa-credit-card"></i> 去付款
+                            </a>
+                        </div>
+                    #end
+                    #if(order.isDeliveried() && !order.isDeliverFinished())
+                    <div class="ui button">
+                        <a href="javascript:;" class="btn btn-success " onclick="doFlagDelivery()">
+                        <i class="fa fa-fw fa-clipboard-check"></i> 确认收货
+                        </a>
+                    </div>
+                    #end
+                    #if(order.isCanApplyForInvoice())
+                    <div class="ui button">
+                        <a href="javascript:;" class="btn btn-success " onclick="applyForInvoice()">
+                            <i class="fa fa-fw fa-keyboard"></i> 申请发票
+                        </a>
+                    </div>
+                    #end
+                    <div class="ui button">
+                        <a href="javascript:;" class="btn btn-success " onclick="addMessage()">
+                            <i class="fa fa-fw fa-keyboard"></i> 提交留言
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 提交留言弹窗 -->
+<div class="ui submitMsg modal">
+    <i class="close icon"></i>
+    <div class="header">
+        提交留言
+    </div>
+    <div class="content">
+        <div class="description">
+            <form class="ui form" autocomplete="off" id="submitMsgForm"
+                  action="#(CPATH)/ucenter/order/doAddMessage"
+                  method="POST"
+            >
+                <input type="hidden" name="orderId" value="#(order.id ??)">
+                <div class="field">
+                    <div class="ui labeled input">
+                        <div class="ui label">
+                            留言信息
+                        </div>
+                        <textarea rows="5" name="message" class="form-control"
+                                  placeholder="留言信息...">#(order.buyer_msg ??)</textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            关闭
+        </div>
+        <div class="ui positive right labeled icon button">
+            提交
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+#end

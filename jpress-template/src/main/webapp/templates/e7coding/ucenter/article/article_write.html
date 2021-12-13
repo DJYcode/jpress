@@ -211,7 +211,7 @@
                             <input type="text" placeholder="搜索分类">
                         </div>
 
-                        <a class="item pr-3 mt-2" href="index.html">
+                        <a class="item pr-3 mt-2" href="../index.html">
                             <img class="ui image" style="width:20px;height:20px;margin-top:-2px;" src="resource/img/admin.gif"> 首页
                         </a>
                         <div class="divider clearfix"></div>
@@ -295,8 +295,10 @@
                         </div>
 
 
-                        <form method="POST" action="" accept-charset="UTF-8"
+                        <form method="POST" action="#(CPATH)/ucenter/article/doWriteSave" accept-charset="UTF-8"
                               id="article-create-form" class="ui form">
+                            <input type="hidden" id="articleId" name="article.id" value="#(article.id ??)">
+                            <input type="hidden" id="editModeId" name="article.edit_mode" value="#(editMode ??)">
 
                             <input name="editor_unique_id" type="hidden" value="">
                             <input name="category_id" type="hidden" value="8">
@@ -305,7 +307,11 @@
                             <div class="fields">
                                 <div class=" three wide field ">
                                     <div class="ui fluid search selection dropdown community-selection">
-                                        <input type="hidden" name="community_id" value="0" required="">
+                                        #for(category : categories)
+                                        #if(category.isCheck)
+                                        <input type="hidden" name="category" value="#(category.id)" required="">
+                                        #end
+                                        #end
                                         <i class="dropdown icon"></i>
                                         <input class="search" autocomplete="off" tabindex="0">
                                         <div class="text"></div>
@@ -313,45 +319,34 @@
                                             <div class="item" data-value="0">
                                                 选择分类
                                             </div>
-                                            <div class="item" data-value="1">
+                                            #for(category : categories)
+                                            <div class="item" data-value="#(category.id)">
                                                 <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
-                                                     src="">
-                                                Laravel
+                                                     src="#(category.icon ??)">
+                                                #(category.title ??)
                                             </div>
-                                            <div class="item" data-value="6">
-                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
-                                                     src="">
-                                                Go
-                                            </div>
-                                            <div class="item" data-value="8">
-                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
-                                                     src="">
-                                                PHP
-                                            </div>
-                                            <div class="item" data-value="5">
-                                                <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
-                                                     src="">
-                                                Vue.js
-                                            </div>
+                                            #end
                                         </div>
                                         <div class="results"></div>
                                     </div>
                                 </div>
                                 <div class="thirteen wide field">
-                                    <input class="form-control" type="text" name="title" id="title-field" value=""
+                                    <input class="form-control" type="text" name="article.title" id="title-field" value="#(article.title ??)"
                                            placeholder="请输入文章标题" required/>
                                 </div>
                             </div>
                             <div class="inline fields">
                                 <div class="five wide disabled field">
-                                    <input type="text" value="网址：http://www.e7coding.com/article/" readonly disabled>
+                                    <input type="text" value="网址：#option('web_domain')/article/" readonly disabled>
                                 </div>
                                 <div class="two wide field">
-                                    <input type="text" placeholder="页面标识">
+                                    <input type="text" placeholder="页面标识" value="#(article.slug ??)">
                                 </div>
+                                #if(option("web_fake_static_enable"))
                                 <div class="two wide disabled field">
-                                    <input type="text" value=".html" readonly disabled>
+                                    <input type="text" value="#option('web_fake_static_suffix')" readonly disabled>
                                 </div>
+                                #end
                             </div>
 
 
@@ -389,17 +384,26 @@
                                 <div class="content">
                                     <div class="field">
                                         <label>SEO关键字</label>
-                                        <textarea rows="3"></textarea>
+                                        <textarea rows="3" name="article.meta_keywords" placeholder="请输入">#(article.meta_keywords ??)</textarea>
                                     </div>
                                     <div class="field">
                                         <label>SEO描述</label>
-                                        <textarea rows="4"></textarea>
+                                        <textarea rows="4" name="article.meta_description"
+                                                  placeholder="请输入">#(article.meta_description ??)</textarea>
                                     </div>
 
                                     <div class="field">
                                         <label>输入标签（多个标签请用 “回车键” 或英文逗号（,）隔开）</label>
-                                        <input type="text" name="position"  value=""
-                                               placeholder="多个标签请用 “回车键” 或英文逗号（,）隔开" />
+                                        <select class="ui fluid normal dropdown" multiple="multiple" name="tag">
+                                            #for(tag : tags)
+                                            <option value="#(tag.title ??)" selected>#(tag.title ??)</option>
+                                            #end
+                                        </select>
+                                        #tags(count = 20)
+                                        #for(tag : tags)
+                                        <a href="javascript:;" class="newTag">#(tag.title)</a>
+                                        #end
+                                        #end
                                     </div>
                                 </div>
                             </div>
@@ -419,7 +423,7 @@
         </div>
 
     </div>
-    #include("../footer.html")
+    #include("../../footer.html")
 </div>
 
 <!-- 登录弹窗 -->

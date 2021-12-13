@@ -76,7 +76,7 @@ public class ArticleUCenterController extends UcenterControllerBase {
         Page<Article> page = articleService._paginateByUserId(getPagePara(), 10, loginedUser.getId());
         setAttr("page", page);
 
-        render("ucenter/article_list.html",DEFAULT_ARTICLE_LIST_VIEW);
+        render("ucenter/article/article_list.html",DEFAULT_ARTICLE_LIST_VIEW);
     }
 
     public void doDel() {
@@ -146,7 +146,7 @@ public class ArticleUCenterController extends UcenterControllerBase {
         Long[] categoryIds = categoryService.findCategoryIdsByArticleId(articleId);
         flagCheck(categories, categoryIds);
 
-        render("ucenter/article_write.html",DEFAULT_ARTICLE_WRITE_VIEW);
+        render("ucenter/article/article_write.html",DEFAULT_ARTICLE_WRITE_VIEW);
     }
 
     private void flagCheck(List<ArticleCategory> categories, Long... checkIds) {
@@ -260,7 +260,7 @@ public class ArticleUCenterController extends UcenterControllerBase {
     public void comment() {
         Page<ArticleComment> page = commentService._paginateByUserId(getPagePara(), 10, getLoginedUser().getId());
         setAttr("page", page);
-        render("ucenter/comment_list.html",DEFAULT_COMMENT_LIST_VIEW);
+        render("ucenter/article/article_comment.html",DEFAULT_COMMENT_LIST_VIEW);
     }
 
 
@@ -268,7 +268,7 @@ public class ArticleUCenterController extends UcenterControllerBase {
     public void favorite() {
         Page<UserFavorite> page = favoriteService.paginateByUserIdAndType(getPagePara(), 10, getLoginedUser().getId(), "article");
         setAttr("page", page);
-        render("ucenter/article_favorite.html",DEFAULT_ARTICLE_FAVORITE_VIEW);
+        render("ucenter/article/article_favorite.html",DEFAULT_ARTICLE_FAVORITE_VIEW);
     }
 
 

@@ -1,0 +1,90 @@
+#include("../u_layout.html")
+#@ucenter_layout("提现申请")
+#define content()
+<div class="twelve wide column">
+    <div class="ui segment">
+        <h1>
+            <i class="info circle icon"></i> 基本信息
+        </h1>
+        <form class="ui form" action="#(CPATH)/ucenter/finance/amount/doPayoutSubmit">
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        您当前余额
+                    </div>
+                    <input type="text"  value="#number(userAmount,'0.00')" readonly>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        提现金额
+                    </div>
+                    <input type="text"   placeholder="请输入提现金额，单位：元..."
+                           value="" name="payoutAmount">
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        身份证号码
+                    </div>
+                    <input type="text"   placeholder="真实身份证号码..."
+                           value="" name="payoutAmount">
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        身份证姓名
+                    </div>
+                    <input type="text"   placeholder="您的真实姓名"
+                           value="" name="payoutAmount">
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        提现到
+                    </div>
+                    <div class="ui selection dropdown">
+                        <input type="hidden" name="payType">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">提现到</div>
+                        <div class="menu">
+                            <div class="item" data-value="alipay">支付宝账号</div>
+                            <div class="item" data-value="wechat">微信账号</div>
+                            <div class="item" data-value="boc">中国银行</div>
+                            <div class="item" data-value="abc">农业银行</div>
+                            <div class="item" data-value="icbc">工商银行</div>
+                            <div class="item" data-value="ccb">建设银行</div>
+                            <div class="item" data-value="bankcomm">交通银行</div>
+                            <div class="item" data-value="cmb">招商银行</div>
+                            <div class="item" data-value="otherbank">其他银行</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        收款账号
+                    </div>
+                    <input type="text"   placeholder="请务必填写正确..."
+                           value="" name="payTo">
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        备注
+                    </div>
+                    <textarea rows="3"  placeholder="提现备注..." name="remarks"></textarea>
+                </div>
+            </div>
+
+            <button class="ui primary basic button" type="submit">申请提现</button>
+        </form>
+    </div>
+</div>
+#end

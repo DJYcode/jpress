@@ -1,0 +1,119 @@
+#include("../u_layout.html")
+#@ucenter_layout("加入会员")
+#define script()
+<script>
+
+    $(document).ready(function () {
+        $("[name='paytype']:first").attr("checked", "checked");
+    });
+
+    function ok(data) {
+        if (isMobileBrowser()) {
+            location.href = data.gotoUrl;
+        } else {
+            window.open(data.gotoUrl, '_blank')
+        }
+    }
+
+</script>
+#end
+
+#define content()
+<div class="twelve wide column">
+    <div class="ui segment">
+        <h1>
+            <i class="credit gem outline icon"></i> 加入会员
+        </h1>
+        <!-- form start -->
+        <form  class="ui form autoAjaxSubmit" autocomplete="off" action="#(CPATH)/ucenter/member/joining" method="post"
+              data-ok-function="ok"
+        >
+            <input type="hidden" name="groupId" value="#(memberGroup.id)">
+            <h4 class="ui dividing header">基本介绍</h4>
+
+            <div class="ui divided items">
+                <div class="item">
+                    <div class="ui tiny image">
+                        会员名称：
+                    </div>
+                    <div class="middle aligned content">
+                        <strong>#(memberGroup.title ??)</strong>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="ui tiny image">
+                        加入费用：
+                    </div>
+                    <div class="middle aligned content">
+                        <strong>#number(memberGroup.price,'0.00') 元 / #(memberGroup.valid_term) 天</strong>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="ui tiny image">
+                        会员简介：
+                    </div>
+                    <div class="middle aligned content">
+                        <strong>#(memberGroup.summary ??)</strong>
+                    </div>
+                </div>
+            </div>
+            <h4 class="ui dividing header">支付方式</h4>
+            <div class="inline fields">
+                <div class="ui labeled input">
+                    #if(wechatxConfig.isEnable())
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paytype" value="wechatx">
+                            <label>微信转账</label>
+                        </div>
+                    </div>
+                    #end
+
+                    #if(alipayxConfig.isEnable())
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paytype" value="alipayx">
+                            <label>支付宝转账</label>
+                        </div>
+                    </div>
+                    #end
+
+                    #if(wechatConfig.isEnable())
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paytype" value="wechat">
+                            <label>微信支付</label>
+                        </div>
+                    </div>
+                    #end
+
+                    #if(alipayConfig.isEnable())
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paytype" value="alipay">
+                            <label>支付宝支付</label>
+                        </div>
+                    </div>
+                    #end
+
+                    #if(paypalConfig.isEnable())
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paytype" value="paypal">
+                            <label>Paypal支付</label>
+                        </div>
+                    </div>
+                    #end
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paytype" value="amount">
+                            <label>使用账户余额支付</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="ui primary basic button">下一步</button>
+        </form>
+    </div>
+</div>
+#end

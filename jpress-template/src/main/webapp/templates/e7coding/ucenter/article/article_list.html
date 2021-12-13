@@ -1,0 +1,78 @@
+#include("../u_layout.html")
+#@ucenter_layout("文章列表")
+#define script()
+<script>
+
+    function del(id) {
+        if (confirm("确定要删除该文章吗？删除后不可恢复")) {
+            ajaxGet("#(CPATH)/ucenter/article/doDel/" + id)
+        }
+    }
+</script>
+
+#end
+#define content()
+<div class="twelve wide column">
+    <div class="ui segment">
+        <h1>
+            <i class="icon file outline" aria-hidden="true"></i> 文章列表
+        </h1>
+        <div class="content extra-padding rm-link-color">
+            <div class="article-content">
+                <div class="extra-padding" style="padding-bottom:4px">
+                    <div class="ui feed blog-article-list rm-link-color">
+                        #for(article : page.list ??)
+                        <div class="event">
+                            <div class="content">
+                                <div class="summary">
+                                    #if(article.isNormal())
+                                    <a href="#(article.url ??)" class="title"> #(article.title ??) </a>
+                                    #else
+                                    <a href="#(CPATH)/ucenter/article/write/#(article.id)">#(article.title ??)</a>
+                                    （审核中...）
+                                    #end
+                                </div>
+
+                                <div class="meta" style="line-height: 34px;">
+                                    <div class="date" style="font-size: 13px;margin: 7px 0em 0em;margin-left:0px">
+                                        #if(!article.isNormal())
+                                        <a href="#(CPATH)/ucenter/article/write/#(article.id)">编辑</a><span class="divider">|</span>
+                                        <a href="javascript:void(0);" onclick="del('#(article.id??)')">永久删除</a><span class="divider">|</span>
+                                        #end
+                                        <a class="" data-tooltip="#date(article.created)"><span title="#date(article.created)">#date(article.created)</span></a>
+                                        #if(article.isNormal())
+                                            #articleCategories(article.id,"category")
+                                            <span class="divider">|</span>
+                                            #for(category : categories)
+                                            <a href="#(category.url ??)" target="_blank">#(category.title ??)</a>
+                                            #if(!for.last) , #end
+                                            #end
+                                            #end
+
+                                            #articleCategories(article.id,"tag")
+                                            <span class="divider">|</span>
+                                            #for(category : categories)
+                                            <a href="#(category.url ??)" target="_blank">#(category.title ??)</a>
+                                            #if(!for.last) , #end
+                                            #end
+                                            #end
+                                        #end
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-meta">
+                                <a class="ui label basic light grey" ><i class="thumbs eye icon"></i> #(article.view_count ??) </a>
+                                <a class="ui label basic light grey" ><i class="comment icon"></i> #(article.comment_count ??) </a>
+                            </div>
+                        </div>
+                        #else
+                        <div class="empty-block">暂无数据~~</div>
+                        #end
+                        #include("../_upaginate.html")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#end

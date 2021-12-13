@@ -1,0 +1,102 @@
+#include("../u_layout.html")
+#@ucenter_layout("我的余额")
+#define content()
+#define script()
+<script>
+
+    $(document).ready(function () {
+        $("[name='paytype']:first").attr("checked", "checked");
+    });
+
+    function ok(data) {
+        if (isMobileBrowser()) {
+            location.href = data.gotoUrl;
+        } else {
+            window.open(data.gotoUrl, '_blank')
+        }
+    }
+
+</script>
+#end
+
+
+#define content()
+<div class="twelve wide column">
+    <div class="ui segment">
+        <h1>
+            <i class="icon image" aria-hidden="true"></i> 充值
+        </h1>
+        <form class="ui form autoAjaxSubmit" autocomplete="off"
+              action="#(CPATH)/ucenter/finance/amount/recharging"
+              method="post"
+              data-ok-function="ok"
+        >
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        充值账号
+                    </div>
+                    <input type="text"  value="#(USER.username ??)" readonly>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        充值金额
+                    </div>
+                    <input type="text"  placeholder="请输入充值金额...." value="" name="recharge_amount">
+                    <p class="text-muted">
+                        单位：元，最低充值不能低于 10 元。
+                    </p>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        充值方式
+                    </div>
+                    #if(wechatxConfig.isEnable())
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paytype" value="wechatx">
+                            <label>微信转账</label>
+                        </div>
+                    #end
+
+                    #if(alipayxConfig.isEnable())
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paytype" value="alipayx">
+                            <label>支付宝转账</label>
+                        </div>
+                    #end
+
+                    #if(wechatConfig.isEnable())
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paytype" value="wechat">
+                            <label>微信支付</label>
+                        </div>
+                    #end
+
+                    #if(alipayConfig.isEnable())
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paytype" value="alipay">
+                            <label>支付宝支付</label>
+                        </div>
+                    #end
+
+                    #if(paypalConfig.isEnable())
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paytype" value="paypal">
+                            <label>Paypal支付</label>
+                        </div>
+                    #end
+                </div>
+            </div>
+
+            <button type="submit" class="ui primary basic button">下一步</button>
+
+        </form>
+    </div>
+</div>
+
+
+#end
