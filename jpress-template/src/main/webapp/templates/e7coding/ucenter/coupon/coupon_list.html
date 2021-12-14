@@ -4,50 +4,74 @@
 <div class="twelve wide column">
     <div class="ui segment">
         <h1>
-            <i class="money bill alternate outline icon"></i> 优惠券
+            <i class="gift icon"></i> 优惠券
         </h1>
-        <table class="ui blue table">
-            <thead>
-            <tr>
-                <th>名称</th>
-                <th>金额</th>
-                <th>券码</th>
-                <th>使用时间</th>
-                <th>仅限会员</th>
-                <th>券类型</th>
-                <th>领取时间</th>
-            </tr>
-            </thead>
-            <tbody>
-            #for(data : couponCodeList)
-            <tr>
-                <td>#(data.coupon.title)</td>
-                <td>#(data.coupon.amount)</td>
-                <td>#(data.code)</td>
-                <td>
-                    #if(data.coupon.valid_type == 1)
-                    #date(data.coupon.valid_start_time) 至 #date(data.coupon.valid_end_time)
-                    #end
+        <div class="ui link cards">
+        #for(data : couponCodeList)
+        <div class=" card">
+            <div class="content">
+                <div class="header"><a class="ui green ribbon label">#(data.coupon.amount)</a>#(data.coupon.title)
+                </div>
+            </div>
+            <div class="content">
+                <h4 class="ui sub header">券码：#(data.code)</h4>
+                <div class="ui small feed">
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                金额：#(data.coupon.amount)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                使用时间：
+                                #if(data.coupon.valid_type == 1)
+                                #date(data.coupon.valid_start_time) 至 #date(data.coupon.valid_end_time)
+                                #end
 
-                    #if(data.coupon.valid_type == 2)
-                    #(data.coupon.valid_days??) 天
-                    #end
-                </td>
-                <td>#(data.coupon.with_member ? '是':'否')</td>
-                <td>  #if(data.coupon.type == 1)
-                    满#(data.coupon.with_amount)减#(data.coupon.amount)
-                    #end
-                    #if(data.coupon.type == 2)
-                    叠加满减券
-                    #end
-                    #if(data.coupon.type == 3)
-                    无门槛券
-                    #end</td>
-                <td>#date(data.valid_time)</td>
-            </tr>
-            #end
-            </tbody>
-        </table>
+                                #if(data.coupon.valid_type == 2)
+                                #(data.coupon.valid_days??) 天
+                                #end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                仅限会员：#(data.coupon.with_member ? '是':'否')
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                券类型：
+                                #if(data.coupon.type == 1)
+                                满#(data.coupon.with_amount)减#(data.coupon.amount)
+                                #end
+                                #if(data.coupon.type == 2)
+                                叠加满减券
+                                #end
+                                #if(data.coupon.type == 3)
+                                无门槛券
+                                #end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                领取时间：#date(data.valid_time)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        #end
+        </div>
     </div>
 </div>
 #end

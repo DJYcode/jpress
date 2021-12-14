@@ -47,7 +47,7 @@ function merge_options(e, t) {
             appendMarkdown: "",
             width: "100%",
             height: "100%",
-            path: "./lib/",
+            path: "../lib/",
             pluginPath: "",
             delay: 300,
             autoLoadModules: !0,

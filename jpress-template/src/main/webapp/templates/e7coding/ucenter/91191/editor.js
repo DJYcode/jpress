@@ -47,7 +47,7 @@ function merge_options(e, t) {
             appendMarkdown: "",
             width: "100%",
             height: "100%",
-            path: "./lib/",
+            path: "../lib/",
             pluginPath: "",
             delay: 300,
             autoLoadModules: !0,
@@ -177,82 +177,82 @@ function merge_options(e, t) {
             toolbarIconTexts: {},
             lang: {
                 name: "zh-cn",
-                description: "寮€婧愬湪绾縈arkdown缂栬緫鍣�<br/>Open source online Markdown editor.",
-                tocTitle: "鐩綍",
+                description: "开源在线Markdown编辑器<br/>Open source online Markdown editor.",
+                tocTitle: "目录",
                 toolbar: {
-                    undo: "鎾ら攢锛圕trl+Z锛�",
-                    redo: "閲嶅仛锛圕trl+Y锛�",
-                    bold: "绮椾綋",
-                    del: "鍒犻櫎绾�",
-                    italic: "鏂滀綋",
-                    quote: "寮曠敤",
-                    ucwords: "灏嗘瘡涓崟璇嶉瀛楁瘝杞垚澶у啓",
-                    uppercase: "灏嗘墍閫夎浆鎹㈡垚澶у啓",
-                    lowercase: "灏嗘墍閫夎浆鎹㈡垚灏忓啓",
-                    h1: "鏍囬1",
-                    h2: "鏍囬2",
-                    h3: "鏍囬3",
-                    h4: "鏍囬4",
-                    h5: "鏍囬5",
-                    h6: "鏍囬6",
-                    "list-ul": "鏃犲簭鍒楄〃",
-                    "list-ol": "鏈夊簭鍒楄〃",
-                    hr: "妯嚎",
-                    link: "閾炬帴",
-                    "reference-link": "寮曠敤閾炬帴",
-                    image: "娣诲姞鍥剧墖",
-                    code: "琛屽唴浠ｇ爜",
-                    "preformatted-text": "棰勬牸寮忔枃鏈� / 浠ｇ爜鍧楋紙缂╄繘椋庢牸锛�",
-                    "code-block": "浠ｇ爜鍧楋紙澶氳瑷€椋庢牸锛�",
-                    table: "娣诲姞琛ㄦ牸",
-                    datetime: "鏃ユ湡鏃堕棿",
-                    emoji: "Emoji琛ㄦ儏",
-                    "html-entities": "HTML瀹炰綋瀛楃",
-                    pagebreak: "鎻掑叆鍒嗛〉绗�",
-                    "goto-line": "璺宠浆鍒拌",
-                    watch: "鍏抽棴瀹炴椂棰勮",
-                    unwatch: "寮€鍚疄鏃堕瑙�",
-                    preview: "鍏ㄧ獥鍙ｉ瑙圚TML锛堟寜 Shift + ESC杩樺師锛�",
-                    fullscreen: "鍏ㄥ睆锛堟寜ESC杩樺師锛�",
-                    clear: "娓呯┖",
-                    search: "鎼滅储",
-                    help: "浣跨敤甯姪",
-                    info: "鍏充簬" + t.title
+                    undo: "撤销（Ctrl+Z）",
+                    redo: "重做（Ctrl+Y）",
+                    bold: "粗体",
+                    del: "删除线",
+                    italic: "斜体",
+                    quote: "引用",
+                    ucwords: "将每个单词首字母转成大写",
+                    uppercase: "将所选转换成大写",
+                    lowercase: "将所选转换成小写",
+                    h1: "标题1",
+                    h2: "标题2",
+                    h3: "标题3",
+                    h4: "标题4",
+                    h5: "标题5",
+                    h6: "标题6",
+                    "list-ul": "无序列表",
+                    "list-ol": "有序列表",
+                    hr: "横线",
+                    link: "链接",
+                    "reference-link": "引用链接",
+                    image: "添加图片",
+                    code: "行内代码",
+                    "preformatted-text": "预格式文本 / 代码块（缩进风格）",
+                    "code-block": "代码块（多语言风格）",
+                    table: "添加表格",
+                    datetime: "日期时间",
+                    emoji: "Emoji表情",
+                    "html-entities": "HTML实体字符",
+                    pagebreak: "插入分页符",
+                    "goto-line": "跳转到行",
+                    watch: "关闭实时预览",
+                    unwatch: "开启实时预览",
+                    preview: "全窗口预览HTML（按 Shift + ESC还原）",
+                    fullscreen: "全屏（按ESC还原）",
+                    clear: "清空",
+                    search: "搜索",
+                    help: "使用帮助",
+                    info: "关于" + t.title
                 },
-                buttons: {enter: "纭畾", cancel: "鍙栨秷", close: "鍏抽棴"},
+                buttons: {enter: "确定", cancel: "取消", close: "关闭"},
                 dialog: {
-                    link: {title: "娣诲姞閾炬帴", url: "閾炬帴鍦板潃", urlTitle: "閾炬帴鏍囬", urlEmpty: "閿欒锛氳濉啓閾炬帴鍦板潃銆�"},
+                    link: {title: "添加链接", url: "链接地址", urlTitle: "链接标题", urlEmpty: "错误：请填写链接地址。"},
                     referenceLink: {
-                        title: "娣诲姞寮曠敤閾炬帴",
-                        name: "寮曠敤鍚嶇О",
-                        url: "閾炬帴鍦板潃",
-                        urlId: "閾炬帴ID",
-                        urlTitle: "閾炬帴鏍囬",
-                        nameEmpty: "閿欒锛氬紩鐢ㄩ摼鎺ョ殑鍚嶇О涓嶈兘涓虹┖銆�",
-                        idEmpty: "閿欒锛氳濉啓寮曠敤閾炬帴鐨処D銆�",
-                        urlEmpty: "閿欒锛氳濉啓寮曠敤閾炬帴鐨刄RL鍦板潃銆�"
+                        title: "添加引用链接",
+                        name: "引用名称",
+                        url: "链接地址",
+                        urlId: "链接ID",
+                        urlTitle: "链接标题",
+                        nameEmpty: "错误：引用链接的名称不能为空。",
+                        idEmpty: "错误：请填写引用链接的ID。",
+                        urlEmpty: "错误：请填写引用链接的URL地址。"
                     },
                     image: {
-                        title: "娣诲姞鍥剧墖",
-                        url: "鍥剧墖鍦板潃",
-                        link: "鍥剧墖閾炬帴",
-                        alt: "鍥剧墖鎻忚堪",
-                        uploadButton: "鏈湴涓婁紶",
-                        imageURLEmpty: "閿欒锛氬浘鐗囧湴鍧€涓嶈兘涓虹┖銆�",
-                        uploadFileEmpty: "閿欒锛氫笂浼犵殑鍥剧墖涓嶈兘涓虹┖銆�",
-                        formatNotAllowed: "閿欒锛氬彧鍏佽涓婁紶鍥剧墖鏂囦欢锛屽厑璁镐笂浼犵殑鍥剧墖鏂囦欢鏍煎紡鏈夛細"
+                        title: "添加图片",
+                        url: "图片地址",
+                        link: "图片链接",
+                        alt: "图片描述",
+                        uploadButton: "本地上传",
+                        imageURLEmpty: "错误：图片地址不能为空。",
+                        uploadFileEmpty: "错误：上传的图片不能为空。",
+                        formatNotAllowed: "错误：只允许上传图片文件，允许上传的图片文件格式有："
                     },
-                    preformattedText: {title: "娣诲姞棰勬牸寮忔枃鏈垨浠ｇ爜鍧�", emptyAlert: "閿欒锛氳濉啓棰勬牸寮忔枃鏈垨浠ｇ爜鐨勫唴瀹广€�"},
+                    preformattedText: {title: "添加预格式文本或代码块", emptyAlert: "错误：请填写预格式文本或代码的内容。"},
                     codeBlock: {
-                        title: "娣诲姞浠ｇ爜鍧�",
-                        selectLabel: "浠ｇ爜璇█锛�",
-                        selectDefaultText: "璇烽€夋嫨浠ｇ爜璇█",
-                        otherLanguage: "鍏朵粬璇█",
-                        unselectedLanguageAlert: "閿欒锛氳閫夋嫨浠ｇ爜鎵€灞炵殑璇█绫诲瀷銆�",
-                        codeEmptyAlert: "閿欒锛氳濉啓浠ｇ爜鍐呭銆�"
+                        title: "添加代码块",
+                        selectLabel: "代码语言：",
+                        selectDefaultText: "请选择代码语言",
+                        otherLanguage: "其他语言",
+                        unselectedLanguageAlert: "错误：请选择代码所属的语言类型。",
+                        codeEmptyAlert: "错误：请填写代码内容。"
                     },
-                    htmlEntities: {title: "HTML 瀹炰綋瀛楃"},
-                    help: {title: "浣跨敤甯姪"}
+                    htmlEntities: {title: "HTML 实体字符"},
+                    help: {title: "使用帮助"}
                 }
             }
         }, t.classNames = {tex: t.classPrefix + "tex"}, t.dialogZindex = 99999, t.$katex = null, t.$marked = null, t.$CodeMirror = null, t.$prettyPrint = null;
@@ -1129,7 +1129,7 @@ function merge_options(e, t) {
                 toc: !0,
                 tocm: !1,
                 tocStartLevel: 1,
-                tocTitle: "鐩綍",
+                tocTitle: "目录",
                 tocDropdown: !1,
                 tocContainer: "",
                 markdown: "",
@@ -1345,7 +1345,7 @@ function merge_options(e, t) {
                     break;
                 case"cn-week-day":
                 case"cn-wd":
-                    u = "鏄熸湡" + ["鏃�", "涓€", "浜�", "涓�", "鍥�", "浜�", "鍏�"][s];
+                    u = "星期" + ["日", "一", "二", "三", "四", "五", "六"][s];
                     break;
                 case"week-day":
                 case"wd":
@@ -1395,7 +1395,7 @@ function merge_options(e, t) {
             i.initEditor(), i.initSelectTags(), window.lkeditor = t, setTimeout(function () {
                 i.postInit()
             }, 1e3), window.onbeforeunload = function () {
-                if (s) return "鎮ㄦ湁鏈繚瀛樼殑鍐呭锛屾槸鍚﹁缁х画绂诲紑姝ら〉闈紵"
+                if (s) return "您有未保存的内容，是否要继续离开此页面？"
             }, e('button.ui.button[type="submit"]:not(.no-loading)').click(function () {
                 s = !1
             }), e(".submit-btn:not(.no-loading)").click(function () {
@@ -1406,11 +1406,11 @@ function merge_options(e, t) {
         }, initEditor: function () {
             var i = this, o = {
                 previewTheme: "lk",
-                placeholder: "璇蜂娇鐢� Markdown 璇硶",
+                placeholder: "请使用 Markdown 语法",
                 styleActiveLine: !1,
                 toolbarIcons: ["h2", "h3", "quote", "|", "list-ul", "list-ol", "|", "link", "image", "code-block", "table", "emoji", "|", "watch", "fullscreen", "help"],
                 lineNumbers: !1,
-                path: "//" + Config.cdn_domain + "/assets/editor/lib/",
+                path: "resource/assets/editor/lib",
                 imageUpload: !0,
                 imageUploadURL: Config.routes.upload_image,
                 emoji: !0,
@@ -1418,7 +1418,7 @@ function merge_options(e, t) {
                 taskList: !0,
                 atLink: !1
             };
-            Config.editor.withoutPreview && (o.toolbarIcons = ["quote", "hr", "h2", "|", "list-ul", "list-ol", "link", "image", "|", "fullscreen", "watch", "help"], o.watch = !1), Config.editor.autoHeight && (o.autoHeight = !0), Config.editor.needTranslatorSeperator && (o.toolbarIcons.push("translation_seperator"), o.toolbarIconsClass = {translation_seperator: "hashtag"}, o.lang = {toolbar: {translation_seperator: "缈昏瘧鍒嗛殧绗�"}}, o.toolbarHandlers = {
+            Config.editor.withoutPreview && (o.toolbarIcons = ["quote", "hr", "h2", "|", "list-ul", "list-ol", "link", "image", "|", "fullscreen", "watch", "help"], o.watch = !1), Config.editor.autoHeight && (o.autoHeight = !0), Config.editor.needTranslatorSeperator && (o.toolbarIcons.push("translation_seperator"), o.toolbarIconsClass = {translation_seperator: "hashtag"}, o.lang = {toolbar: {translation_seperator: "翻译分隔符"}}, o.toolbarHandlers = {
                 translation_seperator: function (e, t, o, n) {
                     i._insertText("\n[//]: # (Section Separator)\n")
                 }
@@ -1449,10 +1449,10 @@ function merge_options(e, t) {
             }), inlineAttachment.editors.codemirror4.attach(t.cm, {
                 uploadUrl: Config.routes.upload_image,
                 extraParams: {_token: Config.token},
-                progressText: "\n![鏂囦欢涓婁紶涓�...]()",
+                progressText: "\n![文件上传中...]()",
                 onFileUploadResponse: function (i) {
                     var o = JSON.parse(i.responseText), n = o[this.settings.jsonFieldName],
-                        r = e("#title-field").length && e("#title-field").val() ? e("#title-field").val() : Config.community.name ? Config.community.name : "鍥剧墖";
+                        r = e("#title-field").length && e("#title-field").val() ? e("#title-field").val() : Config.community.name ? Config.community.name : "图片";
                     if (o && n) {
                         var a = "\n![" + r + "](" + n + ")\n", s = this.editor.getValue().replace(this.lastValue, a);
                         this.editor.setValue(s), this.settings.onFileUploaded.call(this, n);
@@ -1571,7 +1571,7 @@ function merge_options(e, t) {
                 s = !0
             })
         }, updateFetchingImageStatus: function () {
-            0 != i.length && (0 == e(".image-upload-status").length && e('<li class="pull-right image-upload-status text green ui fw-bold" style="line-height: 30px;"><span class="download_hint"></span></li>').appendTo("ul.editormd-menu"), i.length == o.length ? (e(".image-upload-status").removeClass("red").removeClass("orange").addClass("green"), e(".image-upload-status .download_hint").text("鈭� 鍥剧墖杞瓨鎴愬姛锛�"), e(".retry-download-image").remove()) : n.length > 0 ? (e(".image-upload-status").removeClass("green").removeClass("orange").addClass("red"), e(".image-upload-status .download_hint").text("鍥剧墖杞瓨涓�..." + o.length + "/" + i.length + "锛堝け璐� " + n.length + "锛�"), 0 == e(".retry-download-image").length && e(".image-upload-status .download_hint").after('<button class="ui label red retry-download-image" type="button">閲嶈瘯</button>')) : (e(".image-upload-status").removeClass("red").removeClass("green").addClass("orange"), e(".image-upload-status .download_hint").text("鍥剧墖杞瓨涓�..." + o.length + "/" + i.length), e(".retry-download-image").remove()))
+            0 != i.length && (0 == e(".image-upload-status").length && e('<li class="pull-right image-upload-status text green ui fw-bold" style="line-height: 30px;"><span class="download_hint"></span></li>').appendTo("ul.editormd-menu"), i.length == o.length ? (e(".image-upload-status").removeClass("red").removeClass("orange").addClass("green"), e(".image-upload-status .download_hint").text("√ 图片转存成功！"), e(".retry-download-image").remove()) : n.length > 0 ? (e(".image-upload-status").removeClass("green").removeClass("orange").addClass("red"), e(".image-upload-status .download_hint").text("图片转存中..." + o.length + "/" + i.length + "（失败 " + n.length + "）"), 0 == e(".retry-download-image").length && e(".image-upload-status .download_hint").after('<button class="ui label red retry-download-image" type="button">重试</button>')) : (e(".image-upload-status").removeClass("red").removeClass("green").addClass("orange"), e(".image-upload-status .download_hint").text("图片转存中..." + o.length + "/" + i.length), e(".retry-download-image").remove()))
         }, _fetchRemoteImage: function () {
             var a = this;
             setTimeout(function () {

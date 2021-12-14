@@ -21,8 +21,7 @@
 
     <link href="resource/css/vendors.css" rel="stylesheet">
     <link href="resource/css/app.css" rel="stylesheet">
-    <link rel="stylesheet" href="resource/assets/editor/css/editormd.css">
-    <link rel="stylesheet" href="resource/assets/editor/lib/codemirror/codemirror.min.css">
+    <link rel="stylesheet" href="#(CPATH)/static/components/editor/css/editormd.css">
 </head>
 
 <body class=" articles-create-page">
@@ -33,7 +32,7 @@
         'token': '',
         'environment': 'production',
         'url': '',
-        'cdn_domain':'',
+        'cdn_domain':'http://localhost:8888',
         'tags_url': '',
         'scroll_to_top': true,
         'community': {
@@ -351,7 +350,7 @@
 
 
                             <div class="field editor">
-                                <div id="editormd">
+                                <div id="editormd" class="editormd editormd-vertical" style="width: 1934px; height: 638px;">
                                     <textarea rows="15" id="body-field" name="body" placeholder="请使用 Markdown 编写"
                                               required></textarea>
                                 </div>
@@ -463,10 +462,22 @@
     // 本地保存内容唯一值
     Config.editor.unique_id = "articles-create_article_content_";
 </script>
-<script src="resource/assets/editor/lib/codemirror/codemirror.min.js"></script>
-<script src="resource/assets/editor/js/editor.vendors.js"></script>
+<!--<script type="text/javascript">-->
+<!--    $(function() {-->
+<!--        var editor = editormd("editormd", {-->
+<!--            path : "#(CPATH)/static/components/editor/lib/",-->
+<!--            emoji: true,-->
+<!--            imageUpload : true,-->
+<!--            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],-->
+<!--            imageUploadURL : "/article/file/upload", // 文件上传的处理请求！-->
+<!--            onload : function() {-->
 
-<script src="resource/assets/editor/js/editor.js"></script>
+<!--            },-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<script src="#(CPATH)/static/components/editor/js/editor.js"></script>
+<script src="#(CPATH)/static/components/editor/js/editor.vendors.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {

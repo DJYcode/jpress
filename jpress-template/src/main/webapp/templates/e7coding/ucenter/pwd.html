@@ -4,15 +4,11 @@
 <div class="twelve wide column">
     <div class="ui segment">
         <h1>
-            <i class="icon lock" aria-hidden="true"></i> 修改密码
+            <i class="icon key" aria-hidden="true"></i> 修改密码
         </h1>
         <div class="ui stacked segment">
             <div class="content px-3 py-3">
-                <form class="ui form" method="POST" action="https://learnku.com/users/91191/update_password"
-                      accept-charset="UTF-8">
-                    <input name="_method" type="hidden" value="PATCH">
-                    <input type="hidden" name="_token" value="fgdCjTKG6KhxQYU9yItAsicoGkPoObJLhDuXVYUw">
-
+                <form class="ui form autoAjaxSubmit"  data-ok-message="密码修改成功" autocomplete="off" action="#(CPATH)/ucenter/doUpdatePwd">
                     <div class="two fields">
                         <div class="ten wide field ">
                             <label>旧密码：</label>

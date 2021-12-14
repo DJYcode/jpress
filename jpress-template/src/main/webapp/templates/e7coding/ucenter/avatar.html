@@ -1,6 +1,7 @@
 #include("./u_layout.html")
 #@ucenter_layout("修改头像")
 #define script()
+<script src="#(CPATH)/static/components/jquery/jquery.form.min.js"></script>
 <script src="#(CPATH)/static/components/jcrop/js/jquery.jcrop.min.js"></script>
 <script src="#(CPATH)/static/components/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
 <script src="#(CPATH)/static/components/jquery-file-upload/js/jquery.iframe-transport.js"></script>
@@ -61,7 +62,7 @@
 <div class="twelve wide column">
     <div class="ui segment">
         <h1>
-            <i class="icon image" aria-hidden="true"></i> 修改头像
+            <i class="icon image outline" aria-hidden="true"></i> 修改头像
         </h1>
         <div class="ui stacked segment">
             <div class="content px-3 py-3">
@@ -70,41 +71,44 @@
                     <b><i class="icon info"></i> 请注意：</b>
                     <p>上传闪烁、奇异、违法、色情头像，情节严重者将会被封号处理。</p>
                 </div>
+                <form class="ui form autoAjaxSubmit" autocomplete="off" action="#(CPATH)/ucenter/doSaveAvatar"
+                      method="post"
+                      data-ok-function="submitSuccess"
+                >
+                    <input type="hidden" name="path" id="path">
+                    <input type="hidden" name="x" id="x">
+                    <input type="hidden" name="y" id="y">
+                    <input type="hidden" name="w" id="w">
+                    <input type="hidden" name="h" id="h">
+                    <input type="hidden" name="uid" value="#(user.id)">
+                    <div class="card-body">
+                        <div id="uploader">
+                            <div class="ui basic buttons">
+                                <div class="ui button">
+                                    <span class="btn btn-block btn-primary fileinput-button" style="width: 160px">
+                                    <i class="fas fa-plus"></i>
+                                    <span>选择图片...</span>
+                                    <input id="cfile" type="file" name="files[]" multiple>
+                                </span>
+                                </div>
+                            </div>
 
-
-                <form class="ui form" method="POST" action="#(CPATH)/ucenter/doSaveAvatar"
-                      enctype="multipart/form-data" accept-charset="UTF-8">
-                    <input name="_method" type="hidden" value="PATCH">
-                    <input type="hidden" name="_token" value="KbRAGMop6xekVJ25F7Yq4yagr1d13tW2PM4b7Vmu">
-
-                    <div id="image-preview-div">
-                        <img id="preview-img" class="avatar-preview-img image-border "
-                             src="#(CPATH)/static/commons/img/avatar.png" width="320" >
-                    </div>
-
-                    <div class="mb-3 mt-3">
-                        <label for="exampleInputFile">请选择图片：</label>
-                    </div>
-
-
-                    <div class="filed">
-                        <input type="file" name="avatar" id="file" required="">
-                    </div>
-
-                    <div class="filed mt-3">
-                        <button class="ui button primary" id="upload-button" type="submit">上传头像</button>
-                    </div>
-
-
-                    <div class="ui message warning" id="loading" style="display: none;" role="alert">
-                        图片上传中...
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                 aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        </div>
+                        <div class="text-center" style="margin-bottom: 20px">
+                            <div style="margin: 10px 0">
+                                <img src="#(CPATH)/static/commons/img/avatar.png" style="max-width: 100%;height: 100%"
+                                     id="avatarimg">
                             </div>
                         </div>
                     </div>
-                    <div id="message"></div>
+
+                    <div class="card-footer">
+                        <div class="col-sm-10 submit-block">
+                            <div class="card-submit">
+                                <button type="submit" class="ui primary basic button"> 保存选择区域</button>
+                            </div>
+                        </div>
+                    </div>
                 </form>
 
             </div>
