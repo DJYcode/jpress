@@ -25,13 +25,24 @@ function copyToClipboard(t) {
     }
 }
 
+function atReplyCommentsByID(t, e) {
+    selector = ".reply-comment-box-" + e,
+        atReplyComments(t, selector),
+        $(".reply-box-" + e).show()
+}
+
 function scrollToAnchor(t) {
     var e = $("*[id='" + t + "']");
     $("html,body").animate({scrollTop: e.offset().top}, "slow")
 }
 
 function atReplyComments(t, e) {
-    replyContent = $(e), oldContent = replyContent.val(), prefix = "@" + t + " ", newContent = "", oldContent.length > 0 ? oldContent != prefix && (newContent = oldContent + "\n" + prefix) : newContent = prefix, replyContent.focus(), replyContent.val(newContent), moveEnd($(e))
+    replyContent = $(e), oldContent = replyContent.val(),
+        prefix = "@" + t + " ",
+        newContent = "",
+        oldContent.length > 0 ? oldContent != prefix &&
+            (newContent = oldContent + "\n" + prefix) : newContent = prefix, replyContent.focus(),
+        replyContent.val(newContent), moveEnd($(e))
 }
 
 function replyOne(t) {

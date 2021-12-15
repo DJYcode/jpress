@@ -305,7 +305,7 @@ function initAjaxSubmitForms() {
 function initCommentComponent() {
 
 
-    $('#jpress-comment-form').on('submit', function () {
+    $('.jpress-comment-form').on('submit', function () {
         var commentContent = $('#jpress-comment-form').find('textarea[name="content"]').val();
         if (!commentContent || commentContent == ""){
             alert("评论内容不能为空");

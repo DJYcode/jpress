@@ -48,7 +48,7 @@
         'destroyeditor_id': {},
 
         'content': {
-            authorName:'dong'
+            authorName: 'dong'
         }
     };
 
@@ -153,7 +153,6 @@
     }
 
 </style>
-
 
 
 #include("./_sidebar_menu.html")
@@ -269,7 +268,8 @@
                                 <span class="topic-title">#(previous.title)</span>
                                 <span class=" hide-on-mobile simple-topic-meta">
                          <span class="text-mute fs-small">
-                            <abbr title="浏览 #(next.view_count ?? 0)" class="timeago ui popover">#(next.view_count ?? 0)</abbr>
+                            <abbr title="浏览 #(next.view_count ?? 0)"
+                                  class="timeago ui popover">#(next.view_count ?? 0)</abbr>
                              <span class="count_seperator">|</span>
                              <abbr title="创建于 #date(previous.created)" class="timeago ui popover">#date(previous.created)</abbr>
                          </span>
@@ -297,7 +297,8 @@
                                 <span class="topic-title">#(next.title)</span>
                                 <span class=" hide-on-mobile simple-topic-meta">
                          <span class="text-mute fs-small">
-                             <abbr title="浏览 #(next.view_count ?? 0)" class="timeago ui popover">#(next.view_count ?? 0)</abbr>
+                             <abbr title="浏览 #(next.view_count ?? 0)"
+                                   class="timeago ui popover">#(next.view_count ?? 0)</abbr>
                              <span class="count_seperator">|</span>
                              <abbr title="创建于 #date(next.created)" class="timeago ui popover">#date(next.created)</abbr>
                          </span>
@@ -307,6 +308,7 @@
                         #end
                     </div>
                 </div>
+                #if(option("article_comment_enable","true") && article.comment_status)
                 <div id="replies" name="replies"></div>
 
                 <div class="ui threaded comments comment-list ">
@@ -314,6 +316,106 @@
                     <div class="ui divider horizontal grey"><i class="icon comments"></i> 评论数量: <span
                             class="reply-count">0</span></div>
                     <div class="comments-feed" id="all-comments">
+                        #commentPage()
+                        #for(comment : commentPage.list ??)
+                        <div class="comment">
+                            <div id="reply#(comment.id)" name="reply#(comment.id)"></div>
+                            <div class="avatar">
+                                <img src="#(comment.user.avatar ?? (TPATH + '/img/avatar.png'))">
+                            </div>
+
+                            <div class="content">
+                                <div class="comment-header">
+                                    <div class="meta" style="max-width:100%;display: inline-flex;">
+                                        #(comment.author)
+                                    </div>
+
+                                    <div class="reaction">
+                                        <div class="ui floating basic icon dropdown button">
+                                            <a href="javascript:void(0)" onclick="atReplyCommentsByID('#(comment.author)', '#(comment.id)');"
+                                               title="回复 #(comment.author ??)" class="ui teal reply-btn" style="display: none;"><i
+                                                    style="color:rgba(0, 0, 0, 0.3);" class="icon reply"></i></a>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="text comment-body markdown-reply fluidbox-content">
+                                    <div class="px-3">
+                                        #(comment.content)
+                                    </div>
+                                </div>
+
+                                <div class="comment-meta-mute" title="#date(comment.created )"
+                                     style="padding:15px 25px;background: #fff;font-size: 12px;padding-top:0px;color: rgba(0, 0, 0, 0.4);">
+                                    <i class="icon clock"></i> #date(comment.created )
+
+                                    <a href="javascript:;" class="rm-link-color text-mute ml-2 show-reply-box"
+                                       data-reply-box-class="reply-box-#(comment.id)">
+                                        <i class="icon talk outline"></i>回复
+                                    </a>
+                                </div>
+
+                                <div class="comments ">
+
+                                    <div class="reply ui message hide reply-#(comment.id)"></div>
+
+                                    <form class="ui reply form mb-4 reply-comments reply-box-#(comment.id) jpress-comment-form"
+                                          data-article-id="#(article.id)" data-pid="#(comment.id)"
+                                          action="#(CPATH)/article/postComment" style="display:none;" autocomplete="off">
+                                        <input type="hidden" name="articleId" value="#(article.id)">
+                                        <input type="hidden" name="render" value="default">
+                                        <input type="hidden" name="pid" value="#(comment.id)">
+                                        <input name="csrf_token" type="hidden" value="#(CSRF_TOKEN)">
+                                        <div class="field 1">
+                                            <div class="ui action input">
+                                                <input required="" type="text" name="content"
+                                                       class="reply-comments-composing-box reply-comment-box-#(comment.id)"
+                                                       placeholder="支持 Emoji, 仅解析 Markdown 语法：a,code,strong,i,em">
+                                                <button class="ui primary button comment-btn no-loading" type="submit">
+                                                    回复
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    #if(comment.parent)
+                                    <div class="inner-comment-lists inner-comment-lists-#(comment.id)">
+
+                                        <div class="lh-2 my-2" style="padding-top:4px;border-top: 1px dashed #e9e5e5;"
+                                             id="reply#(comment.parent.id)" name="reply#(comment.parent.id)">
+
+                                            <img src="#(comment.parent.avatar ?? (TPATH + '/img/avatar.png'))"
+                                                 style="width:22px;height:22px">
+
+                                            #(comment.parent.author)
+
+                                            <span class="ui popover fs-small text-mute mt-2 ml-2"
+                                                  title="#date(comment.parent.created)">#date(comment.parent.created)</span>
+                                            <div class="reply-comments-content my-2 tdu rm-link-color lh-3"
+                                                 style="color:#403f3f;margin-left: 30px;">
+                                                #(comment.parent.content)
+                                            </div>
+
+                                            <div class=""
+                                                 style="color:#c4c2c2;font-size: 14px;padding-top:0px;margin-left: 30px;">
+                                                <a href="javascript:void(0)"
+                                                   onclick="atReplyCommentsByID('#(comment.parent.author)', '#(comment.parent.id)');"
+                                                   title="回复 #(comment.parent.author)" class="ui teal popover rm-link-color mr-1"><i
+                                                        class="icon reply"></i></a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    #end
+                                </div>
+
+                            </div>
+                        </div>
+                        #end
+                        #end
+
                     </div>
                     <div class="empty-block">
                         (=￣ω￣=)··· 暂无内容！
@@ -326,13 +428,16 @@
 
                         <div class="reply ui new-reply message hide"></div>
 
-                        <form class="ui reply form topic-reply-form" method="POST"
-                              action="https://learnku.com/replies?62311" accept-charset="UTF-8"
-                              id="comment-composing-form">
+                        <form class="ui reply form topic-reply-form jpress-comment-form" method="POST"
+                              action="#(CPATH)/article/postComment" accept-charset="UTF-8"
+                              autocomplete="off"
+                              >
 
-                            <input type="hidden" name="_token" value="n4R2GsG89wT0aiDdICphyCb4ynNVe5fvfPjPZrvY">
-                            <input type="hidden" name="topic_id" value="62311">
+                            <input type="hidden" name="articleId" value="#(article.id)">
+                            <input type="hidden" name="render" value="default">
+                            <input type="hidden" name="pid" id="comment-pid">
                             <input type="hidden" name="body_html" value="">
+                            <input name="csrf_token" type="hidden" value="#(CSRF_TOKEN)">
 
                             <div class="ui message info">
                                 <i class="icon info" aria-hidden="true"></i>如果对此文章有任何疑问，或者涉及侵权需要删除请评论留言，谢谢！
@@ -340,11 +445,11 @@
 
 
                             <div class="field">
-                                <textarea name="body" id="comment-composing-box" data-emojiable="converted"
-                                          data-storage-key="topic-62311" required="" class=""
-                                          data-id="67ee3c74-beab-45f3-9dee-4160d92a5dca" data-type="original-input"
+                                <textarea name="content" id="comment-composing-box" data-emojiable="converted"
+                                          data-storage-key="topic-#(article.id)" required="" class=""
+                                          data-id="#(article.id)" data-type="original-input"
                                           style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 112px;"></textarea>
-                                <div class="emoji-menu" data-id="67ee3c74-beab-45f3-9dee-4160d92a5dca" data-type="menu"
+                                <div class="emoji-menu" data-id="#(article.id)" data-type="menu"
                                      style="display: none;">
                                     <div class="emoji-items-wrap1">
                                         <table class="emoji-menu-tabs">
@@ -360,10 +465,11 @@
                                             </tbody>
                                         </table>
                                         <div class="emoji-items-wrap mobile_scrollable_wrap">
-                                            <div class="emoji-items"><a href="javascript:void(0)" title=":grin:"><img
-                                                    src="resource/assets/images/blank.gif" class="img"
-                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -375px 0px no-repeat;background-size:675px 175px;"
-                                                    alt=":grin:"><span class="label">:grin:</span></a><a
+                                            <div class="emoji-items">
+                                                <a href="javascript:void(0)" title=":grin:"><img
+                                                        src="resource/assets/images/blank.gif" class="img"
+                                                        style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -375px 0px no-repeat;background-size:675px 175px;"
+                                                        alt=":grin:"><span class="label">:grin:</span></a><a
                                                     href="javascript:void(0)" title=":kissing_heart:"><img
                                                     src="resource/assets/images/blank.gif" class="img"
                                                     style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -175px 0px no-repeat;background-size:675px 175px;"
@@ -497,6 +603,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                #if(option("article_comment_vcode_enable","true"))
+                                <input placeholder="请输入验证码" autocomplete="off" name="captcha" id="comment-captcha">
+                                <img class="vcode-img" src="#(CPATH)/commons/captcha"
+                                     onclick="this.src='#(CPATH)/commons/captcha?d='+Math.random();" cdn-exclude
+                                     id="comment-vcode">
+                                #end
                             </div>
 
                             <div class="field rm-link-color">
@@ -512,11 +624,6 @@
                                     <a href="javascript:;" class="mr-2 ui popover text-mute hide-on-mobile"
                                        data-html="支持除了 H1~H6 以外的&lt;br&gt;GitHub 兼容 Markdown">
                                         支持 MD
-                                    </a>
-
-                                    <a href="javascript:;" class="compose-help text-mute rm-tdu"
-                                       style="color: #777;margin-top: 8px;">
-                                        帮助
                                     </a>
 
                                 </div>
@@ -540,6 +647,7 @@
                              style="display:none;border: dashed 1px #ccc;background: #ffffff;border-radius: 6px;box-shadow:none;margin-top: 20px;margin-bottom: 6px;"></div>
                     </div>
                 </div>
+                #end
             </div>
 
             <div class="four wide column">
@@ -550,168 +658,175 @@
                         </a>
 
                         <div class="extra content ui center aligned container">
-                        <div class="extra content ui center aligned container">
-                            <div class="description">维护者  djycode@gmail.com</div>
+                            <div class="extra content ui center aligned container">
+                                <div class="description">维护者 djycode@gmail.com</div>
+                            </div>
+
+                            <div class="extra content">
+
+                            </div>
+
                         </div>
+                        <button href="https://learnku.com/blog/qwwdezone" class="ui single button fluid login_required"
+                                style="margin-top:18px" data-method="post"
+                                data-url="https://learnku.com/blogs/reading_mode">
+                            <i class="icon eye"></i> 阅读模式
+                        </button>
 
-                        <div class="extra content">
+                        <div class="ui card tag-active-user-card popular-card responsive" style="font-size: 13px;">
+                            <div class="ui secondary pointing menu"
+                                 style="margin-bottom: 5px;border-bottom: 2px solid rgba(34, 36, 38, 0.1);">
+                                <a class="item active" data-tab="first">相关文章</a>
+                                <a class="item" data-tab="second">最受欢迎</a>
+                            </div>
+                            <div class="ui bottom attached tab active" data-tab="first">
 
-                        </div>
-
-                    </div>
-                    <button href="https://learnku.com/blog/qwwdezone" class="ui single button fluid login_required"
-                            style="margin-top:18px" data-method="post"
-                            data-url="https://learnku.com/blogs/reading_mode">
-                        <i class="icon eye"></i> 阅读模式
-                    </button>
-
-                    <div class="ui card tag-active-user-card popular-card responsive" style="font-size: 13px;">
-                        <div class="ui secondary pointing menu"
-                             style="margin-bottom: 5px;border-bottom: 2px solid rgba(34, 36, 38, 0.1);">
-                            <a class="item active" data-tab="first">相关文章</a>
-                            <a class="item" data-tab="second">最受欢迎</a>
-                        </div>
-                        <div class="ui bottom attached tab active" data-tab="first">
-
-                            <div class="ui middle aligned divided  list"
-                                 style="padding: 0px 15px;margin-top: 0px;margin-bottom: 5px;">
-                                #relevantArticles(article)
+                                <div class="ui middle aligned divided  list"
+                                     style="padding: 0px 15px;margin-top: 0px;margin-bottom: 5px;">
+                                    #relevantArticles(article)
                                     #if(relevantArticles && relevantArticles.size() >0)
-                                        #for(article :relevantArticles)
-                                        <a class="item" href="#(article.url)">
-                                            #(article.title)
-                                        </a>
-                                        #end
+                                    #for(article :relevantArticles)
+                                    <a class="item" href="#(article.url)">
+                                        #(article.title)
+                                    </a>
+                                    #end
                                     #else
                                     暂无
                                     #end
-                                #end
+                                    #end
+                                </div>
                             </div>
+                            <div class="ui bottom attached tab" data-tab="second">
+                                <div class="ui middle aligned divided  list" style="padding: 0px 15px;margin-top: 0px;">
+                                    #articles()
+                                    #for(article :articles)
+                                    <a class="item" href="#(article.url)">
+                                        #(article.title)
+                                    </a>
+                                    #end
+                                    #end
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="ui bottom attached tab" data-tab="second">
-                            <div class="ui middle aligned divided  list" style="padding: 0px 15px;margin-top: 0px;">
-                                #articles()
-                                #for(article :articles)
-                                <a class="item" href="#(article.url)">
-                                    #(article.title)
+
+
+                        <div class="ui card tag-active-user-card blog-tags responsive">
+                            <div class="content">
+                                <span class="">文章标签</span>
+                            </div>
+                            <div class="extra content readmore" style="    padding-bottom: 18px;">
+                                #if(article.tags && article.tags.size() > 0)
+                                #for(tag : article.tags)
+                                <a class="ui label basic" href="#(tag.url)">
+                                    #(tag.title)
+                                    <div class="detail">#(tag.count)</div>
                                 </a>
                                 #end
+                                #else
+                                暂无
                                 #end
                             </div>
                         </div>
 
+
                     </div>
-
-
-                    <div class="ui card tag-active-user-card blog-tags responsive">
-                        <div class="content">
-                            <span class="">文章标签</span>
-                        </div>
-                        <div class="extra content readmore" style="    padding-bottom: 18px;">
-                            #if(article.tags && article.tags.size() > 0)
-                            #for(tag : article.tags)
-                            <a class="ui label basic" href="#(tag.url)">
-                                #(tag.title)
-                                <div class="detail">#(tag.count)</div>
-                            </a>
-                            #end
-                            #else
-                            暂无
-                            #end
-                        </div>
-                    </div>
-
-
                 </div>
+
+
             </div>
 
+
+            <script>
+
+                Config.topic_id = 0;
+                Config.following_users = [];
+
+                Config.content.authorName = 'dong';
+            </script>
 
         </div>
 
-
-        <script>
-
-            Config.topic_id = 0;
-            Config.following_users = [];
-
-            Config.content.authorName = 'dong';
-        </script>
-
-    </div>
-
         #include("./footer.html")
 
-</div>
-
-<div class="ui modal login small" style="width:400px;margin: 0em 0em 0em -200px;">
-    <i class="close icon"></i>
-    <div class="header">
-        <h4 class="modal-title ">
-            <img class="ui image display-inline-block mr-2" style="width:32px;height:32px;"
-                 src="resource/img/admin.gif"> <span
-                style="position: relative;top: 4px;">请登录</span>
-        </h4>
     </div>
-    <div class="content">
+
+    <div class="ui modal login small" style="width:400px;margin: 0em 0em 0em -200px;">
+        <i class="close icon"></i>
+        <div class="header">
+            <h4 class="modal-title ">
+                <img class="ui image display-inline-block mr-2" style="width:32px;height:32px;"
+                     src="resource/img/admin.gif"> <span
+                    style="position: relative;top: 4px;">请登录</span>
+            </h4>
+        </div>
+        <div class="content">
 
 
-        <form class="ui form login" role="form" method="POST" action="../auth/login.html" accept-charset="UTF-8">
-            <input type="hidden" name="_token" value="B9Xi4ZxkZyBAOolyUmeMQehuu8PG3zD2Rk72Sb8G">
-            <input type="hidden" name="remember" value="yes">
+            <form class="ui form login" role="form" method="POST" action="" accept-charset="UTF-8">
+                <input type="hidden" name="_token" value="B9Xi4ZxkZyBAOolyUmeMQehuu8PG3zD2Rk72Sb8G">
+                <input type="hidden" name="remember" value="yes">
 
-            <input type="hidden" name="return_back" value="no">
+                <input type="hidden" name="return_back" value="no">
 
-            <div class="field">
-                <div class="ui left icon input">
-                    <i class="user icon"></i>
-                    <input type="text" name="username" placeholder="邮 箱 or 手 机 or 用户名" value="" required>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="username" placeholder="邮 箱 or 手 机 or 用户名" value="" required>
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <div class="ui left icon input">
-                    <i class="lock icon"></i>
-                    <input type="password" name="password" placeholder="密 码" value="" required>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password" placeholder="密 码" value="" required>
+                    </div>
                 </div>
-            </div>
-            <button class="ui primary right labeled icon button" type="submit">
-                <i class="right arrow icon"></i>
-                提交
-            </button>
+                <button class="ui primary right labeled icon button" type="submit">
+                    <i class="right arrow icon"></i>
+                    提交
+                </button>
 
-            <div class="pull-right mt-2 rm-link-color">
-                <a class="btn btn-link " href="../auth/forget.html" target="_blank">
-                    忘记密码?
-                </a>
-                <span class="text-mute">or</span>
-                <a class="btn btn-link " href="../auth/register.html" target="_blank">
-                    注册
-                </a>
-            </div>
+                <div class="pull-right mt-2 rm-link-color">
+                    <a class="btn btn-link " href="../auth/forget.html" target="_blank">
+                        忘记密码?
+                    </a>
+                    <span class="text-mute">or</span>
+                    <a class="btn btn-link " href="../auth/register.html" target="_blank">
+                        注册
+                    </a>
+                </div>
 
-            <div class="clearfix"></div>
-
-
-            <div class="ui horizontal divider fs-tiny text-mute">
-                第三方账号登录
-            </div>
+                <div class="clearfix"></div>
 
 
-            <a class="ui button fluid mt-2 green wechat-login-link" href=""><i
-                    class="icon wechat "></i> 微信登录</a>
+                <div class="ui horizontal divider fs-tiny text-mute">
+                    第三方账号登录
+                </div>
 
-            <a class="ui button fluid mt-2 basic" id="login-required-submit"
-               href=""><i class="icon github alternate"></i> GitHub 登录</a>
 
-        </form>
+                <a class="ui button fluid mt-2 green wechat-login-link" href=""><i
+                        class="icon wechat "></i> 微信登录</a>
+
+                <a class="ui button fluid mt-2 basic" id="login-required-submit"
+                   href=""><i class="icon github alternate"></i> GitHub 登录</a>
+
+            </form>
+        </div>
     </div>
 </div>
+    <!-- Scripts -->
+    <script src="resource/js/vendors.js"></script>
+    <script src="resource/js/app.js"></script>
 
-<!-- Scripts -->
-<script src="resource/js/vendors.js"></script>
-<script src="resource/js/app.js"></script>
+    <script src="#(CPATH)/static/components/jquery/jquery.min.js"></script>
+    <script src="#(CPATH)/static/components/jquery/jquery.form.min.js"></script>
+    <script src="#(CPATH)/static/components/selectize/selectize.min.js"></script>
+    <script src="#(CPATH)/static/components/toastr/toastr.min.js"></script>
+    <script src="#(CPATH)/static/front/jpressfront.js"></script>
 
 
-<a id="scrollUp" href="#top"
-   style="position: fixed; z-index: 2147483647; display: none;">Scroll to top</a>
+
+    <a id="scrollUp" href="#top"
+       style="position: fixed; z-index: 2147483647; display: none;">Scroll to top</a>
 </body>
 </html>
