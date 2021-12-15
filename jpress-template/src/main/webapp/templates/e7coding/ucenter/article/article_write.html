@@ -21,7 +21,12 @@
 
     <link href="resource/css/vendors.css" rel="stylesheet">
     <link href="resource/css/app.css" rel="stylesheet">
-    <link rel="stylesheet" href="#(CPATH)/static/components/editor/css/editormd.css">
+    <link href="#(CPATH)/static/components/editor/css/editormd.css"  rel="stylesheet" >
+    <link href="#(CPATH)/static/components/editable/css/bootstrap-editable.css" rel="stylesheet">
+    <link href="#(CPATH)/static/components/selectize/css/selectize.css" rel="stylesheet">
+    <link href="#(CPATH)/static/components/selectize/css/selectize.bootstrap4.css" rel="stylesheet">
+    <link href="#(CPATH)/static/components/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet">
+    <link href="#(CPATH)/static/components/toastr/toastr.min.css" rel="stylesheet" >
 </head>
 
 <body class=" articles-create-page">
@@ -32,7 +37,7 @@
         'token': '',
         'environment': 'production',
         'url': '',
-        'cdn_domain':'http://localhost:8888',
+        'cdn_domain':'#(WEB_DOMAIN ??)',
         'tags_url': '',
         'scroll_to_top': true,
         'community': {
@@ -160,122 +165,12 @@
 </style>
 
 
-<div class="ui top menu sidebar stackable">
-    <div class="item">
-        <img class="ui image" style="width:26px;height:26px;margin-top:-2px;"
-             src="resource/img/admin.gif">
-        <span class="site-name ml-2">#(WEB_NAME)</span>
-    </div>
-
-    <form class="ui fluid category  item secondary" action="/article/search" method="GET">
-        <div class="ui icon input">
-            <input class="prompt" name="keyword" type="text" placeholder="搜索" value="">
-            <i class="search icon"></i>
-        </div>
-    </form>
-
-    #categories(asTree=true)
-    #for(category :categories)
-    <a href="#(category.slug)" class="item secondary">
-        <i class="icon list"></i> #(category.title)
-    </a>
-    #end
-    #end
-
-
-    <div class="item">
-        <a class="ui basic small button no-pjax" href=""><i class="icon user "></i> 登录 </a>
-    </div>
-</div>
-
+#include("../../_sidebar_menu.html")
 
 <div class="pusher in-editor-view">
     <div class="main container">
 
-        <nav class="ui main borderless menu top stackable topnav" id="topnav">
-            <div class="ui container">
-
-                <div class="ui inline scrolling community-nav dropdown mr-2"
-                     style="padding-left: 22px;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;">
-                    <div class="text site-logo" style="color:#888888;display: flex;">
-
-                        <img class="ui image" style="width:26px;height:26px;margin-top:-2px;"
-                             src="resource/img/admin.gif">
-                        <span class="site-name">#(WEB_NAME)</span>
-                        <i class="dropdown icon ml-3"></i>
-                    </div>
-                    <div class="menu ml-4 communities" style="max-height: 520px;padding: 8px;">
-                        <div class="ui icon search input" style="width: 172px;float:left;">
-                            <i class="search icon"></i>
-                            <input type="text" placeholder="搜索分类">
-                        </div>
-
-                        <a class="item pr-3 mt-2" href="../index.html">
-                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;" src="resource/img/admin.gif"> 首页
-                        </a>
-                        <div class="divider clearfix"></div>
-                        #categories(asTree=true)
-                        #for(category :categories)
-                        <a class="item" href="#(category.slug)" style="padding-right: 2.2em!important;">
-                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
-                                 src="#(category.icon)">
-                            #(category.title)
-                        </a>
-                        #end
-                        #end
-                    </div>
-                </div>
-
-                <a class="item header right menu " style="display:none">
-                    <i class="icon align justify"></i>
-                </a>
-
-                <!-- 主菜单 -->
-                #for(menu : MENUS)
-                #if(menu.hasChild())
-                <div class="ui simple item dropdown article stackable nav-user-item  secondary">#(menu.text ??)<i class="dropdown icon"></i>
-                    <div class="ui menu stackable">
-                        #for(childMenu : menu.getChilds())
-                        <a class="item" href="#(childMenu.url ??)"
-                           style="padding-right: 36px!important;">
-                            #(childMenu.text ??)
-                        </a>
-                        #end
-                    </div>
-                </div>
-                #else
-                <a href="#(menu.url ??)" class="item secondary">#(menu.text ??)</a>
-                #end
-                #end
-
-                <!-- 搜索框 -->
-                <form class="ui fluid category search item secondary hide-on-991" action="/article/search"
-                      method="GET">
-                    <div class="ui icon input">
-                        <input class="prompt" name="keyword" type="text" placeholder="搜索" value="">
-                        <i class="search icon"></i>
-                    </div>
-                    <div class="results"></div>
-                </form>
-
-                <!-- 登录注册 -->
-                <div class=" right menu stackable secondary">
-                    <div class="item rm-link-color">
-                        <a class="mr-4 no-pjax login_required" href=""><i class="icon sign in "></i> 登录
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </nav>
-        <div class="mb-3 hide show-on-wechat-view">
-            <div class="ui centered grid container message-container">
-                <div class="sixteen wide column pt-0 pb-0">
-                    <a class="ui button fluid green wechat-login-link"
-                       href="#(CPATH)/oauth/wechat"><i class="icon wechat "></i> 微信登录</a>
-                </div>
-            </div>
-        </div>
+        #include("../../_nav_menu.html")
 
 
         <div class="ui centered grid container stackable">
@@ -295,26 +190,31 @@
 
 
                         <form method="POST" action="#(CPATH)/ucenter/article/doWriteSave" accept-charset="UTF-8"
-                              id="article-create-form" class="ui form">
+                              id="form" class="ui form">
                             <input type="hidden" id="articleId" name="article.id" value="#(article.id ??)">
                             <input type="hidden" id="editModeId" name="article.edit_mode" value="#(editMode ??)">
 
                             <input name="editor_unique_id" type="hidden" value="">
-                            <input name="category_id" type="hidden" value="8">
-                            <input name="body_html" type="hidden" value="">
+                            <input name="csrf_token" type="hidden" value="#(CSRF_TOKEN)">
 
                             <div class="fields">
                                 <div class=" three wide field ">
                                     <div class="ui fluid search selection dropdown community-selection">
-                                        #for(category : categories)
-                                        #if(category.isCheck)
-                                        <input type="hidden" name="category" value="#(category.id)" required="">
-                                        #end
+                                        #if(article_category)
+                                            <input type="hidden" name="category" value="#(article_category.id)" >
+                                        #else
+                                            <input type="hidden" name="category" value="0" >
                                         #end
                                         <i class="dropdown icon"></i>
                                         <input class="search" autocomplete="off" tabindex="0">
-                                        <div class="text"></div>
-                                        <div class="menu communities transition hidden" tabindex="-1">
+                                        <div class="text">
+                                            #if(article_category)
+                                               #(article_category.title ??)
+                                            #else
+                                                选择分类
+                                            #end
+                                        </div>
+                                        <div class="menu categories transition hidden" tabindex="-1">
                                             <div class="item" data-value="0">
                                                 选择分类
                                             </div>
@@ -351,8 +251,8 @@
 
                             <div class="field editor">
                                 <div id="editormd" class="editormd editormd-vertical" style="width: 1934px; height: 638px;">
-                                    <textarea rows="15" id="body-field" name="body" placeholder="请使用 Markdown 编写"
-                                              required></textarea>
+                                    <textarea rows="15" id="body-field" name="article.content" placeholder="请使用 Markdown 编写"
+                                              required>#(article.orignalContent ??)</textarea>
                                 </div>
                             </div>
                             <div class="ui ">
@@ -361,18 +261,23 @@
                                 </div>
                                 <div class="card-body p-0">
                                     <img src="#(CPATH)#(article.thumbnail ??'/static/commons/img/nothumbnail.jpg')"
-                                         style="width: 100%;"
                                          id="thumbnail">
                                     <input type="hidden" value="#(article.thumbnail ??)"
                                            name="article.thumbnail"
                                            id="articleThumbnail">
                                 </div>
                                 <div class="card-footer">
-                                        <span class="btn  btn-default btn-sm fileinput-button">
-                                            <span>选择图片</span>
-                                            <input id="cfile" type="file" name="files[]" multiple>
-                                        </span>
-                                    <a href="javascript:;" style="padding-left: 15px" id="removeThumbnail">移除</a>
+                                    <div class="ui basic buttons">
+                                        <div class="ui button">
+                                            <span class="btn btn-block btn-primary fileinput-button" style="width: 160px">
+                                                <span>选择图片...</span>
+                                                <input id="cfile"  onclick="cfileClick()" type="file" name="files[]" multiple>
+                                            </span>
+                                        </div>
+                                        <div class="ui button">
+                                            <a href="javascript:;" style="padding-left: 15px" id="removeThumbnail">移除</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="ui styled fluid accordion">
@@ -393,7 +298,7 @@
 
                                     <div class="field">
                                         <label>输入标签（多个标签请用 “回车键” 或英文逗号（,）隔开）</label>
-                                        <select class="ui fluid normal dropdown" multiple="multiple" name="tag">
+                                        <select class="form-control article-tags" multiple="multiple" name="tag">
                                             #for(tag : tags)
                                             <option value="#(tag.title ??)" selected>#(tag.title ??)</option>
                                             #end
@@ -410,7 +315,7 @@
                             <div contenteditable="true" id="pastebin"></div>
 
                             <div class="ui message">
-                                <button type="submit" class="ui button primary publish-btn loading-on-clicked" id="">
+                                <button type="button" id="submit" class="ui button primary publish-btn loading-on-clicked" >
                                     <i class="icon send"></i>
                                     保存并投稿
                                 </button>
@@ -462,72 +367,78 @@
     // 本地保存内容唯一值
     Config.editor.unique_id = "articles-create_article_content_";
 </script>
-<!--<script type="text/javascript">-->
-<!--    $(function() {-->
-<!--        var editor = editormd("editormd", {-->
-<!--            path : "#(CPATH)/static/components/editor/lib/",-->
-<!--            emoji: true,-->
-<!--            imageUpload : true,-->
-<!--            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],-->
-<!--            imageUploadURL : "/article/file/upload", // 文件上传的处理请求！-->
-<!--            onload : function() {-->
-
-<!--            },-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
 <script src="#(CPATH)/static/components/editor/js/editor.js"></script>
 <script src="#(CPATH)/static/components/editor/js/editor.vendors.js"></script>
+<script src="#(CPATH)/static/components/jquery/jquery.min.js"></script>
+<script src="#(CPATH)/static/components/jquery/jquery.form.min.js"></script>
+<script src="#(CPATH)/static/components/jquery-validation/jquery.validate.min.js"></script>
+<script src="#(CPATH)/static/components/selectize/selectize.min.js"></script>
+<script src="#(CPATH)/static/components/highlight/highlight.pack.js"></script>
+<script src="#(CPATH)/static/components/toastr/toastr.min.js"></script>
+<script src="#(CPATH)/static/components/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="#(CPATH)/static/components/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="#(CPATH)/static/components/jquery-file-upload/js/jquery.fileupload.js"></script>
+<script src="#(CPATH)/static/front/jpressfront.js"></script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.tags.ui.dropdown')
-            .dropdown({
-                allowAdditions: true,
-                apiSettings: {
-                    url: Config.tags_url,
-                    data: {
-                        '_token': Config.token
-                    },
+<script>
+    function cfileClick() {
+        $('#cfile').fileupload({
+            url: '#(CPATH)/commons/attachment/upload',
+            sequentialUploads: true,
+            done: function (e, data) {
+                if (data.result.state === "ok") {
+                    var src = data.result.src;
+                    $("#thumbnail").attr("src", '#(CPATH)' + src);
+                    $("#articleThumbnail").val(src);
                 }
-            });
-
-    });
-
-</script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#publish-hint').click(function (event) {
-            event.preventDefault();
-            swal({
-                title: "",
-                text: "确定要将发布草稿？",
-                type: "warning",
-                showCancelButton: true,
-                cancelButtonText: "取消",
-                confirmButtonText: "发布"
-            }).then(function () {
-                $('<input />').attr('type', 'hidden')
-                    .attr('name', "subject")
-                    .attr('value', "publish")
-                    .appendTo('#article-edit-form');
-                $("#article-edit-form").submit();
-            }).catch(swal.noop);
+            }
         });
+    }
 
-        $('.articles.ui.dropdown.search.selection')
-            .dropdown({
-                allowAdditions: false,
-                saveRemoteData: false,
-                apiSettings: {
-                    url: 'https://learnku.com/my/articles/search?q={query}',
-                    data: {
-                        '_token': Config.token
-                    },
-                    cache: false,
-                }
-            });
+
+
+
+    var $select = $('.article-tags').selectize({
+        plugins: ['remove_button'],
+        delimiter: ',',
+        persist: false,
+        addPrecedence: true,
+        create: true,
+        render: {
+            option_create: function (data, escape) {
+                return '<div class="create" style="padding-left: 5px"> 使用标签：<strong style="color: #DD1144">' + escape(data.input) + '</strong></div>';
+            }
+        }
     });
+
+    $(".newTag").each(function () {
+        $(this).on('click', function () {
+            $select[0].selectize.createItem($(this).text());
+        })
+    });
+
+    $("#submit").on("click", function () {
+        doSubmit();
+    })
+
+
+    // 全局函数,在CKEditor ctrl + s 快捷键处用到,保留article的status
+    window.doSubmit = function () {
+        ajaxSubmit("#form", function (data) {
+            $("#articleId").attr("value", data.id);
+            window.history.replaceState({}, '', `#(CPATH)/ucenter/article/write/`+data.id)
+            toastr.success('文章保存成功。');
+        });
+    };
+
+    //setSaveHotKeyFunction(doSubmit);
+
+
+    $("#removeThumbnail").on("click", function () {
+        $("#thumbnail").attr("src", "#(CPATH)/static/commons/img/nothumbnail.jpg");
+        $("#articleThumbnail").val("");
+    })
+
 </script>
 
 

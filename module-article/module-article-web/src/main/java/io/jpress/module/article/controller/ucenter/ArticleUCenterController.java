@@ -159,9 +159,12 @@ public class ArticleUCenterController extends UcenterControllerBase {
             for (Long id : checkIds) {
                 if (id != null && id.equals(category.getId())) {
                     category.put("isCheck", true);
+                    setAttr("article_category",category);
+                    break;
                 }
             }
         }
+
     }
 
 

@@ -24,7 +24,6 @@
 <body class=" articles-show-page">
 
 <script>
-    window.Laravel = {"csrfToken": ""}
     window.Config = {
         'CSRF_TOKEN': '',
         'token': '',
@@ -157,115 +156,13 @@
 
 
 
-<div class="ui top menu sidebar stackable">
-    <div class="item">
-        <img class="ui image" style="width:26px;height:26px;margin-top:-2px;"
-             src="resource/img/admin.gif">
-        <span class="site-name ml-2">#(WEB_NAME)</span>
-    </div>
-
-    <form class="ui fluid category  item secondary" action="/article/search" method="GET">
-        <div class="ui icon input">
-            <input class="prompt" name="keyword" type="text" placeholder="搜索" value="">
-            <i class="search icon"></i>
-        </div>
-    </form>
-
-    #categories(asTree=true)
-    #for(category :categories)
-    <a href="#(category.slug)" class="item secondary">
-        <i class="icon list"></i> #(category.title)
-    </a>
-    #end
-    #end
-
-
-    <div class="item">
-        <a class="ui basic small button no-pjax" href=""><i class="icon user "></i> 登录 </a>
-    </div>
-</div>
+#include("./_sidebar_menu.html")
 
 <div class="pusher">
 
     <div class="main container">
 
-        <nav class="ui main borderless menu top stackable topnav" id="topnav">
-            <div class="ui container">
-
-                <div class="ui inline scrolling community-nav dropdown mr-2"
-                     style="padding-left: 22px;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;">
-                    <div class="text site-logo" style="color:#888888;display: flex;">
-
-                        <img class="ui image" style="width:26px;height:26px;margin-top:-2px;"
-                             src="resource/img/admin.gif">
-                        <span class="site-name">#(WEB_NAME)</span>
-                        <i class="dropdown icon ml-3"></i>
-                    </div>
-                    <div class="menu ml-4 communities" style="max-height: 520px;padding: 8px;">
-                        <div class="ui icon search input" style="width: 172px;float:left;">
-                            <i class="search icon"></i>
-                            <input type="text" placeholder="搜索分类">
-                        </div>
-
-                        <a class="item pr-3 mt-2" href="/">
-                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;" src="resource/img/admin.gif"> 首页
-                        </a>
-                        <div class="divider clearfix"></div>
-                        #categories(asTree=true)
-                        #for(category :categories)
-                        <a class="item" href="#(category.slug)" style="padding-right: 2.2em!important;">
-                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
-                                 src="#(category.icon)">
-                            #(category.title)
-                        </a>
-                        #end
-                        #end
-                    </div>
-                </div>
-
-                <a class="item header right menu " style="display:none">
-                    <i class="icon align justify"></i>
-                </a>
-
-                <!-- 主菜单 -->
-                #for(menu : MENUS)
-                #if(menu.hasChild())
-                <div class="ui simple item dropdown article stackable nav-user-item  secondary">#(menu.text ??)<i class="dropdown icon"></i>
-                    <div class="ui menu stackable">
-                        #for(childMenu : menu.getChilds())
-                        <a class="item" href="#(childMenu.url ??)"
-                           style="padding-right: 36px!important;">
-                            #(childMenu.text ??)
-                        </a>
-                        #end
-                    </div>
-                </div>
-                #else
-                <a href="#(menu.url ??)" class="item secondary">#(menu.text ??)</a>
-                #end
-                #end
-
-                <form class="ui fluid category search item secondary hide-on-991" action="/article/search"
-                      method="GET">
-                    <div class="ui icon input">
-                        <input class="prompt" name="keyword" type="text" placeholder="搜索" value="">
-                        <i class="search icon"></i>
-                    </div>
-                    <div class="results"></div>
-                </form>
-
-                <!--                <div class=" right menu stackable secondary">-->
-                <!--                    <div class="item rm-link-color">-->
-                <!--                        <a class="mr-4 no-pjax login_required" href=""><i class="icon sign in "></i>-->
-                <!--                            登录 </a>-->
-                <!--                        <a class="no-pjax" href="" style="margin-left: 10px;"><i-->
-                <!--                                class="icon user add "></i> 注册 </a>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-
-            </div>
-
-        </nav>
+        #include("./_nav_menu.html")
 
         <div class="ui centered grid container stackable">
             <div class="twelve wide column main-column">
@@ -411,6 +308,238 @@
                     </div>
                 </div>
                 <div id="replies" name="replies"></div>
+
+                <div class="ui threaded comments comment-list ">
+
+                    <div class="ui divider horizontal grey"><i class="icon comments"></i> 评论数量: <span
+                            class="reply-count">0</span></div>
+                    <div class="comments-feed" id="all-comments">
+                    </div>
+                    <div class="empty-block">
+                        (=￣ω￣=)··· 暂无内容！
+                    </div>
+
+                    <br>
+
+                    <div class="ui segment extra-padding comment-composing-box pt-3" style="padding:20px;">
+
+
+                        <div class="reply ui new-reply message hide"></div>
+
+                        <form class="ui reply form topic-reply-form" method="POST"
+                              action="https://learnku.com/replies?62311" accept-charset="UTF-8"
+                              id="comment-composing-form">
+
+                            <input type="hidden" name="_token" value="n4R2GsG89wT0aiDdICphyCb4ynNVe5fvfPjPZrvY">
+                            <input type="hidden" name="topic_id" value="62311">
+                            <input type="hidden" name="body_html" value="">
+
+                            <div class="ui message info">
+                                <i class="icon info" aria-hidden="true"></i>如果对此文章有任何疑问，或者涉及侵权需要删除请评论留言，谢谢！
+                            </div>
+
+
+                            <div class="field">
+                                <textarea name="body" id="comment-composing-box" data-emojiable="converted"
+                                          data-storage-key="topic-62311" required="" class=""
+                                          data-id="67ee3c74-beab-45f3-9dee-4160d92a5dca" data-type="original-input"
+                                          style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 112px;"></textarea>
+                                <div class="emoji-menu" data-id="67ee3c74-beab-45f3-9dee-4160d92a5dca" data-type="menu"
+                                     style="display: none;">
+                                    <div class="emoji-items-wrap1">
+                                        <table class="emoji-menu-tabs">
+                                            <tbody>
+                                            <tr>
+                                                <td><a class="emoji-menu-tab icon-recent-selected"></a></td>
+                                                <td><a class="emoji-menu-tab icon-smile"></a></td>
+                                                <td><a class="emoji-menu-tab icon-flower"></a></td>
+                                                <td><a class="emoji-menu-tab icon-bell"></a></td>
+                                                <td><a class="emoji-menu-tab icon-car"></a></td>
+                                                <td><a class="emoji-menu-tab icon-grid"></a></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="emoji-items-wrap mobile_scrollable_wrap">
+                                            <div class="emoji-items"><a href="javascript:void(0)" title=":grin:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -375px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":grin:"><span class="label">:grin:</span></a><a
+                                                    href="javascript:void(0)" title=":kissing_heart:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -175px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":kissing_heart:"><span class="label">:kissing_heart:</span></a><a
+                                                    href="javascript:void(0)" title=":joy:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -550px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":joy:"><span class="label">:joy:</span></a><a
+                                                    href="javascript:void(0)" title=":heart:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -250px -150px no-repeat;background-size:675px 175px;"
+                                                    alt=":heart:"><span class="label">:heart:</span></a><a
+                                                    href="javascript:void(0)" title=":heart_eyes:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -150px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":heart_eyes:"><span class="label">:heart_eyes:</span></a><a
+                                                    href="javascript:void(0)" title=":blush:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -75px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":blush:"><span class="label">:blush:</span></a><a
+                                                    href="javascript:void(0)" title=":+1:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -600px -75px no-repeat;background-size:675px 175px;"
+                                                    alt=":+1:"><span class="label">:+1:</span></a><a
+                                                    href="javascript:void(0)" title=":relaxed:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -100px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":relaxed:"><span class="label">:relaxed:</span></a><a
+                                                    href="javascript:void(0)" title=":pensive:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -400px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":pensive:"><span class="label">:pensive:</span></a><a
+                                                    href="javascript:void(0)" title=":smile:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) 0px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":smile:"><span class="label">:smile:</span></a><a
+                                                    href="javascript:void(0)" title=":sob:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -575px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":sob:"><span class="label">:sob:</span></a><a
+                                                    href="javascript:void(0)" title=":kiss:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -475px -150px no-repeat;background-size:675px 175px;"
+                                                    alt=":kiss:"><span class="label">:kiss:</span></a><a
+                                                    href="javascript:void(0)" title=":unamused:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -450px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":unamused:"><span class="label">:unamused:</span></a><a
+                                                    href="javascript:void(0)" title=":flushed:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -350px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":flushed:"><span class="label">:flushed:</span></a><a
+                                                    href="javascript:void(0)"
+                                                    title=":stuck_out_tongue_winking_eye:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -275px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":stuck_out_tongue_winking_eye:"><span class="label">:stuck_out_tongue_winking_eye:</span></a><a
+                                                    href="javascript:void(0)" title=":see_no_evil:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -75px -75px no-repeat;background-size:675px 175px;"
+                                                    alt=":see_no_evil:"><span class="label">:see_no_evil:</span></a><a
+                                                    href="javascript:void(0)" title=":wink:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -125px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":wink:"><span class="label">:wink:</span></a><a
+                                                    href="javascript:void(0)" title=":smiley:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -25px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":smiley:"><span class="label">:smiley:</span></a><a
+                                                    href="javascript:void(0)" title=":cry:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -525px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":cry:"><span class="label">:cry:</span></a><a
+                                                    href="javascript:void(0)"
+                                                    title=":stuck_out_tongue_closed_eyes:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -300px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":stuck_out_tongue_closed_eyes:"><span class="label">:stuck_out_tongue_closed_eyes:</span></a><a
+                                                    href="javascript:void(0)" title=":scream:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -125px -25px no-repeat;background-size:675px 175px;"
+                                                    alt=":scream:"><span class="label">:scream:</span></a><a
+                                                    href="javascript:void(0)" title=":rage:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -175px -25px no-repeat;background-size:675px 175px;"
+                                                    alt=":rage:"><span class="label">:rage:</span></a><a
+                                                    href="javascript:void(0)" title=":smirk:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -50px -50px no-repeat;background-size:675px 175px;"
+                                                    alt=":smirk:"><span class="label">:smirk:</span></a><a
+                                                    href="javascript:void(0)" title=":disappointed:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -475px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":disappointed:"><span class="label">:disappointed:</span></a><a
+                                                    href="javascript:void(0)" title=":sweat_smile:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) 0px -25px no-repeat;background-size:675px 175px;"
+                                                    alt=":sweat_smile:"><span class="label">:sweat_smile:</span></a><a
+                                                    href="javascript:void(0)" title=":kissing_closed_eyes:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -200px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":kissing_closed_eyes:"><span class="label">:kissing_closed_eyes:</span></a><a
+                                                    href="javascript:void(0)" title=":speak_no_evil:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -125px -75px no-repeat;background-size:675px 175px;"
+                                                    alt=":speak_no_evil:"><span class="label">:speak_no_evil:</span></a><a
+                                                    href="javascript:void(0)" title=":relieved:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -425px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":relieved:"><span class="label">:relieved:</span></a><a
+                                                    href="javascript:void(0)" title=":grinning:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -50px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":grinning:"><span class="label">:grinning:</span></a><a
+                                                    href="javascript:void(0)" title=":yum:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -275px -25px no-repeat;background-size:675px 175px;"
+                                                    alt=":yum:"><span class="label">:yum:</span></a><a
+                                                    href="javascript:void(0)" title=":ok_hand:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -650px -75px no-repeat;background-size:675px 175px;"
+                                                    alt=":ok_hand:"><span class="label">:ok_hand:</span></a><a
+                                                    href="javascript:void(0)" title=":neutral_face:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -600px -25px no-repeat;background-size:675px 175px;"
+                                                    alt=":neutral_face:"><span class="label">:neutral_face:</span></a><a
+                                                    href="javascript:void(0)" title=":confused:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -625px -25px no-repeat;background-size:675px 175px;"
+                                                    alt=":confused:"><span class="label">:confused:</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field rm-link-color">
+                                <div class="pull-left meta">
+                                    <a href="javascript:;" class="mr-2 emoji-picker text-mute fs-big rm-tdu"
+                                       data-type="picker">
+                                        <i class="icon smile"></i>
+                                    </a>
+                                    <a href="javascript:;" class="mr-2 ui popover text-mute"
+                                       data-html="黏贴或拖拽图片至输入&lt;br&gt;框内皆可上传图片">
+                                        <i class="icon picture"></i>
+                                    </a>
+                                    <a href="javascript:;" class="mr-2 ui popover text-mute hide-on-mobile"
+                                       data-html="支持除了 H1~H6 以外的&lt;br&gt;GitHub 兼容 Markdown">
+                                        支持 MD
+                                    </a>
+
+                                    <a href="javascript:;" class="compose-help text-mute rm-tdu"
+                                       style="color: #777;margin-top: 8px;">
+                                        帮助
+                                    </a>
+
+                                </div>
+
+                                <div class="pull-right">
+                                    <button class="ui primary labeled icon button  no-loading" type="submit"
+                                            id="comment-composing-submit">
+                                        <i class="icon comment"></i> 评论
+                                    </button>
+                                </div>
+
+                                <div class="clearfix"></div>
+
+                            </div>
+
+
+                        </form>
+
+                        <div class="clearfix"></div>
+                        <div class="box preview markdown-reply fluidbox-content" id="preview-box"
+                             style="display:none;border: dashed 1px #ccc;background: #ffffff;border-radius: 6px;box-shadow:none;margin-top: 20px;margin-bottom: 6px;"></div>
+                    </div>
+                </div>
             </div>
 
             <div class="four wide column">

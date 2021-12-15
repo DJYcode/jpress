@@ -156,89 +156,14 @@
 </style>
 
 
-
+#include("./_sidebar_menu.html")
 
 
 <div class="pusher">
 
     <div class="main container">
 
-        <nav class="ui main borderless menu top stackable topnav" id="topnav">
-            <div class="ui container">
-
-                <div class="ui inline scrolling community-nav dropdown mr-2"
-                     style="padding-left: 22px;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;">
-                    <div class="text site-logo" style="color:#888888;display: flex;">
-
-                        <img class="ui image" style="width:26px;height:26px;margin-top:-2px;"
-                             src="resource/img/admin.gif">
-                        <span class="site-name">#(WEB_NAME)</span>
-                        <i class="dropdown icon ml-3"></i>
-                    </div>
-                    <div class="menu ml-4 communities" style="max-height: 520px;padding: 8px;">
-                        <div class="ui icon search input" style="width: 172px;float:left;">
-                            <i class="search icon"></i>
-                            <input type="text" placeholder="搜索分类">
-                        </div>
-
-                        <a class="item pr-3 mt-2" href="/">
-                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;" src="resource/img/admin.gif"> 首页
-                        </a>
-                        <div class="divider clearfix"></div>
-                        #categories(asTree=true)
-                        #for(category :categories)
-                        <a class="item" href="#(category.slug)" style="padding-right: 2.2em!important;">
-                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
-                                 src="#(category.icon)">
-                            #(category.title)
-                        </a>
-                        #end
-                        #end
-                    </div>
-                </div>
-
-                <a class="item header right menu " style="display:none">
-                    <i class="icon align justify"></i>
-                </a>
-
-                <!-- 主菜单 -->
-                #for(menu : MENUS)
-                #if(menu.hasChild())
-                <div class="ui simple item dropdown article stackable nav-user-item  secondary">#(menu.text ??)<i class="dropdown icon"></i>
-                    <div class="ui menu stackable">
-                        #for(childMenu : menu.getChilds())
-                        <a class="item" href="#(childMenu.url ??)"
-                           style="padding-right: 36px!important;">
-                            #(childMenu.text ??)
-                        </a>
-                        #end
-                    </div>
-                </div>
-                #else
-                <a href="#(menu.url ??)" class="item secondary">#(menu.text ??)</a>
-                #end
-                #end
-
-                <form class="ui fluid category search item secondary hide-on-991" action="/article/search"
-                      method="GET">
-                    <div class="ui icon input">
-                        <input class="prompt" name="keyword" type="text" placeholder="搜索" value="">
-                        <i class="search icon"></i>
-                    </div>
-                    <div class="results"></div>
-                </form>
-
-                <!--                <div class=" right menu stackable secondary">-->
-                <!--                    <div class="item rm-link-color">-->
-                <!--                        <a class="mr-4 no-pjax login_required" href=""><i class="icon sign in "></i>-->
-                <!--                            登录 </a>-->
-                <!--                        <a class="no-pjax" href="" style="margin-left: 10px;"><i-->
-                <!--                                class="icon user add "></i> 注册 </a>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-
-            </div>
-        </nav>
+        #include("./_nav_menu.html")
 
         <div class="ui centered grid container stackable">
             <div class="twelve wide column main-column">

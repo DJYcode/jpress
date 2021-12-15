@@ -1216,7 +1216,7 @@ function merge_options(e, t) {
             } : n.onload = function () {
                 t.loadFiles.js.push(e), i()
             }, "head" === o ? document.getElementsByTagName("head")[0].appendChild(n) : document.body.appendChild(n)
-        }, t.katexURL = {js: "//" + Config.cdn_domain + "/assets/editor/lib/katex/katex.min"}, t.kaTeXLoaded = !1, t.loadKaTeX = function (e) {
+        }, t.katexURL = {js: "//" + Config.cdn_domain + "/static/components/editor/lib/katex/katex.min"}, t.kaTeXLoaded = !1, t.loadKaTeX = function (e) {
             t.loadScript(t.katexURL.js, e || function () {
             })
         }, t.lockScreen = function (t) {
@@ -1410,7 +1410,7 @@ function merge_options(e, t) {
                 styleActiveLine: !1,
                 toolbarIcons: ["h2", "h3", "quote", "|", "list-ul", "list-ol", "|", "link", "image", "code-block", "table", "emoji", "|", "watch", "fullscreen", "help"],
                 lineNumbers: !1,
-                path: "resource/assets/editor/lib",
+                path: "http://localhost:8888/static/components/editor/lib/",
                 imageUpload: !0,
                 imageUploadURL: Config.routes.upload_image,
                 emoji: !0,
@@ -1625,7 +1625,7 @@ function merge_options(e, t) {
             e(".ui.accordion").accordion({selector: {trigger: ".title"}})
         }
     };
-    window.LearnKuEditor = l
+    window.E7CodingEditor = l
 }(jQuery), $(document).ready(function () {
-    LearnKuEditor.init()
+    E7CodingEditor.init()
 });
