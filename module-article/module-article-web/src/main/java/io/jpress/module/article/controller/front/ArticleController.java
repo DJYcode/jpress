@@ -245,8 +245,10 @@ public class ArticleController extends TemplateControllerBase {
                 comment.put("parent", parent);
             }
         }
+        long totalCommentCount = commentService.findCountByArticleId(articleId);
 
         Ret ret = Ret.ok().set("code", 0);
+        ret.set("total_comment_count",totalCommentCount);
 
 
         Map<String, Object> paras = new HashMap<>();

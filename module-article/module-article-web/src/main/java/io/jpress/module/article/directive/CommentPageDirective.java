@@ -20,6 +20,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.template.Env;
 import com.jfinal.template.io.Writer;
 import com.jfinal.template.stat.Scope;
+import io.jboot.utils.CollectionUtil;
 import io.jboot.utils.StrUtil;
 import io.jboot.web.controller.JbootControllerContext;
 import io.jboot.web.directive.annotation.JFinalDirective;
@@ -29,6 +30,12 @@ import io.jpress.module.article.model.Article;
 import io.jpress.module.article.model.ArticleComment;
 import io.jpress.module.article.service.ArticleCommentService;
 import io.jpress.web.base.TemplateControllerBase;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Michael Yang 杨福海 （fuhai999@gmail.com）
@@ -51,6 +58,13 @@ public class CommentPageDirective extends JbootDirectiveBase {
         Article article = controller.getAttr("article");
         if (article != null) {
             Page<ArticleComment> articlePage = service.paginateByArticleIdInNormal(page, pageSize, article.getId());
+            List<ArticleComment> newArticleComments = new ArrayList<>();
+            for (ArticleComment articleComment : articlePage.getList()) {
+                if (articleComment.get("parent") == null) {
+                    newArticleComments.add(articleComment);
+                }
+            }
+            articlePage.setList(newArticleComments);
             scope.setGlobal("commentPage", articlePage);
             renderBody(env, scope, writer);
         }

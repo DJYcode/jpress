@@ -515,26 +515,26 @@ var moveEnd = function (t) {
                     t("." + t(this).data("comments-class")).toggle()
                 }), t(".attend-topic-checkbox").click(function () {
                     setCookie("attend-topic", t("#attend-topic-checkbox").is(":checked") ? "yes" : "no", 1e3)
-                }), t(".reply-comments").submit(function (e) {
+                }),
+                t(".reply-comments").submit(function (e) {
                     e.preventDefault();
                     var n = t(this);
                     n.find(".comment-btn").addClass("loading disabled").prop("disabled", !0), t.ajax({
                         method: "POST",
                         url: n.attr("action"),
                         data: {
-                            body: n.find("[name=comment-body-input]").val(),
-                            attend_topic: 0,
-                            reply_id: n.data("reply-id"),
-                            topic_id: n.data("topic-id"),
-                            _token: Config.token
+                            content: n.find("[name=content]").val(),
+                            render: n.find("[name=render]").val(),
+                            pid: n.find("[name=pid]").val(),
+                            articleId: n.data("article-id"),
+                            csrf_token: n.find("[name=csrf_token]").val(),
                         }
                     }).done(function (e) {
-                        200 == e.status && (t(".inner-comment-lists-" + n.data("reply-id")).html(t(e.html)), n.find("[name=comment-body-input]").val(""), emojify.run(), t(".reply-count").text(e.reply_count)), t(".reply.ui.message.reply-" + n.data("reply-id")).addClass(e.message_class).text(e.message).fadeIn()
+                        "ok" === e.state && (t(".inner-comment-lists-" + n.data("reply-id")).html(t(e.html)), n.find("[name=content]").val(""), emojify.run(), t(".reply-count").text(e.total_comment_count)),
+                            t(".reply.ui.message.reply-" + n.data("reply-id")).addClass(e.message_class).text(e.message).fadeIn()
                     }).fail(function (e) {
-                        if (422 == e.status) {
-                            var i = e.responseJSON.errors;
-                            i.body && t(".reply.ui.message.reply-" + n.data("reply-id")).removeClass("green").addClass("error").text(i.body[0]).fadeIn()
-                        }
+                        var i = e.responseJSON.errors;
+                        i.body && t(".reply.ui.message.reply-" + n.data("reply-id")).removeClass("green").addClass("error").text(i.body[0]).fadeIn()
                     }).always(function () {
                         n.find(".comment-btn").removeClass("loading disabled").prop("disabled", !1)
                     })
@@ -542,24 +542,23 @@ var moveEnd = function (t) {
                 var e = this, n = t(".topic-reply-form"), i = t("#comment-composing-submit"), a = i.val(),
                     c = t("#all-comments"), s = t("#preview-box");
                 n.submit(function () {
-                    var n = t(this).find("textarea"), r = n.val();
-                    return t(".reply.ui.message.new-reply").removeClass("error green").text("").hide(), "" === t.trim(r) || o || (i.val("提交中...").addClass("loading disabled").prop("disabled", !0), o = !0, t.ajax({
+                    var n = t(this)
+                    return t(".reply.ui.message.new-reply").removeClass("error green").text("").hide(), "" === t.trim(r) || o || (i.val("提交中...").addClass("loading disabled").prop("disabled", !0), o = !0,
+                        t.ajax({
                         method: "POST",
                         url: t(this).attr("action"),
                         data: {
-                            body: r,
-                            body_html: t('input[name="body_html"]').length ? t('input[name="body_html"]').val() : "",
-                            attend_topic: t("#attend-topic-checkbox").is(":checked") ? 1 : 0,
-                            topic_id: t("[name=topic_id]").val(),
-                            _token: Config.token
+                            content: n.find("[name=content]").val(),
+                            render: n.find("[name=render]").val(),
+                            pid: n.find("[name=pid]").val(),
+                            articleId: n.find("[name=articleId]").val(),
+                            csrf_token: n.find("[name=csrf_token]").val(),
                         }
                     }).done(function (i) {
-                        200 === i.status && (c.html(t(i.html)), t(".reply-count").text(i.reply_count), t("#replies-empty-block").fadeOut(), t(".empty-block").hide(), t("#preview-box").hide(), n.val(""), e.removeLocalStorage(n), s.html(""), location.href = location.href.split("#")[0] + "#reply" + i.reply_id, emojify.run(), e.siteBootUp()), t(".reply.ui.message.new-reply").addClass(i.message_class).text(i.message).fadeIn()
+                        "ok" === i.state && (c.html(t(i.html)), t(".reply-count").text(i.reply_count), t("#replies-empty-block").fadeOut(), t(".empty-block").hide(), t("#preview-box").hide(), n.val(""), e.removeLocalStorage(n), s.html(""), location.href = location.href.split("#")[0] + "#reply" + i.reply_id, emojify.run(), e.siteBootUp()), t(".reply.ui.message.new-reply").addClass(i.message_class).text(i.message).fadeIn()
                     }).fail(function (e) {
-                        if (422 == e.status) {
                             var n = e.responseJSON.errors;
                             n.body && t(".reply.ui.message.new-reply").removeClass("green").addClass("error").text(n.body[0]).fadeIn()
-                        }
                     }).always(function () {
                         i.val(a).removeClass("loading disabled").prop("disabled", !1), o = !1
                     })), !1

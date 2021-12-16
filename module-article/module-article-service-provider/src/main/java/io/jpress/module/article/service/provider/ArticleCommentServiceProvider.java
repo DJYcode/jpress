@@ -174,6 +174,7 @@ public class ArticleCommentServiceProvider extends JbootServiceBase<ArticleComme
                 "id desc");
 
         join(p, "pid", "parent");
+        joinMany(p,"pid","children");
         joinParentUser(p);
         userService.join(p, "user_id");
 

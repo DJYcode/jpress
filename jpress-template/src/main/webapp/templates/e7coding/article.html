@@ -308,6 +308,7 @@
                         #end
                     </div>
                 </div>
+                <!-- 评论 -->
                 #if(option("article_comment_enable","true") && article.comment_status)
                 <div id="replies" name="replies"></div>
 
@@ -352,6 +353,8 @@
                                     <i class="icon clock"></i> #date(comment.created )
 
                                     <a href="javascript:;" class="rm-link-color text-mute ml-2 show-reply-box"
+                                       title="回复 #(comment.author ??)"
+                                       onclick="atReplyCommentsByID('#(comment.author)', '#(comment.id)');"
                                        data-reply-box-class="reply-box-#(comment.id)">
                                         <i class="icon talk outline"></i>回复
                                     </a>
@@ -361,8 +364,9 @@
 
                                     <div class="reply ui message hide reply-#(comment.id)"></div>
 
-                                    <form class="ui reply form mb-4 reply-comments reply-box-#(comment.id) jpress-comment-form"
+                                    <form class="ui reply form mb-4 reply-comments reply-box-#(comment.id)"
                                           data-article-id="#(article.id)" data-pid="#(comment.id)"
+                                          data-reply-id="#(comment.id)"
                                           action="#(CPATH)/article/postComment" style="display:none;" autocomplete="off">
                                         <input type="hidden" name="articleId" value="#(article.id)">
                                         <input type="hidden" name="render" value="default">
@@ -380,34 +384,33 @@
                                         </div>
                                     </form>
 
-                                    #if(comment.parent)
+                                    #if(comment.children && comment.children.size()>0)
+                                    #for(child : comment.children ??)
                                     <div class="inner-comment-lists inner-comment-lists-#(comment.id)">
 
                                         <div class="lh-2 my-2" style="padding-top:4px;border-top: 1px dashed #e9e5e5;"
-                                             id="reply#(comment.parent.id)" name="reply#(comment.parent.id)">
+                                             id="reply#(child.id)" name="reply#(child.id)">
 
-                                            <img src="#(comment.parent.avatar ?? (TPATH + '/img/avatar.png'))"
-                                                 style="width:22px;height:22px">
-
-                                            #(comment.parent.author)
-
+                                            <img src="#(child.avatar ?? (TPATH + '/img/avatar.png'))"
+                                                 style="width:22px;height:22px">#(child.author)
                                             <span class="ui popover fs-small text-mute mt-2 ml-2"
-                                                  title="#date(comment.parent.created)">#date(comment.parent.created)</span>
+                                                  title="#date(child.created)">#date(child.created)</span>
                                             <div class="reply-comments-content my-2 tdu rm-link-color lh-3"
                                                  style="color:#403f3f;margin-left: 30px;">
-                                                #(comment.parent.content)
+                                                #(child.content)
                                             </div>
 
                                             <div class=""
                                                  style="color:#c4c2c2;font-size: 14px;padding-top:0px;margin-left: 30px;">
                                                 <a href="javascript:void(0)"
-                                                   onclick="atReplyCommentsByID('#(comment.parent.author)', '#(comment.parent.id)');"
-                                                   title="回复 #(comment.parent.author)" class="ui teal popover rm-link-color mr-1"><i
+                                                   onclick="atReplyCommentsByID('#(child.author)', '#(comment.id)');"
+                                                   title="回复 #(child.author)" class="ui teal popover rm-link-color mr-1"><i
                                                         class="icon reply"></i></a>
 
                                             </div>
                                         </div>
                                     </div>
+                                    #end
                                     #end
                                 </div>
 
@@ -430,6 +433,7 @@
 
                         <form class="ui reply form topic-reply-form jpress-comment-form" method="POST"
                               action="#(CPATH)/article/postComment" accept-charset="UTF-8"
+                              data-article-id="#(article.id)"
                               autocomplete="off"
                               >
 
@@ -446,7 +450,7 @@
 
                             <div class="field">
                                 <textarea name="content" id="comment-composing-box" data-emojiable="converted"
-                                          data-storage-key="topic-#(article.id)" required="" class=""
+                                          data-storage-key="topic-#(article.id)" required="" class="comment-textarea textarea"
                                           data-id="#(article.id)" data-type="original-input"
                                           style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 112px;"></textarea>
                                 <div class="emoji-menu" data-id="#(article.id)" data-type="menu"
@@ -815,6 +819,9 @@
     </div>
 </div>
     <!-- Scripts -->
+
+<!--    <script src="#(CPATH)/static/front/jpressfront.js"></script>-->
+
     <script src="resource/js/vendors.js"></script>
     <script src="resource/js/app.js"></script>
 
@@ -822,10 +829,6 @@
     <script src="#(CPATH)/static/components/jquery/jquery.form.min.js"></script>
     <script src="#(CPATH)/static/components/selectize/selectize.min.js"></script>
     <script src="#(CPATH)/static/components/toastr/toastr.min.js"></script>
-    <script src="#(CPATH)/static/front/jpressfront.js"></script>
-
-
-
     <a id="scrollUp" href="#top"
        style="position: fixed; z-index: 2147483647; display: none;">Scroll to top</a>
 </body>
