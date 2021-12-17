@@ -530,11 +530,14 @@ var moveEnd = function (t) {
                             csrf_token: n.find("[name=csrf_token]").val(),
                         }
                     }).done(function (e) {
-                        "ok" === e.state && (t(".inner-comment-lists-" + n.data("reply-id")).html(t(e.html)), n.find("[name=content]").val(""), emojify.run(), t(".reply-count").text(e.total_comment_count)),
-                            t(".reply.ui.message.reply-" + n.data("reply-id")).addClass(e.message_class).text(e.message).fadeIn()
+                        if (e.state === "ok") {
+                            (t(".inner-comment-lists-" + n.data("reply-id")).append(t(e.html)), n.find("[name=content]").val(""), emojify.run(), t(".reply-count").text(e.total_comment_count)),
+                                t(".reply.ui.message.reply-" + n.data("reply-id")).addClass("green basic").text("√ 评论成功").fadeIn()
+                        } else {
+                            t(".reply.ui.message.reply-" + n.data("reply-id")).removeClass("green").addClass("error").text(e.message).fadeIn()
+                        }
                     }).fail(function (e) {
-                        var i = e.responseJSON.errors;
-                        i.body && t(".reply.ui.message.reply-" + n.data("reply-id")).removeClass("green").addClass("error").text(i.body[0]).fadeIn()
+                        t(".reply.ui.message.reply-" + n.data("reply-id")).removeClass("green").addClass("error").text(e.message).fadeIn()
                     }).always(function () {
                         n.find(".comment-btn").removeClass("loading disabled").prop("disabled", !1)
                     })
@@ -555,10 +558,18 @@ var moveEnd = function (t) {
                             csrf_token: n.find("[name=csrf_token]").val(),
                         }
                     }).done(function (i) {
-                        "ok" === i.state && (c.html(t(i.html)), t(".reply-count").text(i.reply_count), t("#replies-empty-block").fadeOut(), t(".empty-block").hide(), t("#preview-box").hide(), n.val(""), e.removeLocalStorage(n), s.html(""), location.href = location.href.split("#")[0] + "#reply" + i.reply_id, emojify.run(), e.siteBootUp()), t(".reply.ui.message.new-reply").addClass(i.message_class).text(i.message).fadeIn()
+                        if (i.state === "ok") {
+                            (c.html(t(i.html)), t(".reply-count").text(i.total_comment_count),
+                                t("#replies-empty-block").fadeOut(), t(".empty-block").hide(),
+                                t("#preview-box").hide(), n.val(""), e.removeLocalStorage(n), s.html(""),
+                                location.href = location.href.split("#")[0] + "#reply" + i.comment_id,
+                                emojify.run(), e.siteBootUp()),
+                                t(".reply.ui.message.new-reply").addClass("green basic").text("√ 评论成功").fadeIn()
+                        } else {
+                            t(".reply.ui.message.new-reply").removeClass("green").addClass("error").text(i.message).fadeIn()
+                        }
                     }).fail(function (e) {
-                            var n = e.responseJSON.errors;
-                            n.body && t(".reply.ui.message.new-reply").removeClass("green").addClass("error").text(n.body[0]).fadeIn()
+                            t(".reply.ui.message.reply-" + n.data("reply-id")).removeClass("green").addClass("error").text(e.message).fadeIn()
                     }).always(function () {
                         i.val(a).removeClass("loading disabled").prop("disabled", !1), o = !1
                     })), !1

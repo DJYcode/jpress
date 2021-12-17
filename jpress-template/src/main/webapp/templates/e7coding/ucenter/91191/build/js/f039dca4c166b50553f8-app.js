@@ -580,7 +580,10 @@ var moveEnd = function (t) {
                             _token: Config.token
                         }
                     }).done(function (i) {
-                        200 === i.status && (c.html(t(i.html)), t(".reply-count").text(i.reply_count), t("#replies-empty-block").fadeOut(), t(".empty-block").hide(), t("#preview-box").hide(), n.val(""), e.removeLocalStorage(n), s.html(""), location.href = location.href.split("#")[0] + "#reply" + i.reply_id, emojify.run(), e.siteBootUp()), t(".reply.ui.message.new-reply").addClass(i.message_class).text(i.message).fadeIn()
+                        200 === i.status && (c.html(t(i.html)), t(".reply-count").text(i.reply_count),
+                            t("#replies-empty-block").fadeOut(), t(".empty-block").hide(), t("#preview-box").hide(), n.val(""),
+                            e.removeLocalStorage(n), s.html(""), location.href = location.href.split("#")[0] + "#reply" + i.reply_id, emojify.run(), e.siteBootUp()),
+                            t(".reply.ui.message.new-reply").addClass(i.message_class).text(i.message).fadeIn()
                     }).fail(function (e) {
                         if (422 == e.status) {
                             var n = e.responseJSON.errors;

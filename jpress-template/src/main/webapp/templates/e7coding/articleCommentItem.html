@@ -1,0 +1,27 @@
+<div class="inner-comment-lists inner-comment-lists-#(comment.id)">
+    <div class="lh-2 my-2" style="padding-top:4px;border-top: 1px dashed #e9e5e5;">
+        <img src="#(comment.user.avatar ?? (TPATH + '/img/avatar.png'))"
+             style="width:22px;height:22px">
+        #(comment.author)
+        <span class="ui popover fs-small text-mute mt-2 ml-2" title="#date(comment.created )">#date(comment.created )</span>
+        <div class="reply-comments-content my-2 tdu rm-link-color lh-3" style="color:#403f3f;margin-left: 30px;">
+            #(comment.content)
+        </div>
+        <div class="" style="color:#c4c2c2;font-size: 14px;padding-top:0px;margin-left: 30px;">
+            <a class="ui popover rm-link-color rm-tdu mr-1" href="javascript:;" title="无法给自己点赞" data-id="212141" style="font-size:15px;">
+                <i class=" icon thumbs up outline"></i>
+                <span class="vote-count"></span>
+            </a>
+            #if(option("article_comment_enable","true") && article.comment_status)
+                <a href="javascript:void(0)"
+                   onclick="atReplyCommentsByID('#(comment.author)', '#(comment.id)');" title="回复 #(comment.author)"
+                   class="ui teal popover rm-link-color mr-1">
+                 <i class="icon reply"></i>
+                </a>
+            #end
+            <a class="item ui rm-link-color mr-1" style="" href="javascript:;" data-method="delete" data-url="#(CPATH)/ucenter/article/doCommentDel?id=#(comment.id)">
+                <i class="icon trash"></i>
+            </a>
+        </div>
+    </div>
+</div>

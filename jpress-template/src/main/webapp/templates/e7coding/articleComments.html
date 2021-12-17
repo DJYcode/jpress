@@ -1,0 +1,103 @@
+<div class="comments-feed" id="all-comments">
+    #for(comment : comments ??)
+    <div class="comment">
+        <div id="reply#(comment.id)" name="reply#(comment.id)"></div>
+        <div class="avatar">
+            <img src="#(comment.user.avatar ?? (TPATH + '/img/avatar.png'))">
+        </div>
+
+        <div class="content">
+            <div class="comment-header">
+                <div class="meta" style="max-width:100%;display: inline-flex;">
+                    #(comment.author)
+                </div>
+
+                <div class="reaction">
+                    <div class="ui floating basic icon dropdown button">
+                        <a href="javascript:void(0)" onclick="atReplyCommentsByID('#(comment.author)', '#(comment.id)');"
+                           title="回复 #(comment.author ??)" class="ui teal reply-btn" style="display: none;"><i
+                                style="color:rgba(0, 0, 0, 0.3);" class="icon reply"></i></a>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text comment-body markdown-reply fluidbox-content">
+                <div class="px-3">
+                    #(comment.content)
+                </div>
+            </div>
+
+            <div class="comment-meta-mute" title="#date(comment.created )"
+                 style="padding:15px 25px;background: #fff;font-size: 12px;padding-top:0px;color: rgba(0, 0, 0, 0.4);">
+                <i class="icon clock"></i> #date(comment.created )
+
+                <a href="javascript:;" class="rm-link-color text-mute ml-2 show-reply-box"
+                   title="回复 #(comment.author ??)"
+                   onclick="atReplyCommentsByID('#(comment.author)', '#(comment.id)');"
+                   data-reply-box-class="reply-box-#(comment.id)">
+                    <i class="icon talk outline"></i>回复
+                </a>
+            </div>
+
+            <div class="comments ">
+
+                <div class="reply ui message hide reply-#(comment.id)"></div>
+
+                <form class="ui reply form mb-4 reply-comments reply-box-#(comment.id)"
+                      data-article-id="#(article.id)" data-pid="#(comment.id)"
+                      data-reply-id="#(comment.id)"
+                      action="#(CPATH)/article/postComment" style="display:none;" autocomplete="off">
+                    <input type="hidden" name="articleId" value="#(article.id)">
+                    <input type="hidden" name="render" value="articleCommentItem">
+                    <input type="hidden" name="pid" value="#(comment.id)">
+                    <input name="csrf_token" type="hidden" value="#(CSRF_TOKEN)">
+                    <div class="field 1">
+                        <div class="ui action input">
+                            <input required="" type="text" name="content"
+                                   class="reply-comments-composing-box reply-comment-box-#(comment.id)"
+                                   placeholder="支持 Emoji, 仅解析 Markdown 语法：a,code,strong,i,em">
+                            <button class="ui primary button comment-btn no-loading" type="submit">
+                                回复
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                #if(comment.children && comment.children.size()>0)
+                <div class="inner-comment-lists inner-comment-lists-#(comment.id)">
+                    #for(child : comment.children ??)
+                    <div class="lh-2 my-2" style="padding-top:4px;border-top: 1px dashed #e9e5e5;"
+                         id="reply#(child.id)" name="reply#(child.id)">
+
+                        <img src="#(child.avatar ?? (TPATH + '/img/avatar.png'))"
+                             style="width:22px;height:22px">#(child.author)
+                        <span class="ui popover fs-small text-mute mt-2 ml-2"
+                              title="#date(child.created)">#date(child.created)</span>
+                        <div class="reply-comments-content my-2 tdu rm-link-color lh-3"
+                             style="color:#403f3f;margin-left: 30px;">
+                            #(child.content)
+                        </div>
+
+                        <div class=""
+                             style="color:#c4c2c2;font-size: 14px;padding-top:0px;margin-left: 30px;">
+                            <a href="javascript:void(0)"
+                               onclick="atReplyCommentsByID('#(child.author)', '#(comment.id)');"
+                               title="回复 #(child.author)" class="ui teal popover rm-link-color mr-1"><i
+                                    class="icon reply"></i></a>
+
+                        </div>
+                    </div>
+                    #end
+                </div>
+                #end
+            </div>
+
+        </div>
+    </div>
+    #end
+</div>
+<div class="empty-block">
+    (=￣ω￣=)··· 暂无内容！
+</div>

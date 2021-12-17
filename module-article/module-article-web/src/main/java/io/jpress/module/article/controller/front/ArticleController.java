@@ -17,6 +17,7 @@ package io.jpress.module.article.controller.front;
 
 import com.jfinal.aop.Inject;
 import com.jfinal.kit.Ret;
+import com.jfinal.plugin.activerecord.Page;
 import io.jboot.utils.StrUtil;
 import io.jboot.web.controller.annotation.RequestMapping;
 import io.jpress.JPressOptions;
@@ -34,6 +35,7 @@ import io.jpress.service.OptionService;
 import io.jpress.service.UserService;
 import io.jpress.web.base.TemplateControllerBase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -249,17 +251,31 @@ public class ArticleController extends TemplateControllerBase {
 
         Ret ret = Ret.ok().set("code", 0);
         ret.set("total_comment_count",totalCommentCount);
-
-
-        Map<String, Object> paras = new HashMap<>();
-        paras.put("comment", comment);
-        paras.put("article", article);
-        if (conmmentUser != null) {
-            paras.put("user", conmmentUser.keepSafe());
-            comment.put("user", conmmentUser.keepSafe());
+        ret.set("comment_id",comment.getId());
+        String render = getPara("render", "default");
+        if ("articleComments".equals(render)) {
+            Page<ArticleComment> articlePage = commentService.paginateByArticleIdInNormal(1, 1000, article.getId());
+            List<ArticleComment> newArticleComments = new ArrayList<>();
+            for (ArticleComment articleComment : articlePage.getList()) {
+                if (articleComment.get("parent") == null) {
+                    newArticleComments.add(articleComment);
+                }
+            }
+            articlePage.setList(newArticleComments);
+            Map<String, Object> paras = new HashMap<>();
+            paras.put("comments", articlePage.getList());
+            paras.put("article", article);
+            renderHtmltoRet("/WEB-INF/views/commons/article/defaultArticleCommentItem.html", paras, ret);
+        } else {
+            Map<String, Object> paras = new HashMap<>();
+            paras.put("comment", comment);
+            paras.put("article", article);
+            if (conmmentUser != null) {
+                paras.put("user", conmmentUser.keepSafe());
+                comment.put("user", conmmentUser.keepSafe());
+            }
+            renderHtmltoRet("/WEB-INF/views/commons/article/defaultArticleCommentItem.html", paras, ret);
         }
-
-        renderHtmltoRet("/WEB-INF/views/commons/article/defaultArticleCommentItem.html", paras, ret);
 
         ArticleNotifyKit.notify(article, comment, conmmentUser);
 

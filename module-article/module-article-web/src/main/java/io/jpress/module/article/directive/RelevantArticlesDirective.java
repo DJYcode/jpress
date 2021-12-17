@@ -25,6 +25,7 @@ import io.jpress.module.article.model.Article;
 import io.jpress.module.article.service.ArticleCategoryService;
 import io.jpress.module.article.service.ArticleService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,6 +55,7 @@ public class RelevantArticlesDirective extends JbootDirectiveBase {
         List<Article> relevantArticles = service.findRelevantListByArticleId(article.getId(), Article.STATUS_NORMAL, count);
 
         if (relevantArticles == null || relevantArticles.isEmpty()) {
+            scope.setLocal("relevantArticles", new ArrayList<>());
             return;
         }
 
