@@ -108,7 +108,9 @@ public class CheckoutController extends UcenterControllerBase {
 
         setAttr("userCarts", userCarts);
         setAttr("defaultAddress", addressService.findDefaultAddress(getLoginedUser().getId()));
-
+        List<CouponCode> couponCodes = couponCodeService.findAvailableByUserId(getLoginedUser().getId(),
+                userCarts.get(0).getShouldPayPrice());
+        setAttr("couponCodeList", couponCodes);
         render("checkout.html",DEFAULT_CHECKOUT_TEMPLATE);
     }
 

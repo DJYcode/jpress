@@ -33,11 +33,11 @@ public class UserCart extends BaseUserCart<UserCart> {
         if (memberPrice != null
                 && memberPrice.compareTo(BigDecimal.ZERO) >= 0
                 && memberPrice.compareTo(newestSalePrice) < 0) {
-            return memberPrice.multiply(BigDecimal.valueOf(getProductCount()));
+            return memberPrice.multiply(BigDecimal.valueOf(1));
         }
 
 
-        return newestSalePrice.multiply(BigDecimal.valueOf(getProductCount()));
+        return newestSalePrice.multiply(BigDecimal.valueOf(1));
     }
 
 

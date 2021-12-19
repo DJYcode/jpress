@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh" class="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="baidu-site-verification" content="MfC8ppEukL"/>
+    <meta baidu-gxt-verify-token="">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="">
+
+    <title>#(SEO_TITLE ?? (WEB_TITLE + '-' + WEB_SUBTITLE))</title>
+    <meta name="description" content="#(SEO_DESCRIPTION)"/>
+    <meta name="keywords"
+          content="#(SEO_KEYWORDS)"/>
+
+    <meta name="author" content="dong"/>
+
+    <link rel="shortcut icon" href=""/>
+
+    <!-- Styles -->
+    <link href="resource/css/vendors.css" rel="stylesheet">
+    <link href="resource/css/app.css" rel="stylesheet">
+
+    <style type="text/css">
+        .swiper {
+            width: 240px;
+            height: 320px;
+        }
+
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .swiper-slide:nth-child(1n) {
+            background-color: rgb(206, 17, 17);
+        }
+
+        .swiper-slide:nth-child(2n) {
+            background-color: rgb(0, 140, 255);
+        }
+
+        .swiper-slide:nth-child(3n) {
+            background-color: rgb(10, 184, 111);
+        }
+
+        .swiper-slide:nth-child(4n) {
+            background-color: rgb(211, 122, 7);
+        }
+
+        .swiper-slide:nth-child(5n) {
+            background-color: rgb(118, 163, 12);
+        }
+
+        .swiper-slide:nth-child(6n) {
+            background-color: rgb(180, 10, 47);
+        }
+
+        .swiper-slide:nth-child(7n) {
+            background-color: rgb(35, 99, 19);
+        }
+
+        .swiper-slide:nth-child(8n) {
+            background-color: rgb(0, 68, 255);
+        }
+
+        .swiper-slide:nth-child(9n) {
+            background-color: rgb(218, 12, 218);
+        }
+
+        .swiper-slide:nth-child(10n) {
+            background-color: rgb(54, 94, 77);
+        }
+    </style>
+</head>
+<body class=" home-page">
+
+<script>
+    window.Laravel = {"csrfToken": ""}
+    window.Config = {
+        'CSRF_TOKEN': '',
+        'token': '',
+        'environment': 'production',
+        'url': '',
+        'tags_url': '',
+        'scroll_to_top': true,
+        'community': {
+            'id': 0,
+            'name': '',
+            'favicon': ''
+        },
+        'routes': {
+            'upload_image': '',
+        },
+        'user_settings': {
+            'visit_topic_patches_page': false,
+            'annotation_disabled': 'yes',
+        },
+        'overlay': '',
+        'editor': {},
+        'destroyeditor_id': {},
+
+        'content': {
+            authorName: 'dong'
+        }
+    };
+
+    var ShowCrxHint = 'no';
+
+    function onWXWebView() {
+        $('.wechat-login-link').attr("href", "")
+        $('.show-on-wechat-view').show();
+    }
+
+    if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+        onWXWebView();
+    } else {
+        if (document.addEventListener) {
+            document.addEventListener("WeixinJSBridgeReady", onWXWebView, false);
+        } else if (document.attachEvent) {
+            document.attachEvent("WeixinJSBridgeReady", onWXWebView);
+            document.attachEvent("onWeixinJSBridgeReady", onWXWebView);
+        }
+    }
+
+</script>
+
+<style type="text/css">
+    .ui.top.menu {
+        border-top: 4px solid #00b5ad;
+    }
+
+    .ui.fluid.search .results {
+        width: 550px;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .ui.top.menu > .ui.container {
+            height: 52px;
+            flex-direction: initial;
+        }
+    }
+
+
+    /* 顶部导航栏 */
+    .ui.top.menu {
+        border-top: 4px solid #00b5ad;
+    }
+
+    /* 右边导航栏顶部样式 */
+    .ui.top-color.segment:not(.inverted) {
+        border-top: 2px solid #00b5ad;
+    }
+
+    /* 右边导航栏顶部样式 */
+    .ui.top-color.card:not(.inverted) {
+        border-top: 2px solid #00b5ad;
+    }
+
+    a {
+        color: #1775cc;
+    }
+
+    a:hover, a:focus {
+        color: #0081f9;
+        transition: color .15s ease 0s;
+    }
+
+    /* 主要按钮 */
+
+    .ui.primary.buttons .button, .ui.primary.button {
+        background-color: #00b5ad;
+        border-color: #00b5ad;
+    }
+
+    /* 主要按钮选中状态 */
+    .ui.primary.buttons .button:hover, .ui.primary.button:hover, .ui.primary.button:focus, .ui.primary.buttons .button:focus {
+        background-color: #00b5ad;
+        border-color: #00b5ad;
+    }
+
+    /* 外框按钮 */
+    .ui.basic.primary.buttons .button, .ui.basic.primary.button {
+        color: #00b5ad !important;
+        box-shadow: 0px 0px 0px 1px #00b5ad inset !important;
+    }
+
+    /* 外框按钮选中状态 */
+    .ui.basic.primary.buttons .button:hover, .ui.basic.primary.button:hover {
+        color: #00b5ad !important;
+        box-shadow: 0px 0px 0px 1px #00b5ad inset !important;
+    }
+
+    .ui.basic.primary.buttons .button:active, .ui.basic.primary.button:active, .ui.basic.primary.buttons .active.button, .ui.basic.primary.active.button, .ui.basic.buttons .button:hover, .ui.basic.button:hover, .ui.basic.primary.buttons .button:focus, .ui.basic.primary.button:focus {
+        color: #00b5ad !important;
+        box-shadow: 0px 0px 0px 1px #00b5ad inset !important;
+    }
+
+
+    .footer {
+        max-height: max-content;
+    }
+
+</style>
+<style type="text/css">
+    .my-communities + .readmore-separator {
+        margin-top: -12px;
+        font-size: 12px;
+        padding-bottom: 0px;
+        margin-bottom: -8px;
+        padding-top: 0px !important;
+    }
+</style>
+
+
+#include("./_sidebar_menu.html")
+
+<div class="pusher">
+
+    <div class="main container">
+
+        #include("./_nav_menu.html")
+
+        <div class="ui centered grid container books-page stackable">
+            <div class="twelve wide column">
+                <div class="ui segment">
+                    <div class="content extra-padding">
+                        <h4 class="ui horizontal divider header">
+                            <i class="bar chart icon"></i>
+                            商品信息确认
+                        </h4>
+                        <table class="ui single line table">
+                            <thead>
+                            <tr>
+                                <th>商品名称</th>
+                                <th>下载价格</th>
+                                <th>数量</th>
+                                <th>合计</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            #for(userCart : userCarts )
+                            <tr>
+                                <td>
+                                    #(userCart.product_title ??)
+                                    <div style="color: #9c9c9c">
+                                        #for(option : userCart.optionsMap)
+                                        #(option.key ??) : #(option.value ??) #if(!(for.last))<br/>#end
+                                        #end
+                                    </div>
+                                </td>
+                                <td>
+                                    #if(userCart.memberPrice && userCart.memberPrice < userCart.newProductPrice)
+                                    <s>原价：#(userCart.newProductPrice ??)</s>
+                                    会员：#(userCart.memberPrice)
+                                    #else
+                                    #(userCart.newProductPrice ??)
+                                    #end
+                                </td>
+                                <td>
+                                    <div class="input-group input-number">
+                                        <input type="hidden" name="cid" value="#(userCart.id ??)">
+                                        1
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="price-color" id="payPrice">#(userCart.shouldPayPrice ??)</span>
+                                    <small style="font-size: 14px"> <span id="coupon-price-span" class="text-primary"></span> </small>
+                                </td>
+                            </tr>
+                            #end
+                            </tbody>
+                        </table>
+
+                        <h4 class="ui horizontal divider header">
+                            <i class="bar chart icon"></i>
+                            支付信息
+                        </h4>
+                        <form class="ui form">
+                        <div class="inline fields">
+                            <div class="ui labeled input">
+                                #if(wechatxConfig.isEnable())
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="paytype" value="wechatx">
+                                        <label>微信转账</label>
+                                    </div>
+                                </div>
+                                #end
+
+                                #if(alipayxConfig.isEnable())
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="paytype" value="alipayx">
+                                        <label>支付宝转账</label>
+                                    </div>
+                                </div>
+                                #end
+
+                                #if(wechatConfig.isEnable())
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="paytype" value="wechat">
+                                        <label>微信支付</label>
+                                    </div>
+                                </div>
+                                #end
+
+                                #if(alipayConfig.isEnable())
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="paytype" value="alipay">
+                                        <label>支付宝支付</label>
+                                    </div>
+                                </div>
+                                #end
+
+                                #if(paypalConfig.isEnable())
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="paytype" value="paypal">
+                                        <label>Paypal支付</label>
+                                    </div>
+                                </div>
+                                #end
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="paytype" value="amount">
+                                        <label>使用账户余额支付</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>优惠券(码)</label>
+                            <input type="text" id="coupon-code-input" name="coupon_code" placeholder="请输入优惠码...">
+                            <a href="javascript:void(0);" id="select-coupon-code" onclick="choiceCoupon()">选择优惠券</a>
+                        </div>
+                        <div class="field">
+                            <label>备注</label>
+                            <textarea rows="2"></textarea>
+                        </div>
+                            <div class="ui basic buttons">
+                                <div class="ui button">
+                                    <a href="">确认下载</a>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    #include("./footer.html")
+
+</div>
+
+<!-- 登录弹窗 -->
+<div class="ui modal login small" style="width:400px;margin: 0em 0em 0em -200px;">
+    <i class="close icon"></i>
+    <div class="header">
+        <h4 class="modal-title ">
+            <img class="ui image display-inline-block mr-2" style="width:32px;height:32px;"
+                 src=""> <span
+                style="position: relative;top: 4px;">请登录</span>
+        </h4>
+    </div>
+    <div class="content">
+        #if(option('login_qq_enable') || option('login_wechat_enable'))
+        <div class="form-group row">
+            #if(option('login_wechat_enable'))
+            <a class="ui button fluid mt-2 green wechat-login-link" href="#(CPATH)/oauth/wechat"><i
+                    class="icon wechat "></i> 微信登录</a>
+            #end
+            #if(option('login_qq_enable'))
+            <a class="ui button fluid mt-2 basic" id="login-required-submit"
+               href="#(CPATH)/oauth/qq"><i class="icon github alternate"></i> QQ 登录</a>
+            #end
+        </div>
+        #end
+    </div>
+</div>
+<!-- 选择优惠券弹窗 -->
+<div class="ui choiceCoupon modal">
+    <i class="close icon"></i>
+    <div class="header">
+        选择优惠券
+    </div>
+    <div class="content">
+        <div class="description">
+            <table class="ui single line table">
+                <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>金额</th>
+                    <th>类型</th>
+                    <th>选择</th>
+                </tr>
+                </thead>
+                <tbody>
+                #for(data : couponCodeList)
+                <tr>
+                    <td>
+                        #(data.title)
+                    </td>
+                    <td>
+                        #(data.coupon.amount)
+                    </td>
+                    <td>
+                        #if(data.coupon.type == 1)
+                        满#(data.coupon.with_amount)减#(data.coupon.amount)
+                        #end
+                        #if(data.coupon.type == 2)
+                        叠加满减券
+                        #end
+                        #if(data.coupon.type == 3)
+                        无门槛券
+                        #end
+                    </td>
+                    <td><button class="btn btn-primary useButton"
+                                data-coupon-code="#(data.code)"
+                                data-coupon-amount="#(data.coupon.amount)"
+                                data-coupon-title="#(data.title) -#(data.coupon.amount)">使用</button></td>
+                </tr>
+                #end
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+
+
+<!-- Scripts -->
+<script src="#(CPATH)/static/components/jquery/jquery.min.js"></script>
+<script src="#(CPATH)/static/components/jquery/jquery.form.min.js"></script>
+<script src="#(CPATH)/static/components/jquery-validation/jquery.validate.min.js"></script>
+<script src="#(CPATH)/static/components/jquery-validation/additional-methods.min.js"></script>
+<script src="#(CPATH)/static/components/jquery-validation/localization/messages_zh.min.js"></script>
+<script src="#(CPATH)/static/components/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="#(CPATH)/static/components/fastclick/fastclick.js"></script>
+<script src="#(CPATH)/static/components/layer/layer.js"></script>
+<script src="#(CPATH)/static/components/switchery/switchery.min.js"></script>
+<script src="#(CPATH)/static/components/toastr/toastr.min.js"></script>
+<script src="#(CPATH)/static/components/air-datepicker/js/datepicker.min.js"></script>
+<script src="#(CPATH)/static/components/air-datepicker/js/i18n/datepicker.zh.js"></script>
+<script src="#(CPATH)/static/components/sweetalert2/sweetalert2.all.min.js"></script>
+<script src="#(CPATH)/static/adminlte/js/adminlte.min.js"></script>
+<script src="#(CPATH)/static/admin/js/jpressutils.js"></script>
+<script src="#(CPATH)/static/front/jpressfront.js"></script>
+<script src="resource/js/vendors.js"></script>
+<script src="resource/js/app.js"></script>
+<script>
+    function choiceCoupon() {
+        $('.ui.choiceCoupon.modal')
+            .modal({
+                closable  : false,
+                onDeny    : function(){
+                    return true;
+                },
+                onApprove : function() {
+
+                }
+            })
+            .modal('show')
+        ;
+    }
+    $(".useButton").on('click', function () {
+        var payPrice = parseFloat('#(userCart.shouldPayPrice ??)') - parseFloat($(this).attr("data-coupon-amount"));
+        $('#payPrice').text(payPrice.toFixed(2));
+        $('#coupon-price-span').text('优惠券:-' + (parseFloat($(this).attr("data-coupon-amount"))));
+        $('#coupon-code-input').val($(this).attr("data-coupon-code"));
+        $('#coupon-code-input').attr('readonly', true);
+        $('#select-coupon-code').text('选择优惠券（已选:' + $(this).attr("data-coupon-title") + '）');
+        $('.ui.choiceCoupon.modal').modal('hide');
+    })
+</script>
+</html>

@@ -22,7 +22,6 @@
     <!-- Styles -->
     <link href="resource/css/vendors.css" rel="stylesheet">
     <link href="resource/css/app.css" rel="stylesheet">
-    <link rel="stylesheet" href="resource/css/swiper-bundle.min.css"/>
 
     <style type="text/css">
         .swiper {
@@ -254,7 +253,7 @@
                                         </div>
                                         <div class="ui basic buttons">
                                             <div class="ui button">
-                                                <a href="">下载</a>
+                                                <a href="javascript:;" onclick="buyProduct('#(product.id ??)')">下载</a>
                                             </div>
                                         </div>
                                         <a href="javascript:;"
@@ -320,13 +319,7 @@
 <!-- Scripts -->
 <script src="resource/js/vendors.js"></script>
 <script src="resource/js/app.js"></script>
-<script src="resource/js/swiper-bundle.min.js"></script>
-
-<script>
-    var swiper = new Swiper(".mySwiper", {
-        effect: "cards",
-        grabCursor: true,
-    });
-</script>
+<script src="#(CPATH)/static/components/jquery/jquery.min.js"></script>
+<script src="#(CPATH)/static/front/jpressfront.js"></script>
 
 </html>
