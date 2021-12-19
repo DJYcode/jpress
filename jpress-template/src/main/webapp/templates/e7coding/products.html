@@ -173,15 +173,23 @@
         #include("./_nav_menu.html")
 
         <div class="ui centered grid container stackable" style="margin-bottom: 80px;min-height:380px">
-
             <div class="sixteen wide column docs-main-content">
-
                 <div class="ui header text-center"
                      style="margin-top: 26px;margin-bottom: 26px;">
                     <div class="ui fluid action input">
                         <input type="text" placeholder="搜索...">
                         <div class="ui button">搜索</div>
                     </div>
+                </div>
+                <div class="ui segment pb-0 readmore  my-communities" data-height="55">
+                    #categories(asTree=true)
+                    #for(category :categories)
+                    <a class="ui image light label mr-1 mb-3" href="#(category.slug)" style="padding-right: 2.2em!important;">
+                        <img src="#(category.icon)">
+                        #(category.title)
+                    </a>
+                    #end
+                    #end
                 </div>
 
                 <div class="ui secondary pointing menu mb-4">
