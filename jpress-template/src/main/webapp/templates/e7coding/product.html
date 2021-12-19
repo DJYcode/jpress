@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh" class="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="baidu-site-verification" content="MfC8ppEukL"/>
+    <meta baidu-gxt-verify-token="">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="">
+
+    <title>#(SEO_TITLE ?? (WEB_TITLE + '-' + WEB_SUBTITLE))</title>
+    <meta name="description" content="#(SEO_DESCRIPTION)"/>
+    <meta name="keywords"
+          content="#(SEO_KEYWORDS)"/>
+
+    <meta name="author" content="dong"/>
+
+    <link rel="shortcut icon" href=""/>
+
+    <!-- Styles -->
+    <link href="resource/css/vendors.css" rel="stylesheet">
+    <link href="resource/css/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="resource/css/swiper-bundle.min.css"/>
+
+    <style type="text/css">
+        .swiper {
+            width: 240px;
+            height: 320px;
+        }
+
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .swiper-slide:nth-child(1n) {
+            background-color: rgb(206, 17, 17);
+        }
+
+        .swiper-slide:nth-child(2n) {
+            background-color: rgb(0, 140, 255);
+        }
+
+        .swiper-slide:nth-child(3n) {
+            background-color: rgb(10, 184, 111);
+        }
+
+        .swiper-slide:nth-child(4n) {
+            background-color: rgb(211, 122, 7);
+        }
+
+        .swiper-slide:nth-child(5n) {
+            background-color: rgb(118, 163, 12);
+        }
+
+        .swiper-slide:nth-child(6n) {
+            background-color: rgb(180, 10, 47);
+        }
+
+        .swiper-slide:nth-child(7n) {
+            background-color: rgb(35, 99, 19);
+        }
+
+        .swiper-slide:nth-child(8n) {
+            background-color: rgb(0, 68, 255);
+        }
+
+        .swiper-slide:nth-child(9n) {
+            background-color: rgb(218, 12, 218);
+        }
+
+        .swiper-slide:nth-child(10n) {
+            background-color: rgb(54, 94, 77);
+        }
+    </style>
+</head>
+<body class=" home-page">
+
+<script>
+    window.Laravel = {"csrfToken": ""}
+    window.Config = {
+        'CSRF_TOKEN': '',
+        'token': '',
+        'environment': 'production',
+        'url': '',
+        'tags_url': '',
+        'scroll_to_top': true,
+        'community': {
+            'id': 0,
+            'name': '',
+            'favicon': ''
+        },
+        'routes': {
+            'upload_image': '',
+        },
+        'user_settings': {
+            'visit_topic_patches_page': false,
+            'annotation_disabled': 'yes',
+        },
+        'overlay': '',
+        'editor': {},
+        'destroyeditor_id': {},
+
+        'content': {
+            authorName: 'dong'
+        }
+    };
+
+    var ShowCrxHint = 'no';
+
+    function onWXWebView() {
+        $('.wechat-login-link').attr("href", "")
+        $('.show-on-wechat-view').show();
+    }
+
+    if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+        onWXWebView();
+    } else {
+        if (document.addEventListener) {
+            document.addEventListener("WeixinJSBridgeReady", onWXWebView, false);
+        } else if (document.attachEvent) {
+            document.attachEvent("WeixinJSBridgeReady", onWXWebView);
+            document.attachEvent("onWeixinJSBridgeReady", onWXWebView);
+        }
+    }
+
+</script>
+
+<style type="text/css">
+    .ui.top.menu {
+        border-top: 4px solid #00b5ad;
+    }
+
+    .ui.fluid.search .results {
+        width: 550px;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .ui.top.menu > .ui.container {
+            height: 52px;
+            flex-direction: initial;
+        }
+    }
+
+
+    /* 顶部导航栏 */
+    .ui.top.menu {
+        border-top: 4px solid #00b5ad;
+    }
+
+    /* 右边导航栏顶部样式 */
+    .ui.top-color.segment:not(.inverted) {
+        border-top: 2px solid #00b5ad;
+    }
+
+    /* 右边导航栏顶部样式 */
+    .ui.top-color.card:not(.inverted) {
+        border-top: 2px solid #00b5ad;
+    }
+
+    a {
+        color: #1775cc;
+    }
+
+    a:hover, a:focus {
+        color: #0081f9;
+        transition: color .15s ease 0s;
+    }
+
+    /* 主要按钮 */
+
+    .ui.primary.buttons .button, .ui.primary.button {
+        background-color: #00b5ad;
+        border-color: #00b5ad;
+    }
+
+    /* 主要按钮选中状态 */
+    .ui.primary.buttons .button:hover, .ui.primary.button:hover, .ui.primary.button:focus, .ui.primary.buttons .button:focus {
+        background-color: #00b5ad;
+        border-color: #00b5ad;
+    }
+
+    /* 外框按钮 */
+    .ui.basic.primary.buttons .button, .ui.basic.primary.button {
+        color: #00b5ad !important;
+        box-shadow: 0px 0px 0px 1px #00b5ad inset !important;
+    }
+
+    /* 外框按钮选中状态 */
+    .ui.basic.primary.buttons .button:hover, .ui.basic.primary.button:hover {
+        color: #00b5ad !important;
+        box-shadow: 0px 0px 0px 1px #00b5ad inset !important;
+    }
+
+    .ui.basic.primary.buttons .button:active, .ui.basic.primary.button:active, .ui.basic.primary.buttons .active.button, .ui.basic.primary.active.button, .ui.basic.buttons .button:hover, .ui.basic.button:hover, .ui.basic.primary.buttons .button:focus, .ui.basic.primary.button:focus {
+        color: #00b5ad !important;
+        box-shadow: 0px 0px 0px 1px #00b5ad inset !important;
+    }
+
+
+    .footer {
+        max-height: max-content;
+    }
+
+</style>
+<style type="text/css">
+    .my-communities + .readmore-separator {
+        margin-top: -12px;
+        font-size: 12px;
+        padding-bottom: 0px;
+        margin-bottom: -8px;
+        padding-top: 0px !important;
+    }
+</style>
+
+
+#include("./_sidebar_menu.html")
+
+<div class="pusher">
+
+    <div class="main container">
+
+        #include("./_nav_menu.html")
+
+        <div class="ui centered grid container books-page stackable">
+            <div class="twelve wide column">
+                <div class="ui segment">
+                    <div class="content extra-padding">
+                        <br>
+                        <div class="book header">
+                            <div class="ui items">
+                                <div class="item">
+                                    <div class="image">
+                                        <img class="ui image image-shadow " src="#(product.thumbnail)"
+                                             alt="#(product.title ??)" style="width: 175px;height: 175px"/>
+                                    </div>
+                                    <div class="content">
+                                        <div class="header" style="width:100%;font-size: 22px;margin-top: 5px;">
+                                            #(product.title ??)
+                                        </div>
+
+                                        <div class="description"
+                                             style="line-height: 28px;margin-bottom: 18px;margin-top: 17px;">
+                                            <div>下载价格：¥ #number(product.price ?? 0 , '0.00')</div>
+                                            <div>下载量 ：#(product.sales_count ?? 0)</div>
+                                            <div>摘要   ：#(product.summary ??)</div>
+                                        </div>
+                                        <div class="ui basic buttons">
+                                            <div class="ui button">
+                                                <a href="">下载</a>
+                                            </div>
+                                        </div>
+                                        <a href="javascript:;"
+                                           onclick="addProductToFavorite('#(product.id ??)')">
+                                            <i class="icon heart outline"></i> 添加收藏</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="ui  attached tabular menu" id="topics">
+                            <a class="item active" href="https://learnku.com/docs/effective-go/2020">
+                                <i class="grey content icon"></i>
+                                资源介绍
+                            </a>
+                        </div>
+                        <br>
+
+                        <div class="ui middle aligned selection list">
+                            #(product.content)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    #include("./footer.html")
+
+</div>
+
+<!-- 登录弹窗 -->
+<div class="ui modal login small" style="width:400px;margin: 0em 0em 0em -200px;">
+    <i class="close icon"></i>
+    <div class="header">
+        <h4 class="modal-title ">
+            <img class="ui image display-inline-block mr-2" style="width:32px;height:32px;"
+                 src=""> <span
+                style="position: relative;top: 4px;">请登录</span>
+        </h4>
+    </div>
+    <div class="content">
+        #if(option('login_qq_enable') || option('login_wechat_enable'))
+        <div class="form-group row">
+            #if(option('login_wechat_enable'))
+            <a class="ui button fluid mt-2 green wechat-login-link" href="#(CPATH)/oauth/wechat"><i
+                    class="icon wechat "></i> 微信登录</a>
+            #end
+            #if(option('login_qq_enable'))
+            <a class="ui button fluid mt-2 basic" id="login-required-submit"
+               href="#(CPATH)/oauth/qq"><i class="icon github alternate"></i> QQ 登录</a>
+            #end
+        </div>
+        #end
+    </div>
+</div>
+
+
+</body>
+
+
+<!-- Scripts -->
+<script src="resource/js/vendors.js"></script>
+<script src="resource/js/app.js"></script>
+<script src="resource/js/swiper-bundle.min.js"></script>
+
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        effect: "cards",
+        grabCursor: true,
+    });
+</script>
+
+</html>
