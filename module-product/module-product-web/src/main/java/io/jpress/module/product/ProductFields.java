@@ -98,6 +98,33 @@ public class ProductFields {
                 null,
                 "",
                 30));
+        fields.add(new SmartField("view_path",
+                "隐藏链接",
+                "product.view_path",
+                "请输入",
+                SmartField.TYPE_INPUT,
+                null,
+                null,
+                "",
+                30));
+        fields.add(new SmartField("view_text",
+                "隐藏内容",
+                "product.view_text",
+                "请输入",
+                SmartField.TYPE_TEXTAREA,
+                null,
+                null,
+                "",
+                30));
+        fields.add(new SmartField("view_effective_time",
+                "隐藏内容访问有效时间(默认0:永久)",
+                "product.view_effective_time",
+                "请输入",
+                SmartField.TYPE_INPUT,
+                null,
+                null,
+                "",
+                30));
 
         fields.add(new SmartField("sales_count",
                 "销量",

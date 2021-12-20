@@ -45,7 +45,7 @@ public class UserOrderItem extends BaseUserOrderItem<UserOrderItem> {
     public boolean canView() {
         Integer status = getStatus();
 
-        if (status == null || status != STATUS_FINISHED) {
+        if (status == null || (status != STATUS_FINISHED && status != STATUS_COMPLETED)) {
             return false;
         }
 

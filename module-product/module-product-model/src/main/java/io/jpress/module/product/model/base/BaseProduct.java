@@ -368,6 +368,45 @@ public abstract class BaseProduct<M extends BaseProduct<M>> extends BaseOptionsM
 	public java.lang.Long getViewCount() {
 		return getLong("view_count");
 	}
+	/**
+	 * 商品隐藏链接
+	 */
+	public void setViewPath(java.lang.String viewPath) {
+		set("view_path", viewPath);
+	}
+
+	/**
+	 * 商品隐藏链接
+	 */
+	public java.lang.String getViewPath() {
+		return getStr("view_path");
+	}
+	/**
+	 * 商品隐藏内容
+	 */
+	public void setViewText(java.lang.String viewText) {
+		set("view_text", viewText);
+	}
+
+	/**
+	 * 商品隐藏内容
+	 */
+	public java.lang.String getViewText() {
+		return getStr("view_text");
+	}
+	/**
+	 * 隐藏内容访问有效时间
+	 */
+	public void setViewEffectiveTime(java.lang.String viewEffectiveTime) {
+		set("view_effective_time", viewEffectiveTime);
+	}
+
+	/**
+	 * 隐藏内容访问有效时间
+	 */
+	public java.lang.String getViewEffectiveTime() {
+		return getStr("view_effective_time");
+	}
 
     /**
      * 真实访问量

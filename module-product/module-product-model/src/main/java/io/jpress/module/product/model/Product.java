@@ -5,10 +5,13 @@ import io.jboot.utils.StrUtil;
 import io.jpress.commons.utils.UrlUtils;
 import io.jpress.commons.utils.CommonsUtils;
 import io.jpress.commons.utils.JsoupUtils;
+import io.jpress.model.MemberGroup;
+import io.jpress.model.MemberPrice;
 import io.jpress.model.UserCart;
 import io.jpress.model.UserFavorite;
 import io.jpress.module.product.model.base.BaseProduct;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +28,16 @@ public class Product extends BaseProduct<Product> {
     public static final int STATUS_DRAFT = 2;
     public static final int STATUS_TRASH = 3;
 
+    private List<MemberGroup> memberGroups;
+
+    public List<MemberGroup> getMemberGroups() {
+        return memberGroups;
+    }
+
+    public Product setMemberGroups(List<MemberGroup> memberGroups) {
+        this.memberGroups = memberGroups;
+        return this;
+    }
 
     public boolean isNormal() {
         return getStatus() != null && getStatus() == STATUS_NORMAL;
@@ -130,14 +143,17 @@ public class Product extends BaseProduct<Product> {
         userCart.setProductId(getId());
         userCart.setProductType("product");
         userCart.setProductTypeText("产品");
+        userCart.setViewText(getViewText());
+        userCart.setViewPath(getViewPath());
+        userCart.setViewEffectiveTime(Long.valueOf(getViewEffectiveTime()));
         userCart.setProductPrice(this.getPrice());
         userCart.setProductCount(1);
         userCart.setProductTitle(getTitle());
         userCart.setProductSummary(CommonsUtils.maxLength(getText(), 200));
         userCart.setSelected(false);
         userCart.setProductLink(getUrl());
-        userCart.setWithVirtual(false);//非虚拟产品
-        userCart.setWithRefund(true);//可以退货
+        userCart.setWithVirtual(true);//虚拟产品
+        userCart.setWithRefund(false);//可以退货
         userCart.setCommentPath(getUrl());
         userCart.setCreated(new Date());
         userCart.setProductSpec(spec);

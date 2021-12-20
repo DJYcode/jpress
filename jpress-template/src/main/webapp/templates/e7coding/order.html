@@ -230,56 +230,49 @@
 
         <div class="ui centered grid container books-page stackable">
             <div class="twelve wide column">
-                <form class="ui form" action="#(CPATH)/ucenter/checkout/genorder" method="post" target="_blank" id="checkout">
-                <div class="ui segment">
-                    <div class="content extra-padding">
-                        <h4 class="ui horizontal divider header">
-                            <i class="bar chart icon"></i>
-                            商品信息确认
-                        </h4>
-                        <table class="ui single line table">
-                            <thead>
-                            <tr>
-                                <th>商品名称</th>
-                                <th>下载价格</th>
-                                <th>数量</th>
-                                <th>合计</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            #for(userCart : userCarts )
-                            <tr>
-                                <td>
-                                    #(userCart.product_title ??)
-                                    <div style="color: #9c9c9c">
-                                        #for(option : userCart.optionsMap)
-                                        #(option.key ??) : #(option.value ??) #if(!(for.last))<br/>#end
-                                        #end
-                                    </div>
-                                </td>
-                                <td>
-                                    #if(userCart.memberPrice && userCart.memberPrice < userCart.newProductPrice)
-                                    <s>原价：#(userCart.newProductPrice ??)</s>
-                                    会员：#(userCart.memberPrice)
-                                    #else
-                                    #(userCart.newProductPrice ??)
-                                    #end
-                                </td>
-                                <td>
-                                    <div class="input-group input-number">
-                                        <input type="hidden" name="cid" value="#(userCart.id ??)">
-                                        1
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="price-color" id="payPrice">#(userCart.shouldPayPrice ??)</span>
-                                    <small style="font-size: 14px"> <span id="coupon-price-span" class="text-primary"></span> </small>
-                                </td>
-                            </tr>
-                            #end
-                            </tbody>
-                        </table>
-                        #if(shouldPayPrice > 0)
+                <form class="ui form" action="#(CPATH)/ucenter/checkout/payorder/#(order.id)" method="post" target="_blank" id="checkout">
+                    <div class="ui segment">
+                        <div class="content extra-padding">
+                            <h4 class="ui horizontal divider header">
+                                <i class="bar chart icon"></i>
+                                商品信息确认
+                            </h4>
+                            <table class="ui single line table">
+                                <thead>
+                                <tr>
+                                    <th>商品名称</th>
+                                    <th>下载价格</th>
+                                    <th>数量</th>
+                                    <th>合计</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                #for(item : orderItems )
+                                <tr>
+                                    <td>
+                                        #(item.product_title ??)
+                                        <div style="color: #9c9c9c">
+                                            #for(option : item.optionsMap)
+                                            #(option.key ??) : #(option.value ??) #if(!(for.last))<br/>#end
+                                            #end
+                                        </div>
+                                    </td>
+                                    <td>#(item.product_price ??)</td>
+                                    <td>
+                                        <div class="input-group input-number">
+                                            <input type="hidden" name="cid" value="#(item.id ??)">
+                                            #(item.product_count ??)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="price-color" id="payPrice">#(item.product_count * item.product_price ??)</span>
+                                        <small style="font-size: 14px"> <span id="coupon-price-span" class="text-primary"></span> </small>
+                                    </td>
+                                </tr>
+                                #end
+                                </tbody>
+                            </table>
+                            #if(order.orderRealAmount > 0)
                             <h4 class="ui horizontal divider header">
                                 <i class="bar chart icon"></i>
                                 支付信息
@@ -339,19 +332,14 @@
                                 </div>
                             </div>
                             <div class="field">
-                                <label for="coupon-code-input">优惠券(码)</label>
-                                <input type="text" id="coupon-code-input" name="coupon_code" placeholder="请输入优惠码...">
-                                <a href="javascript:void(0);" id="select-coupon-code" onclick="choiceCoupon()">选择优惠券</a>
-                            </div>
-                            <div class="field">
                                 <label>备注</label>
-                                <textarea rows="3" name="buyer_msg"></textarea>
+                                <textarea rows="3" name="payer_msg"></textarea>
                             </div>
-                        #end
+                            #end
 
-                        <button class="ui primary basic button" type="submit" id="submit">确认下载</button>
+                            <button class="ui primary basic button" type="submit" id="submit">确认下载</button>
+                        </div>
                     </div>
-                </div>
                 </form>
             </div>
         </div>
@@ -456,61 +444,5 @@
 <script src="#(CPATH)/static/components/jquery/jquery.form.min.js"></script>
 <script>
     $("[name='paytype']:first").attr("checked", "checked");
-    $('#checkout').on('submit', function () {
-        var self = this;
-        layer.confirm('确认要支付下载吗？', {
-            btn: ['确定', '取消']//按钮
-        }, function (index) {
-
-            $(self).ajaxSubmit({
-                type: "post",
-                success: function (result) {
-                    if (result.state === "ok") {
-                        if (result.pay === "yes") {
-                            location.href = '#(CPATH)/ucenter/checkout/payorder/' + result.orderId + "?paytype=" + result.paytype;
-                        } else if (result.pay === "no") {
-                            location.href = '#(CPATH)/ucenter/order/viewText/' + result.orderId;
-                        }
-                    }
-                    //fail
-                    else {
-                        showErrorMessage(result.message);
-                    }
-                },
-                error: function () {
-                    showErrorMessage('系统错误，请稍后重试。');
-                }
-            });
-
-            layer.close(index);
-
-        });
-        return false;
-    });
-</script>
-<script>
-    function choiceCoupon() {
-        $('.ui.choiceCoupon.modal')
-            .modal({
-                closable  : false,
-                onDeny    : function(){
-                    return true;
-                },
-                onApprove : function() {
-
-                }
-            })
-            .modal('show')
-        ;
-    }
-    $(".useButton").on('click', function () {
-        var payPrice = parseFloat('#(shouldPayPrice ??)') - parseFloat($(this).attr("data-coupon-amount"));
-        $('#payPrice').text(payPrice.toFixed(2));
-        $('#coupon-price-span').text('优惠券:-' + (parseFloat($(this).attr("data-coupon-amount"))));
-        $('#coupon-code-input').val($(this).attr("data-coupon-code"));
-        $('#coupon-code-input').attr('readonly', true);
-        $('#select-coupon-code').text('选择优惠券（已选:' + $(this).attr("data-coupon-title") + '）');
-        $('.ui.choiceCoupon.modal').modal('hide');
-    })
 </script>
 </html>

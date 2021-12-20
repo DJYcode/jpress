@@ -97,6 +97,24 @@ public class OrderController extends UcenterControllerBase {
 
         render("ucenter/order/order_detail.html",DEFAULT_ORDER_DETAIL_INDEX_TEMPLATE);
     }
+    /**
+     * 查看隐藏内容
+     */
+    public void viewText() {
+        UserOrder userOrder = orderService.findById(getPara());
+        render404If(notLoginedUserModel(userOrder, "buyer_id"));
+        // 订单状态交易完成或交易结束
+        if (userOrder.isPaySuccess()
+                || userOrder.isFinished()
+                || userOrder.isDeliveried()) {
+            List<UserOrderItem> orderItems = orderItemService.findListByOrderId(userOrder.getId());
+            setAttr("orderNs",userOrder.getNs());
+            setAttr("orderItem", orderItems.get(0));
+            render("viewtext.html",DEFAULT_ORDER_DETAIL_INDEX_TEMPLATE);
+        }
+        setAttr("order",userOrder);
+        render("viewtext.html",DEFAULT_ORDER_DETAIL_INDEX_TEMPLATE);
+    }
 
     public void comment() {
         UserOrderItem item = orderItemService.findById(getPara());

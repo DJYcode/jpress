@@ -58,10 +58,10 @@
                                                 <a href="#(CPATH)/ucenter/order/comment/#(item.id)"
                                                    target="_blank">评价</a>
                                                 #end
-                                                #if(item.canView())
+                                                #if(order.isPaySuccess() || order.isFinished())
                                                 <span class="divider">|</span>
-                                                <a href="#(CPATH)#(item.view_path ??)itemId=#(item.id)" target="_blank">
-                                                    #(item.view_text ??)
+                                                <a href="#(CPATH)/ucenter/order/viewText/#(order.id)" target="_blank">
+                                                   下载
                                                 </a>
                                                 #end
 

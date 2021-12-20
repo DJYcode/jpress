@@ -111,6 +111,7 @@ public class CheckoutController extends UcenterControllerBase {
         List<CouponCode> couponCodes = couponCodeService.findAvailableByUserId(getLoginedUser().getId(),
                 userCarts.get(0).getShouldPayPrice());
         setAttr("couponCodeList", couponCodes);
+        setAttr("shouldPayPrice", userCarts.get(0).getShouldPayPrice());
         render("checkout.html",DEFAULT_CHECKOUT_TEMPLATE);
     }
 
@@ -206,7 +207,7 @@ public class CheckoutController extends UcenterControllerBase {
             item.setProductTitle(userCart.getProductTitle());
             item.setProductPrice(userCart.getProductPrice());
             item.setProductSpec(userCart.getProductSpec());
-            item.setProductCount(userCart.getProductCount());
+            item.setProductCount(1);//默认一件
             item.setProductThumbnail(userCart.getProductThumbnail());
             item.setProductLink(userCart.getProductLink());
 
@@ -308,6 +309,10 @@ public class CheckoutController extends UcenterControllerBase {
 
 
         if (userOrder.getCouponAmount() != null) {
+            if (orderTotalAmount.compareTo(new BigDecimal(0)) == 0) {
+                renderJson(Ret.fail().set("message", "免费下载，无需使用优惠券"));
+                return;
+            }
             //优惠劵大于 订单金额会导致 负数
             if (orderTotalAmount.compareTo(userOrder.getCouponAmount()) < 0) {
                 orderTotalAmount = new BigDecimal(0);
@@ -343,9 +348,9 @@ public class CheckoutController extends UcenterControllerBase {
         userOrder.setOrderRealAmount(orderTotalAmount);
         userOrder.setId(userOrderId);
 
-        userOrder.setPayStatus(PayStatus.UNPAY.getStatus());//支付状态：未支付
-        userOrder.setTradeStatus(UserOrder.TRADE_STATUS_TRADING);//交易状态：交易中...
-        userOrder.setDeliveryStatus(UserOrder.DELIVERY_STATUS_UNDELIVERY);//发货状态：未发货
+        userOrder.setPayStatus(orderTotalAmount.compareTo(new BigDecimal(0)) == 0 ?PayStatus.SUCCESS_OTHER.getStatus():PayStatus.UNPAY.getStatus());//支付状态：未支付
+        userOrder.setTradeStatus(orderTotalAmount.compareTo(new BigDecimal(0)) == 0 ?UserOrder.TRADE_STATUS_FINISHED:UserOrder.TRADE_STATUS_TRADING);//交易状态：交易中...
+        userOrder.setDeliveryStatus(orderTotalAmount.compareTo(new BigDecimal(0)) == 0 ?UserOrder.DELIVERY_STATUS_DELIVERIED:UserOrder.DELIVERY_STATUS_UNDELIVERY);//发货状态：未发货
         userOrder.setInvoiceStatus(UserOrder.INVOICE_STATUS_NOT_APPLY);//发票开具状态：用户未申请
 
         userOrderService.update(userOrder);
@@ -354,8 +359,11 @@ public class CheckoutController extends UcenterControllerBase {
         for (String cid : cids) {
             cartService.delete(cartService.findById(cid));
         }
-
-        renderJson(Ret.ok().set("orderId", userOrderId).set("paytype", getPara("paytype")));
+        if (orderTotalAmount.compareTo(new BigDecimal(0)) == 0) {
+            renderJson(Ret.ok().set("orderId", userOrderId).set("pay","no"));
+            return;
+        }
+        renderJson(Ret.ok().set("orderId", userOrderId).set("pay","yes").set("paytype", getPara("paytype")));
     }
 
     public void payorder() {

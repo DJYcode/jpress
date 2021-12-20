@@ -13,7 +13,9 @@ import io.jboot.components.cache.annotation.CachesEvict;
 import io.jboot.db.model.Column;
 import io.jboot.db.model.Columns;
 import io.jboot.service.JbootServiceBase;
+import io.jboot.utils.CollectionUtil;
 import io.jboot.utils.StrUtil;
+import io.jpress.model.MemberGroup;
 import io.jpress.module.product.model.Product;
 import io.jpress.module.product.model.ProductCategory;
 import io.jpress.module.product.query.ProductQuery;
@@ -25,12 +27,14 @@ import io.jpress.module.product.service.search.ProductSearcherFactory;
 import io.jpress.module.product.service.task.ProductCommentsCountUpdateTask;
 import io.jpress.module.product.service.task.ProductViewsCountUpdateTask;
 import io.jpress.module.product.service.search.ProductSearcher;
+import io.jpress.service.MemberGroupService;
+import io.jpress.service.MemberPriceService;
 import io.jpress.service.UserService;
 import io.jpress.web.seoping.SeoManager;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Bean
@@ -46,6 +50,12 @@ public class ProductServiceProvider extends JbootServiceBase<Product> implements
 
     @Inject
     private ProductCategoryService categoryService;
+
+    @Inject
+    private MemberPriceService memberPriceService;
+
+    @Inject
+    private MemberGroupService memberGroupService;
 
     @Override
     @CachesEvict({
@@ -126,6 +136,15 @@ public class ProductServiceProvider extends JbootServiceBase<Product> implements
         Columns columns = new Columns();
         columns.eq("status", Product.STATUS_NORMAL);
         Page<Product> dataPage = DAO.paginateByColumns(page, pagesize, columns, orderBy);
+        for (Product product : dataPage.getList()) {
+            List<MemberGroup> memberGroups = memberGroupService.findAll();
+            if (!CollectionUtil.isEmpty(memberGroups)) {
+                for (MemberGroup group : memberGroups) {
+                    group.put("memberPriceInfo", memberPriceService.findByPorductAndGroup("product", product.getId(), group.getId()));
+                }
+                product.setMemberGroups(memberGroups);
+            }
+        }
         return joinUserInfo(dataPage);
     }
 

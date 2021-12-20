@@ -57,6 +57,22 @@
                 </div>
             #end
         </div>
+        #if(orderItems.get(0).canView())
+        <h4 class="ui horizontal divider header">
+            <i class="bar chart icon"></i>
+            增值内容
+        </h4>
+        <div class="ui message">
+            <div>资源链接：#(orderItems.get(0).view_path ??)</div>
+            <div>描述 ：#(orderItems.get(0).view_text ??)</div>
+            #if(orderItems.get(0).view_effective_time == 0)
+            <div>访问有效期：永久</div>
+            #else
+            <div>访问有效期：#(orderItems.get(0).view_effective_time??)</div>
+            #end
+        </div>
+        #end
+
         <h4 class="ui horizontal divider header">
             <i class="bar chart icon"></i>
             基本信息
@@ -64,7 +80,7 @@
         <table class="ui definition table">
             <tbody>
             <tr>
-                <td class="two wide column">价格</td>
+                <td class="two wide column">金额</td>
                 <td>#number(order.orderRealAmount ,'0.00') 元</td>
             </tr>
             <tr>
@@ -176,8 +192,8 @@
                     #end
 
                     #if(item.canView())
-                    <a href="#(CPATH)#(item.view_path ??)itemId=#(item.id)" target="_blank">
-                        #(item.view_text ??)
+                    <a href="#(CPATH)/ucenter/order/viewText/#(order.id)" target="_blank">
+                        下载
                     </a>
                     #end
 
@@ -189,6 +205,7 @@
             #end
             </tbody>
         </table>
+
         <div class="ui horizontal segments">
             <div class="ui right aligned segment">
                 <div class="ui basic buttons">
