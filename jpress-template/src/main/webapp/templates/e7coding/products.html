@@ -170,16 +170,21 @@
 
     <div class="main container">
 
-        #include("./_nav_menu.html")
+        #include("./_nav_product_menu.html")
 
         <div class="ui centered grid container stackable" style="margin-bottom: 80px;min-height:380px">
             <div class="sixteen wide column docs-main-content">
                 <div class="ui header text-center"
                      style="margin-top: 26px;margin-bottom: 26px;">
-                    <div class="ui fluid action input">
-                        <input type="text" placeholder="搜索...">
-                        <div class="ui button">搜索</div>
-                    </div>
+                    <form class="ui fluid category search item secondary hide-on-991" action="#(CPATH)/product/search"
+                          method="GET">
+                        <div class="ui fluid action input">
+                            <input type="text"  name="keyword" placeholder="资源搜索...">
+                            <button class="ui button" type="submit">资源搜索</button>
+                        </div>
+                        <div class="results"></div>
+                    </form>
+
                 </div>
                 <div class="ui segment pb-0 readmore  my-communities" data-height="55">
                     #allProductCategories(asTree=true)
@@ -193,18 +198,21 @@
                 </div>
 
                 <div class="ui secondary pointing menu mb-4">
-                    <a class="item active" href="">
+                    <a class="item #if(orderBy == 'created' && !type) active #end" href="#(CPATH)/products?orderBy=created">
                         最新资源
                     </a>
-                    <a class="item " href="">
+                    <a class="item #if(orderBy == 'sales_count' && !type) active #end" href="#(CPATH)/products?orderBy=sales_count">
                         热门资源
+                    </a>
+                    <a class="item #if(type && type == 'free') active #end" href="#(CPATH)/products?type=free">
+                        免费资源
                     </a>
                     <div class="right menu">
                     </div>
                 </div>
 
                 <div class="ui five doubling cards mt-2" style="justify-content: center;">
-                    #productPage()
+                    #productPage(orderBy=orderBy,type=type)
                     #for(product : productPage.list)
                     <div class="ui card">
                         <a class="image bg-white"
@@ -257,7 +265,7 @@
                                     </a>
                                 </div>
                                 <div class="ui basic green button">
-                                    <a href="">
+                                    <a href="javascript:;" onclick="addProductToFavorite('#(product.id ??)')">
                                         <i class="icon heart outline"></i>
                                         收藏
                                     </a>
@@ -321,5 +329,6 @@
 <!-- Scripts -->
 <script src="resource/js/vendors.js"></script>
 <script src="resource/js/app.js"></script>
-
+<script src="#(CPATH)/static/components/jquery/jquery.min.js"></script>
+<script src="#(CPATH)/static/front/jpressfront.js"></script>
 </html>

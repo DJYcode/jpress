@@ -405,10 +405,10 @@ function addProductToFavorite(productId, ok, fail) {
             id: productId
         },
         ok ? ok : function () {
-            alert('成功添加到收藏夹。')
+            showMessage('成功添加到收藏夹。');
         },
         fail ? fail : function (data) {
-            alert('添加到收藏夹失败：' + data.message)
+            showErrorMessage('添加到收藏夹失败：' + data.message);
             if (data.gotoUrl) {
                 location.href = data.gotoUrl;
             }

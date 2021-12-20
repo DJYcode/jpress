@@ -36,6 +36,9 @@ import io.jpress.web.base.UcenterControllerBase;
 @RequestMapping(value = "/ucenter/product",viewPath = "/WEB-INF/views/ucenter/")
 public class ProductUCenterController extends UcenterControllerBase {
 
+    private static final String DEFAULT_PRODUCT_COMMENT_LIST = "product/comment_list.html";
+    private static final String DEFAULT_PRODUCT_FAVORITE = "product/product_favorite.html";
+
     @Inject
     private ProductService articleService;
 
@@ -54,7 +57,7 @@ public class ProductUCenterController extends UcenterControllerBase {
     public void comment() {
         Page<ProductComment> page = commentService._paginateByUserId(getPagePara(), 10, getLoginedUser().getId());
         setAttr("page", page);
-        render("product/comment_list.html");
+        render("ucenter/product/comment_list.html",DEFAULT_PRODUCT_COMMENT_LIST);
     }
 
 
@@ -62,7 +65,7 @@ public class ProductUCenterController extends UcenterControllerBase {
     public void favorite() {
         Page<UserFavorite> page = favoriteService.paginateByUserIdAndType(getPagePara(),10,getLoginedUser().getId(),"product");
         setAttr("page", page);
-        render("product/product_favorite.html");
+        render("ucenter/product/product_favorite.html",DEFAULT_PRODUCT_FAVORITE);
     }
 
     public void doDelFavorite(){

@@ -17,6 +17,7 @@ package io.jpress.module.product.controller.front;
 
 import io.jboot.web.controller.annotation.RequestMapping;
 import io.jpress.web.base.TemplateControllerBase;
+import org.apache.commons.lang3.StringUtils;
 
 
 /**
@@ -36,6 +37,18 @@ public class ProductsController extends TemplateControllerBase {
         //设置当前页码
         setPageNumber(getParaToInt());
 
+        String orderBy = getPara("orderBy");
+        if (StringUtils.isBlank(orderBy)) {
+            orderBy = "created";
+        } else if ("created".equals(orderBy)) {
+            orderBy = "created"; // 最新资源标签页
+        } else if ("sales_count".equals(orderBy)){
+            orderBy = "sales_count";
+        } else {
+            orderBy = "created";
+        }
+        set("orderBy",orderBy);
+        set("type",getPara("type"));
         render("products.html","prolist.html");
     }
 

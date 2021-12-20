@@ -31,6 +31,9 @@ import io.jpress.module.product.model.ProductCategory;
 import io.jpress.module.product.service.ProductService;
 import io.jpress.web.base.TemplateControllerBase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Michael Yang 杨福海 （fuhai999@gmail.com）
  * @version V1.0
@@ -48,7 +51,10 @@ public class ProductPageDirective extends JbootDirectiveBase {
 
         int page = controller.getPageNumber();
         int pageSize = getParaToInt("pageSize", scope, 10);
-        String orderBy = getPara("orderBy", scope, "id desc");
+        String orderBy = getPara("orderBy", scope, "id");
+        orderBy = orderBy + " desc";
+
+        String freeFlag = getPara("type", scope, "charge");
 
         // 可以指定当前的分类ID
         Long categoryId = getParaToLong("categoryId", scope, 0L);
@@ -57,10 +63,14 @@ public class ProductPageDirective extends JbootDirectiveBase {
         if (categoryId == 0 && category != null) {
             categoryId = category.getId();
         }
+        Map<String,Object> searchParams = new HashMap<>();
+        if ("free".equals(freeFlag)) {
+            searchParams.put("price",0);
+        }
 
         Page<Product> productPage = categoryId == 0
-                ? service.paginateInNormal(page, pageSize, orderBy)
-                : service.paginateByCategoryIdInNormal(page, pageSize, categoryId, orderBy);
+                ? service.paginateInNormal(page, pageSize, orderBy,searchParams)
+                : service.paginateByCategoryIdInNormal(page, pageSize, categoryId, orderBy,searchParams);
 
         scope.setGlobal("productPage", productPage);
         renderBody(env, scope, writer);

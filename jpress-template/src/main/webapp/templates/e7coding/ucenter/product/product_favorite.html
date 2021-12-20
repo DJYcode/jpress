@@ -1,10 +1,10 @@
 #include("../u_layout.html")
-#@ucenter_layout("文章收藏")
+#@ucenter_layout("商品收藏")
 #define script()
 <script>
     function doDelFavorite(id) {
         if (confirm("确定要删除该内容吗？")) {
-            ajaxGet("#(CPATH)/ucenter/article/doDelFavorite?id=" + id)
+            ajaxGet("#(CPATH)/ucenter/product/doDelFavorite?id=" + id)
         }
     }
 </script>
@@ -13,7 +13,7 @@
 <div class="twelve wide column">
     <div class="ui segment">
         <h1>
-            <i class="icon folder open outline" aria-hidden="true"></i> 文章收藏
+            <i class="icon folder open outline" aria-hidden="true"></i> 商品收藏
         </h1>
         <div class="content extra-padding rm-link-color">
             <div class="article-content">

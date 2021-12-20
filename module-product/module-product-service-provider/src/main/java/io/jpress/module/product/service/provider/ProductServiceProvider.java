@@ -35,6 +35,7 @@ import io.jpress.web.seoping.SeoManager;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Bean
@@ -148,6 +149,28 @@ public class ProductServiceProvider extends JbootServiceBase<Product> implements
         return joinUserInfo(dataPage);
     }
 
+    @Override
+    public Page<Product> paginateInNormal(int page, int pagesize, String orderBy, Map<String, Object> searchParams) {
+        orderBy = StrUtil.obtainDefaultIfBlank(orderBy, DEFAULT_ORDER_BY);
+        Columns columns = new Columns();
+        columns.eq("status", Product.STATUS_NORMAL);
+        if (!CollectionUtil.isEmpty(searchParams.keySet())) {
+            for (String key : searchParams.keySet()) {
+                columns.eq(key,searchParams.get(key));
+            }
+        }
+        Page<Product> dataPage = DAO.paginateByColumns(page, pagesize, columns, orderBy);
+        for (Product product : dataPage.getList()) {
+            List<MemberGroup> memberGroups = memberGroupService.findAll();
+            if (!CollectionUtil.isEmpty(memberGroups)) {
+                for (MemberGroup group : memberGroups) {
+                    group.put("memberPriceInfo", memberPriceService.findByPorductAndGroup("product", product.getId(), group.getId()));
+                }
+                product.setMemberGroups(memberGroups);
+            }
+        }
+        return joinUserInfo(dataPage);
+    }
 
     @Override
     @Cacheable(name = "products")
@@ -160,6 +183,20 @@ public class ProductServiceProvider extends JbootServiceBase<Product> implements
         return _paginateByBaseColumns(page, pagesize, columns, categoryId, orderBy);
     }
 
+    @Override
+    public Page<Product> paginateByCategoryIdInNormal(int page, int pagesize,long categoryId, String orderBy,Map<String, Object> searchParams) {
+
+        Columns columns = new Columns();
+        if (!CollectionUtil.isEmpty(searchParams.keySet())) {
+            for (String key : searchParams.keySet()) {
+                columns.eq(key,searchParams.get(key));
+            }
+        }
+        columns.eq("m.category_id", categoryId);
+        columns.eq("product.status", Product.STATUS_NORMAL);
+
+        return _paginateByBaseColumns(page, pagesize, columns, categoryId, orderBy);
+    }
 
     public Page<Product> _paginateByBaseColumns(int page, int pagesize, Columns baseColumns, Long categoryId, String orderBy) {
 

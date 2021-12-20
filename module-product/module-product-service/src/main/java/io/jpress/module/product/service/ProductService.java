@@ -193,7 +193,11 @@ public interface ProductService extends JbootServiceJoiner {
 
     Page<Product> paginateInNormal(int page, int pagesize, String orderBy);
 
+    Page<Product> paginateInNormal(int page, int pagesize, String orderBy,Map<String,Object> searchParams);
+
     Page<Product> paginateByCategoryIdInNormal(int page, int pagesize, long categoryId, String orderBy);
+
+    Page<Product> paginateByCategoryIdInNormal(int page, int pagesize, long categoryId, String orderBy,Map<String,Object> searchParams);
 
     Product findFirstBySlug(String slug);
 
