@@ -185,11 +185,14 @@
                 </div>
 
                 <div class="ui secondary pointing menu mb-4">
-                    <a class="item active" href="https://learnku.com/go/docs">
+                    <a class="item #if(orderBy == 'created' && !type) active #end" href="#(CPATH)/products?orderBy=created">
                         最新资源
                     </a>
-                    <a class="item " href="https://learnku.com/go/docs?type=user">
+                    <a class="item #if(orderBy == 'sales_count' && !type) active #end" href="#(CPATH)/products?orderBy=sales_count">
                         热门资源
+                    </a>
+                    <a class="item #if(type && type == 'free') active #end" href="#(CPATH)/products?type=free">
+                        免费资源
                     </a>
                     <div class="right menu">
                     </div>

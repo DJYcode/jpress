@@ -7383,7 +7383,7 @@ html.night-node .ui.comments.comment-list .comment .comment-body, html.night-nod
     color: inherit
 }
 
-html.night-node .ui.dropdown .menu > .item > .image, html.night-node .ui.dropdown .menu > .item > img, html.night-node .ui.dropdown > .text > .image, html.night-node .ui.dropdown > .text > img, html.night-node .ui.image.label img, html.night-node img.learnku-logo {
+html.night-node .ui.dropdown .menu > .item > .image, html.night-node .ui.dropdown .menu > .item > img, html.night-node .ui.dropdown > .text > .image, html.night-node .ui.dropdown > .text > img, html.night-node .ui.image.label img, html.night-node img {
     background: #fff
 }
 

@@ -964,7 +964,7 @@ function merge_options(e, t) {
             editormdLogo: /:(editormd-logo-?(\w+)?):/g,
             pageBreak: /^\[[=]{8,}\]$/
         }, t.emoji = {
-            path: "https://cdn.learnku.com/assets/images/emoji/",
+            path: "/assets/images/emoji/",
             ext: ".png"
         }, t.twemoji = {path: "http://twemoji.maxcdn.com/36x36/", ext: ".png"}, t.markedRenderer = function (i, o) {
             var r = {
