@@ -18,6 +18,17 @@ public class SearchParam implements Serializable {
      */
     private Map<String,String> sortField;
 
+    private Map<String,Object> searchParams;
+
+    public Map<String, Object> getSearchParams() {
+        return searchParams;
+    }
+
+    public SearchParam setSearchParams(Map<String, Object> searchParams) {
+        this.searchParams = searchParams;
+        return this;
+    }
+
     public String getTitle() {
         return title;
     }

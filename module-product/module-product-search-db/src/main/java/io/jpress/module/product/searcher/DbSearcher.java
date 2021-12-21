@@ -55,7 +55,8 @@ public class DbSearcher implements ProductSearcher {
         ProductQuery productQuery = new ProductQuery()
                 .setTitle(searchParam.getTitle())
                 .setCategoryId(searchParam.getCategoryId())
-                .setSortField(searchParam.getSortField());
+                .setSortField(searchParam.getSortField())
+                .setSearchParams(searchParam.getSearchParams());
         return productService.searchIndb(productQuery, pageNum, pageSize);
     }
 }

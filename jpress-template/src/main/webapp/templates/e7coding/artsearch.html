@@ -1720,23 +1720,20 @@ iframe[data-v-2463f168] {
 
         <div class="ui stacked segment">
             <div class="content px-3 py-3">
-
+                #articleSearchPage()
                 <h1 class="fs-large lh-3">
-                    为您找到 1962 条关于
+                    为您找到 #(articlePage.list.size()) 条关于
                     <code class="search-keyword">#(keyword ??)</code> 的内容
                     <div class="clearfix"></div>
                 </h1>
-
                 <div class="ui divider mb-1 topic-index-divider"></div>
-
-                #articleSearchPage()
                 #if(articlePage && articlePage.list.size() > 0)
                 <div class="ui feed mt-0 pt-0 rm-link-color">
                     #for(article : articlePage.list)
                     <div class="event pt-3 pb-0 mb-0">
                         <div class="label mt-1" style="width: 3.2em;">
                             <a href="#(article.url)" target="_blank">
-                                <img src="" alt="#(article.title)"
+                                <img src="#(article.thumbnail ?? 'resource/images/default-img.png')" alt="#(article.title)"
                                      style="border: 1px solid #ddd;padding: 2px;">
                             </a>
                         </div>
@@ -1782,11 +1779,7 @@ iframe[data-v-2463f168] {
                     #end
                 </div>
                 #else
-                <div class="ui feed mt-0 pt-0 rm-link-color">
-                    <div class="event pt-3 pb-0 mb-0">
-                        没有找到关于 <span style="color: red">#(keyword ??)</span> 的任何文章
-                    </div>
-                </div>
+                <div class="empty-block">没有找到关于 <span style="color: red">#(keyword ??)</span> 的任何内容</div>
                 #end
                 #end
 

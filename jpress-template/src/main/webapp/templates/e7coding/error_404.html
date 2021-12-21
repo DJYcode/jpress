@@ -1,0 +1,30 @@
+#include("./layout.html")
+#@layout()
+
+#define content()
+<div class="ui centered grid container stackable">
+    <div class="twelve wide column">
+        <div class="ui segment">
+            <div class="content extra-padding">
+
+                <h2>
+                    <i class="ui icon fighter jet"/>404 (Not Found)
+                </h2>
+
+                <hr>
+                <div class="ui error message">
+                    <div class="header">
+                        <i class="ui icon fighter jet"/>访问的页面飞走了！
+                    </div>
+                </div>
+                <p>
+                    <a class="ui button basic" href="javascript:window.back()"> <i
+                            class="icon left arrow"></i> 返回</a>
+                    <a class="ui button basic" href="/"> <i class="icon home"></i> 首页</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+#end

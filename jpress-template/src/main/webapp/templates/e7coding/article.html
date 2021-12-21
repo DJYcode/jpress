@@ -704,7 +704,7 @@
                             <div class="ui bottom attached tab" data-tab="second">
                                 <div class="ui middle aligned divided  list" style="padding: 0px 15px;margin-top: 0px;">
                                     #articles()
-                                    #if(relevantArticles && relevantArticles.size() >0)
+                                    #if(articles && articles.size() >0)
                                         #for(article :articles)
                                         <a class="item" href="#(article.url)">
                                             #(article.title)

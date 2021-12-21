@@ -31,6 +31,7 @@ import io.jpress.service.MemberGroupService;
 import io.jpress.service.MemberPriceService;
 import io.jpress.service.UserService;
 import io.jpress.web.seoping.SeoManager;
+import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -423,9 +424,29 @@ public class ProductServiceProvider extends JbootServiceBase<Product> implements
         Columns columns = Columns.create("product.status", Product.STATUS_NORMAL)
                 .likeAppendPercent("title", productQuery.getTitle())
                 .eq("m.category_id",productQuery.getCategoryId());
+        String defaultSort = "order_number desc,id desc";
+        String customSort = "";
+        if (productQuery.getSearchParams() != null &&
+                !CollectionUtil.isEmpty(productQuery.getSearchParams().keySet())) {
+            for (String key : productQuery.getSearchParams().keySet()) {
+                if (key.startsWith("sort:")) {
+                    String[] split = key.split(":");
+                    customSort = split[1] + " "+ split[2];
+                } else if (key.startsWith("filter:")) {
+                    String[] split = key.split(":");
+                    if ("eq".equals(split[2])) {
+                        columns.eq(split[1],productQuery.getSearchParams().get(key));
+                    }else if ("gt".equals(split[2])) {
+                        columns.gt(split[1],productQuery.getSearchParams().get(key));
+                    } else if ("lt".equals(split[2])) {
+                        columns.lt(split[1],productQuery.getSearchParams().get(key));
+                    }
+                }
+            }
+        }
         Page<Product> productPage = DAO.leftJoin("product_category_mapping").as("m")
                 .on("product.id = m.`product_id`")
-                .paginateByColumns(pageNum, pageSize, columns, "order_number desc,id desc");
+                .paginateByColumns(pageNum, pageSize, columns, StringUtils.isBlank(customSort)?defaultSort:customSort);
         return joinUserInfo(productPage);
     }
 
@@ -436,7 +457,8 @@ public class ProductServiceProvider extends JbootServiceBase<Product> implements
             SearchParam searchParam = new SearchParam()
                     .setTitle(productQuery.getTitle())
                     .setCategoryId(productQuery.getCategoryId())
-                    .setSortField(productQuery.getSortField());
+                    .setSortField(productQuery.getSortField())
+                    .setSearchParams(productQuery.getSearchParams());
             Page<Product> page = searcher.search(searchParam, pageNum, pageSize);
             if (page != null) {
                 return page;

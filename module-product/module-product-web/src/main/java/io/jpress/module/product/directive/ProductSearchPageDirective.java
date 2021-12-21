@@ -27,7 +27,14 @@ import io.jboot.web.directive.JbootPaginateDirective;
 import io.jboot.web.directive.annotation.JFinalDirective;
 import io.jboot.web.directive.base.JbootDirectiveBase;
 import io.jpress.module.product.model.Product;
+import io.jpress.module.product.query.ProductQuery;
 import io.jpress.module.product.service.ProductService;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Michael Yang 杨福海 （fuhai999@gmail.com）
@@ -47,9 +54,24 @@ public class ProductSearchPageDirective extends JbootDirectiveBase {
         String keyword = controller.getAttr("keyword");
         int page = controller.getAttr("page");
         int pageSize = getParaToInt("pageSize", scope, 10);
+        String sort = controller.getAttr("sort");
+        String filter = controller.getAttr("filter");
+        List<String> sortFields = Arrays.asList("created", "sales_count", "price");
+        List<String> filterFields = Arrays.asList("free", "charge");
+        Map<String,Object> searchParams = new HashMap<>();
+        if (StringUtils.isNotBlank(sort) && sortFields.contains(sort)) {
+            searchParams.put("sort:" + sort+":desc",sort);
+        }
+        if (StringUtils.isNotBlank(filter) && filterFields.contains(filter)) {
+            if ("free".equals(filter)) {
+                searchParams.put("filter:price:eq",0);
+            } else if ("charge".equals(filter)) {
+                searchParams.put("filter:price:gt",0);
+            }
+        }
 
         Page<Product> dataPage = StrUtil.isNotBlank(keyword)
-                ? productService.search(keyword, page, pageSize)
+                ? productService.search(new ProductQuery().setTitle(keyword).setSearchParams(searchParams), page, pageSize)
                 : null;
 
         if (dataPage != null) {

@@ -18,6 +18,8 @@ public class ProductQuery implements Serializable {
      */
     private Map<String,String> sortField;
 
+    private Map<String,Object> searchParams;
+
     public String getTitle() {
         return title;
     }
@@ -42,6 +44,15 @@ public class ProductQuery implements Serializable {
 
     public ProductQuery setSortField(Map<String, String> sortField) {
         this.sortField = sortField;
+        return this;
+    }
+
+    public Map<String, Object> getSearchParams() {
+        return searchParams;
+    }
+
+    public ProductQuery setSearchParams(Map<String, Object> searchParams) {
+        this.searchParams = searchParams;
         return this;
     }
 }

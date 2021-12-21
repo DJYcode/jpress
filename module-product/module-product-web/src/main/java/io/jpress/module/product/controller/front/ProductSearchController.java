@@ -2,6 +2,10 @@ package io.jpress.module.product.controller.front;
 
 import io.jboot.web.controller.annotation.RequestMapping;
 import io.jpress.web.base.TemplateControllerBase;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
+import java.util.List;
 
 @RequestMapping("/product/search")
 public class ProductSearchController extends TemplateControllerBase {
@@ -22,6 +26,17 @@ public class ProductSearchController extends TemplateControllerBase {
 
         setAttr("keyword", getEscapeHtmlPara("keyword"));
         setAttr("page", page);
+
+        List<String> sortFields = Arrays.asList("created", "sales_count", "price");
+        List<String> filterFields = Arrays.asList("free", "charge");
+        String sort = getPara("sort");
+        String filter = getPara("filter");
+        if (StringUtils.isNotBlank(sort) && sortFields.contains(sort)) {
+            setAttr("sort", sort);
+        }
+        if (StringUtils.isNotBlank(filter) && filterFields.contains(filter)) {
+            setAttr("filter", filter);
+        }
 
         setMenuActive(menu -> menu.isUrlStartWidth("/product/search"));
         render("prosearch.html");

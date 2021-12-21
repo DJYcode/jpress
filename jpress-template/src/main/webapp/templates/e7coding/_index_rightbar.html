@@ -19,24 +19,26 @@
           #end
         #end
 
-        <div class="ui card text-center responsive">
+        <div class="ui card tag-active-user-card blog-tags responsive">
             <div class="content">
                 <div class="header">
                     文章标签
                 </div>
             </div>
-            <div class="content main">
+            <div class="extra content readmore" style="padding-bottom: 18px; max-height: none; height: 105px;" data-readmore="" aria-expanded="false" id="rmjs-2">
                 #tags()
-                    #if(tags && tags.size() > 0)
-                        #for(tag : tags)
-                        <a class="ui label basic" href="#(tag.url)">
-                            #(tag.title)
-                            <div class="detail">#(tag.count)</div>
-                        </a>
-                        #end
-                    #else
-                    暂无
-                    #end
+                #if(tags && tags.size() > 0)
+                #for(tag : tags)
+                <a class="ui label basic" href="#(tag.url)">
+                    #(tag.title)
+                    <div class="detail">#(tag.count)</div>
+                </a>
+                #end
+                #else
+                <div class="ui message mx-3 my-3">
+                    暂无内容~
+                </div>
+                #end
                 #end
             </div>
         </div>

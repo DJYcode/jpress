@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh" class="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="baidu-site-verification" content="MfC8ppEukL"/>
+    <meta baidu-gxt-verify-token="">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="">
+
+    <title>#(SEO_TITLE ?? (WEB_TITLE + '-' + WEB_SUBTITLE))</title>
+    <meta name="description" content="#(SEO_DESCRIPTION)"/>
+    <meta name="keywords"
+          content="#(SEO_KEYWORDS)"/>
+
+    <meta name="author" content="dong"/>
+
+    <link rel="shortcut icon" href=""/>
+
+    <!-- Styles -->
+    <link href="resource/css/vendors.css" rel="stylesheet">
+    <link href="resource/css/app.css" rel="stylesheet">
+
+    <style type="text/css">
+        .swiper {
+            width: 240px;
+            height: 320px;
+        }
+
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .swiper-slide:nth-child(1n) {
+            background-color: rgb(206, 17, 17);
+        }
+
+        .swiper-slide:nth-child(2n) {
+            background-color: rgb(0, 140, 255);
+        }
+
+        .swiper-slide:nth-child(3n) {
+            background-color: rgb(10, 184, 111);
+        }
+
+        .swiper-slide:nth-child(4n) {
+            background-color: rgb(211, 122, 7);
+        }
+
+        .swiper-slide:nth-child(5n) {
+            background-color: rgb(118, 163, 12);
+        }
+
+        .swiper-slide:nth-child(6n) {
+            background-color: rgb(180, 10, 47);
+        }
+
+        .swiper-slide:nth-child(7n) {
+            background-color: rgb(35, 99, 19);
+        }
+
+        .swiper-slide:nth-child(8n) {
+            background-color: rgb(0, 68, 255);
+        }
+
+        .swiper-slide:nth-child(9n) {
+            background-color: rgb(218, 12, 218);
+        }
+
+        .swiper-slide:nth-child(10n) {
+            background-color: rgb(54, 94, 77);
+        }
+    </style>
+</head>
+<body class=" home-page">
+
+<script>
+    window.Laravel = {"csrfToken": ""}
+    window.Config = {
+        'CSRF_TOKEN': '',
+        'token': '',
+        'environment': 'production',
+        'url': '',
+        'tags_url': '',
+        'scroll_to_top': true,
+        'community': {
+            'id': 0,
+            'name': '',
+            'favicon': ''
+        },
+        'routes': {
+            'upload_image': '',
+        },
+        'user_settings': {
+            'visit_topic_patches_page': false,
+            'annotation_disabled': 'yes',
+        },
+        'overlay': '',
+        'editor': {},
+        'destroyeditor_id': {},
+
+        'content': {
+            authorName: 'dong'
+        }
+    };
+
+    var ShowCrxHint = 'no';
+
+    function onWXWebView() {
+        $('.wechat-login-link').attr("href", "")
+        $('.show-on-wechat-view').show();
+    }
+
+    if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+        onWXWebView();
+    } else {
+        if (document.addEventListener) {
+            document.addEventListener("WeixinJSBridgeReady", onWXWebView, false);
+        } else if (document.attachEvent) {
+            document.attachEvent("WeixinJSBridgeReady", onWXWebView);
+            document.attachEvent("onWeixinJSBridgeReady", onWXWebView);
+        }
+    }
+
+</script>
+
+<style type="text/css">
+    .ui.top.menu {
+        border-top: 4px solid #00b5ad;
+    }
+
+    .ui.fluid.search .results {
+        width: 550px;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .ui.top.menu > .ui.container {
+            height: 52px;
+            flex-direction: initial;
+        }
+    }
+
+
+    /* 顶部导航栏 */
+    .ui.top.menu {
+        border-top: 4px solid #00b5ad;
+    }
+
+    /* 右边导航栏顶部样式 */
+    .ui.top-color.segment:not(.inverted) {
+        border-top: 2px solid #00b5ad;
+    }
+
+    /* 右边导航栏顶部样式 */
+    .ui.top-color.card:not(.inverted) {
+        border-top: 2px solid #00b5ad;
+    }
+
+    a {
+        color: #1775cc;
+    }
+
+    a:hover, a:focus {
+        color: #0081f9;
+        transition: color .15s ease 0s;
+    }
+
+    /* 主要按钮 */
+
+    .ui.primary.buttons .button, .ui.primary.button {
+        background-color: #00b5ad;
+        border-color: #00b5ad;
+    }
+
+    /* 主要按钮选中状态 */
+    .ui.primary.buttons .button:hover, .ui.primary.button:hover, .ui.primary.button:focus, .ui.primary.buttons .button:focus {
+        background-color: #00b5ad;
+        border-color: #00b5ad;
+    }
+
+    /* 外框按钮 */
+    .ui.basic.primary.buttons .button, .ui.basic.primary.button {
+        color: #00b5ad !important;
+        box-shadow: 0px 0px 0px 1px #00b5ad inset !important;
+    }
+
+    /* 外框按钮选中状态 */
+    .ui.basic.primary.buttons .button:hover, .ui.basic.primary.button:hover {
+        color: #00b5ad !important;
+        box-shadow: 0px 0px 0px 1px #00b5ad inset !important;
+    }
+
+    .ui.basic.primary.buttons .button:active, .ui.basic.primary.button:active, .ui.basic.primary.buttons .active.button, .ui.basic.primary.active.button, .ui.basic.buttons .button:hover, .ui.basic.button:hover, .ui.basic.primary.buttons .button:focus, .ui.basic.primary.button:focus {
+        color: #00b5ad !important;
+        box-shadow: 0px 0px 0px 1px #00b5ad inset !important;
+    }
+
+
+    .footer {
+        max-height: max-content;
+    }
+
+</style>
+<style type="text/css">
+    .my-communities + .readmore-separator {
+        margin-top: -12px;
+        font-size: 12px;
+        padding-bottom: 0px;
+        margin-bottom: -8px;
+        padding-top: 0px !important;
+    }
+</style>
+
+
+#include("./_sidebar_menu.html")
+
+<div class="pusher">
+
+    <div class="main container">
+
+        #include("./_nav_product_menu.html")
+
+        <div class="ui centered grid container stackable">
+
+            <div class="four wide column remove padding">
+                <div class="ui large vertical fluid pointing menu">
+                    <div class="header my-2 py-1">
+                        <h2 class="fs-normal pl-3 text-mute">资源分类：</h2>
+                    </div>
+                    #allProductCategories(asTree=true)
+                    #for(category :categories)
+                    <a class="item" href="#(category.slug)">
+                        #(category.title)
+                    </a>
+                    #end
+                    #end
+                </div>
+
+            </div>
+            <div class="twelve wide stretched column search-result-page">
+
+                <div class="ui stacked segment">
+                    <div class="content px-3 py-3">
+                        #productSearchPage()
+                        <h1 class="fs-large lh-3">
+                            为您找到 #(productPage.list.size()) 条关于
+                            <code class="search-keyword">#(keyword ??)</code> 的资源
+                            <div class="pull-right search-filters" style="margin-top: -5px;margin-right: 0px;">
+
+
+                                <div class="ui basic simple icon dropdown button small">
+                                    <i class="list icon"></i>
+                                    <span class="text">排序(默认倒序)</span>
+                                    <div class="menu bg-white border-left border-right">
+                                        <h3 class="header fs-normal bg-white border-left border-right">
+                                            请选择排序方式
+                                        </h3>
+                                        <div class="ui divider bg-white border-left border-right"></div>
+                                        <a class="item bg-white border-left border-right" href="#(CPATH)/product/search?keyword=#(keyword ??)&amp;sort=created">
+                                            <i class="icon random"></i> 最新发布
+                                        </a>
+                                        <a class="item bg-white border-left border-right" href="#(CPATH)/product/search?keyword=#(keyword ??)&amp;sort=sales_count">
+                                            <i class="icon thumbs up outline"></i> 下载量
+                                        </a>
+                                        <a class="item bg-white border-left border-right" href="#(CPATH)/product/search?keyword=#(keyword ??)&amp;sort=price">
+                                            <i class="icon thumbs up outline"></i> 价格
+                                        </a>
+                                    </div>
+                                </div>
+
+
+                                <div class="ui basic simple icon dropdown button small">
+                                    <i class="filter icon"></i>
+                                    <span class="text">过滤(默认倒序)</span>
+                                    <div class="menu ">
+                                        <h3 class="header fs-normal bg-white border-left border-right">
+                                            请选择过滤方式
+                                        </h3>
+                                        <div class="ui divider bg-white border-left border-right"></div>
+                                        <a class="item bg-white border-left border-right" href="#(CPATH)/product/search?keyword=#(keyword ??)">
+                                            <i class="icon remove"></i> 清除过滤
+                                        </a>
+                                        <a class="item bg-white border-left border-right" href="#(CPATH)/product/search?keyword=#(keyword ??)&amp;filter=free">
+                                            <i class="icon trophy"></i> 免费
+                                        </a>
+                                        <a class="item bg-white border-left border-right" href="#(CPATH)/product/search?keyword=#(keyword ??)&amp;filter=charge">
+                                            <i class="icon trophy"></i> 收费
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </h1>
+                        <div class="ui divider mb-1 topic-index-divider"></div>
+                        #if(productPage && productPage.list.size() > 0)
+                        <div class="ui feed mt-0 pt-0 rm-link-color">
+                            #for(product : productPage.list)
+                            <div class="event pt-3 pb-0 mb-0">
+                                <div class="label mt-1" style="width: 3.2em;">
+                                    <a href="#(product.url)" target="_blank">
+                                        <img src="#(product.thumbnail ?? 'resource/images/default-img.png')" alt="#(product.title)"
+                                             style="border: 1px solid #ddd;padding: 2px;">
+                                    </a>
+                                </div>
+                                <div class="content ml-3" style="width:90%">
+                                    <div class="summary font-weight-normal" style="color: #555;">
+                                        <a href="#(product.url)" class="title" target="_blank">
+                                            #(product.title ??)
+                                        </a>
+                                    </div>
+
+                                    <div class=" mt-3 mb-3 lh-3 fs-normal text-mute">
+                                        #(product.summary ??)
+                                    </div>
+
+                                    <div class="meta mt-2 mb-2">
+                                        <div class="tags" style="margin: -2px 0px 0px;margin-bottom: -8px;"></div>
+                                        <div class="date lh-3"
+                                             style="font-size: 13px;margin: 7px 0em 0em;margin-left:0px">
+                                            #productCategories(product.id,'tag')
+                                                标签：
+                                                #for(cat : categories)
+                                                <a href="#(cat.url ??)">#(cat.title ??)</a>
+                                                <span class="divider">|</span>
+                                                #end
+                                            #end
+                                            #productCategories(product.id,'category')
+                                                分类：
+                                                #for(cat : categories)
+                                                <a href="#(cat.url ??)">#(cat.title ??)</a>
+                                                <span class="divider">|</span>
+                                                #end
+                                            #end
+
+                                            <a class="" data-tooltip="#date(product.created)">
+                                                下载价格
+                                                #if(product.price && product.price > 0)
+                                                ¥ #number(product.price)
+                                                #else
+                                                免费
+                                                #end
+                                            </a>
+                                            <span class="divider">|</span>
+                                            <a class="" data-tooltip="#date(product.created)">
+                                                发布于 <span title="#date(product.created)">#date(product.created)</span>
+                                            </a>
+                                            <span class="divider">|</span>
+                                            <a>
+                                                下载量 #(product.sales_count ?? 0)
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            #end
+                            #productSearchPaginate(firstGotoIndex=true)
+                            <nav>
+                                <ul class="pagination">
+                                    #for(page : pages)
+                                    <li class="page-item #(page.style)">
+                                        <a class="page-link" href="#(page.url ??)">#(page.text)</a>
+                                    </li>
+                                    #end
+                                </ul>
+                            </nav>
+                            #end
+                        </div>
+                        #else
+                        <div class="empty-block">没有找到关于 <span style="color: red">#(keyword ??)</span> 的任何资源</div>
+                        #end
+                        #end
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a id="scrollUp" href="#top"
+           style="display: none; position: fixed; z-index: 2147483647;">Scroll to top</a>
+    </div>
+    #include("./footer.html")
+
+</div>
+
+<!-- 登录弹窗 -->
+<div class="ui modal login small" style="width:400px;margin: 0em 0em 0em -200px;">
+    <i class="close icon"></i>
+    <div class="header">
+        <h4 class="modal-title ">
+            <img class="ui image display-inline-block mr-2" style="width:32px;height:32px;"
+                 src=""> <span
+                style="position: relative;top: 4px;">请登录</span>
+        </h4>
+    </div>
+    <div class="content">
+        #if(option('login_qq_enable') || option('login_wechat_enable'))
+        <div class="form-group row">
+            #if(option('login_wechat_enable'))
+            <a class="ui button fluid mt-2 green wechat-login-link" href="#(CPATH)/oauth/wechat"><i
+                    class="icon wechat "></i> 微信登录</a>
+            #end
+            #if(option('login_qq_enable'))
+            <a class="ui button fluid mt-2 basic" id="login-required-submit"
+               href="#(CPATH)/oauth/qq"><i class="icon github alternate"></i> QQ 登录</a>
+            #end
+        </div>
+        #end
+    </div>
+</div>
+
+
+</body>
+
+
+<!-- Scripts -->
+<script src="resource/js/vendors.js"></script>
+<script src="resource/js/app.js"></script>
+
+</html>
