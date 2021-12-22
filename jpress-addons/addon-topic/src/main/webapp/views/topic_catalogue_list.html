@@ -1,0 +1,106 @@
+#@layout()
+
+#define script()
+<script>
+
+    function doDel(id) {
+        ajaxGet("/admin/addon-topic/topic_catalogue/doDel/" + id);
+    }
+
+</script>
+#end
+
+#define content()
+
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row mb-2">
+                        <div class="col-sm-12">
+                            <h1>
+                                管理
+                                <small data-toggle="tooltip" title="" data-placement="right"
+                                       data-trigger="hover"><i class="nav-icon far fa-question-circle"></i></small>
+                                <small> 首页 / TopicCatalogue / 管理</small>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-outline card-primary">
+                    <div class="card-header with-border">
+
+                        <div class="row admin-search-panel">
+                            <div class="col-12">
+                                <a href="topic_catalogue/edit" class="btn btn-primary ">
+                                    <i class="fas fa-plus"></i> 新建
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body ">
+
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr>
+                                <th style="width: 10px">
+	                                    <input class="tableCheckAll" type="checkbox"/>
+	                                </th>
+	                                <th>主键ID</th>
+	                                <th>主题ID</th>
+	                                <th>标题</th>
+	                                <th>文章标题ID列表 以,分割</th>
+	                                <th>排序编码</th>
+
+                            </tr>
+                            #for(entry : page.list)
+                            <tr>
+                                <td><input name="tableItem" type="checkbox" value="#(entry.id)" />
+                                </td>
+                                <td>
+                                    <strong>
+                                        <a href="#(CPATH)/admin/addon-topic/topic_catalogue/edit/#(entry.id)"> #(entry.id ??) </a>
+                                    </strong>
+                                    <div class="jp-action-card">
+                                        <div class="jp-action-body">
+                                            <a href="/admin/addon-topic/topic_catalogue/edit/#(entry.id)">编辑</a> |
+                                            <a href="javascript:;" class="red-action"
+                                               onclick="doDel('#(entry.id)')">删除</a>
+                                        </div>
+                                    </div>
+                                </td>
+
+	                                <td>#(entry.topic_id)</td>
+	                                <td>#(entry.title)</td>
+	                                <td>#(entry.article_id)</td>
+	                                <td>#(entry.order_number)</td>
+                            </tr>
+                            #end
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-12">
+                            	 #@_paginate()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+
+    </section>
+#end

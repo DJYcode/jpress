@@ -21,6 +21,7 @@ import io.jboot.service.JbootServiceJoiner;
 import io.jpress.module.article.model.Article;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ArticleService extends JbootServiceJoiner {
 
@@ -139,6 +140,10 @@ public interface ArticleService extends JbootServiceJoiner {
     Page<Article> search(String queryString, int pageNum, int pageSize);
 
     Page<Article> searchIndb(String queryString, int pageNum, int pageSize);
+
+    Map<String, List<Article>> findAllArticleFilterFlag();
+
+    List<Article> findArticlesByFlag(String flag);
 
 
 }

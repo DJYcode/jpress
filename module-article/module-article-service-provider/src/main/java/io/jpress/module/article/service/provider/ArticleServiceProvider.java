@@ -44,6 +44,7 @@ import io.jpress.web.seoping.SeoManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Bean
@@ -404,5 +405,22 @@ public class ArticleServiceProvider extends JbootServiceBase<Article> implements
     })
     public void shouldUpdateCache(int action, Model model, Object id) {
         super.shouldUpdateCache(action, model, id);
+    }
+
+    @Override
+    @Cacheable(name = "flagArticles")
+    public Map<String, List<Article>> findAllArticleFilterFlag() {
+        Columns columns = new Columns();
+        columns.isNotNull("flag");
+        List<Article> articleList = DAO.findListByColumns(columns);
+        return articleList.stream().collect(Collectors.groupingBy(Article::getFlag));
+    }
+
+    @Override
+    public List<Article> findArticlesByFlag(String flag) {
+        Columns columns = new Columns();
+        columns.add(Column.create("flag", flag));
+        columns.add(Column.create("status", Article.STATUS_NORMAL));
+        return DAO.findListByColumns(columns);
     }
 }
