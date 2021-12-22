@@ -23,30 +23,18 @@
                 <tr>
                     <th>文章ID</th>
                     <th>文章标题</th>
-                    <th>类型</th>
-                    <th>选择</th>
+                    <th>操作</th>
                 </tr>
 
-                #for(data : couponCodeList)
+                #for(data : articleList)
                 <tr>
+                    <td>
+                        #(data.id)
+                    </td>
                     <td>
                         #(data.title)
                     </td>
-                    <td>
-                        #(data.coupon.amount)
-                    </td>
-                    <td>
-                        #if(data.coupon.type == 1)
-                        满#(data.coupon.with_amount)减#(data.coupon.amount)
-                        #end
-                        #if(data.coupon.type == 2)
-                        叠加满减券
-                        #end
-                        #if(data.coupon.type == 3)
-                        无门槛券
-                        #end
-                    </td>
-                    <td><button class="btn btn-primary useButton" data-coupon-code="#(data.code)" data-coupon-amount="#(data.coupon.amount)" data-coupon-title="#(data.title) -#(data.coupon.amount)">使用</button></td>
+                    <td><button class="btn btn-primary useButton"  data-article-title="#(data.title)"  data-article-id="#(data.id)">选择</button></td>
                 </tr>
                 #end
 

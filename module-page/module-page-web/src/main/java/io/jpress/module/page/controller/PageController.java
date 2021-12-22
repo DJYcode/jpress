@@ -19,6 +19,7 @@ import com.google.common.collect.Sets;
 import com.jfinal.aop.Inject;
 import com.jfinal.core.NotAction;
 import com.jfinal.kit.Ret;
+import io.jboot.utils.CollectionUtil;
 import io.jboot.utils.StrUtil;
 import io.jboot.web.controller.annotation.RequestMapping;
 import io.jpress.JPressOptions;
@@ -119,6 +120,12 @@ public class PageController extends TemplateControllerBase {
 
         String htmlView = slugOrId + ".html";
         if (hasTemplate(htmlView)) {
+            Map<String, String> paras = getParas();
+            if (!CollectionUtil.isEmpty(paras.keySet())) {
+                for (Map.Entry<String, String> entry : paras.entrySet()) {
+                    setAttr(entry.getKey(),entry.getValue());
+                }
+            }
             //设置菜单高亮
             setMenuActive(menu -> menu.isUrlStartWidth("/" + slugOrId));
             render(htmlView);

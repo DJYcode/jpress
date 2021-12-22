@@ -1,12 +1,13 @@
 package io.jpress.addon.topic.service;
 
 import com.jfinal.plugin.activerecord.Page;
+import io.jboot.service.JbootServiceJoiner;
 import io.jpress.addon.topic.model.TopicCatalogue;
 import io.jboot.db.model.Columns;
 
 import java.util.List;
 
-public interface TopicCatalogueService  {
+public interface TopicCatalogueService  extends JbootServiceJoiner {
 
     /**
      * 根据主键查找Model

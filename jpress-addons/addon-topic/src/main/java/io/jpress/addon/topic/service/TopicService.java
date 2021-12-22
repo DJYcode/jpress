@@ -175,4 +175,5 @@ public interface TopicService  {
     public Page<Topic> paginateByColumns(int page, int pageSize, Columns columns, String orderBy);
 
 
+    Topic findByTopicCode(String topicCode);
 }

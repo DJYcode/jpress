@@ -19,6 +19,8 @@ import com.jfinal.aop.Inject;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;
 
+import io.jboot.db.model.Columns;
+import io.jboot.utils.CollectionUtil;
 import io.jboot.web.controller.annotation.RequestMapping;
 import io.jboot.web.validate.EmptyValidate;
 import io.jpress.addon.topic.model.Topic;
@@ -31,9 +33,11 @@ import io.jpress.model.CouponCode;
 import io.jpress.module.article.model.Article;
 import io.jpress.module.article.service.ArticleService;
 import io.jpress.web.base.AdminControllerBase;
+import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @RequestMapping(value = "/admin/addon-topic/topic_catalogue", viewPath = "/")
@@ -84,8 +88,28 @@ public class _TopicCatalogueController extends AdminControllerBase {
      */
     public void layer() {
         String topicCode = getPara("topicCode");
+        String articleId = getPara("articleId");
         List<Article> articleList = articleService.findArticlesByFlag(topicCode);
-        setAttr("articleList", articleList);
+        List<TopicCatalogue> topicCatalogues = service.findListByColumns(
+                Columns.create().eq("topic_id",
+                topicService.findCountByColumns(Columns.create().eq("topic_code", topicCode))));
+        if (!CollectionUtil.isEmpty(topicCatalogues)) {
+           List<String> topicCatalogueArticleIds = topicCatalogues.stream().map(TopicCatalogue::getArticleId).collect(Collectors.toList());
+           List<String> articleIds = new ArrayList<>();
+            for (String catalogueArticleId : topicCatalogueArticleIds) {
+                articleIds.addAll(Arrays.asList(catalogueArticleId.split(",")));
+            }
+            articleList = articleList.stream().filter(item->!articleIds.contains(String.valueOf(item.getId())))
+                    .collect(Collectors.toList());
+        }
+        if (StringUtils.isNotBlank(articleId)) {
+            String[] split = articleId.split(",");
+            articleList = articleList.stream().filter(item->!Arrays.asList(split).contains(String.valueOf(item.getId())))
+                    .collect(Collectors.toList());
+            setAttr("articleList", articleList);
+        } else {
+            setAttr("articleList", articleList);
+        }
         render("views/article_layer.html");
     }
 }

@@ -212,6 +212,7 @@ var moveEnd = function (t) {
                     t.initClearImg(),
                     t.initPostTweets(),
                     t.initEmojiPicker(),
+                    t.initArticlePagers(),
                     t.initRegister(),
                     t.initWhitespace(),
                     t.initCheatSheet(),
@@ -743,7 +744,35 @@ var moveEnd = function (t) {
                         t("#post-tweets").removeClass("loading disabled").prop("disabled", !1), o = !1
                     }))
                 })
-            }, initEmojiPicker: function () {
+            }, initArticlePagers: function() {
+                t("a.article-pager-btn:not(.disabled)").click(function() {
+                    var e = t('.book-sidemenu a[href="' + t(this).attr("href") + '"]');
+                    a && e && (event.preventDefault(),
+                        e.trigger("click")),
+                        t(this).addClass("loading disabled").prop("disabled", !0)
+                }),
+                    t("a.article-wiki-pager-btn:not(.disabled)").click(function() {
+                        var e, n = t(this).data("id"), i = t(".article-position-" + n), o = t(this).hasClass("page-btn-left");
+                        a = !0,
+                            e = o ? i.data("previous") : i.data("next");
+                        var c = t("#" + e);
+                        c.length ? (c.trigger("click"),
+                            t(this).addClass("loading disabled").prop("disabled", !0)) : swal({
+                            title: "没有更多文章了",
+                            type: "info",
+                            showConfirmButton: !1,
+                            timer: 2200
+                        }).catch(swal.noop)
+                    }),
+                 t(".wiki-category-name").each(function() {
+                    t(this).hover(function(e) {
+                        t(this).find(".wiki-category-edit").show()
+                    }),
+                        t(this).mouseleave(function(e) {
+                            t(this).find(".wiki-category-edit").hide()
+                        })
+                })
+            },initEmojiPicker: function () {
                 0 !== t("[data-emojiable=true]").length && (window.emojiPicker = new EmojiPicker({
                     emojiable_selector: "[data-emojiable=true]",
                     popupButtonClasses: "icon smile",

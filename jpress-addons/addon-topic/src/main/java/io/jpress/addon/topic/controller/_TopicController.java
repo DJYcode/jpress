@@ -42,7 +42,7 @@ public class _TopicController extends AdminControllerBase {
     @Inject
     private ArticleService articleService;
 
-    @AdminMenu(text = "管理", groupId = "addon-topic")
+    @AdminMenu(text = "主题管理", groupId = "addon-topic")
     public void index() {
         Page<Topic> entries=service.paginate(getPagePara(), 10);
         setAttr("page", entries);

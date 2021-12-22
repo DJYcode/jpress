@@ -40,7 +40,7 @@ public class TopicAddon extends AddonBase  {
          *  添加菜单到后台
          */
         MenuGroup orderMenuGroup = new MenuGroup();
-        orderMenuGroup.setId("topic");
+        orderMenuGroup.setId("addon-topic");
         orderMenuGroup.setText("专题设置");
         orderMenuGroup.setIcon("<i class=\"fas fa-comment-alt\"></i>");
 
@@ -54,7 +54,7 @@ public class TopicAddon extends AddonBase  {
         /**
          *  删除添加的菜单
          */
-        MenuManager.me().deleteMenuGroup("topic");
+        MenuManager.me().deleteMenuGroup("addon-topic");
 
     }
 }

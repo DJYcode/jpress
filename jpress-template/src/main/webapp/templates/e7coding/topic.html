@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh" class="">
+#topic(topic_code=topic_code,article_id=article_id)
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="baidu-site-verification" content="MfC8ppEukL"/>
+    <meta baidu-gxt-verify-token="">
+    <meta name="csrf-token" content="">
+
+    <title>#(firstArticle.title) | #(WEB_NAME) </title>
+    <meta name="description"
+          content="#(topic.topic_name)"/>
+    <meta name="keywords" content="#(topic.topic_name)"/>
+
+    <!-- Styles -->
+    <link href="resource/css/vendors.css" rel="stylesheet">
+    <link href="resource/css/app.css" rel="stylesheet">
+
+</head>
+
+<body class=" articles-show-page">
+
+<script>
+    window.Config = {
+        'CSRF_TOKEN': '',
+        'token': '',
+        'environment': 'production',
+        'url': '',
+        'tags_url': '',
+        'scroll_to_top': true,
+        'community': {
+            'id': 0,
+            'name': '',
+            'favicon': ''
+        },
+        'routes': {
+            'upload_image': '',
+        },
+        'user_settings': {
+            'visit_topic_patches_page': false,
+            'annotation_disabled': 'yes',
+        },
+        'overlay': '',
+        'editor': {},
+        'destroyeditor_id': {},
+
+        'content': {
+            authorName: 'dong'
+        }
+    };
+
+    var ShowCrxHint = 'no';
+
+    function onWXWebView() {
+        $('.wechat-login-link').attr("href", "")
+        $('.show-on-wechat-view').show();
+    }
+
+    if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+        onWXWebView();
+    } else {
+        if (document.addEventListener) {
+            document.addEventListener("WeixinJSBridgeReady", onWXWebView, false);
+        } else if (document.attachEvent) {
+            document.attachEvent("WeixinJSBridgeReady", onWXWebView);
+            document.attachEvent("onWeixinJSBridgeReady", onWXWebView);
+        }
+    }
+
+</script>
+<style>
+
+    .ui.top.menu {
+        border-top: 4px solid #00b5ad;
+    }
+
+    .ui.fluid.search .results {
+        width: 550px;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .ui.top.menu > .ui.container {
+            height: 52px;
+            flex-direction: initial;
+        }
+    }
+
+
+    /* 顶部导航栏 */
+    .ui.top.menu {
+        border-top: 4px solid #f4645f;
+    }
+
+    /* 右边导航栏顶部样式 */
+    .ui.top-color.segment:not(.inverted) {
+        border-top: 2px solid #f4645f;
+    }
+
+    /* 右边导航栏顶部样式 */
+    .ui.top-color.card:not(.inverted) {
+        border-top: 2px solid #f4645f;
+    }
+
+    /* 主要按钮 */
+
+    .ui.primary.buttons .button, .ui.primary.button {
+        background-color: #f4645f;
+        border-color: #f4645f;
+    }
+
+    /* 主要按钮选中状态 */
+    .ui.primary.buttons .button:hover, .ui.primary.button:hover, .ui.primary.button:active, .ui.primary.buttons .button:active, .ui.primary.button:focus, .ui.primary.buttons .button:focus, .ui.primary.active.button, .ui.primary.button .active.button:active, .ui.primary.buttons .active.button, .ui.primary.buttons .active.button:active {
+        background-color: #f4645f;
+        border-color: #f4645f;
+    }
+
+    /* 外框按钮 */
+    .ui.basic.primary.buttons .button, .ui.basic.primary.button {
+        color: #f4645f !important;
+        box-shadow: 0px 0px 0px 1px #f4645f inset !important;
+    }
+
+    /* 外框按钮选中状态 */
+    .ui.basic.primary.buttons .button:hover, .ui.basic.primary.button:hover {
+        color: #f4645f !important;
+        box-shadow: 0px 0px 0px 1px #f4645f inset !important;
+    }
+
+    .ui.basic.primary.buttons .active.button, .ui.basic.primary.active.button {
+        color: #f4645f !important;
+        box-shadow: 0px 0px 0px 1px #f4645f inset !important;
+    }
+
+    .ui.basic.primary.buttons .button:active, .ui.basic.primary.button:active, .ui.basic.primary.buttons .active.button, .ui.basic.primary.active.button, .ui.basic.buttons .button:hover, .ui.basic.button:hover, .ui.basic.primary.buttons .button:focus, .ui.basic.primary.button:focus {
+        box-shadow: 0px 0px 0px 1px #f4645f inset !important;
+    }
+
+    .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+        background-color: #f4645f;
+        border-color: #f4645f;
+    }
+
+    .pagination > li > a, .pagination > li > span {
+        color: #f4645f;
+    }
+
+
+    .footer {
+        max-height: max-content;
+    }
+
+</style>
+
+
+#include("./_sidebar_menu.html")
+<div class="ui vertical sidebar book-sidemenu menu accordion following  visible wikis hide-on-mobile"
+     style="z-index: 2;width: 250px;">
+    <a class="item lh-2 pb-1 pt-3 d-flex align-items-center" href="https://learnku.com/java/wikis">
+       <b>#(topic.topic_name)</b>
+    </a>
+
+
+    #if(topicCatalogues && topicCatalogues.size()>0)
+    #for(topicCatalogue : topicCatalogues)
+    <div class="item px-3 py-1" style="border-bottom:none;">
+
+        <div class="py-1 title fs-tiny chapter-position-166 header active"
+             style="line-height: inherit;margin: 0px;font-weight: normal;"><i class="dropdown icon mt-0"></i>
+            #(topicCatalogue.title)
+        </div>
+
+        <div class="pl-0 pt-0 mt-1 article menu content accordion active">
+            #for(article : topicCatalogue.articles)
+
+            <a id="article-link-#(for.count)" data-index="#(for.count+for.outer.size)" data-chapter-id="166" data-previous="article-link-#(for.count-1+for.outer.size)"
+               data-next="article-link-#(for.count+1+for.outer.size)" class="item article-link lh-1 article-position-#(article.id) #if(article.id==article_id) active #end transition visible"
+               href="http://localhost:8888/topic.html?topic_code=#(topic_code??)&article_id=#(article.id??)">
+                #(for.count). #(article.title)
+            </a>
+
+
+            #end
+        </div>
+
+
+    </div>
+    #end
+    #end
+
+</div>
+<div class="pusher">
+
+    <div class="main container">
+
+        #include("./_nav_menu.html")
+
+        <div class="ui centered grid container stackable">
+            <div class="twelve wide column main-column">
+                <div class="ui segment article-content">
+                    <div class="extra-padding" style="padding-bottom:4px">
+
+                        <h1 style="margin-bottom: 15px;">
+                            <div class="pull-left">
+                                <span style="line-height: 34px;">#(firstArticle.title)</span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </h1>
+
+                        <div class="left ui rail hide-on-mobile operation-sticker"
+                             style="left: -68px; top: 0px; width: 40px; min-height: 270px; height: 40816px;">
+
+                            <div class="ui sticky topic-operation">
+                                <div class="ui vertical icon menu border-0">
+                                    <a class="item text-mute ui action login_required popover rm-tdu rm-link-color text-mute"
+                                       data-position="left center" id="topic-vote-#(firstArticle.id)" data-id="#(firstArticle.id)"
+                                       href="javascript:;" data-html="浏览">
+                                        <i class="thumbs eye icon fs-large "></i>
+                                        <span class="count vote-count fs-small mt-2 display-inline-block">#(firstArticle.view_count ?? 0)</span>
+                                    </a>
+
+                                    <a class="item text-mute ui action login_required popover rm-link-color text-mute"
+                                       data-position="left center" data-id="61377" href="#replies"
+                                       onclick="scrollToAnchor('replies')" title="评论">
+                                        <i class="comments icon fs-large"></i>
+                                        <span class="fs-small mt-2 display-inline-block reply-count">#(firstArticle.comment_count ?? 0)</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <p class="book-article-meta" style="margin-bottom: 10px;">
+                            #if(firstArticle.articleCategory??)
+                            <a class="ui popover hide-on-mobile" href="" title="#(firstArticle.articleCategory.title)">
+                                <img class="ui image display-inline-block"
+                                     style="width:18px;height:18px;margin-top:-5px;"
+                                     src="#(firstArticle.articleCategory.icon)">
+                                #(firstArticle.articleCategory.title)
+                            </a>
+                            <span class="divider hide-on-mobile">/</span>
+                            #end
+
+                            <a class="" data-inverted="" data-tooltip="#(firstArticle.view_count ?? 0)">
+                                浏览 <span title="#(firstArticle.view_count ?? 0)">#(firstArticle.view_count ?? 0)</span>
+                            </a>
+                            <span class="divider">/</span>
+                            <a class="" data-inverted="" data-tooltip="#date(firstArticle.created)">
+                                发布于 <span title="#date(firstArticle.created)">#date(firstArticle.created)</span>
+                            </a>
+                        </p>
+
+                        <div class="ui divider"></div>
+
+                        <div class="ui readme markdown-body content-body article-content fluidbox-content">
+
+
+                            <div class="toc-wraper ui  card column author-box grid pt-2" style="display:none">
+                                <a href="javascript:void(0);" class="close-toc pull-right"
+                                   style="width: 20px;position: absolute;right: 7px;top: 3px;margin-bottom: 20px;">
+                                    <i class="icon remove text-mute "></i>
+                                </a>
+
+                            </div>
+                            #(firstArticle.content)
+                            <div class="meta" style="margin: 35px 0px;">
+                                #if(firstArticle.tags && firstArticle.tags.size() > 0)
+                                <i class="icon tags"></i>
+                                #for(item : firstArticle.tags)
+                                <a class="ui label small yellow topic-tag"
+                                   href="#(item.url)">#(item.name)</a>
+                                #end
+                                #end
+                            </div>
+                        </div>
+
+                        <div class="ui horizontal list topic-operations" style="margin-bottom: 0px;margin-top:10px">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="ui segment threaded comments comment-list extra-padding mt-3" name="pre"
+                     id="pre" style="padding:15px">
+                    <div class="rm-link-color d-flex mb-1 mt-3">
+                        <h3 class="rm-tdu">
+                            <a href="#next">上一篇文章：</a>
+                        </h3>
+                    </div>
+                    <div class="simple topic-list rm-link-color mt-0 recommended-topic-list">
+
+                    </div>
+                    <div class="rm-link-color d-flex mb-1 mt-3">
+                        <h3 class="rm-tdu">
+                            <a href="#next">下一篇文章：</a>
+                        </h3>
+                    </div>
+                    <div class="simple topic-list rm-link-color mt-0 recommended-topic-list">
+
+                    </div>
+                </div>
+                <!-- 评论 -->
+                #if(option("article_comment_enable","true") && firstArticle.comment_status)
+                <div id="replies" name="replies"></div>
+
+                <div class="ui threaded comments comment-list ">
+
+                    <div class="ui divider horizontal grey"><i class="icon comments"></i> 评论数量: <span
+                            class="reply-count">0</span></div>
+                    <div class="comments-feed" id="all-comments">
+                        #commentPage()
+                        #for(comment : commentPage.list ??)
+                        <div class="comment">
+                            <div id="reply#(comment.id)" name="reply#(comment.id)"></div>
+                            <div class="avatar">
+                                <img src="#(comment.user.avatar ?? (TPATH + '/img/avatar.png'))">
+                            </div>
+
+                            <div class="content">
+                                <div class="comment-header">
+                                    <div class="meta" style="max-width:100%;display: inline-flex;">
+                                        #(comment.author)
+                                    </div>
+
+                                    <div class="reaction">
+                                        <div class="ui floating basic icon dropdown button">
+                                            <a href="javascript:void(0)" onclick="atReplyCommentsByID('#(comment.author)', '#(comment.id)');"
+                                               title="回复 #(comment.author ??)" class="ui teal reply-btn" style="display: none;"><i
+                                                    style="color:rgba(0, 0, 0, 0.3);" class="icon reply"></i></a>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="text comment-body markdown-reply fluidbox-content">
+                                    <div class="px-3">
+                                        #(comment.content)
+                                    </div>
+                                </div>
+
+                                <div class="comment-meta-mute" title="#date(comment.created )"
+                                     style="padding:15px 25px;background: #fff;font-size: 12px;padding-top:0px;color: rgba(0, 0, 0, 0.4);">
+                                    <i class="icon clock"></i> #date(comment.created )
+
+                                    <a href="javascript:;" class="rm-link-color text-mute ml-2 show-reply-box"
+                                       title="回复 #(comment.author ??)"
+                                       onclick="atReplyCommentsByID('#(comment.author)', '#(comment.id)');"
+                                       data-reply-box-class="reply-box-#(comment.id)">
+                                        <i class="icon talk outline"></i>回复
+                                    </a>
+                                </div>
+
+                                <div class="comments ">
+
+                                    <div class="reply ui message hide reply-#(comment.id)"></div>
+
+                                    <form class="ui reply form mb-4 reply-comments reply-box-#(comment.id)"
+                                          data-article-id="#(firstArticle.id)" data-pid="#(comment.id)"
+                                          data-reply-id="#(comment.id)"
+                                          action="#(CPATH)/article/postComment" style="display:none;" autocomplete="off">
+                                        <input type="hidden" name="articleId" value="#(firstArticle.id)">
+                                        <input type="hidden" name="render" value="articleCommentItem">
+                                        <input type="hidden" name="pid" value="#(comment.id)">
+                                        <input name="csrf_token" type="hidden" value="#(CSRF_TOKEN)">
+                                        <div class="field 1">
+                                            <div class="ui action input">
+                                                <input required="" type="text" name="content"
+                                                       class="reply-comments-composing-box reply-comment-box-#(comment.id)"
+                                                       placeholder="支持 Emoji, 仅解析 Markdown 语法：a,code,strong,i,em">
+                                                <button class="ui primary button comment-btn no-loading" type="submit">
+                                                    回复
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    #if(comment.children && comment.children.size()>0)
+                                    <div class="inner-comment-lists inner-comment-lists-#(comment.id)">
+                                        #for(child : comment.children ??)
+                                        <div class="lh-2 my-2" style="padding-top:4px;border-top: 1px dashed #e9e5e5;"
+                                             id="reply#(child.id)" name="reply#(child.id)">
+
+                                            <img src="#(child.avatar ?? (TPATH + '/img/avatar.png'))"
+                                                 style="width:22px;height:22px">#(child.author)
+                                            <span class="ui popover fs-small text-mute mt-2 ml-2"
+                                                  title="#date(child.created)">#date(child.created)</span>
+                                            <div class="reply-comments-content my-2 tdu rm-link-color lh-3"
+                                                 style="color:#403f3f;margin-left: 30px;">
+                                                #(child.content)
+                                            </div>
+
+                                            <div class=""
+                                                 style="color:#c4c2c2;font-size: 14px;padding-top:0px;margin-left: 30px;">
+                                                <a href="javascript:void(0)"
+                                                   onclick="atReplyCommentsByID('#(child.author)', '#(comment.id)');"
+                                                   title="回复 #(child.author)" class="ui teal popover rm-link-color mr-1"><i
+                                                        class="icon reply"></i></a>
+
+                                            </div>
+                                        </div>
+                                        #end
+                                    </div>
+                                    #end
+                                </div>
+
+                            </div>
+                        </div>
+                        #end
+                        #end
+
+                    </div>
+                    <div class="empty-block">
+                        (=￣ω￣=)··· 暂无内容！
+                    </div>
+
+                    <br>
+
+                    <div class="ui segment extra-padding comment-composing-box pt-3" style="padding:20px;">
+
+
+                        <div class="reply ui new-reply message hide"></div>
+
+                        <form class="ui reply form topic-reply-form" method="POST"
+                              action="#(CPATH)/article/postComment" accept-charset="UTF-8"
+                              data-article-id="#(firstArticle.id)"
+                              autocomplete="off"
+                        >
+
+                            <input type="hidden" name="articleId" value="#(firstArticle.id)">
+                            <input type="hidden" name="render" value="articleComments">
+                            <input type="hidden" name="pid" id="comment-pid">
+                            <input type="hidden" name="body_html" value="">
+                            <input name="csrf_token" type="hidden" value="#(CSRF_TOKEN)">
+
+                            <div class="ui message info">
+                                <i class="icon info" aria-hidden="true"></i>如果对此文章有任何疑问，或者涉及侵权需要删除请评论留言，谢谢！
+                            </div>
+
+
+                            <div class="field">
+                                <textarea name="content" id="comment-composing-box" data-emojiable="converted"
+                                          data-storage-key="topic-#(firstArticle.id)" required="" class="comment-textarea textarea"
+                                          data-id="#(firstArticle.id)" data-type="original-input"
+                                          style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 112px;"></textarea>
+                                <div class="emoji-menu" data-id="#(firstArticle.id)" data-type="menu"
+                                     style="display: none;">
+                                    <div class="emoji-items-wrap1">
+                                        <table class="emoji-menu-tabs">
+                                            <tbody>
+                                            <tr>
+                                                <td><a class="emoji-menu-tab icon-recent-selected"></a></td>
+                                                <td><a class="emoji-menu-tab icon-smile"></a></td>
+                                                <td><a class="emoji-menu-tab icon-flower"></a></td>
+                                                <td><a class="emoji-menu-tab icon-bell"></a></td>
+                                                <td><a class="emoji-menu-tab icon-car"></a></td>
+                                                <td><a class="emoji-menu-tab icon-grid"></a></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="emoji-items-wrap mobile_scrollable_wrap">
+                                            <div class="emoji-items">
+                                                <a href="javascript:void(0)" title=":grin:"><img
+                                                        src="resource/assets/images/blank.gif" class="img"
+                                                        style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -375px 0px no-repeat;background-size:675px 175px;"
+                                                        alt=":grin:"><span class="label">:grin:</span></a><a
+                                                    href="javascript:void(0)" title=":kissing_heart:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -175px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":kissing_heart:"><span class="label">:kissing_heart:</span></a><a
+                                                    href="javascript:void(0)" title=":joy:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -550px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":joy:"><span class="label">:joy:</span></a><a
+                                                    href="javascript:void(0)" title=":heart:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -250px -150px no-repeat;background-size:675px 175px;"
+                                                    alt=":heart:"><span class="label">:heart:</span></a><a
+                                                    href="javascript:void(0)" title=":heart_eyes:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -150px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":heart_eyes:"><span class="label">:heart_eyes:</span></a><a
+                                                    href="javascript:void(0)" title=":blush:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -75px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":blush:"><span class="label">:blush:</span></a><a
+                                                    href="javascript:void(0)" title=":+1:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -600px -75px no-repeat;background-size:675px 175px;"
+                                                    alt=":+1:"><span class="label">:+1:</span></a><a
+                                                    href="javascript:void(0)" title=":relaxed:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -100px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":relaxed:"><span class="label">:relaxed:</span></a><a
+                                                    href="javascript:void(0)" title=":pensive:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -400px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":pensive:"><span class="label">:pensive:</span></a><a
+                                                    href="javascript:void(0)" title=":smile:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) 0px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":smile:"><span class="label">:smile:</span></a><a
+                                                    href="javascript:void(0)" title=":sob:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -575px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":sob:"><span class="label">:sob:</span></a><a
+                                                    href="javascript:void(0)" title=":kiss:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -475px -150px no-repeat;background-size:675px 175px;"
+                                                    alt=":kiss:"><span class="label">:kiss:</span></a><a
+                                                    href="javascript:void(0)" title=":unamused:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -450px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":unamused:"><span class="label">:unamused:</span></a><a
+                                                    href="javascript:void(0)" title=":flushed:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -350px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":flushed:"><span class="label">:flushed:</span></a><a
+                                                    href="javascript:void(0)"
+                                                    title=":stuck_out_tongue_winking_eye:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -275px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":stuck_out_tongue_winking_eye:"><span class="label">:stuck_out_tongue_winking_eye:</span></a><a
+                                                    href="javascript:void(0)" title=":see_no_evil:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -75px -75px no-repeat;background-size:675px 175px;"
+                                                    alt=":see_no_evil:"><span class="label">:see_no_evil:</span></a><a
+                                                    href="javascript:void(0)" title=":wink:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -125px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":wink:"><span class="label">:wink:</span></a><a
+                                                    href="javascript:void(0)" title=":smiley:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -25px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":smiley:"><span class="label">:smiley:</span></a><a
+                                                    href="javascript:void(0)" title=":cry:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -525px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":cry:"><span class="label">:cry:</span></a><a
+                                                    href="javascript:void(0)"
+                                                    title=":stuck_out_tongue_closed_eyes:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -300px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":stuck_out_tongue_closed_eyes:"><span class="label">:stuck_out_tongue_closed_eyes:</span></a><a
+                                                    href="javascript:void(0)" title=":scream:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -125px -25px no-repeat;background-size:675px 175px;"
+                                                    alt=":scream:"><span class="label">:scream:</span></a><a
+                                                    href="javascript:void(0)" title=":rage:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -175px -25px no-repeat;background-size:675px 175px;"
+                                                    alt=":rage:"><span class="label">:rage:</span></a><a
+                                                    href="javascript:void(0)" title=":smirk:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -50px -50px no-repeat;background-size:675px 175px;"
+                                                    alt=":smirk:"><span class="label">:smirk:</span></a><a
+                                                    href="javascript:void(0)" title=":disappointed:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -475px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":disappointed:"><span class="label">:disappointed:</span></a><a
+                                                    href="javascript:void(0)" title=":sweat_smile:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) 0px -25px no-repeat;background-size:675px 175px;"
+                                                    alt=":sweat_smile:"><span class="label">:sweat_smile:</span></a><a
+                                                    href="javascript:void(0)" title=":kissing_closed_eyes:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -200px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":kissing_closed_eyes:"><span class="label">:kissing_closed_eyes:</span></a><a
+                                                    href="javascript:void(0)" title=":speak_no_evil:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -125px -75px no-repeat;background-size:675px 175px;"
+                                                    alt=":speak_no_evil:"><span class="label">:speak_no_evil:</span></a><a
+                                                    href="javascript:void(0)" title=":relieved:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -425px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":relieved:"><span class="label">:relieved:</span></a><a
+                                                    href="javascript:void(0)" title=":grinning:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -50px 0px no-repeat;background-size:675px 175px;"
+                                                    alt=":grinning:"><span class="label">:grinning:</span></a><a
+                                                    href="javascript:void(0)" title=":yum:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -275px -25px no-repeat;background-size:675px 175px;"
+                                                    alt=":yum:"><span class="label">:yum:</span></a><a
+                                                    href="javascript:void(0)" title=":ok_hand:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -650px -75px no-repeat;background-size:675px 175px;"
+                                                    alt=":ok_hand:"><span class="label">:ok_hand:</span></a><a
+                                                    href="javascript:void(0)" title=":neutral_face:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -600px -25px no-repeat;background-size:675px 175px;"
+                                                    alt=":neutral_face:"><span class="label">:neutral_face:</span></a><a
+                                                    href="javascript:void(0)" title=":confused:"><img
+                                                    src="resource/assets/images/blank.gif" class="img"
+                                                    style="display:inline-block;width:25px;height:25px;background:url(&#39;resource/assets/images/emoji_spritesheet_0.png&#39;) -625px -25px no-repeat;background-size:675px 175px;"
+                                                    alt=":confused:"><span class="label">:confused:</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                #if(option("article_comment_vcode_enable","true"))
+                                <input placeholder="请输入验证码" autocomplete="off" name="captcha" id="comment-captcha">
+                                <img class="vcode-img" src="#(CPATH)/commons/captcha"
+                                     onclick="this.src='#(CPATH)/commons/captcha?d='+Math.random();" cdn-exclude
+                                     id="comment-vcode">
+                                #end
+                            </div>
+
+                            <div class="field rm-link-color">
+                                <div class="pull-left meta">
+                                    <a href="javascript:;" class="mr-2 emoji-picker text-mute fs-big rm-tdu"
+                                       data-type="picker">
+                                        <i class="icon smile"></i>
+                                    </a>
+                                    <a href="javascript:;" class="mr-2 ui popover text-mute"
+                                       data-html="黏贴或拖拽图片至输入&lt;br&gt;框内皆可上传图片">
+                                        <i class="icon picture"></i>
+                                    </a>
+                                    <a href="javascript:;" class="mr-2 ui popover text-mute hide-on-mobile"
+                                       data-html="支持除了 H1~H6 以外的&lt;br&gt;GitHub 兼容 Markdown">
+                                        支持 MD
+                                    </a>
+
+                                </div>
+
+                                <div class="pull-right">
+                                    <button class="ui primary labeled icon button  no-loading" type="submit"
+                                            id="comment-composing-submit">
+                                        <i class="icon comment"></i> 评论
+                                    </button>
+                                </div>
+
+                                <div class="clearfix"></div>
+
+                            </div>
+
+
+                        </form>
+
+                        <div class="clearfix"></div>
+                        <div class="box preview markdown-reply fluidbox-content" id="preview-box"
+                             style="display:none;border: dashed 1px #ccc;background: #ffffff;border-radius: 6px;box-shadow:none;margin-top: 20px;margin-bottom: 6px;"></div>
+                    </div>
+                </div>
+                #end
+                <div class="wiki navigator hide-on-mobile">
+                    <a href="javascript:;" data-id="#(firstArticle.id)" title="⬅ 快捷键" class="ui popover article-wiki-pager-btn circular ui icon button big page-btn page-btn-left" style="position: absolute;">
+                        <i class="icon chevron left"></i>
+                    </a>
+                    <a href="javascript:;" data-id="#(firstArticle.id)" class="ui popover article-wiki-pager-btn circular ui icon button big page-btn page-btn-right" style="position: absolute;" title="快捷键 ➡">
+                        <i class="icon chevron right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <script>
+
+                Config.topic_id = 0;
+                Config.following_users = [];
+
+                Config.content.authorName = 'dong';
+            </script>
+
+        </div>
+
+        #include("./footer.html")
+
+    </div>
+
+    <!-- 登录弹窗 -->
+    <div class="ui modal login small" style="width:400px;margin: 0em 0em 0em -200px;">
+        <i class="close icon"></i>
+        <div class="header">
+            <h4 class="modal-title ">
+                <img class="ui image display-inline-block mr-2" style="width:32px;height:32px;"
+                     src=""> <span
+                    style="position: relative;top: 4px;">请登录</span>
+            </h4>
+        </div>
+        <div class="content">
+            #if(option('login_qq_enable') || option('login_wechat_enable'))
+            <div class="form-group row">
+                #if(option('login_wechat_enable'))
+                <a class="ui button fluid mt-2 green wechat-login-link" href="#(CPATH)/oauth/wechat"><i
+                        class="icon wechat "></i> 微信登录</a>
+                #end
+                #if(option('login_qq_enable'))
+                <a class="ui button fluid mt-2 basic" id="login-required-submit"
+                   href="#(CPATH)/oauth/qq"><i class="icon github alternate"></i> QQ 登录</a>
+                #end
+            </div>
+            #end
+        </div>
+    </div>
+</div>
+
+<script src="resource/js/vendors.js"></script>
+<script src="resource/js/app.js"></script>
+
+<script src="#(CPATH)/static/components/jquery/jquery.min.js"></script>
+<script src="#(CPATH)/static/components/jquery/jquery.form.min.js"></script>
+<script src="#(CPATH)/static/components/selectize/selectize.min.js"></script>
+<script src="#(CPATH)/static/components/toastr/toastr.min.js"></script>
+<a id="scrollUp" href="#top"
+   style="position: fixed; z-index: 2147483647; display: none;">Scroll to top</a>
+</body>
+</html>
+#end

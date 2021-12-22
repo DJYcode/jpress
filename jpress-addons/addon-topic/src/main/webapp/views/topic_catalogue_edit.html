@@ -24,12 +24,13 @@
         doSubmit();
     })
     $('#select-article').click(function () {
-        var topicCode = $(".topic_code").val();
-        selectArticle(topicCode);
+        var topicCode = $(".topic_code").find("option:selected").attr("data-flag");
+        var articleId = $(".articleId").val();
+        selectArticle(topicCode,articleId);
     });
 
 
-    function selectArticle(topicCode) {
+    function selectArticle(topicCode,articleId) {
         layer.data = {}
         layer.open({
             type: 2,
@@ -38,15 +39,16 @@
             shadeClose: true,
             shade: 0.3,
             area: ['60%', '60%'],
-            content: '#(CPATH)/admin/addon-topic/topic_catalogue/layer?topicCode=' + topicCode,
+            content: '#(CPATH)/admin/addon-topic/topic_catalogue/layer?topicCode=' + topicCode+'&articleId='+articleId,
             end: function () {
-                if (layer.data.couponCode) {
-                    var payPrice = parseFloat(globalTotalPrice) - parseFloat(layer.data.couponAmount);
-                    $('#payPrice').text(payPrice.toFixed(2));
-                    $('#coupon-price-span').text('优惠券:-' + (parseFloat(layer.data.couponAmount)));
-                    $('#coupon-code-input').val(layer.data.couponCode);
-                    $('#coupon-code-input').attr('readonly', true);
-                    $('#select-coupon-code').text('选择优惠券（已选:' + layer.data.couponTitle + '）');
+                if (layer.data.articleId) {
+                    var articleId = $(".articleId").val();
+                    if (articleId === "") {
+                        $(".articleId").val(layer.data.articleId);
+                    } else {
+                        articleId = articleId +","+layer.data.articleId;
+                        $(".articleId").val(articleId);
+                    }
                 }
             }
         });
@@ -90,21 +92,19 @@
 		                            <div class="form-group row">
 		                                <label class="col-sm-2 col-form-label">主题名称</label>
 		                                <div class="col-sm-6">
-                                            <select class="form-control topic_code" name="topic.topic_code">
+                                            <select class="form-control topic_code" name="topicCatalogue.topic_id">
+                                                <option data-flag="0" value="-1" >请选择</option>
                                                 #if(topics)
                                                 #for(topic : topics ??)
-                                                 <option data-flag="#(topic.topicCode)" value="#(topic.id)" #if(topic.id == topicCatalogue.topic_id) selected #end>#(topic.topicName)</option>
+                                                 <option data-flag="#(topic.topicCode)" value="#(topic.id)" #if(topic.id == topicCatalogue.topic_id??) selected #end>#(topic.topicName)</option>
                                                 #end
                                                 #end
                                             </select>
-<!--										   <input type="input" name="topicCatalogue.topic_id" class="form-control" value="#(topicCatalogue.topic_id ??)"-->
-<!--		                                           placeholder="">-->
 		                                </div>
 		                            </div>
 		                            <div class="form-group row">
 		                                <label class="col-sm-2 col-form-label">标题</label>
 		                                <div class="col-sm-6">
-
 										   <input type="input" name="topicCatalogue.title" class="form-control" value="#(topicCatalogue.title ??)"
 		                                           placeholder="">
 		                                </div>

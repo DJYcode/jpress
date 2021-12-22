@@ -24,7 +24,7 @@
         doSubmit();
     })
 	function choiceOption(obj) {
-	  $(".topicItemCount").val($(obj).attr("data-count"));
+	  $(".topicItemCount").val($(obj).find("option:selected").attr("data-count"));
 	}
     </script>
 #end
@@ -82,9 +82,10 @@
 		                                <label class="col-sm-2 col-form-label">专题标识</label>
 		                                <div class="col-sm-6">
 											<select class="form-control" name="topic.topic_code" onchange="choiceOption(this)">
+												<option data-count="0" value="-1" >请选择</option>
 												#if(flags)
 													#for(flag : flags ??)
-													 <option data-count="#(flag.value)" value="#(flag.key)" #if(flag.key == topic.topic_code) selected #end>#(flag.key)</option>
+													 <option data-count="#(flag.value)" value="#(flag.key)" #if(flag.key == topic.topic_code??) selected #end>#(flag.key)</option>
 													#end
 												#end
 											</select>
