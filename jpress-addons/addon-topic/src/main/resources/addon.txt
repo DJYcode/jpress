@@ -4,4 +4,4 @@ description=专题
 author=dongjy
 authorWebsite=
 version=1.0.3
-versionCode=25
+versionCode=29

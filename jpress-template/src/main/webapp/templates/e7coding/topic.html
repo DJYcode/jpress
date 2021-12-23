@@ -167,7 +167,7 @@
     #for(topicCatalogue : topicCatalogues)
     <div class="item px-3 py-1" style="border-bottom:none;">
 
-        <div class="py-1 title fs-tiny chapter-position-166 header active"
+        <div class="py-1 title fs-tiny chapter-position-#(for.count) header active"
              style="line-height: inherit;margin: 0px;font-weight: normal;"><i class="dropdown icon mt-0"></i>
             #(topicCatalogue.title)
         </div>
@@ -175,8 +175,9 @@
         <div class="pl-0 pt-0 mt-1 article menu content accordion active">
             #for(article : topicCatalogue.articles)
 
-            <a id="article-link-#(for.count)" data-index="#(for.count+for.outer.size)" data-chapter-id="166" data-previous="article-link-#(for.count-1+for.outer.size)"
-               data-next="article-link-#(for.count+1+for.outer.size)" class="item article-link lh-1 article-position-#(article.id) #if(article.id==article_id) active #end transition visible"
+            <a id="article-link-#(for.count)" data-previous="article-link-#(numbers.get(article.id)-1)" data-index="#(numbers.get(article.id))" data-next="article-link-#(numbers.get(article.id)+1)"
+               data-chapter-id="#(for.outer.index)"
+               class="item article-link lh-1 article-position-#(article.id) #if(article.id==article_id) active #end transition visible"
                href="http://localhost:8888/topic.html?topic_code=#(topic_code??)&article_id=#(article.id??)">
                 #(for.count). #(article.title)
             </a>

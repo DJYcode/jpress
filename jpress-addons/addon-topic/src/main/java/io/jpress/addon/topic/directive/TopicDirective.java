@@ -15,10 +15,7 @@ import io.jpress.module.article.model.Article;
 import io.jpress.module.article.service.ArticleService;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -37,6 +34,8 @@ public class TopicDirective extends JbootDirectiveBase {
         Topic topic = topicService.findByTopicCode(topicCode);
         scope.setLocal("topic", topic);//topicCatalogue -> {TopicCatalogue@7450} "{article_id:20,21,22,23, id:1, topic_id:1, title:基础命令, order_number:null}"
         List<TopicCatalogue> topicCatalogues = topic.get("topicCatalogueList");
+        Map<Long,Integer> numbers = new HashMap<>();
+        int index = 0;
         if (!CollectionUtil.isEmpty(topicCatalogues)) {
             List<Article> articles = new ArrayList<>();
             for (TopicCatalogue topicCatalogue : topicCatalogues) {
@@ -46,6 +45,9 @@ public class TopicDirective extends JbootDirectiveBase {
                 List<Article> articleList = articleService.findListByColumns(columns, "id asc", articleIds.length);
                 topicCatalogue.setArticles(articleList);
                 articles.addAll(articleList);
+                for (Article article : articleList) {
+                    numbers.put(article.getId(),++index);
+                }
             }
             scope.setLocal("topicCatalogues", topicCatalogues);
             if (StringUtils.isNotBlank(articleId)) {
@@ -58,6 +60,9 @@ public class TopicDirective extends JbootDirectiveBase {
                 scope.setLocal("firstArticle",articles.get(0));
             }
         }
+        scope.setLocal("numbers",numbers);
+        scope.setLocal("previous",1);
+        scope.setLocal("next",1);
         renderBody(env, scope, writer);
     }
 
