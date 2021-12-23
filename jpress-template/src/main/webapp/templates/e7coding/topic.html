@@ -158,10 +158,14 @@
 #include("./_sidebar_menu.html")
 <div class="ui vertical sidebar book-sidemenu menu accordion following  visible wikis hide-on-mobile"
      style="z-index: 2;width: 250px;">
-    <a class="item lh-2 pb-1 pt-3 d-flex align-items-center" href="https://learnku.com/java/wikis">
+    <a class="item lh-2 pb-1 pt-3 d-flex align-items-center" href="#(CPATH)/topic.html?topic_code=#(topic_code??)">
        <b>#(topic.topic_name)</b>
     </a>
-
+    <div class="item lh-2 text-center">
+        <div class="ui button  mini basic icon open-all">
+            <i class="icon sort"></i> 展开或关闭
+        </div>
+    </div>
 
     #if(topicCatalogues && topicCatalogues.size()>0)
     #for(topicCatalogue : topicCatalogues)
@@ -169,7 +173,7 @@
 
         <div class="py-1 title fs-tiny chapter-position-#(for.count) header active"
              style="line-height: inherit;margin: 0px;font-weight: normal;"><i class="dropdown icon mt-0"></i>
-            #(topicCatalogue.title)
+            #(for.count). #(topicCatalogue.title)
         </div>
 
         <div class="pl-0 pt-0 mt-1 article menu content accordion active">

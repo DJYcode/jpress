@@ -39,7 +39,7 @@
                                         <a href="#(CPATH)/ucenter/article/write/#(article.id)">编辑</a><span class="divider">|</span>
                                         <a href="javascript:void(0);" onclick="del('#(article.id??)')">永久删除</a><span class="divider">|</span>
                                         #end
-                                        <a class="" data-tooltip="#date(article.created)"><span title="#date(article.created)">#date(article.created)</span></a>
+                                        <a class="" data-tooltip="#relativeDateFormat(relativeDateFormat.created)"><span title="#relativeDateFormat(article.created)">#relativeDateFormat(article.created)</span></a>
                                         #if(article.isNormal())
                                             #articleCategories(article.id,"category")
                                             <span class="divider">|</span>

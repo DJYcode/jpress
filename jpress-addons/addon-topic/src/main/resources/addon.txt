@@ -1,7 +1,7 @@
 id=io.jpress.addon.topic
-title=专题插件
-description=专题
+title=e7coding专题插件
+description=e7coding专题
 author=dongjy
 authorWebsite=
-version=1.0.3
+version=1.0.0
 versionCode=43

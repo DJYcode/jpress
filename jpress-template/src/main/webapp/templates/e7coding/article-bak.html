@@ -380,8 +380,8 @@
                                 浏览 <span title="#(article.view_count ?? 0)">#(article.view_count ?? 0)</span>
                             </a>
                             <span class="divider">/</span>
-                            <a class="" data-inverted="" data-tooltip="#date(article.created)">
-                                发布于 <span title="#date(article.created)">#date(article.created)</span>
+                            <a class="" data-inverted="" data-tooltip="#relativeDateFormat(article.created)">
+                                发布于 <span title="#relativeDateFormat(article.created)">#relativeDateFormat(article.created)</span>
                             </a>
                         </p>
 

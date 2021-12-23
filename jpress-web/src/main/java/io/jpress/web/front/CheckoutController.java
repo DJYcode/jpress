@@ -231,7 +231,11 @@ public class CheckoutController extends UcenterControllerBase {
             item.setCommentPath(userCart.getCommentPath());
 
             item.setOptions(userCart.getOptions());
-            item.setStatus(UserOrderItem.STATUS_TRADING);// 交易中
+            if (userCart.getProductPrice().compareTo(new BigDecimal(0)) == 0) {
+                item.setStatus(UserOrderItem.STATUS_FINISHED);// 交易结束
+            } else {
+                item.setStatus(UserOrderItem.STATUS_TRADING);// 交易中
+            }
 
             //payAmount = 产品价格 * 产品数量 + 运费 + 其他费用
             BigDecimal payAmount = userCart.getShouldPayPrice()

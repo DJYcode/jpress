@@ -273,6 +273,7 @@
                                             </div>
                                             #end
                                         </div>
+                                        #if(product.price && product.price > 0)
                                         <div class="ui basic buttons">
                                             <div class="ui button">
                                                 <a href="javascript:;" onclick="buyProduct('#(product.id ??)')">下载</a>
@@ -281,6 +282,7 @@
                                         <a href="javascript:;"
                                            onclick="addProductToFavorite('#(product.id ??)')">
                                             <i class="icon heart outline"></i> 添加收藏</a>
+                                        #end
                                     </div>
                                 </div>
                             </div>

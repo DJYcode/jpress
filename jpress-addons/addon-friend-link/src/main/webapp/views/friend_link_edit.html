@@ -1,0 +1,112 @@
+#@layout()
+#define css()
+#@layout_css?()
+<link rel="stylesheet" href="#(CPATH)/static/components/datepicker/css/bootstrap-datepicker3.min.css">
+#end
+#define script()
+#@layout_script?()
+<script src="#(CPATH)/static/components/datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="#(CPATH)/static/components/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<script>
+    $("input[hint='date']").datepicker({
+        format: 'yyyy-mm-dd',
+        language: 'zh-CN'
+    });
+
+  function doSubmit() {
+    ajaxSubmit("#form", function (data) {
+        $("#entryId").attr("value", data.id);
+        toastr.success('内容保存成功。');
+    })
+  }
+
+    $("#submit").on("click", function () {
+        doSubmit();
+    })
+    </script>
+#end
+
+#define content()
+
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <div class="row mb-2">
+                        <div class="col-sm-12">
+                            <h1>
+                                编辑/新增
+                                <small data-toggle="tooltip" title="" data-placement="right"
+                                       data-trigger="hover"><i class="nav-icon far fa-question-circle"></i></small>
+                                <small> 首页 / FriendLink / 编辑</small>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-outline card-primary">
+                    <form class=" form-setting" autocomplete="off"
+                          action="/admin/addon-friend-link/friend_link/doSave"
+                          method="POST" id="form">
+
+                        <div class="card-body ">
+	                                <input type="hidden" id="entryId" name="friendLink.id" value="#(friendLink.id ??)">
+		                            <div class="form-group row">
+		                                <label class="col-sm-2 col-form-label">链接名</label>
+		                                <div class="col-sm-6">
+
+										   <input type="input" name="friendLink.name" class="form-control" value="#(friendLink.name ??)"
+		                                           placeholder="">
+		                                </div>
+		                            </div>
+		                            <div class="form-group row">
+		                                <label class="col-sm-2 col-form-label">网址</label>
+		                                <div class="col-sm-6">
+
+										   <input type="input" name="friendLink.url" class="form-control" value="#(friendLink.url ??)"
+		                                           placeholder="">
+		                                </div>
+		                            </div>
+		                            <div class="form-group row">
+		                                <label class="col-sm-2 col-form-label">图标路径</label>
+		                                <div class="col-sm-6">
+
+										   <input type="input" name="friendLink.ico" class="form-control" value="#(friendLink.ico ??)"
+		                                           placeholder="">
+		                                </div>
+		                            </div>
+		                            <div class="form-group row">
+		                                <label class="col-sm-2 col-form-label">排序</label>
+		                                <div class="col-sm-6">
+
+										   <input type="input" name="friendLink.order_number" class="form-control" value="#(friendLink.order_number ??)"
+		                                           placeholder="">
+		                                </div>
+		                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <div class="offset-sm-2 col-sm-10 submit-block">
+                                <div class="card-submit">
+                                    <button id="submit" type="button" class="btn btn-primary">提交</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-footer -->
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+#end

@@ -50,14 +50,14 @@
             </div>
 
             <div class="content text-center" style="padding-top:5px">
-                <a class="" href="https://ucloud.cn" rel="nofollow noopener noreferrer" target="_blank"
+                #friendLinks()
+                #for(link : friendLinks)
+                <a class="" href="#(link.url)" rel="nofollow noopener noreferrer" target="_blank"
                    style="margin-top: 10px;display: block;">
-                   Ucloud
+                   #(link.name)
                 </a>
-                <a class="" href="http://www.jpress.io/" rel="nofollow noopener noreferrer" target="_blank"
-                   style="margin-top: 10px;display: block;">
-                    Jpress
-                </a>
+                #end
+                #end
             </div>
         </div>
     </div>

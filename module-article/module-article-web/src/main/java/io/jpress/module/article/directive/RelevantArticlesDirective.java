@@ -55,7 +55,7 @@ public class RelevantArticlesDirective extends JbootDirectiveBase {
         List<Article> relevantArticles = service.findRelevantListByArticleId(article.getId(), Article.STATUS_NORMAL, count);
 
         if (relevantArticles == null || relevantArticles.isEmpty()) {
-            scope.setLocal("relevantArticles", new ArrayList<>());
+            renderBody(env, scope, writer);
             return;
         }
 

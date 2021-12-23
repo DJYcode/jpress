@@ -466,7 +466,7 @@
 
                              <span class="count_of_replies" title="评论数"><i class="icon comments outline"></i>#(article.comment_count ?? 0)</span>
                              <span class="count_seperator">|</span>
-                             <abbr title="创建于 #(article.created)" class="timeago ui popover">#(article.created)</abbr>
+                             <abbr title="创建于 #relativeDateFormat(article.created)" class="timeago ui popover">#relativeDateFormat(article.created)</abbr>
                          </span>
                      </span>
                             </a>

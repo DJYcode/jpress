@@ -185,9 +185,9 @@
                         </div>
                         <div class="results"></div>
                     </form>
-
                 </div>
                 <div class="ui segment pb-0 readmore  my-communities" data-height="55">
+                    资源分类:
                     #allProductCategories(asTree=true)
                     #for(category :categories)
                     <a class="ui image light label mr-1 mb-3" href="#(category.slug)" style="padding-right: 2.2em!important;">
@@ -258,6 +258,7 @@
                             </div>
                         </div>
                         <div class="extra content">
+                            #if(product.price && product.price > 0)
                             <div class="ui two buttons">
                                 <div class="ui basic green button">
                                     <a href="#(product.url)">
@@ -272,6 +273,17 @@
                                     </a>
                                 </div>
                             </div>
+                            #else
+                            <div class="ui two buttons">
+                                <div class="ui basic green button">
+                                    <a href="#(product.url)">
+                                        <i class="icon download"></i>
+                                        详情
+                                    </a>
+                                </div>
+                            </div>
+                            #end
+
                         </div>
                     </div>
                     #end

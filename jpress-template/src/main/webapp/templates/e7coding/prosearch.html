@@ -341,7 +341,7 @@
                                                 #end
                                             #end
 
-                                            <a class="" data-tooltip="#date(product.created)">
+                                            <a class="" data-tooltip="#relativeDateFormat(product.created)">
                                                 下载价格
                                                 #if(product.price && product.price > 0)
                                                 ¥ #number(product.price)
@@ -350,8 +350,8 @@
                                                 #end
                                             </a>
                                             <span class="divider">|</span>
-                                            <a class="" data-tooltip="#date(product.created)">
-                                                发布于 <span title="#date(product.created)">#date(product.created)</span>
+                                            <a class="" data-tooltip="#relativeDateFormat(product.created)">
+                                                发布于 <span title="#relativeDateFormat(product.created)">#relativeDateFormat(product.created)</span>
                                             </a>
                                             <span class="divider">|</span>
                                             <a>
