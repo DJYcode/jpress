@@ -177,7 +177,7 @@
 
             <a id="article-link-#(numbers.get(article.id))" data-previous="article-link-#(numbers.get(article.id)-1)" data-index="#(numbers.get(article.id))" data-next="article-link-#(numbers.get(article.id)+1)"
                data-chapter-id="#(for.outer.index)"
-               class="item article-link lh-1 article-position-#(article.id) #if(article.id==article_id) active #end transition visible"
+               class="item article-link lh-1 article-position-#(article.id) #(active.get(article.id)??)  transition visible"
                href="http://localhost:8888/topic.html?topic_code=#(topic_code??)&article_id=#(article.id??)">
                 #(for.count). #(article.title)
             </a>
@@ -282,24 +282,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="ui segment threaded comments comment-list extra-padding mt-3" name="pre"
-                     id="pre" style="padding:15px">
-                    <div class="rm-link-color d-flex mb-1 mt-3">
-                        <h3 class="rm-tdu">
-                            <a href="#next">上一篇文章：</a>
-                        </h3>
-                    </div>
-                    <div class="simple topic-list rm-link-color mt-0 recommended-topic-list">
-
-                    </div>
-                    <div class="rm-link-color d-flex mb-1 mt-3">
-                        <h3 class="rm-tdu">
-                            <a href="#next">下一篇文章：</a>
-                        </h3>
-                    </div>
-                    <div class="simple topic-list rm-link-color mt-0 recommended-topic-list">
-
-                    </div>
+                <div>
+                    #if(previousArticle)
+                    <a class="ui basic button small article-pager-btn pull-left popover "
+                       data-content="#(previousArticle.title)"
+                       href="#(CPATH)/topic.html?topic_code=#(topic_code??)&article_id=#(previousArticle.id??)"><i class="icon arrow left"></i> 上一篇</a>
+                    #else
+                    <a class="ui basic button small article-pager-btn pull-left disabled " data-content="" href=""><i class="icon arrow left"></i> 上一篇</a>
+                    #end
+                    #if(nextArticle)
+                    <a class="ui basic button small article-pager-btn pull-right popover"
+                       data-content="#(nextArticle.title)" href="#(CPATH)/topic.html?topic_code=#(topic_code??)&article_id=#(nextArticle.id??)">下一篇 <i class="icon arrow right"></i></a>
+                    #else
+                    <a class="ui basic button small article-pager-btn pull-right disabled"
+                       data-content="" href="">下一篇 <i class="icon arrow right"></i></a>
+                    #end
+                    <div class="clearfix"></div>
                 </div>
                 <!-- 评论 -->
                 #if(option("article_comment_enable","true") && firstArticle.comment_status)

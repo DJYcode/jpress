@@ -35,6 +35,7 @@ public class TopicDirective extends JbootDirectiveBase {
         scope.setLocal("topic", topic);//topicCatalogue -> {TopicCatalogue@7450} "{article_id:20,21,22,23, id:1, topic_id:1, title:基础命令, order_number:null}"
         List<TopicCatalogue> topicCatalogues = topic.get("topicCatalogueList");
         Map<Long,Integer> numbers = new HashMap<>();
+        Map<Long,String> active = new HashMap<>();
         int index = 0;
         if (!CollectionUtil.isEmpty(topicCatalogues)) {
             List<Article> articles = new ArrayList<>();
@@ -47,22 +48,35 @@ public class TopicDirective extends JbootDirectiveBase {
                 articles.addAll(articleList);
                 for (Article article : articleList) {
                     numbers.put(article.getId(),++index);
+                    if (StringUtils.isNotBlank(articleId) && articleId.equals(String.valueOf(article.getId()))) {
+                        active.put(article.getId(),"active");
+                    } else {
+                        active.put(article.getId(),"uactive");
+                    }
                 }
             }
             scope.setLocal("topicCatalogues", topicCatalogues);
             if (StringUtils.isNotBlank(articleId)) {
-                Optional<Article> optionalArticle = articles.stream().filter(item -> articleId.equals(String.valueOf(item.getId()))).findFirst();
-                if (optionalArticle.isPresent()) {
-                    Article article = optionalArticle.get();
-                    scope.setLocal("firstArticle",article);
+                for (int i = 0; i < articles.size(); i++) {
+                    if (articleId.equals(String.valueOf(articles.get(i).getId()))) {
+                        scope.setLocal("firstArticle",articles.get(i));
+                        if (i+1 == articles.size()) {
+                            scope.setLocal("previousArticle",articles.get(i-1));
+                        } else if (i == 0){
+                            scope.setLocal("nextArticle",articles.get(i+1));
+                        } else {
+                            scope.setLocal("nextArticle",articles.get(i+1));
+                            scope.setLocal("previousArticle",articles.get(i-1));
+                        }
+                    }
                 }
             } else {
                 scope.setLocal("firstArticle",articles.get(0));
+                scope.setLocal("nextArticle",articles.get(1));
             }
         }
         scope.setLocal("numbers",numbers);
-        scope.setLocal("previous",1);
-        scope.setLocal("next",1);
+        scope.setLocal("active",active);
         renderBody(env, scope, writer);
     }
 
