@@ -16,11 +16,11 @@ public class TopicAddon extends AddonBase  {
 
     @Override
     public void onInstall(AddonInfo addonInfo) {
-        try {
-            AddonUtil.execSqlFile(addonInfo, "sql/install.sql");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            AddonUtil.execSqlFile(addonInfo, "sql/install.sql");
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
 

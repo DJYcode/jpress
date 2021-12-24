@@ -1,7 +1,7 @@
-id=io.jpress.addon.topic
+id=io.jpress.addon.friendlink
 title=友情链接插件
 description=友情链接
 author=dongjy
 authorWebsite=e7coding.com
 version=1.0.0
-versionCode=1
+versionCode=2
